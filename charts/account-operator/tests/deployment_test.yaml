@@ -1,0 +1,12 @@
+suite: operator
+templates:
+  - deployment.yaml
+  - service-account.yaml
+  - cluster-role.yaml
+  - cluster-rolebinding.yaml
+chart:
+  appVersion: 0.0.0
+tests:
+  - it: operator match the snapshot
+    asserts:
+      - matchSnapshot: {}

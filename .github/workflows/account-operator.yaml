@@ -1,0 +1,28 @@
+name: Build account-operator Workflow
+on:
+  push:
+    paths:
+      - 'charts/account-operator/**'
+      - '.github/workflows/account-operator.yaml'
+
+jobs:
+  pipeline:
+    concurrency:
+      group: account-operator-${{ github.ref }}
+      cancel-in-progress: true
+    uses: openmfp/gha/.github/workflows/pipeline-chart.yml@main
+    with:
+      chartFolder: charts
+      chartName: account-operator
+      additionalTestFilesCommand: ''
+      chartRepos: 'bitnami=https://charts.bitnami.com/bitnami,openfga=https://openfga.github.io/helm-charts'
+    secrets: inherit
+
+  updateVersionFile:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [pipeline]
+    uses: openmfp/gha/.github/workflows/job-update-version-file.yml@main
+    secrets: inherit
+    with:
+      componentVersionKey: "account-operator"
+      version: ${{ needs.pipeline.outputs.version }}

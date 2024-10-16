@@ -1,0 +1,33 @@
+version: '3'
+
+vars:
+  LOCAL_BIN: bin
+  CHARTS:
+    sh: "ls charts/ | sed 's/^/charts\\//g' | paste -sd ',' -"
+tasks:
+  ## Development
+  lint:
+    deps: []
+    cmds:
+      - "ct lint --target-branch main --validate-maintainers=false --charts={{.CHARTS}}"
+  package:
+    cmds:
+      - helm package ./charts/openmfp
+  helmtest:
+    cmds:
+      - helm unittest ./charts/common
+      - helm unittest ./charts/account-operator-crds
+      - helm unittest ./charts/account-operator
+  test:
+    deps:
+      - task: helmtest
+  update:
+    cmds:
+      - helm dependency update ./charts/common
+      - helm dependency update ./charts/account-operator-crds
+      - helm dependency update ./charts/account-operator
+  validate:
+    cmds:
+      - task: lint
+      - task: package
+      - task: test
