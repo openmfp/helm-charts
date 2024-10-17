@@ -17,7 +17,7 @@ tasks:
     cmds:
       - helm unittest ./charts/common
       - helm unittest ./charts/account-operator-crds
-      - helm unittest ./charts/account-operator
+      - helm unittest ./charts/account-operator-new
   test:
     deps:
       - task: helmtest
@@ -25,7 +25,7 @@ tasks:
     cmds:
       - helm dependency update ./charts/common
       - helm dependency update ./charts/account-operator-crds
-      - helm dependency update ./charts/account-operator
+      - helm dependency update ./charts/account-operator-new
   validate:
     cmds:
       - task: lint
