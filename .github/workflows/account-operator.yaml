@@ -13,7 +13,7 @@ jobs:
     uses: openmfp/gha/.github/workflows/pipeline-chart.yml@main
     with:
       chartFolder: charts
-      chartName: account-operator-new
+      chartName: account-operator
       additionalTestFilesCommand: ''
       chartRepos: 'bitnami=https://charts.bitnami.com/bitnami,openfga=https://openfga.github.io/helm-charts'
     secrets: inherit
