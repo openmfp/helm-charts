@@ -53,7 +53,25 @@ spec:
             requests:
               cpu: {{ .Values.deployment.resources.requests.cpu }}
               memory: {{ .Values.deployment.resources.requests.memory }}
+          env:
+          - name: KCP_ENABLED
+            value: "{{ .Values.kcp.enabled }}"
+          {{- if .Values.kubeconfigSecret }}
+          - name: KUBECONFIG
+            value: /api-kubeconfig/kubeconfig
+          {{- end }}
+          {{- if .Values.kubeconfigSecret }}
+          volumeMounts:
+            - name: external-api-server
+              mountPath: /api-kubeconfig
+          {{- end }}
       terminationGracePeriodSeconds: 10
+      volumes:
+        {{- if .Values.kubeconfigSecret }}
+        - name: external-api-server
+          secret:
+            secretName: {{ .Values.kubeconfigSecret }}
+        {{- end }}
 
 
 
