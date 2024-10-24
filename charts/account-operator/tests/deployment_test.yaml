@@ -10,3 +10,8 @@ tests:
   - it: operator match the snapshot
     asserts:
       - matchSnapshot: {}
+  - it: operator match the snapshot (with kubeconfigSecret)
+    set:
+      kubeconfigSecret: "kubeconfig"
+    asserts:
+      - matchSnapshot: {}
