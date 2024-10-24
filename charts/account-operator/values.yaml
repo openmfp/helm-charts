@@ -22,3 +22,8 @@ deployment:
     requests:
       cpu: 150m
       memory: 128Mi
+
+kcp:
+  enabled: false
+
+kubeconfigSecret: ""
