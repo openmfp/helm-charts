@@ -56,7 +56,7 @@ spec:
           env:
           - name: KCP_ENABLED
             value: "{{ .Values.kcp.enabled }}"
-          - name: VIRTUAL_WORKSPACE_URL
+          - name: KCP_VIRTUAL_WORKSPACE_URL
             value: "{{ .Values.kcp.virtualWorkspaceUrl }}"
           {{- if .Values.kubeconfigSecret }}
           - name: KUBECONFIG
