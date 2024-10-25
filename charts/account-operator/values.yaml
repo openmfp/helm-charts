@@ -29,12 +29,12 @@ kcp:
 
 subroutines:
   namespace:
-      enabled: true
+    enabled: true
   creator:
-      enabled: true
+    enabled: true
   extension:
-      enabled: true
+    enabled: true
   extensionReady:
-      enabled: true
+    enabled: true
 
 kubeconfigSecret: ""
