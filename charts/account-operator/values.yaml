@@ -27,4 +27,14 @@ kcp:
   enabled: false
   virtualWorkspaceUrl: ""
 
+subroutines:
+  namespace:
+      enabled: true
+  creator:
+      enabled: true
+  extension:
+      enabled: true
+  extensionReady:
+      enabled: true
+
 kubeconfigSecret: ""
