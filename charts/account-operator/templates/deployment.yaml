@@ -54,6 +54,14 @@ spec:
               cpu: {{ .Values.deployment.resources.requests.cpu }}
               memory: {{ .Values.deployment.resources.requests.memory }}
           env:
+          - name: SUBROUTINES_NAMESPACE_ENABLED
+            value: "{{ .Values.subroutines.namespace.enabled }}"
+          - name: SUBROUTINES_CREATOR_ENABLED
+            value: "{{ .Values.subroutines.creator.enabled }}"
+          - name: SUBROUTINES_EXTENSION_ENABLED
+            value: "{{ .Values.subroutines.extension.enabled }}"
+          - name: SUBROUTINES_EXTENSION_READY_ENABLED
+            value: "{{ .Values.subroutines.extensionReady.enabled }}"
           - name: KCP_ENABLED
             value: "{{ .Values.kcp.enabled }}"
           - name: KCP_VIRTUAL_WORKSPACE_URL
