@@ -94,6 +94,14 @@ operator match the snapshot:
                 - --log-level=
                 - --health-probe-bind-address=:8081
               env:
+                - name: SUBROUTINES_NAMESPACE_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_CREATOR_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_EXTENSION_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_EXTENSION_READY_ENABLED
+                  value: "true"
                 - name: KCP_ENABLED
                   value: "false"
                 - name: KCP_VIRTUAL_WORKSPACE_URL
@@ -235,6 +243,14 @@ operator match the snapshot (with kubeconfigSecret):
                 - --log-level=
                 - --health-probe-bind-address=:8081
               env:
+                - name: SUBROUTINES_NAMESPACE_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_CREATOR_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_EXTENSION_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_EXTENSION_READY_ENABLED
+                  value: "true"
                 - name: KCP_ENABLED
                   value: "false"
                 - name: KCP_VIRTUAL_WORKSPACE_URL
