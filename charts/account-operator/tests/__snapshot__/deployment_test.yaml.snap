@@ -96,6 +96,8 @@ operator match the snapshot:
               env:
                 - name: KCP_ENABLED
                   value: "false"
+                - name: VIRTUAL_WORKSPACE_URL
+                  value: ""
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
                 httpGet:
@@ -235,6 +237,8 @@ operator match the snapshot (with kubeconfigSecret):
               env:
                 - name: KCP_ENABLED
                   value: "false"
+                - name: VIRTUAL_WORKSPACE_URL
+                  value: ""
                 - name: KUBECONFIG
                   value: /api-kubeconfig/kubeconfig
               image: ghcr.io/openmfp/account-operator:0.0.0
