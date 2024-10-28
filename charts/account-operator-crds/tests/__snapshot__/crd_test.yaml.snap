@@ -214,9 +214,11 @@ crds with kcp enabled match the snapshot:
       latestResourceSchemas:
         - v241024-b5d9cd8.accounts.core.openmfp.io
       permissionClaims:
-        - group: ""
+        - all: true
+          group: ""
           resource: namespaces
-        - group: tenancy.kcp.io
+        - all: true
+          group: tenancy.kcp.io
           resource: workspaces
     status: {}
   2: |

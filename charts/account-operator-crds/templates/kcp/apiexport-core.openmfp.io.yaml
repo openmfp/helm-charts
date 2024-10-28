@@ -10,7 +10,9 @@ spec:
   permissionClaims:
     - group: ""
       resource: namespaces
+      all: true
     - group: tenancy.kcp.io
       resource: workspaces
+      all: true
 status: {}
 {{- end -}}
