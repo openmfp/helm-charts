@@ -219,6 +219,7 @@ crds with kcp enabled match the snapshot:
           resource: namespaces
         - all: true
           group: tenancy.kcp.io
+          identityHash: 007c0af6df73d2ac93c0ce21d99b413d87a6e599aa4f4f7d3f32fbbcd17d505e
           resource: workspaces
     status: {}
   2: |
