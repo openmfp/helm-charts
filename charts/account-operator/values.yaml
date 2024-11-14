@@ -30,7 +30,7 @@ kcp:
 subroutines:
   namespace:
     enabled: true
-  creator:
+  fga:
     enabled: true
   extension:
     enabled: true
