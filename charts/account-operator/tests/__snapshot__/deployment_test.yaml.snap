@@ -96,7 +96,7 @@ operator match the snapshot:
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
-                - name: SUBROUTINES_CREATOR_ENABLED
+                - name: SUBROUTINES_FGA_ENABLED
                   value: "true"
                 - name: SUBROUTINES_EXTENSION_ENABLED
                   value: "true"
@@ -245,7 +245,7 @@ operator match the snapshot (with kubeconfigSecret):
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
-                - name: SUBROUTINES_CREATOR_ENABLED
+                - name: SUBROUTINES_FGA_ENABLED
                   value: "true"
                 - name: SUBROUTINES_EXTENSION_ENABLED
                   value: "true"
