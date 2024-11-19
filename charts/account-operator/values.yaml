@@ -32,6 +32,11 @@ subroutines:
     enabled: true
   fga:
     enabled: true
+    grpcAddr: ""
+    rootNamespace: openmfp-root
+    objectType: account
+    parentRelation: parent
+    creatorRelation: owner
   extension:
     enabled: true
   extensionReady:
