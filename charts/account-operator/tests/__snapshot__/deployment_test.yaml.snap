@@ -1166,7 +1166,7 @@ operator match the snapshot with webhook enabled:
         - RELEASE-NAME-account-operator-webhook.NAMESPACE.svc.cluster.local
       issuerRef:
         kind: Issuer
-        name: selfsigned-issuer
+        name: RELEASE-NAME-account-operator-selfsigned-issuer
       secretName: RELEASE-NAME-account-operator-webhook-server-cert
   9: |
     apiVersion: v1
