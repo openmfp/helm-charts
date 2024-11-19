@@ -98,6 +98,16 @@ operator match the snapshot:
                   value: "true"
                 - name: SUBROUTINES_FGA_ENABLED
                   value: "true"
+                - name: SUBROUTINES_FGA_GRPC_ADDR
+                  value: ""
+                - name: SUBROUTINES_FGA_ROOT_NAMESPACE
+                  value: openmfp-root
+                - name: SUBROUTINES_FGA_OBJECT_TYPE
+                  value: account
+                - name: SUBROUTINES_FGA_PARENT_RELATION
+                  value: parent
+                - name: SUBROUTINES_FGA_CREATOR_RELATION
+                  value: owner
                 - name: SUBROUTINES_EXTENSION_ENABLED
                   value: "true"
                 - name: SUBROUTINES_EXTENSION_READY_ENABLED
@@ -247,6 +257,16 @@ operator match the snapshot (with kubeconfigSecret):
                   value: "true"
                 - name: SUBROUTINES_FGA_ENABLED
                   value: "true"
+                - name: SUBROUTINES_FGA_GRPC_ADDR
+                  value: ""
+                - name: SUBROUTINES_FGA_ROOT_NAMESPACE
+                  value: openmfp-root
+                - name: SUBROUTINES_FGA_OBJECT_TYPE
+                  value: account
+                - name: SUBROUTINES_FGA_PARENT_RELATION
+                  value: parent
+                - name: SUBROUTINES_FGA_CREATOR_RELATION
+                  value: owner
                 - name: SUBROUTINES_EXTENSION_ENABLED
                   value: "true"
                 - name: SUBROUTINES_EXTENSION_READY_ENABLED
