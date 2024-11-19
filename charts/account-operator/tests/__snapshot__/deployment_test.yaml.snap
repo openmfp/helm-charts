@@ -81,10 +81,7 @@ operator match the snapshot:
           service: RELEASE-NAME-account-operator
       template:
         metadata:
-          annotations:
-            sidecar.istio.io/inject: "false"
           labels:
-            control-plane: controller-manager
             service: RELEASE-NAME-account-operator
         spec:
           containers:
@@ -240,10 +237,7 @@ operator match the snapshot (with kubeconfigSecret):
           service: RELEASE-NAME-account-operator
       template:
         metadata:
-          annotations:
-            sidecar.istio.io/inject: "false"
           labels:
-            control-plane: controller-manager
             service: RELEASE-NAME-account-operator
         spec:
           containers:
