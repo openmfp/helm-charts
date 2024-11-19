@@ -6,6 +6,7 @@ metadata:
   {{- if .Values.webhooks.enabled }}
   annotations:
     cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "entity.name" . }}-serving-cert
+    traffic.sidecar.istio.io/excludeInboundPorts: "9443"
   {{- end }}
 spec:
   revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}

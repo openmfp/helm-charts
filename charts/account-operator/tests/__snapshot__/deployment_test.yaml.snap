@@ -1017,6 +1017,7 @@ operator match the snapshot with webhook enabled:
     metadata:
       annotations:
         cert-manager.io/inject-ca-from: NAMESPACE/RELEASE-NAME-account-operator-serving-cert
+        traffic.sidecar.istio.io/excludeInboundPorts: "9443"
       name: RELEASE-NAME-account-operator
       namespace: NAMESPACE
     spec:
