@@ -6,7 +6,6 @@ metadata:
   {{- if .Values.webhooks.enabled }}
   annotations:
     cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "entity.name" . }}-serving-cert
-    traffic.sidecar.istio.io/excludeInboundPorts: "9443"
   {{- end }}
 spec:
   revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
@@ -21,12 +20,13 @@ spec:
         {{- with .Values.deployment.specTemplate.labels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-      {{ if .Values.deployment.specTemplate.annotations }}
       annotations:
         {{- with .Values.deployment.specTemplate.annotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-      {{- end }}
+        {{- if .Values.webhooks.enabled }}
+        traffic.sidecar.istio.io/excludeInboundPorts: "9443"
+        {{- end }}
     spec:
       serviceAccountName: {{ include "entity.name" . }}
       containers:

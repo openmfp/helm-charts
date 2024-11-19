@@ -285,6 +285,7 @@ operator match the snapshot:
           service: RELEASE-NAME-account-operator
       template:
         metadata:
+          annotations: null
           labels:
             control-plane: controller-manager
             service: RELEASE-NAME-account-operator
@@ -651,6 +652,7 @@ operator match the snapshot (with kubeconfigSecret):
           service: RELEASE-NAME-account-operator
       template:
         metadata:
+          annotations: null
           labels:
             control-plane: controller-manager
             service: RELEASE-NAME-account-operator
@@ -1017,7 +1019,6 @@ operator match the snapshot with webhook enabled:
     metadata:
       annotations:
         cert-manager.io/inject-ca-from: NAMESPACE/RELEASE-NAME-account-operator-serving-cert
-        traffic.sidecar.istio.io/excludeInboundPorts: "9443"
       name: RELEASE-NAME-account-operator
       namespace: NAMESPACE
     spec:
@@ -1027,6 +1028,8 @@ operator match the snapshot with webhook enabled:
           service: RELEASE-NAME-account-operator
       template:
         metadata:
+          annotations:
+            traffic.sidecar.istio.io/excludeInboundPorts: "9443"
           labels:
             control-plane: controller-manager
             service: RELEASE-NAME-account-operator
