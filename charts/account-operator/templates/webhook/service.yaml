@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "entity.name" . }}-webhook
-  namespace: system
+  namespace: {{ .Release.Namespace }}
 spec:
   ports:
     - port: 443
