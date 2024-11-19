@@ -7,6 +7,10 @@ imagePullSecret: "github"
 crds:
   enabled: true
 
+webhooks:
+  enabled: false
+  certDir: /certs
+
 health:
   port: 8081
 
