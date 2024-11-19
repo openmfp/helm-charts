@@ -26,8 +26,6 @@ deployment:
       cpu: 150m
       memory: 128Mi
 
-
-
 kcp:
   enabled: false
   virtualWorkspaceUrl: ""
