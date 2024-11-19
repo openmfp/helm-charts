@@ -107,7 +107,7 @@ spec:
               mountPath: /api-kubeconfig
           {{- end }}
           {{- if .Values.webhooks.enabled }}
-          - mountPath: {{ .Values.webhooks.certPath }}
+          - mountPath: {{ .Values.webhooks.certDir }}
             name: cert
             readOnly: true
           {{- end }}
