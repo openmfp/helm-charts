@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         service: {{ include "entity.name" . }}
+        control-plane: controller-manager
         {{- with .Values.deployment.specTemplate.labels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
