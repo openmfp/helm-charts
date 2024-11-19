@@ -1173,7 +1173,7 @@ operator match the snapshot with webhook enabled:
     kind: Service
     metadata:
       name: RELEASE-NAME-account-operator-webhook
-      namespace: system
+      namespace: NAMESPACE
     spec:
       ports:
         - port: 443
