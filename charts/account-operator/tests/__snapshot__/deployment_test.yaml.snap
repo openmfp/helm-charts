@@ -1,5 +1,209 @@
 operator match the snapshot:
   1: |
+    apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    metadata:
+      annotations:
+        controller-gen.kubebuilder.io/version: v0.14.0
+      name: accounts.core.openmfp.io
+    spec:
+      group: core.openmfp.io
+      names:
+        kind: Account
+        listKind: AccountList
+        plural: accounts
+        singular: account
+      scope: Namespaced
+      versions:
+        - additionalPrinterColumns:
+            - jsonPath: .spec.displayName
+              name: Display Name
+              type: string
+            - jsonPath: .status.namespace
+              name: Account Namespace
+              type: string
+            - jsonPath: .spec.type
+              name: Type
+              type: string
+            - jsonPath: .status.conditions[?(@.type=="Ready")].status
+              name: Ready
+              type: string
+          name: v1alpha1
+          schema:
+            openAPIV3Schema:
+              description: Account is the Schema for the accounts API
+              properties:
+                apiVersion:
+                  description: |-
+                    APIVersion defines the versioned schema of this representation of an object.
+                    Servers should convert recognized schemas to the latest internal value, and
+                    may reject unrecognized values.
+                    More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+                  type: string
+                kind:
+                  description: |-
+                    Kind is a string value representing the REST resource this object represents.
+                    Servers may infer this from the endpoint the client submits requests to.
+                    Cannot be updated.
+                    In CamelCase.
+                    More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+                  type: string
+                metadata:
+                  type: object
+                spec:
+                  description: AccountSpec defines the desired state of Account
+                  properties:
+                    creator:
+                      description: The initial creator of this account
+                      type: string
+                    data:
+                      description: Additional information that should be stored with the account
+                      x-kubernetes-preserve-unknown-fields: true
+                    description:
+                      description: An optional description for this account
+                      type: string
+                    displayName:
+                      description: The display name for this account
+                      maxLength: 255
+                      type: string
+                    extensions:
+                      items:
+                        properties:
+                          apiVersion:
+                            description: |-
+                              APIVersion defines the versioned schema of this representation of an object.
+                              Servers should convert recognized schemas to the latest internal value, and
+                              may reject unrecognized values.
+                              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+                            type: string
+                          kind:
+                            description: |-
+                              Kind is a string value representing the REST resource this object represents.
+                              Servers may infer this from the endpoint the client submits requests to.
+                              Cannot be updated.
+                              In CamelCase.
+                              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+                            type: string
+                          readyConditionType:
+                            description: |-
+                              The type of a condition that must be set to True on the Extension object
+                              for the extension to be considered reconciled and ready. If this is empty,
+                              the extension is considered ready.
+                            type: string
+                          specGoTemplate:
+                            x-kubernetes-preserve-unknown-fields: true
+                        required:
+                          - specGoTemplate
+                        type: object
+                      type: array
+                    namespace:
+                      description: Namespace is the account should take ownership of
+                      type: string
+                    type:
+                      description: Type specifies the intended type for this Account object.
+                      enum:
+                        - folder
+                        - account
+                      type: string
+                  required:
+                    - displayName
+                    - type
+                  type: object
+                status:
+                  description: AccountStatus defines the observed state of Account
+                  properties:
+                    conditions:
+                      items:
+                        description: |-
+                          Condition contains details for one aspect of the current state of this API Resource.
+                          ---
+                          This struct is intended for direct use as an array at the field path .status.conditions.  For example,
+
+
+                          	type FooStatus struct{
+                          	    // Represents the observations of a foo's current state.
+                          	    // Known .status.conditions.type are: "Available", "Progressing", and "Degraded"
+                          	    // +patchMergeKey=type
+                          	    // +patchStrategy=merge
+                          	    // +listType=map
+                          	    // +listMapKey=type
+                          	    Conditions []metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
+
+
+                          	    // other fields
+                          	}
+                        properties:
+                          lastTransitionTime:
+                            description: |-
+                              lastTransitionTime is the last time the condition transitioned from one status to another.
+                              This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
+                            format: date-time
+                            type: string
+                          message:
+                            description: |-
+                              message is a human readable message indicating details about the transition.
+                              This may be an empty string.
+                            maxLength: 32768
+                            type: string
+                          observedGeneration:
+                            description: |-
+                              observedGeneration represents the .metadata.generation that the condition was set based upon.
+                              For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                              with respect to the current state of the instance.
+                            format: int64
+                            minimum: 0
+                            type: integer
+                          reason:
+                            description: |-
+                              reason contains a programmatic identifier indicating the reason for the condition's last transition.
+                              Producers of specific condition types may define expected values and meanings for this field,
+                              and whether the values are considered a guaranteed API.
+                              The value should be a CamelCase string.
+                              This field may not be empty.
+                            maxLength: 1024
+                            minLength: 1
+                            pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                            type: string
+                          status:
+                            description: status of the condition, one of True, False, Unknown.
+                            enum:
+                              - "True"
+                              - "False"
+                              - Unknown
+                            type: string
+                          type:
+                            description: |-
+                              type of condition in CamelCase or in foo.example.com/CamelCase.
+                              ---
+                              Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be
+                              useful (see .node.status.conditions), the ability to deconflict is important.
+                              The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                            maxLength: 316
+                            pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                            type: string
+                        required:
+                          - lastTransitionTime
+                          - message
+                          - reason
+                          - status
+                          - type
+                        type: object
+                      type: array
+                    namespace:
+                      type: string
+                    nextReconcileTime:
+                      format: date-time
+                      type: string
+                    observedGeneration:
+                      format: int64
+                      type: integer
+                  type: object
+              type: object
+          served: true
+          storage: true
+          subresources:
+            status: {}
+  2: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -55,7 +259,7 @@ operator match the snapshot:
           - update
           - patch
           - delete
-  2: |
+  3: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -68,7 +272,7 @@ operator match the snapshot:
       - kind: ServiceAccount
         name: RELEASE-NAME-account-operator
         namespace: NAMESPACE
-  3: |
+  4: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -81,6 +285,7 @@ operator match the snapshot:
           service: RELEASE-NAME-account-operator
       template:
         metadata:
+          annotations: null
           labels:
             control-plane: controller-manager
             service: RELEASE-NAME-account-operator
@@ -114,6 +319,10 @@ operator match the snapshot:
                   value: "false"
                 - name: KCP_VIRTUAL_WORKSPACE_URL
                   value: ""
+                - name: WEBHOOKS_ENABLED
+                  value: "false"
+                - name: WEBHOOKS_CERT_DIR
+                  value: /certs
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
                 httpGet:
@@ -144,10 +353,11 @@ operator match the snapshot:
                   memory: 128Mi
               securityContext:
                 runAsNonRoot: true
+              volumeMounts: null
           serviceAccountName: RELEASE-NAME-account-operator
           terminationGracePeriodSeconds: 10
           volumes: null
-  4: |
+  5: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
@@ -157,6 +367,210 @@ operator match the snapshot:
       namespace: NAMESPACE
 operator match the snapshot (with kubeconfigSecret):
   1: |
+    apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    metadata:
+      annotations:
+        controller-gen.kubebuilder.io/version: v0.14.0
+      name: accounts.core.openmfp.io
+    spec:
+      group: core.openmfp.io
+      names:
+        kind: Account
+        listKind: AccountList
+        plural: accounts
+        singular: account
+      scope: Namespaced
+      versions:
+        - additionalPrinterColumns:
+            - jsonPath: .spec.displayName
+              name: Display Name
+              type: string
+            - jsonPath: .status.namespace
+              name: Account Namespace
+              type: string
+            - jsonPath: .spec.type
+              name: Type
+              type: string
+            - jsonPath: .status.conditions[?(@.type=="Ready")].status
+              name: Ready
+              type: string
+          name: v1alpha1
+          schema:
+            openAPIV3Schema:
+              description: Account is the Schema for the accounts API
+              properties:
+                apiVersion:
+                  description: |-
+                    APIVersion defines the versioned schema of this representation of an object.
+                    Servers should convert recognized schemas to the latest internal value, and
+                    may reject unrecognized values.
+                    More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+                  type: string
+                kind:
+                  description: |-
+                    Kind is a string value representing the REST resource this object represents.
+                    Servers may infer this from the endpoint the client submits requests to.
+                    Cannot be updated.
+                    In CamelCase.
+                    More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+                  type: string
+                metadata:
+                  type: object
+                spec:
+                  description: AccountSpec defines the desired state of Account
+                  properties:
+                    creator:
+                      description: The initial creator of this account
+                      type: string
+                    data:
+                      description: Additional information that should be stored with the account
+                      x-kubernetes-preserve-unknown-fields: true
+                    description:
+                      description: An optional description for this account
+                      type: string
+                    displayName:
+                      description: The display name for this account
+                      maxLength: 255
+                      type: string
+                    extensions:
+                      items:
+                        properties:
+                          apiVersion:
+                            description: |-
+                              APIVersion defines the versioned schema of this representation of an object.
+                              Servers should convert recognized schemas to the latest internal value, and
+                              may reject unrecognized values.
+                              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+                            type: string
+                          kind:
+                            description: |-
+                              Kind is a string value representing the REST resource this object represents.
+                              Servers may infer this from the endpoint the client submits requests to.
+                              Cannot be updated.
+                              In CamelCase.
+                              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+                            type: string
+                          readyConditionType:
+                            description: |-
+                              The type of a condition that must be set to True on the Extension object
+                              for the extension to be considered reconciled and ready. If this is empty,
+                              the extension is considered ready.
+                            type: string
+                          specGoTemplate:
+                            x-kubernetes-preserve-unknown-fields: true
+                        required:
+                          - specGoTemplate
+                        type: object
+                      type: array
+                    namespace:
+                      description: Namespace is the account should take ownership of
+                      type: string
+                    type:
+                      description: Type specifies the intended type for this Account object.
+                      enum:
+                        - folder
+                        - account
+                      type: string
+                  required:
+                    - displayName
+                    - type
+                  type: object
+                status:
+                  description: AccountStatus defines the observed state of Account
+                  properties:
+                    conditions:
+                      items:
+                        description: |-
+                          Condition contains details for one aspect of the current state of this API Resource.
+                          ---
+                          This struct is intended for direct use as an array at the field path .status.conditions.  For example,
+
+
+                          	type FooStatus struct{
+                          	    // Represents the observations of a foo's current state.
+                          	    // Known .status.conditions.type are: "Available", "Progressing", and "Degraded"
+                          	    // +patchMergeKey=type
+                          	    // +patchStrategy=merge
+                          	    // +listType=map
+                          	    // +listMapKey=type
+                          	    Conditions []metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
+
+
+                          	    // other fields
+                          	}
+                        properties:
+                          lastTransitionTime:
+                            description: |-
+                              lastTransitionTime is the last time the condition transitioned from one status to another.
+                              This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
+                            format: date-time
+                            type: string
+                          message:
+                            description: |-
+                              message is a human readable message indicating details about the transition.
+                              This may be an empty string.
+                            maxLength: 32768
+                            type: string
+                          observedGeneration:
+                            description: |-
+                              observedGeneration represents the .metadata.generation that the condition was set based upon.
+                              For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                              with respect to the current state of the instance.
+                            format: int64
+                            minimum: 0
+                            type: integer
+                          reason:
+                            description: |-
+                              reason contains a programmatic identifier indicating the reason for the condition's last transition.
+                              Producers of specific condition types may define expected values and meanings for this field,
+                              and whether the values are considered a guaranteed API.
+                              The value should be a CamelCase string.
+                              This field may not be empty.
+                            maxLength: 1024
+                            minLength: 1
+                            pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                            type: string
+                          status:
+                            description: status of the condition, one of True, False, Unknown.
+                            enum:
+                              - "True"
+                              - "False"
+                              - Unknown
+                            type: string
+                          type:
+                            description: |-
+                              type of condition in CamelCase or in foo.example.com/CamelCase.
+                              ---
+                              Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be
+                              useful (see .node.status.conditions), the ability to deconflict is important.
+                              The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                            maxLength: 316
+                            pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                            type: string
+                        required:
+                          - lastTransitionTime
+                          - message
+                          - reason
+                          - status
+                          - type
+                        type: object
+                      type: array
+                    namespace:
+                      type: string
+                    nextReconcileTime:
+                      format: date-time
+                      type: string
+                    observedGeneration:
+                      format: int64
+                      type: integer
+                  type: object
+              type: object
+          served: true
+          storage: true
+          subresources:
+            status: {}
+  2: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -212,7 +626,7 @@ operator match the snapshot (with kubeconfigSecret):
           - update
           - patch
           - delete
-  2: |
+  3: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -225,7 +639,7 @@ operator match the snapshot (with kubeconfigSecret):
       - kind: ServiceAccount
         name: RELEASE-NAME-account-operator
         namespace: NAMESPACE
-  3: |
+  4: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -238,6 +652,7 @@ operator match the snapshot (with kubeconfigSecret):
           service: RELEASE-NAME-account-operator
       template:
         metadata:
+          annotations: null
           labels:
             control-plane: controller-manager
             service: RELEASE-NAME-account-operator
@@ -271,6 +686,10 @@ operator match the snapshot (with kubeconfigSecret):
                   value: "false"
                 - name: KCP_VIRTUAL_WORKSPACE_URL
                   value: ""
+                - name: WEBHOOKS_ENABLED
+                  value: "false"
+                - name: WEBHOOKS_CERT_DIR
+                  value: /certs
                 - name: KUBECONFIG
                   value: /api-kubeconfig/kubeconfig
               image: ghcr.io/openmfp/account-operator:0.0.0
@@ -312,7 +731,7 @@ operator match the snapshot (with kubeconfigSecret):
             - name: external-api-server
               secret:
                 secretName: kubeconfig
-  4: |
+  5: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
@@ -320,3 +739,446 @@ operator match the snapshot (with kubeconfigSecret):
     metadata:
       name: RELEASE-NAME-account-operator
       namespace: NAMESPACE
+operator match the snapshot with webhook enabled:
+  1: |
+    apiVersion: apiextensions.k8s.io/v1
+    kind: CustomResourceDefinition
+    metadata:
+      annotations:
+        controller-gen.kubebuilder.io/version: v0.14.0
+      name: accounts.core.openmfp.io
+    spec:
+      group: core.openmfp.io
+      names:
+        kind: Account
+        listKind: AccountList
+        plural: accounts
+        singular: account
+      scope: Namespaced
+      versions:
+        - additionalPrinterColumns:
+            - jsonPath: .spec.displayName
+              name: Display Name
+              type: string
+            - jsonPath: .status.namespace
+              name: Account Namespace
+              type: string
+            - jsonPath: .spec.type
+              name: Type
+              type: string
+            - jsonPath: .status.conditions[?(@.type=="Ready")].status
+              name: Ready
+              type: string
+          name: v1alpha1
+          schema:
+            openAPIV3Schema:
+              description: Account is the Schema for the accounts API
+              properties:
+                apiVersion:
+                  description: |-
+                    APIVersion defines the versioned schema of this representation of an object.
+                    Servers should convert recognized schemas to the latest internal value, and
+                    may reject unrecognized values.
+                    More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+                  type: string
+                kind:
+                  description: |-
+                    Kind is a string value representing the REST resource this object represents.
+                    Servers may infer this from the endpoint the client submits requests to.
+                    Cannot be updated.
+                    In CamelCase.
+                    More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+                  type: string
+                metadata:
+                  type: object
+                spec:
+                  description: AccountSpec defines the desired state of Account
+                  properties:
+                    creator:
+                      description: The initial creator of this account
+                      type: string
+                    data:
+                      description: Additional information that should be stored with the account
+                      x-kubernetes-preserve-unknown-fields: true
+                    description:
+                      description: An optional description for this account
+                      type: string
+                    displayName:
+                      description: The display name for this account
+                      maxLength: 255
+                      type: string
+                    extensions:
+                      items:
+                        properties:
+                          apiVersion:
+                            description: |-
+                              APIVersion defines the versioned schema of this representation of an object.
+                              Servers should convert recognized schemas to the latest internal value, and
+                              may reject unrecognized values.
+                              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+                            type: string
+                          kind:
+                            description: |-
+                              Kind is a string value representing the REST resource this object represents.
+                              Servers may infer this from the endpoint the client submits requests to.
+                              Cannot be updated.
+                              In CamelCase.
+                              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+                            type: string
+                          readyConditionType:
+                            description: |-
+                              The type of a condition that must be set to True on the Extension object
+                              for the extension to be considered reconciled and ready. If this is empty,
+                              the extension is considered ready.
+                            type: string
+                          specGoTemplate:
+                            x-kubernetes-preserve-unknown-fields: true
+                        required:
+                          - specGoTemplate
+                        type: object
+                      type: array
+                    namespace:
+                      description: Namespace is the account should take ownership of
+                      type: string
+                    type:
+                      description: Type specifies the intended type for this Account object.
+                      enum:
+                        - folder
+                        - account
+                      type: string
+                  required:
+                    - displayName
+                    - type
+                  type: object
+                status:
+                  description: AccountStatus defines the observed state of Account
+                  properties:
+                    conditions:
+                      items:
+                        description: |-
+                          Condition contains details for one aspect of the current state of this API Resource.
+                          ---
+                          This struct is intended for direct use as an array at the field path .status.conditions.  For example,
+
+
+                          	type FooStatus struct{
+                          	    // Represents the observations of a foo's current state.
+                          	    // Known .status.conditions.type are: "Available", "Progressing", and "Degraded"
+                          	    // +patchMergeKey=type
+                          	    // +patchStrategy=merge
+                          	    // +listType=map
+                          	    // +listMapKey=type
+                          	    Conditions []metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
+
+
+                          	    // other fields
+                          	}
+                        properties:
+                          lastTransitionTime:
+                            description: |-
+                              lastTransitionTime is the last time the condition transitioned from one status to another.
+                              This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
+                            format: date-time
+                            type: string
+                          message:
+                            description: |-
+                              message is a human readable message indicating details about the transition.
+                              This may be an empty string.
+                            maxLength: 32768
+                            type: string
+                          observedGeneration:
+                            description: |-
+                              observedGeneration represents the .metadata.generation that the condition was set based upon.
+                              For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                              with respect to the current state of the instance.
+                            format: int64
+                            minimum: 0
+                            type: integer
+                          reason:
+                            description: |-
+                              reason contains a programmatic identifier indicating the reason for the condition's last transition.
+                              Producers of specific condition types may define expected values and meanings for this field,
+                              and whether the values are considered a guaranteed API.
+                              The value should be a CamelCase string.
+                              This field may not be empty.
+                            maxLength: 1024
+                            minLength: 1
+                            pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                            type: string
+                          status:
+                            description: status of the condition, one of True, False, Unknown.
+                            enum:
+                              - "True"
+                              - "False"
+                              - Unknown
+                            type: string
+                          type:
+                            description: |-
+                              type of condition in CamelCase or in foo.example.com/CamelCase.
+                              ---
+                              Many .condition.type values are consistent across resources like Available, but because arbitrary conditions can be
+                              useful (see .node.status.conditions), the ability to deconflict is important.
+                              The regex it matches is (dns1123SubdomainFmt/)?(qualifiedNameFmt)
+                            maxLength: 316
+                            pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                            type: string
+                        required:
+                          - lastTransitionTime
+                          - message
+                          - reason
+                          - status
+                          - type
+                        type: object
+                      type: array
+                    namespace:
+                      type: string
+                    nextReconcileTime:
+                      format: date-time
+                      type: string
+                    observedGeneration:
+                      format: int64
+                      type: integer
+                  type: object
+              type: object
+          served: true
+          storage: true
+          subresources:
+            status: {}
+  2: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: RELEASE-NAME-account-operator
+    rules:
+      - apiGroups:
+          - core.openmfp.io
+        resources:
+          - accounts
+        verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+      - apiGroups:
+          - coordination.k8s.io
+        resources:
+          - leases
+        verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+      - apiGroups:
+          - core.openmfp.io
+        resources:
+          - accounts
+          - accounts/status
+        verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+      - apiGroups:
+          - ""
+        resources:
+          - namespaces
+          - events
+        verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+  3: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: RELEASE-NAME-account-operator
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: RELEASE-NAME-account-operator
+    subjects:
+      - kind: ServiceAccount
+        name: RELEASE-NAME-account-operator
+        namespace: NAMESPACE
+  4: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      annotations:
+        cert-manager.io/inject-ca-from: NAMESPACE/RELEASE-NAME-account-operator-serving-cert
+      name: RELEASE-NAME-account-operator
+      namespace: NAMESPACE
+    spec:
+      revisionHistoryLimit: 3
+      selector:
+        matchLabels:
+          service: RELEASE-NAME-account-operator
+      template:
+        metadata:
+          annotations:
+            traffic.sidecar.istio.io/excludeInboundPorts: "9443"
+          labels:
+            control-plane: controller-manager
+            service: RELEASE-NAME-account-operator
+        spec:
+          containers:
+            - args:
+                - operator
+                - --leader-elect
+                - --log-level=warn
+                - --health-probe-bind-address=:8081
+              env:
+                - name: SUBROUTINES_NAMESPACE_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_FGA_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_FGA_GRPC_ADDR
+                  value: ""
+                - name: SUBROUTINES_FGA_ROOT_NAMESPACE
+                  value: openmfp-root
+                - name: SUBROUTINES_FGA_OBJECT_TYPE
+                  value: account
+                - name: SUBROUTINES_FGA_PARENT_RELATION
+                  value: parent
+                - name: SUBROUTINES_FGA_CREATOR_RELATION
+                  value: owner
+                - name: SUBROUTINES_EXTENSION_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_EXTENSION_READY_ENABLED
+                  value: "true"
+                - name: KCP_ENABLED
+                  value: "false"
+                - name: KCP_VIRTUAL_WORKSPACE_URL
+                  value: ""
+                - name: WEBHOOKS_ENABLED
+                  value: "true"
+                - name: WEBHOOKS_CERT_DIR
+                  value: /certs
+              image: ghcr.io/openmfp/account-operator:0.0.0
+              livenessProbe:
+                httpGet:
+                  path: /healthz
+                  port: 8081
+                initialDelaySeconds: 15
+                periodSeconds: 20
+              name: manager
+              ports:
+                - containerPort: 8080
+                  name: metrics
+                  protocol: TCP
+                - containerPort: 8081
+                  name: health-port
+                  protocol: TCP
+                - containerPort: 9443
+                  name: webhook-port
+                  protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8081
+                initialDelaySeconds: 5
+                periodSeconds: 10
+              resources:
+                limits:
+                  cpu: 260m
+                  memory: 512Mi
+                requests:
+                  cpu: 150m
+                  memory: 128Mi
+              securityContext:
+                runAsNonRoot: true
+              volumeMounts:
+                - mountPath: null
+                  name: cert
+                  readOnly: true
+          serviceAccountName: RELEASE-NAME-account-operator
+          terminationGracePeriodSeconds: 10
+          volumes:
+            - name: cert
+              secret:
+                defaultMode: 420
+                secretName: RELEASE-NAME-account-operator-webhook-server-cert
+  5: |
+    apiVersion: v1
+    imagePullSecrets:
+      - name: github
+    kind: ServiceAccount
+    metadata:
+      name: RELEASE-NAME-account-operator
+      namespace: NAMESPACE
+  6: |
+    apiVersion: admissionregistration.k8s.io/v1
+    kind: MutatingWebhookConfiguration
+    metadata:
+      annotations:
+        cert-manager.io/inject-ca-from: NAMESPACE/RELEASE-NAME-account-operator-serving-cert
+      name: RELEASE-NAME-account-operator-mutating-webhook-configuration
+    webhooks:
+      - admissionReviewVersions:
+          - v1
+        clientConfig:
+          service:
+            name: RELEASE-NAME-account-operator-webhook
+            namespace: NAMESPACE
+            path: /mutate-core-openmfp-io-v1alpha1-account
+        failurePolicy: Fail
+        name: maccount.kb.io
+        rules:
+          - apiGroups:
+              - core.openmfp.io
+            apiVersions:
+              - v1alpha1
+            operations:
+              - CREATE
+            resources:
+              - accounts
+        sideEffects: None
+  7: |
+    apiVersion: cert-manager.io/v1
+    kind: Issuer
+    metadata:
+      name: RELEASE-NAME-account-operator-selfsigned-issuer
+      namespace: null
+    spec:
+      selfSigned: {}
+  8: |
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    metadata:
+      name: RELEASE-NAME-account-operator-serving-cert
+      namespace: null
+    spec:
+      dnsNames:
+        - RELEASE-NAME-account-operator-webhook.NAMESPACE.svc
+        - RELEASE-NAME-account-operator-webhook.NAMESPACE.svc.cluster.local
+      issuerRef:
+        kind: Issuer
+        name: selfsigned-issuer
+      secretName: RELEASE-NAME-account-operator-webhook-server-cert
+  9: |
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: RELEASE-NAME-account-operator-webhook
+      namespace: system
+    spec:
+      ports:
+        - port: 443
+          protocol: TCP
+          targetPort: 9443
+      selector:
+        control-plane: controller-manager
+        service: RELEASE-NAME-account-operator
