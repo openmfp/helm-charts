@@ -14,6 +14,9 @@ metrics:
   port: 8080
 
 deployment:
+  specTemplate:
+    annotations: {}
+    labels: {}
   revisionHistoryLimit: 3
   resources:
     limits:
