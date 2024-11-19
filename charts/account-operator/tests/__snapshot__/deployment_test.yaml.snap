@@ -1101,7 +1101,7 @@ operator match the snapshot with webhook enabled:
               securityContext:
                 runAsNonRoot: true
               volumeMounts:
-                - mountPath: null
+                - mountPath: /certs
                   name: cert
                   readOnly: true
           serviceAccountName: RELEASE-NAME-account-operator
