@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: {{ include "entity.name" . }}
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.webhooks.enabled }}
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "entity.name" . }}-serving-cert
+  {{- end }}
 spec:
   revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
   selector:
@@ -41,6 +45,11 @@ spec:
           - name: health-port
             containerPort: {{ .Values.health.port }}
             protocol: TCP
+          {{- if .Values.webhooks.enabled }}
+          - name: webhook-port
+            containerPort: 9443
+            protocol: TCP
+          {{- end }}
           livenessProbe:
             httpGet:
               path: /healthz
@@ -83,14 +92,23 @@ spec:
             value: "{{ .Values.kcp.enabled }}"
           - name: KCP_VIRTUAL_WORKSPACE_URL
             value: "{{ .Values.kcp.virtualWorkspaceUrl }}"
+          - name: WEBHOOKS_ENABLED
+            value: "{{ .Values.webhooks.enabled }}"
+          - name: WEBHOOKS_CERT_DIR
+            value: "{{ .Values.webhooks.certDir }}"
           {{- if .Values.kubeconfigSecret }}
           - name: KUBECONFIG
             value: /api-kubeconfig/kubeconfig
           {{- end }}
-          {{- if .Values.kubeconfigSecret }}
           volumeMounts:
+          {{- if .Values.kubeconfigSecret }}
             - name: external-api-server
               mountPath: /api-kubeconfig
+          {{- end }}
+          {{- if .Values.webhooks.enabled }}
+          - mountPath: {{ .Values.webhooks.certPath }}
+            name: cert
+            readOnly: true
           {{- end }}
       terminationGracePeriodSeconds: 10
       volumes:
@@ -98,6 +116,12 @@ spec:
         - name: external-api-server
           secret:
             secretName: {{ .Values.kubeconfigSecret }}
+        {{- end }}
+        {{- if .Values.webhooks.enabled }}
+        - name: cert
+          secret:
+            defaultMode: 420
+            secretName: {{ include "entity.name" . }}-webhook-server-cert
         {{- end }}
 
 

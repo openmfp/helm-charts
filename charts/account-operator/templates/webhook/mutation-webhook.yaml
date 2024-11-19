@@ -1,0 +1,28 @@
+{{- if .Values.webhooks.enabled -}}
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: {{ include "entity.name" . }}-mutating-webhook-configuration
+  annotations:
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "entity.name" . }}-serving-cert
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: {{ include "entity.name" . }}-webhook
+      namespace: {{ .Release.Namespace }}
+      path: /mutate-core-openmfp-io-v1alpha1-account
+  failurePolicy: Fail
+  name: maccount.kb.io
+  rules:
+  - apiGroups:
+    - core.openmfp.io
+    apiVersions:
+    - v1alpha1
+    operations:
+    - CREATE
+    resources:
+    - accounts
+  sideEffects: None
+{{- end -}}

@@ -1,0 +1,15 @@
+{{- if .Values.webhooks.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "entity.name" . }}-webhook
+  namespace: system
+spec:
+  ports:
+    - port: 443
+      protocol: TCP
+      targetPort: 9443
+  selector:
+    service: {{ include "entity.name" . }}
+    control-plane: controller-manager
+{{- end -}}
