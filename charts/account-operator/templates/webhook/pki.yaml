@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: {{ include "entity.name" . }}-selfsigned-issuer
+  name: {{ include "common.entity.name" . }}-selfsigned-issuer
   namespace: {{ .Release.namespace }}
 spec:
   selfSigned: {}
@@ -10,14 +10,14 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: {{ include "entity.name" . }}-serving-cert
+  name: {{ include "common.entity.name" . }}-serving-cert
   namespace: {{ .Release.namespace }}
 spec:
   dnsNames:
-  - {{ include "entity.name" . }}-webhook.{{ .Release.Namespace }}.svc
-  - {{ include "entity.name" . }}-webhook.{{ .Release.Namespace }}.svc.cluster.local
+  - {{ include "common.entity.name" . }}-webhook.{{ .Release.Namespace }}.svc
+  - {{ include "common.entity.name" . }}-webhook.{{ .Release.Namespace }}.svc.cluster.local
   issuerRef:
     kind: Issuer
-    name: {{ include "entity.name" . }}-selfsigned-issuer
-  secretName: {{ include "entity.name" . }}-webhook-server-cert
+    name: {{ include "common.entity.name" . }}-selfsigned-issuer
+  secretName: {{ include "common.entity.name" . }}-webhook-server-cert
 {{- end -}}
