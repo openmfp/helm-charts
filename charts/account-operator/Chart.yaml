@@ -6,7 +6,7 @@ version: 0.4.13
 appVersion: "0.102.0"
 dependencies:
   - name: account-operator-crds
-    version: 0.1.4
+    version: 0.1.5
     condition: crds.enabled
     repository: file://../account-operator-crds
   - name: common
