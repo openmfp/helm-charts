@@ -1,0 +1,104 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.entity.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ include "common.entity.name" . }}
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.maxSurge }}
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: {{ include "common.entity.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "common.entity.name" . }}
+    spec:
+      serviceAccountName: {{ include "common.entity.name" . }}
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+      containers:
+      - name: {{ include "common.entity.name" . }}
+        image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          readOnlyRootFilesystem: true
+        env:
+        - name: HTTP_PROTOCOL
+          value: {{ .Values.http.protocol }}
+      {{- range $key, $idp := .Values.trust }}
+        - name: OIDC_CLIENT_ID_{{ $key | upper | replace "-" "_" }}
+          value: "{{ $idp.loginAudience | default $idp.audience }}"
+        - name: OIDC_CLIENT_SECRET_{{ $key | upper | replace "-" "_" }}
+          valueFrom:
+            secretKeyRef:
+              name: portal-client-secret-{{ $idp.secretKey | default $key }}
+              key: {{ $idp.secretKeyRef | default "secret" }}
+      {{ if $idp.discoveryEndpoint }}
+        - name: DISCOVERY_ENDPOINT_{{ $key | upper | replace "-" "_" }}
+          value: {{ $idp.discoveryEndpoint }}
+      {{- else }}
+        - name: TOKEN_URL_{{ $key | upper | replace "-" "_" }}
+          value: {{ $idp.tokenUrl | default $idp.trustedIssuer }}
+        - name: AUTH_SERVER_URL_{{ $key | upper | replace "-" "_" }}
+          value: {{ $idp.authDomain | default $idp.trustedIssuer }}
+      {{- end }}
+      {{- if $idp.baseDomains }}
+        - name: BASE_DOMAINS_{{ $key | upper | replace "-" "_" }}
+          value: {{ $idp.baseDomains }}
+      {{- end }}
+      {{- end }}
+      {{- if .Values.trust }}
+        - name: IDP_NAMES
+          {{- $keys := keys .Values.trust | sortAlpha }}
+          value: "{{ join "," $keys  }}"
+      {{- end }}
+        {{- if .Values.developmentLandcsape }}
+        - name: DEVELOPMENT_INSTANCE
+          value: "{{ .Values.developmentLandcsape }}"
+        {{- end }}
+        {{- if .Values.featureToggles }}
+        - name: FEATURE_TOGGLES
+          value: "{{ .Values.featureToggles }}"
+        {{- end }}
+        - name: PORT
+          value: "{{ .Values.port }}"
+        - name: REGION
+          value: {{ .Values.region }}
+        - name: IMAGE_TAG
+          value: "{{ .Chart.AppVersion }}"
+        - name: IMAGE_NAME
+          value: "{{ .Values.image.name }}"
+        {{- if .Values.cookieDomain }}
+        - name: COOKIE_DOMAIN
+          value: {{ .Values.cookieDomain }}
+        {{- end }}
+        {{- if .Values.frontendPort }}
+        - name: FRONTEND_PORT
+          value: "{{ .Values.frontendPort }}"
+        {{- end }}
+        {{- if .Values.environment }}
+        - name: ENVIRONMENT
+          value: "{{ .Values.environment }}"
+        {{- end }}
+        {{- if .Values.validWebcomponentUrls }}
+        - name: VALID_WEBCOMPONENT_URLS
+          value: '{{ .Values.validWebcomponentUrls }}'
+        {{- end }}
+        resources:
+          limits:
+            cpu: "1"
+            memory: 512Mi
+          requests:
+            cpu: 40m
+            memory: 50Mi
+        ports:
+          - name: http
+            containerPort: {{ .Values.port }}

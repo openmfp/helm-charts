@@ -1,0 +1,72 @@
+matches the snapshot:
+  1: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: RELEASE-NAME-portal
+      name: RELEASE-NAME-portal
+      namespace: NAMESPACE
+    spec:
+      revisionHistoryLimit: 3
+      selector:
+        matchLabels:
+          app: RELEASE-NAME-portal
+      strategy:
+        rollingUpdate:
+          maxSurge: 5
+          maxUnavailable: 0
+      template:
+        metadata:
+          labels:
+            app: RELEASE-NAME-portal
+        spec:
+          containers:
+            - env:
+                - name: HTTP_PROTOCOL
+                  value: https
+                - name: OIDC_CLIENT_ID_PORTAL
+                  value: "12345"
+                - name: OIDC_CLIENT_SECRET_PORTAL
+                  valueFrom:
+                    secretKeyRef:
+                      key: secret
+                      name: portal-client-secret-portal
+                - name: DISCOVERY_ENDPOINT_PORTAL
+                  value: https://auth.example.com/.well-known/openid-configuration
+                - name: BASE_DOMAINS_PORTAL
+                  value: portal.example.com,portal2.example.com
+                - name: IDP_NAMES
+                  value: portal
+                - name: FEATURE_TOGGLES
+                  value: enableSessionAutoRefresh=true
+                - name: PORT
+                  value: "8080"
+                - name: REGION
+                  value: null
+                - name: IMAGE_TAG
+                  value: 1.0.0
+                - name: IMAGE_NAME
+                  value: ghcr.io/openmfp/portal
+                - name: VALID_WEBCOMPONENT_URLS
+                  value: .?
+              image: ghcr.io/openmfp/portal:1.0.0
+              imagePullPolicy: IfNotPresent
+              name: RELEASE-NAME-portal
+              ports:
+                - containerPort: 8080
+                  name: http
+              resources:
+                limits:
+                  cpu: "1"
+                  memory: 512Mi
+                requests:
+                  cpu: 40m
+                  memory: 50Mi
+              securityContext:
+                readOnlyRootFilesystem: true
+          securityContext:
+            fsGroup: 2000
+            runAsGroup: 3000
+            runAsUser: 1000
+          serviceAccountName: RELEASE-NAME-portal

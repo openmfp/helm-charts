@@ -1,0 +1,13 @@
+suite: deploy
+templates:
+  - deploy.yaml
+chart:
+  version: 1.0.0
+  appVersion: 1.0.0
+tests:
+  - it: matches the snapshot
+    values:
+      - ../test-values.yaml
+    template: deploy.yaml
+    asserts:
+      - matchSnapshot: {}
