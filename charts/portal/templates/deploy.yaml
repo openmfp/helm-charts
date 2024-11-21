@@ -80,10 +80,6 @@ spec:
         - name: COOKIE_DOMAIN
           value: {{ .Values.cookieDomain }}
         {{- end }}
-        {{- if .Values.crdGatewayApiUrl }}
-        - name: CRD_GATEWAY_API_URL
-          value: {{ .Values.crdGatewayApiUrl }}
-        {{- end }}
         {{- if .Values.frontendPort }}
         - name: FRONTEND_PORT
           value: "{{ .Values.frontendPort }}"
