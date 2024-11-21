@@ -5,5 +5,9 @@ values:
   - ../test-values.yaml
 tests:
   - it: virtual service match the snapshot
+    set:
+      global:
+        istio:
+          enabled: true
     asserts:
       - matchSnapshot: {}

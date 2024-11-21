@@ -1,11 +1,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ include "entity.name" . }}
+  name: {{ include "common.entity.name" . }}
   namespace: {{ .Release.Namespace }}
 spec:
   selector:
-    app: {{ include "entity.name" . }}
+    app: {{ include "common.entity.name" . }}
   ports:
     - name: http
       protocol: TCP

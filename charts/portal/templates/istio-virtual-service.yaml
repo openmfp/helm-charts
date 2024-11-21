@@ -1,15 +1,15 @@
-{{- if .Values.istio.enabled -}}
+{{- if eq (include "common.istioEnabled" .) "true" -}}
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ include "entity.name" . }}
+  name: {{ include "common.entity.name" . }}
   namespace: {{ .Release.Namespace }}
 spec:
   gateways:
   - {{ .Release.Namespace }}/gateway
   hosts:
-  {{- if (.Values.istio.virtualService).hosts }}
-{{ .Values.istio.virtualService.hosts | toYaml | nindent 2}}
+  {{- if (.Values.virtualService).hosts }}
+{{ .Values.virtualService.hosts | toYaml | nindent 2}}
   {{- else }}
   {{ range $domainName := .Values.baseDomains }}
   - {{ $domainName }}
@@ -31,7 +31,7 @@ spec:
       - DELETE
     route:
     - destination:
-        host: {{ include "entity.name" . }}.{{ .Release.Namespace }}.svc.cluster.local
+        host: {{ include "common.entity.name" . }}.{{ .Release.Namespace }}.svc.cluster.local
         port:
           number: 8080
 {{- end -}}

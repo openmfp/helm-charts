@@ -4,6 +4,9 @@ chart:
   appVersion: 1.0.0
 tests:
   - it: matches the snapshot
+    set:
+      istio:
+        enabled: false
     values:
       - ../test-values.yaml
     asserts:

@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "entity.name" . }}
+  name: {{ include "common.entity.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ include "entity.name" . }}
+    app: {{ include "common.entity.name" . }}
 spec:
   strategy:
     rollingUpdate:
@@ -13,19 +13,19 @@ spec:
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: {{ include "entity.name" . }}
+      app: {{ include "common.entity.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "entity.name" . }}
+        app: {{ include "common.entity.name" . }}
     spec:
-      serviceAccountName: {{ include "entity.name" . }}
+      serviceAccountName: {{ include "common.entity.name" . }}
       securityContext:
         runAsUser: 1000
         runAsGroup: 3000
         fsGroup: 2000
       containers:
-      - name: {{ include "entity.name" . }}
+      - name: {{ include "common.entity.name" . }}
         image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         securityContext:

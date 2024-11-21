@@ -15,7 +15,7 @@ metadata:
   name: read-contentconfigurations-global
 subjects:
   - kind: ServiceAccount
-    name: {{ include "entity.name" . }}
+    name: {{ include "common.entity.name" . }}
     namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole

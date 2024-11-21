@@ -1,13 +1,13 @@
-{{- if .Values.istio.enabled -}}
+{{- if eq (include "common.istioEnabled" .) "true" -}}
 apiVersion: "security.istio.io/v1beta1"
 kind: "PeerAuthentication"
 metadata:
-  name: {{ include "entity.name" . }}
+  name: {{ include "common.entity.name" . }}
   namespace: {{ .Release.Namespace }}
 spec:
   selector:
     matchLabels:
-      app: {{ include "entity.name" . }}
+      app: {{ include "common.entity.name" . }}
   mtls:
     mode: STRICT
 {{- end -}}
