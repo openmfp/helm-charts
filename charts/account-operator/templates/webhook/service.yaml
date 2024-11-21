@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "entity.name" . }}-webhook
+  name: {{ include "common.entity.name" . }}-webhook
   namespace: {{ .Release.Namespace }}
 spec:
   ports:
@@ -10,6 +10,6 @@ spec:
       protocol: TCP
       targetPort: 9443
   selector:
-    service: {{ include "entity.name" . }}
+    service: {{ include "common.entity.name" . }}
     control-plane: controller-manager
 {{- end -}}

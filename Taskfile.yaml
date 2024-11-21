@@ -15,17 +15,13 @@ tasks:
       - helm package ./charts/openmfp
   helmtest:
     cmds:
-      - helm unittest ./charts/common
-      - helm unittest ./charts/account-operator-crds
-      - helm unittest ./charts/account-operator
+      - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm unittest $chart; done"
   test:
     deps:
       - task: helmtest
   update:
     cmds:
-      - helm dependency update ./charts/common
-      - helm dependency update ./charts/account-operator-crds
-      - helm dependency update ./charts/account-operator
+      - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
   validate:
     cmds:
       - task: lint

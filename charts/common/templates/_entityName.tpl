@@ -1,4 +1,4 @@
-{{- define "entity.name" -}}
+{{- define "common.entity.name" -}}
 {{- if contains .Chart.Name .Release.Name }}
 {{- printf "%s" .Chart.Name | trunc 63 }}
 {{- else }}
