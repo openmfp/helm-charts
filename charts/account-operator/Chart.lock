@@ -1,7 +1,7 @@
 dependencies:
 - name: account-operator-crds
   repository: file://../account-operator-crds
-  version: 0.1.4
+  version: 0.1.5
 - name: common
   repository: file://../common
   version: 0.1.4
