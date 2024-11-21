@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "entity.name" . }}
+  name: {{ include "common.entity.name" . }}
   namespace: {{ .Release.Namespace }}
   {{- if .Values.webhooks.enabled }}
   annotations:
-    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "entity.name" . }}-serving-cert
+    cert-manager.io/inject-ca-from: {{ .Release.Namespace }}/{{ include "common.entity.name" . }}-serving-cert
   {{- end }}
 spec:
   revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
   selector:
     matchLabels:
-      service: {{ include "entity.name" . }}
+      service: {{ include "common.entity.name" . }}
   template:
     metadata:
       labels:
-        service: {{ include "entity.name" . }}
+        service: {{ include "common.entity.name" . }}
         control-plane: controller-manager
         {{- with .Values.deployment.specTemplate.labels }}
         {{- toYaml . | nindent 8 }}
@@ -28,7 +28,7 @@ spec:
         traffic.sidecar.istio.io/excludeInboundPorts: "9443"
         {{- end }}
     spec:
-      serviceAccountName: {{ include "entity.name" . }}
+      serviceAccountName: {{ include "common.entity.name" . }}
       containers:
         - args:
           - operator
@@ -122,7 +122,7 @@ spec:
         - name: cert
           secret:
             defaultMode: 420
-            secretName: {{ include "entity.name" . }}-webhook-server-cert
+            secretName: {{ include "common.entity.name" . }}-webhook-server-cert
         {{- end }}
 
 
