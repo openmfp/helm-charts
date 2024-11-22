@@ -5,6 +5,13 @@ vars:
   CHARTS:
     sh: "ls charts/ | sed 's/^/charts\\//g' | paste -sd ',' -"
 tasks:
+  ## Setup
+  setup:kube-lint:
+    internal: true
+    cmds:
+      - mkdir -p $(pwd)/{{.LOCAL_BIN}}
+      - test -s {{.LOCAL_BIN}}/kube-linter || GOBIN=$(pwd)/{{.LOCAL_BIN}} go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
+      - chmod +x $(pwd)/{{.LOCAL_BIN}}/kube-linter
   ## Development
   lint:
     deps: []
@@ -27,3 +34,8 @@ tasks:
       - task: lint
       - task: package
       - task: test
+  vulnerability:
+    deps:
+      - task: setup:kube-lint
+    cmds:
+      - "{{.LOCAL_BIN}}/kube-linter lint \"charts/\" --format \"plain\""
