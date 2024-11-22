@@ -13,3 +13,6 @@ tests:
   - it: operator match the snapshot
     asserts:
       - matchSnapshot: {}
+    set:
+      istio:
+        enabled: true

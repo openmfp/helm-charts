@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: {{ include "common.entity.name" . }}
   namespace: {{ .Release.Namespace }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
 spec:
   revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
   selector:
@@ -14,7 +17,7 @@ spec:
         service: {{ include "common.entity.name" . }}
         control-plane: controller-manager
       annotations:
-        sidecar.istio.io/inject: "false"
+        sidecar.istio.io/inject: "{{ (include "common.istioEnabled" .) }}"
     spec:
       serviceAccountName: {{ include "common.entity.name" . }}
       containers:

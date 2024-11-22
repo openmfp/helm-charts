@@ -6,4 +6,4 @@ version: 0.69.92
 dependencies:
   - name: common
     repository: file://../common
-    version: 0.1.4
+    version: 0.1.5

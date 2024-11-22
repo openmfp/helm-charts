@@ -39,3 +39,7 @@ deployment:
 ## @param crds.enabled Enable or disable the CRDs
 crds:
   enabled: true
+
+## @param commonAnnotations Annotations to add to all deployed objects
+##
+commonAnnotations: {}

@@ -17,9 +17,9 @@ tasks:
     deps: []
     cmds:
       - "ct lint --target-branch main --validate-maintainers=false --charts={{.CHARTS}}"
-  package:
-    cmds:
-      - helm package ./charts/openmfp
+  # package:
+  #   cmds:
+  #     - helm package ./charts/openmfp
   helmtest:
     cmds:
       - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm unittest $chart; done"
@@ -32,8 +32,9 @@ tasks:
   validate:
     cmds:
       - task: lint
-      - task: package
+      # - task: package
       - task: test
+      - task: vulnerability
   vulnerability:
     deps:
       - task: setup:kube-lint

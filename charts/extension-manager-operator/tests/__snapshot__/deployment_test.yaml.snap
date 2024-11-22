@@ -70,7 +70,7 @@ operator match the snapshot:
       template:
         metadata:
           annotations:
-            sidecar.istio.io/inject: "false"
+            sidecar.istio.io/inject: "true"
           labels:
             control-plane: controller-manager
             service: RELEASE-NAME-extension-manager-operator
