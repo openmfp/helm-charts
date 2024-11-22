@@ -84,6 +84,8 @@ operator match the snapshot:
                               In CamelCase.
                               More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
                             type: string
+                          metadataGoTemplate:
+                            x-kubernetes-preserve-unknown-fields: true
                           readyConditionType:
                             description: |-
                               The type of a condition that must be set to True on the Extension object
@@ -451,6 +453,8 @@ operator match the snapshot (with kubeconfigSecret):
                               In CamelCase.
                               More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
                             type: string
+                          metadataGoTemplate:
+                            x-kubernetes-preserve-unknown-fields: true
                           readyConditionType:
                             description: |-
                               The type of a condition that must be set to True on the Extension object
@@ -825,6 +829,8 @@ operator match the snapshot with webhook enabled:
                               In CamelCase.
                               More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
                             type: string
+                          metadataGoTemplate:
+                            x-kubernetes-preserve-unknown-fields: true
                           readyConditionType:
                             description: |-
                               The type of a condition that must be set to True on the Extension object
