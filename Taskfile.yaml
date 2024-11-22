@@ -18,7 +18,7 @@ tasks:
     cmds:
       - "ct lint --target-branch main --validate-maintainers=false --charts={{.CHARTS}}"
   # package:
-  #   cmds:
+  #   cmds: 
   #     - helm package ./charts/openmfp
   helmtest:
     cmds:
