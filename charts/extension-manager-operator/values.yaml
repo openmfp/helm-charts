@@ -1,15 +1,30 @@
+# The image configuration for the Extension Manager Operator
+## @param image.name The image repository
+## @param image.tag The image tag
 image:
   name: ghcr.io/openmfp/extension-content-operator
   tag: 0.16.0
 
+# The secret used to pull the image
+## @param imagePullSecret The secret used to pull the image
 imagePullSecret: "github"
 
+# The health probe configuration
+## @param health.port The port for the health probe
 health:
   port: 8081
 
+# The metrics configuration
+## @param metrics.port The port for the metrics
 metrics:
   port: 8080
 
+# The deployment configuration
+## @param deployment.revisionHistoryLimit The number of old ReplicaSets to retain to allow rollback
+## @param deployment.resources.limits.cpu The maximum amount of CPU the container is allowed to use
+## @param deployment.resources.limits.memory The maximum amount of memory the container is allowed to use
+## @param deployment.resources.requests.cpu The amount of CPU requested for the container
+## @param deployment.resources.requests.memory The amount of memory requested for the container
 deployment:
   revisionHistoryLimit: 3
   resources:
@@ -20,5 +35,7 @@ deployment:
       cpu: 150m
       memory: 128Mi
 
+# The Custom Resource Definitions (CRDs) configuration
+## @param crds.enabled Enable or disable the CRDs
 crds:
   enabled: true
