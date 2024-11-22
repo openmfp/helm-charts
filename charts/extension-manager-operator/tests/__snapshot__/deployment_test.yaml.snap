@@ -111,6 +111,7 @@ operator match the snapshot:
                   cpu: 150m
                   memory: 128Mi
               securityContext:
+                readOnlyRootFilesystem: true
                 runAsNonRoot: true
           serviceAccountName: RELEASE-NAME-extension-manager-operator
           terminationGracePeriodSeconds: 10

@@ -354,6 +354,7 @@ operator match the snapshot:
                   cpu: 150m
                   memory: 128Mi
               securityContext:
+                readOnlyRootFilesystem: true
                 runAsNonRoot: true
               volumeMounts: null
           serviceAccountName: RELEASE-NAME-account-operator
@@ -725,6 +726,7 @@ operator match the snapshot (with kubeconfigSecret):
                   cpu: 150m
                   memory: 128Mi
               securityContext:
+                readOnlyRootFilesystem: true
                 runAsNonRoot: true
               volumeMounts:
                 - mountPath: /api-kubeconfig
@@ -1105,6 +1107,7 @@ operator match the snapshot with webhook enabled:
                   cpu: 150m
                   memory: 128Mi
               securityContext:
+                readOnlyRootFilesystem: true
                 runAsNonRoot: true
               volumeMounts:
                 - mountPath: /certs
