@@ -10,7 +10,7 @@ jobs:
     concurrency:
       group: common-${{ github.ref }}
       cancel-in-progress: true
-    uses: openmfp/gha/.github/workflows/pipeline-chart.yml@fix/skipVulnerabilityScan
+    uses: openmfp/gha/.github/workflows/pipeline-chart.yml@main
     with:
       chartFolder: charts
       chartName: common
