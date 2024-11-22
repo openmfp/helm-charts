@@ -28,6 +28,7 @@ spec:
           name: manager
           securityContext:
             runAsNonRoot: true
+            readOnlyRootFilesystem: true
           ports:
           - containerPort: {{ .Values.metrics.port }}
             name: metrics
