@@ -1,0 +1,24 @@
+image:
+  name: ghcr.io/openmfp/extension-content-operator
+  tag: 0.16.0
+
+imagePullSecret: "github"
+
+health:
+  port: 8081
+
+metrics:
+  port: 8080
+
+deployment:
+  revisionHistoryLimit: 3
+  resources:
+    limits:
+      cpu: 260m
+      memory: 512Mi
+    requests:
+      cpu: 150m
+      memory: 128Mi
+
+crds:
+  enabled: true
