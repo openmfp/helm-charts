@@ -123,3 +123,6 @@ securityContext:
 serviceAccountName: {{ .Release.Name }}
 automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountToken false) }}
 {{- end }}
+{{- define "common.terminationGracePeriodSeconds" -}}
+{{ .Values.terminationGracePeriodSeconds | default 10 }}
+{{- end }}

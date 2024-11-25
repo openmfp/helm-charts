@@ -47,7 +47,4 @@ spec:
             requests:
               cpu: {{ .Values.deployment.resources.requests.cpu }}
               memory: {{ .Values.deployment.resources.requests.memory }}
-      terminationGracePeriodSeconds: 10
-
-
-
+      terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
