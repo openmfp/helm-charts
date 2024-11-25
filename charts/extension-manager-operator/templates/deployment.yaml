@@ -37,11 +37,5 @@ spec:
           ports:
           {{ include "common.PortsMetricsHealth" . | nindent 10 }}
           {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}
-          resources:
-            limits:
-              cpu: {{ .Values.deployment.resources.limits.cpu }}
-              memory: {{ .Values.deployment.resources.limits.memory }}
-            requests:
-              cpu: {{ .Values.deployment.resources.requests.cpu }}
-              memory: {{ .Values.deployment.resources.requests.memory }}
+          {{ include "common.resources" . | nindent 10 }}
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}

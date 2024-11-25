@@ -18,13 +18,13 @@ image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
 {{- define "common.resources" }}
 resources:
   limits:
-    {{- if ((.Values.resources).limits).cpu }}
-    cpu: {{ ((.Values.resources).limits).cpu | quote }}
+    {{- if (((.Values.deployment).resources).limits).cpu }}
+    cpu: {{ (((.Values.deployment).resources).limits).cpu | quote }}
     {{- end }}
-    memory: {{ ((.Values.resources).limits).memory | default "512Mi" | quote }}
+    memory: {{ (((.Values.deployment).resources).limits).memory | default "512Mi" | quote }}
   requests:
-    cpu: {{ ((.Values.resources).requests).cpu | default "40m" }}
-    memory: {{ ((.Values.resources).requests).memory | default "50Mi" | quote }}
+    cpu: {{ (((.Values.deployment).resources).requests).cpu | default "40m" }}
+    memory: {{ (((.Values.deployment).resources).requests).memory | default "50Mi" | quote }}
 {{- end }}
 {{- define "common.ports" }}
 ports:

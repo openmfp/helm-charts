@@ -45,13 +45,7 @@ spec:
             protocol: TCP
           {{- end }}
           {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}
-          resources:
-            limits:
-              cpu: {{ .Values.deployment.resources.limits.cpu }}
-              memory: {{ .Values.deployment.resources.limits.memory }}
-            requests:
-              cpu: {{ .Values.deployment.resources.requests.cpu }}
-              memory: {{ .Values.deployment.resources.requests.memory }}
+          {{ include "common.resources" . | nindent 10 }}
           env:
           - name: SUBROUTINES_NAMESPACE_ENABLED
             value: "{{ .Values.subroutines.namespace.enabled }}"

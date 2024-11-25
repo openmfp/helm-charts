@@ -111,11 +111,10 @@ operator match the snapshot:
                 periodSeconds: 10
               resources:
                 limits:
-                  cpu: 260m
                   memory: 512Mi
                 requests:
-                  cpu: 150m
-                  memory: 128Mi
+                  cpu: 40m
+                  memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true

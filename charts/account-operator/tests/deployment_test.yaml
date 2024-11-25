@@ -22,6 +22,14 @@ tests:
       webhooks:
         enabled: true
         certDir: /certs
+      deployment:
+        resources:
+          limits:
+            cpu: 260m
+            memory: 512Mi
+          requests:
+            cpu: 150m
+            memory: 128Mi
     asserts:
       - matchSnapshot: {}
   - it: deployment with security context
