@@ -27,8 +27,7 @@ spec:
       - name: {{ include "common.entity.name" . }}
         image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        securityContext:
-          readOnlyRootFilesystem: true
+        {{ include "common.security" . | nindent 8 }}
         env:
         - name: HTTP_PROTOCOL
           value: {{ .Values.http.protocol }}

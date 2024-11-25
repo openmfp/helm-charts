@@ -21,7 +21,8 @@ matches the snapshot:
             app: portal
         spec:
           containers:
-            - env:
+            - automountServiceAccountToken: true
+              env:
                 - name: HTTP_PROTOCOL
                   value: https
                 - name: OIDC_CLIENT_ID_PORTAL
@@ -64,6 +65,10 @@ matches the snapshot:
                   memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: portal
           securityContext:
             fsGroup: 2000
             runAsGroup: 3000
@@ -160,7 +165,8 @@ matches the snapshot with istio disabled:
             app: portal
         spec:
           containers:
-            - env:
+            - automountServiceAccountToken: true
+              env:
                 - name: HTTP_PROTOCOL
                   value: https
                 - name: OIDC_CLIENT_ID_PORTAL
@@ -203,6 +209,10 @@ matches the snapshot with istio disabled:
                   memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: portal
           securityContext:
             fsGroup: 2000
             runAsGroup: 3000

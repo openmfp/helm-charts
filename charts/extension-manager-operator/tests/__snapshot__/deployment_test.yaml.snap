@@ -86,6 +86,7 @@ operator match the snapshot:
                 - --leader-elect
                 - --log-level=
                 - --health-probe-bind-address=:8081
+              automountServiceAccountToken: true
               image: ghcr.io/openmfp/extension-content-operator:1.0.0
               imagePullPolicy: Always
               livenessProbe:
@@ -118,6 +119,9 @@ operator match the snapshot:
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: extension-manager-operator
               startupProbe:
                 failureThreshold: 30
                 httpGet:

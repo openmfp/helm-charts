@@ -33,9 +33,7 @@ spec:
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: manager
-          securityContext:
-            runAsNonRoot: true
-            readOnlyRootFilesystem: true
+          {{ include "common.security" . | nindent 10 }}
           ports:
           - containerPort: {{ .Values.metrics.port }}
             name: metrics
