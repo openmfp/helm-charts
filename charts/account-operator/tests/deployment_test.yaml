@@ -15,15 +15,20 @@ tests:
   - it: operator match the snapshot with webhook enabled
     set:
       health:
+        port: 8081
         liveness:
           path: "/healthz"
           # failureThreshold: 1
       webhooks:
         enabled: true
+        certDir: /certs
     asserts:
       - matchSnapshot: {}
   - it: deployment with security context
     template: deployment.yaml
+    set:
+      security:
+        mountServiceAccountToken: true
     asserts:
       - equal:
           path: spec.template.spec.containers[0].securityContext

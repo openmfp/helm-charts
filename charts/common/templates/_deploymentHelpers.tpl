@@ -31,12 +31,7 @@ ports:
   - name: http
     containerPort: {{ .Values.port | default 8080 }}
     protocol: TCP
-  - name: metrics
-    containerPort: {{ .Values.metricsPort | default 2112 }}
-    protocol: TCP
-  - name: health-port
-    containerPort: {{ (.Values.health).port | default 3389 }}
-    protocol: TCP
+  {{ include "common.PortsMetricsHealth" | nindent 4 }}
 {{- end}}
 
 {{- define "common.technicalIssuers" }}
@@ -114,7 +109,7 @@ readinessProbe:
   initialDelaySeconds: {{ ((.Values.health).readiness).initialDelaySeconds | default 45 }}
   periodSeconds: {{ (.Values.health).periodSeconds | default 10 }}
 {{- end }}
-{{- define "common.security" }}
+{{- define "common.security" -}}
 securityContext:
   runAsNonRoot: true
   readOnlyRootFilesystem: true
@@ -126,7 +121,6 @@ automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountT
 {{- define "common.terminationGracePeriodSeconds" -}}
 {{ .Values.terminationGracePeriodSeconds | default 10 }}
 {{- end }}
-
 {{- define "common.imagePullPolicy" -}}
 {{- if and .Values.global (.Values.global.imagePullPolicy) -}}
 {{ .Values.global.imagePullPolicy }}
@@ -136,3 +130,11 @@ automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountT
 Always
 {{- end -}}
 {{- end }}
+{{- define "common.PortsMetricsHealth" -}}
+- name: metrics
+  containerPort: {{ ((.Values).metrics).port | default 2112 }}
+  protocol: TCP
+- name: health-port
+  containerPort: {{ (.Values.health).port | default 3389 }}
+  protocol: TCP
+{{- end -}}

@@ -38,12 +38,7 @@ spec:
           name: manager
           {{ include "common.security" . | nindent 10 }}
           ports:
-          - containerPort: {{ .Values.metrics.port }}
-            name: metrics
-            protocol: TCP
-          - name: health-port
-            containerPort: {{ .Values.health.port }}
-            protocol: TCP
+          {{ include "common.PortsMetricsHealth" . | nindent 10 }}
           {{- if .Values.webhooks.enabled }}
           - name: webhook-port
             containerPort: 9443

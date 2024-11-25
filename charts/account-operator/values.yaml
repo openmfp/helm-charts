@@ -1,12 +1,18 @@
 image:
+  # @param image.name The image repository
   name: ghcr.io/openmfp/account-operator
+  # @param image.tag The image tag
   tag: latest
 
+# @param imagePullSecret The secret used to pull the image
 imagePullSecret: "github"
 
+# @param crds.enabled Enable CRDs
 crds:
   enabled: true
 
+# @param webhooks.enabled Enable webhooks
+# @param webhooks.certDir The directory for webhook certificates
 webhooks:
   enabled: false
   certDir: /certs
@@ -35,10 +41,19 @@ health:
   #   path: "/readyz"
   #   failureThreshold: 30
 
-
+# The metrics configuration
+## @param metrics.port The port for the metrics
 metrics:
   port: 8080
 
+# The deployment configuration
+## @param deployment.specTemplate.annotations The annotations to add to the deployment template
+## @param deployment.specTemplate.labels The labels to add to the deployment template
+## @param deployment.revisionHistoryLimit The number of old ReplicaSets to retain to allow rollback
+## @param deployment.resources.limits.cpu The maximum amount of CPU the container is allowed to use
+## @param deployment.resources.limits.memory The maximum amount of memory the container is allowed to use
+## @param deployment.resources.requests.cpu The amount of CPU requested for the container
+## @param deployment.resources.requests.memory The amount of memory requested for the container
 deployment:
   specTemplate:
     annotations: {}
@@ -52,10 +67,23 @@ deployment:
       cpu: 150m
       memory: 128Mi
 
+# The KCP configuration
+## @param kcp.enabled Enable KCP
+## @param kcp.virtualWorkspaceUrl The URL for the virtual workspace
 kcp:
   enabled: false
   virtualWorkspaceUrl: ""
 
+# The subroutines configuration
+## @param subroutines.namespace.enabled Enable namespace subroutines
+## @param subroutines.fga.enabled Enable FGA subroutines
+## @param subroutines.fga.grpcAddr The gRPC address for FGA
+## @param subroutines.fga.rootNamespace The root namespace for FGA
+## @param subroutines.fga.objectType The object type for FGA
+## @param subroutines.fga.parentRelation The parent relation for FGA
+## @param subroutines.fga.creatorRelation The creator relation for FGA
+## @param subroutines.extension.enabled Enable extension subroutines
+## @param subroutines.extensionReady.enabled Enable extension ready subroutines
 subroutines:
   namespace:
     enabled: true
@@ -71,5 +99,11 @@ subroutines:
   extensionReady:
     enabled: true
 
+# @param kubeconfigSecret The secret for kubeconfig
 kubeconfigSecret: ""
+# @param logLevel The log level
 logLevel: warn
+
+## @param security.mountServiceAccountToken Mount the service account token
+security:
+  mountServiceAccountToken: false

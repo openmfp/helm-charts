@@ -297,7 +297,7 @@ operator match the snapshot:
                 - --leader-elect
                 - --log-level=warn
                 - --health-probe-bind-address=:8081
-              automountServiceAccountToken: true
+              automountServiceAccountToken: false
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -675,7 +675,7 @@ operator match the snapshot (with kubeconfigSecret):
                 - --leader-elect
                 - --log-level=warn
                 - --health-probe-bind-address=:8081
-              automountServiceAccountToken: true
+              automountServiceAccountToken: false
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -1063,7 +1063,7 @@ operator match the snapshot with webhook enabled:
                 - --leader-elect
                 - --log-level=warn
                 - --health-probe-bind-address=:8081
-              automountServiceAccountToken: true
+              automountServiceAccountToken: false
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
