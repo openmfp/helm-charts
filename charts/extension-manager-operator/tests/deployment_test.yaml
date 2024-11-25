@@ -16,11 +16,19 @@ tests:
     set:
       istio:
         enabled: true
+      health:
+        port: 8081
+        liveness:
+          path: /readyz
+      metrics:
+        port: 8080
   - it: deployment with metrics probes
     template: deployment.yaml
     set:
       health:
         port: 8081
+        liveness:
+          path: /healthz
       metrics:
         port: 8082
     asserts:
