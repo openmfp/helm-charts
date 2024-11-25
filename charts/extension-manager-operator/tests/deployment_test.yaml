@@ -16,3 +16,19 @@ tests:
     set:
       istio:
         enabled: true
+  - it: deployment with metrics probes
+    template: deployment.yaml
+    set:
+      health:
+        port: 8081
+      metrics:
+        port: 8082
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].livenessProbe
+          value:
+            failureThreshold: 1
+            httpGet:
+              path: /healthz
+              port: 8081
+            periodSeconds: 10

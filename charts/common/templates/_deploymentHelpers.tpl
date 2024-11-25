@@ -98,19 +98,19 @@ ports:
 livenessProbe:
   httpGet:
     path: {{ ((.Values.health).liveness).path | default "/healthz" }}
-    port: health-port
+    port: {{ (.Values.health).port | default 3389 }}
   failureThreshold: {{ ((.Values.health).liveness).failureThreshold | default 1 }}
   periodSeconds: {{ (.Values.health).periodSeconds | default 10 }}
 startupProbe:
   httpGet:
     path: {{ ((.Values.health).startup).path | default "/healthz" }}
-    port: health-port
+    port: {{ (.Values.health).port | default 3389 }}
   failureThreshold: {{ ((.Values.health).startup).failureThreshold | default 30 }}
   periodSeconds: {{ (.Values.health).periodSeconds | default 10 }}
 readinessProbe:
   httpGet:
     path: {{ ((.Values.health).readiness).path | default "/readyz" }}
-    port: health-port
+    port: {{ (.Values.health).port | default 3389 }}
   initialDelaySeconds: {{ ((.Values.health).readiness).initialDelaySeconds | default 45 }}
   periodSeconds: {{ (.Values.health).periodSeconds | default 10 }}
 {{- end }}

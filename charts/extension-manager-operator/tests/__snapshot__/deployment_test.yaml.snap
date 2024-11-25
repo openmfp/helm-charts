@@ -33,7 +33,6 @@ operator match the snapshot:
       - apiGroups:
           - ""
         resources:
-          - namespaces
           - events
         verbs:
           - get
@@ -84,11 +83,11 @@ operator match the snapshot:
               image: ghcr.io/openmfp/extension-content-operator:1.0.0
               imagePullPolicy: Always
               livenessProbe:
+                failureThreshold: 1
                 httpGet:
                   path: /healthz
                   port: 8081
-                initialDelaySeconds: 15
-                periodSeconds: 20
+                periodSeconds: 10
               name: manager
               ports:
                 - containerPort: 8080
@@ -101,7 +100,7 @@ operator match the snapshot:
                 httpGet:
                   path: /readyz
                   port: 8081
-                initialDelaySeconds: 5
+                initialDelaySeconds: 45
                 periodSeconds: 10
               resources:
                 limits:
@@ -113,6 +112,12 @@ operator match the snapshot:
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /healthz
+                  port: 8081
+                periodSeconds: 10
           serviceAccountName: RELEASE-NAME-extension-manager-operator
           terminationGracePeriodSeconds: 10
   4: |

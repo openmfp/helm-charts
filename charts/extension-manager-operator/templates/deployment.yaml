@@ -39,18 +39,7 @@ spec:
           - name: health-port
             containerPort: {{ .Values.health.port }}
             protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: {{ .Values.health.port}}
-            initialDelaySeconds: 15
-            periodSeconds: 20
-          readinessProbe:
-            httpGet:
-              path: /readyz
-              port: {{ .Values.health.port}}
-            initialDelaySeconds: 5
-            periodSeconds: 10
+          {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}
           resources:
             limits:
               cpu: {{ .Values.deployment.resources.limits.cpu }}

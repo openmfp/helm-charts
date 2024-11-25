@@ -31,7 +31,6 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - namespaces
   - events
   verbs:
   - get
