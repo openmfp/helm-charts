@@ -37,9 +37,7 @@ spec:
           - "--health-probe-bind-address=:{{ .Values.health.port }}"
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           name: manager
-          securityContext:
-            runAsNonRoot: true
-            readOnlyRootFilesystem: true
+          {{ include "common.security" . | nindent 10 }}
           ports:
           - containerPort: {{ .Values.metrics.port }}
             name: metrics

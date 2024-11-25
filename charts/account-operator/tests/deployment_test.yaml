@@ -16,3 +16,19 @@ tests:
         enabled: true
     asserts:
       - matchSnapshot: {}
+  - it: deployment with security context
+    template: deployment.yaml
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].securityContext
+          value:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
+      - equal:
+          path: spec.template.spec.containers[0].serviceAccountName
+          value: RELEASE-NAME
+      - equal:
+          path: spec.template.spec.containers[0].automountServiceAccountToken
+          value: true
