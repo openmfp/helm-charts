@@ -20,6 +20,9 @@ spec:
       {{- end }}
       annotations:
         sidecar.istio.io/inject: "{{ (include "common.istioEnabled" .) }}"
+      {{- if ((.Values.deployment).template).annotations }}
+      {{ .Values.deployment.template.annotations | toYaml | nindent 8 }}
+      {{- end }}
     spec:
       serviceAccountName: {{ include "common.entity.name" . }}
       containers:

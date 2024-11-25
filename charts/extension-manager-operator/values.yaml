@@ -45,6 +45,8 @@ metrics:
 ## @param deployment.resources.limits.memory The maximum amount of memory the container is allowed to use
 ## @param deployment.resources.requests.cpu The amount of CPU requested for the container
 ## @param deployment.resources.requests.memory The amount of memory requested for the container
+## @param deployment.template.labels The labels to add to the deployment template
+## @param deployment.template.annotations The annotations to add to the deployment template
 deployment:
   revisionHistoryLimit: 3
   resources:
@@ -57,6 +59,8 @@ deployment:
   template:
     # labels:
     #   control-plane: controller-manager
+    # annotations:
+    #   annotation1: test
 
 # The Custom Resource Definitions (CRDs) configuration
 ## @param crds.enabled Enable or disable the CRDs
