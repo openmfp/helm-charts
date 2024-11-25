@@ -4,14 +4,13 @@ matches the snapshot:
     kind: Deployment
     metadata:
       labels:
-        app: RELEASE-NAME-portal
-      name: RELEASE-NAME-portal
-      namespace: NAMESPACE
+        app: portal
+      name: portal
     spec:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          app: RELEASE-NAME-portal
+          app: portal
       strategy:
         rollingUpdate:
           maxSurge: 5
@@ -19,7 +18,7 @@ matches the snapshot:
       template:
         metadata:
           labels:
-            app: RELEASE-NAME-portal
+            app: portal
         spec:
           containers:
             - env:
@@ -52,7 +51,7 @@ matches the snapshot:
                   value: .?
               image: ghcr.io/openmfp/portal:1.0.0
               imagePullPolicy: IfNotPresent
-              name: RELEASE-NAME-portal
+              name: portal
               ports:
                 - containerPort: 8080
                   name: http
@@ -69,4 +68,4 @@ matches the snapshot:
             fsGroup: 2000
             runAsGroup: 3000
             runAsUser: 1000
-          serviceAccountName: RELEASE-NAME-portal
+          serviceAccountName: portal

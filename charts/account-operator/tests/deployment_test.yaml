@@ -1,6 +1,8 @@
 suite: operator
 chart:
   appVersion: 0.0.0
+release:
+  name: account-operator
 tests:
   - it: operator match the snapshot
     asserts:
@@ -28,7 +30,7 @@ tests:
               type: RuntimeDefault
       - equal:
           path: spec.template.spec.containers[0].serviceAccountName
-          value: RELEASE-NAME
+          value: account-operator
       - equal:
           path: spec.template.spec.containers[0].automountServiceAccountToken
           value: true

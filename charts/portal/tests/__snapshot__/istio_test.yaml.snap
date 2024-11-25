@@ -4,14 +4,13 @@ matches the snapshot:
     kind: Deployment
     metadata:
       labels:
-        app: RELEASE-NAME-portal
-      name: RELEASE-NAME-portal
-      namespace: NAMESPACE
+        app: portal
+      name: portal
     spec:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          app: RELEASE-NAME-portal
+          app: portal
       strategy:
         rollingUpdate:
           maxSurge: 5
@@ -19,7 +18,7 @@ matches the snapshot:
       template:
         metadata:
           labels:
-            app: RELEASE-NAME-portal
+            app: portal
         spec:
           containers:
             - env:
@@ -52,7 +51,7 @@ matches the snapshot:
                   value: .?
               image: ghcr.io/openmfp/portal:1.0.0
               imagePullPolicy: IfNotPresent
-              name: RELEASE-NAME-portal
+              name: portal
               ports:
                 - containerPort: 8080
                   name: http
@@ -69,12 +68,12 @@ matches the snapshot:
             fsGroup: 2000
             runAsGroup: 3000
             runAsUser: 1000
-          serviceAccountName: RELEASE-NAME-portal
+          serviceAccountName: portal
   2: |
     apiVersion: external-secrets.io/v1beta1
     kind: ExternalSecret
     metadata:
-      name: RELEASE-NAME-portal-client-secret-portal
+      name: portal-portal-client-secret-portal
       namespace: NAMESPACE
     spec:
       data:
@@ -116,7 +115,7 @@ matches the snapshot:
       name: contentconfigurations-reader
     subjects:
       - kind: ServiceAccount
-        name: RELEASE-NAME-portal
+        name: portal
         namespace: NAMESPACE
   5: |
     apiVersion: v1
@@ -124,21 +123,19 @@ matches the snapshot:
       - name: github
     kind: ServiceAccount
     metadata:
-      name: RELEASE-NAME-portal
-      namespace: NAMESPACE
+      name: portal
   6: |
     apiVersion: v1
     kind: Service
     metadata:
-      name: RELEASE-NAME-portal
-      namespace: NAMESPACE
+      name: portal
     spec:
       ports:
         - name: http
           port: 8080
           protocol: TCP
       selector:
-        app: RELEASE-NAME-portal
+        app: portal
       type: ClusterIP
 matches the snapshot with istio disabled:
   1: |
@@ -146,14 +143,13 @@ matches the snapshot with istio disabled:
     kind: Deployment
     metadata:
       labels:
-        app: RELEASE-NAME-portal
-      name: RELEASE-NAME-portal
-      namespace: NAMESPACE
+        app: portal
+      name: portal
     spec:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          app: RELEASE-NAME-portal
+          app: portal
       strategy:
         rollingUpdate:
           maxSurge: 5
@@ -161,7 +157,7 @@ matches the snapshot with istio disabled:
       template:
         metadata:
           labels:
-            app: RELEASE-NAME-portal
+            app: portal
         spec:
           containers:
             - env:
@@ -194,7 +190,7 @@ matches the snapshot with istio disabled:
                   value: .?
               image: ghcr.io/openmfp/portal:1.0.0
               imagePullPolicy: IfNotPresent
-              name: RELEASE-NAME-portal
+              name: portal
               ports:
                 - containerPort: 8080
                   name: http
@@ -211,12 +207,12 @@ matches the snapshot with istio disabled:
             fsGroup: 2000
             runAsGroup: 3000
             runAsUser: 1000
-          serviceAccountName: RELEASE-NAME-portal
+          serviceAccountName: portal
   2: |
     apiVersion: external-secrets.io/v1beta1
     kind: ExternalSecret
     metadata:
-      name: RELEASE-NAME-portal-client-secret-portal
+      name: portal-portal-client-secret-portal
       namespace: NAMESPACE
     spec:
       data:
@@ -258,7 +254,7 @@ matches the snapshot with istio disabled:
       name: contentconfigurations-reader
     subjects:
       - kind: ServiceAccount
-        name: RELEASE-NAME-portal
+        name: portal
         namespace: NAMESPACE
   5: |
     apiVersion: v1
@@ -266,19 +262,17 @@ matches the snapshot with istio disabled:
       - name: github
     kind: ServiceAccount
     metadata:
-      name: RELEASE-NAME-portal
-      namespace: NAMESPACE
+      name: portal
   6: |
     apiVersion: v1
     kind: Service
     metadata:
-      name: RELEASE-NAME-portal
-      namespace: NAMESPACE
+      name: portal
     spec:
       ports:
         - name: http
           port: 8080
           protocol: TCP
       selector:
-        app: RELEASE-NAME-portal
+        app: portal
       type: ClusterIP

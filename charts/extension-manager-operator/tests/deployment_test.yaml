@@ -9,6 +9,8 @@ values:
 chart:
   version: 1.0.0
   appVersion: 1.0.0
+release:
+  name: extension-manager-operator
 tests:
   - it: operator match the snapshot
     asserts:
@@ -60,7 +62,7 @@ tests:
       - equal:
           path: spec.template.metadata.labels
           value:
-            service: RELEASE-NAME-extension-manager-operator
+            service: extension-manager-operator
   - it: test imagePullPolicy override
     template: deployment.yaml
     set:

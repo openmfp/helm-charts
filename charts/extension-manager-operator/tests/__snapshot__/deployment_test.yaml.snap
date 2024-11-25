@@ -3,7 +3,7 @@ operator match the snapshot:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
-      name: RELEASE-NAME-extension-manager-operator
+      name: extension-manager-operator
     rules:
       - apiGroups:
           - core.openmfp.io
@@ -46,31 +46,31 @@ operator match the snapshot:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
-      name: RELEASE-NAME-extension-manager-operator
+      name: extension-manager-operator
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: ClusterRole
-      name: RELEASE-NAME-extension-manager-operator
+      name: extension-manager-operator
     subjects:
       - kind: ServiceAccount
-        name: RELEASE-NAME-extension-manager-operator
+        name: extension-manager-operator
         namespace: NAMESPACE
   3: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: RELEASE-NAME-extension-manager-operator
+      name: extension-manager-operator
     spec:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-extension-manager-operator
+          service: extension-manager-operator
       template:
         metadata:
           annotations:
             sidecar.istio.io/inject: "true"
           labels:
-            service: RELEASE-NAME-extension-manager-operator
+            service: extension-manager-operator
         spec:
           containers:
             - args:
@@ -116,7 +116,7 @@ operator match the snapshot:
                   path: /readyz
                   port: 8081
                 periodSeconds: 10
-          serviceAccountName: RELEASE-NAME-extension-manager-operator
+          serviceAccountName: extension-manager-operator
           terminationGracePeriodSeconds: 10
   4: |
     apiVersion: v1
@@ -124,5 +124,4 @@ operator match the snapshot:
       - name: github
     kind: ServiceAccount
     metadata:
-      name: RELEASE-NAME-extension-manager-operator
-      namespace: NAMESPACE
+      name: extension-manager-operator
