@@ -1,8 +1,8 @@
 apiVersion: v2
-appVersion: "0.178.0"
+appVersion: "0.179.0"
 description: Helm Chart for the openmfp Portal
 name: portal
-version: 0.69.99
+version: 0.69.100
 dependencies:
   - name: common
     repository: file://../common
