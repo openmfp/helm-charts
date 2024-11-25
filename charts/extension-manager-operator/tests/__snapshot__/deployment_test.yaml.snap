@@ -60,7 +60,6 @@ operator match the snapshot:
     kind: Deployment
     metadata:
       name: RELEASE-NAME-extension-manager-operator
-      namespace: NAMESPACE
     spec:
       revisionHistoryLimit: 3
       selector:
