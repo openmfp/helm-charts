@@ -34,7 +34,6 @@ health:
   startup:
     path: "/readyz"
     failureThreshold: 30
-    
 
 # The metrics configuration
 ## @param metrics.port The port for the metrics
