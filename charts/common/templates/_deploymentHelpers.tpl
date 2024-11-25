@@ -128,10 +128,10 @@ automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountT
 {{- end }}
 
 {{- define "common.imagePullPolicy" -}}
-{{- if .Values.imagePullPolicy -}}
-{{ .Values.imagePullPolicy }}
-{{- else if and .Values.global (.Values.global.imagePullPolicy) -}}
+{{- if and .Values.global (.Values.global.imagePullPolicy) -}}
 {{ .Values.global.imagePullPolicy }}
+{{- else if .Values.imagePullPolicy -}}
+{{ .Values.imagePullPolicy }}
 {{- else -}}
 Always
 {{- end -}}
