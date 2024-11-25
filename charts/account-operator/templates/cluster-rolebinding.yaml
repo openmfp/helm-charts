@@ -5,6 +5,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: {{ include "common.entity.name" . }}
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
   name: {{ include "common.entity.name" . }}

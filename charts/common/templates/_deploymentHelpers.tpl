@@ -126,6 +126,13 @@ automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountT
 {{- define "common.terminationGracePeriodSeconds" -}}
 {{ .Values.terminationGracePeriodSeconds | default 10 }}
 {{- end }}
+
 {{- define "common.imagePullPolicy" -}}
-{{ .Values.imagePullPolicy | default "Always" }}
+{{- if .Values.imagePullPolicy -}}
+{{ .Values.imagePullPolicy }}
+{{- else if and .Values.global (.Values.global.imagePullPolicy) -}}
+{{ .Values.global.imagePullPolicy }}
+{{- else -}}
+Always
+{{- end -}}
 {{- end }}
