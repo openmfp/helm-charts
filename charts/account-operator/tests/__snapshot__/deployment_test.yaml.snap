@@ -327,11 +327,11 @@ operator match the snapshot:
                   value: /certs
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
+                failureThreshold: 1
                 httpGet:
                   path: /healthz
                   port: 8081
-                initialDelaySeconds: 15
-                periodSeconds: 20
+                periodSeconds: 10
               name: manager
               ports:
                 - containerPort: 8080
@@ -344,7 +344,7 @@ operator match the snapshot:
                 httpGet:
                   path: /readyz
                   port: 8081
-                initialDelaySeconds: 5
+                initialDelaySeconds: 45
                 periodSeconds: 10
               resources:
                 limits:
@@ -359,6 +359,12 @@ operator match the snapshot:
                 seccompProfile:
                   type: RuntimeDefault
               serviceAccountName: account-operator
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /healthz
+                  port: 8081
+                periodSeconds: 10
               volumeMounts: null
           serviceAccountName: account-operator
           terminationGracePeriodSeconds: 10
@@ -701,11 +707,11 @@ operator match the snapshot (with kubeconfigSecret):
                   value: /api-kubeconfig/kubeconfig
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
+                failureThreshold: 1
                 httpGet:
                   path: /healthz
                   port: 8081
-                initialDelaySeconds: 15
-                periodSeconds: 20
+                periodSeconds: 10
               name: manager
               ports:
                 - containerPort: 8080
@@ -718,7 +724,7 @@ operator match the snapshot (with kubeconfigSecret):
                 httpGet:
                   path: /readyz
                   port: 8081
-                initialDelaySeconds: 5
+                initialDelaySeconds: 45
                 periodSeconds: 10
               resources:
                 limits:
@@ -733,6 +739,12 @@ operator match the snapshot (with kubeconfigSecret):
                 seccompProfile:
                   type: RuntimeDefault
               serviceAccountName: account-operator
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /healthz
+                  port: 8081
+                periodSeconds: 10
               volumeMounts:
                 - mountPath: /api-kubeconfig
                   name: external-api-server
@@ -1081,11 +1093,11 @@ operator match the snapshot with webhook enabled:
                   value: /certs
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
+                failureThreshold: 1
                 httpGet:
                   path: /healthz
                   port: 8081
-                initialDelaySeconds: 15
-                periodSeconds: 20
+                periodSeconds: 10
               name: manager
               ports:
                 - containerPort: 8080
@@ -1101,7 +1113,7 @@ operator match the snapshot with webhook enabled:
                 httpGet:
                   path: /readyz
                   port: 8081
-                initialDelaySeconds: 5
+                initialDelaySeconds: 45
                 periodSeconds: 10
               resources:
                 limits:
@@ -1116,6 +1128,12 @@ operator match the snapshot with webhook enabled:
                 seccompProfile:
                   type: RuntimeDefault
               serviceAccountName: account-operator
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /healthz
+                  port: 8081
+                periodSeconds: 10
               volumeMounts:
                 - mountPath: /certs
                   name: cert
