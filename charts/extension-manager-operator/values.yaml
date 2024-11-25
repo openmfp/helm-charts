@@ -8,6 +8,8 @@ image:
 # The secret used to pull the image
 ## @param imagePullSecret The secret used to pull the image
 imagePullSecret: "github"
+## @param imagePullPolicy The image pull policy
+imagePullPolicy: Always
 
 # The health probe configuration
 ## @param health.port The port for the health probe

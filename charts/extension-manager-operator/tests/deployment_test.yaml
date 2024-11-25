@@ -61,3 +61,11 @@ tests:
           path: spec.template.metadata.labels
           value:
             service: RELEASE-NAME-extension-manager-operator
+  - it: test imagePullPolicy override
+    template: deployment.yaml
+    set:
+      imagePullPolicy: IfNotPresent
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].imagePullPolicy
+          value: IfNotPresent

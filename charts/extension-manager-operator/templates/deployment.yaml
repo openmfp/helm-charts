@@ -32,7 +32,7 @@ spec:
           - --log-level={{ .Values.logLevel }}
           - "--health-probe-bind-address=:{{ .Values.health.port }}"
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
-          imagePullPolicy: Always
+          imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: manager
           securityContext:
             runAsNonRoot: true
