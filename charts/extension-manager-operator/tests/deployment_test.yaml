@@ -24,6 +24,14 @@ tests:
           path: /readyz
       metrics:
         port: 8080
+      deployment:
+        resources:
+          limits:
+            cpu: 260m
+            memory: 512Mi
+          requests:
+            cpu: 40m
+            memory: 50Mi
   - it: deployment with metrics probes
     template: deployment.yaml
     set:

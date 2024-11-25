@@ -5,6 +5,15 @@ release:
   name: account-operator
 tests:
   - it: operator match the snapshot
+    set:
+      deployment:
+        resources:
+          limits:
+            cpu: 260m
+            memory: 512Mi
+          requests:
+            cpu: 150m
+            memory: 128Mi
     asserts:
       - matchSnapshot: {}
   - it: operator match the snapshot (with kubeconfigSecret)
