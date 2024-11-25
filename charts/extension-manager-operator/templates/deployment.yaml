@@ -15,7 +15,9 @@ spec:
     metadata:
       labels:
         service: {{ include "common.entity.name" . }}
-        control-plane: controller-manager
+      {{- if ((.Values.deployment).template).labels }}
+      {{ .Values.deployment.template.labels | toYaml | nindent 8 }}
+      {{- end }}
       annotations:
         sidecar.istio.io/inject: "{{ (include "common.istioEnabled" .) }}"
     spec:

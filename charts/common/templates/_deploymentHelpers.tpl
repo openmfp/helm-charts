@@ -126,3 +126,6 @@ automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountT
 {{- define "common.terminationGracePeriodSeconds" -}}
 {{ .Values.terminationGracePeriodSeconds | default 10 }}
 {{- end }}
+{{- define "common.deploymentTemplateLabels" }}
+
+{{- end }}

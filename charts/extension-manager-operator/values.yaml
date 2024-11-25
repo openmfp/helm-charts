@@ -54,6 +54,9 @@ deployment:
     requests:
       cpu: 150m
       memory: 128Mi
+  template:
+    # labels:
+    #   control-plane: controller-manager
 
 # The Custom Resource Definitions (CRDs) configuration
 ## @param crds.enabled Enable or disable the CRDs

@@ -40,3 +40,24 @@ tests:
               path: /healthz
               port: 8081
             periodSeconds: 10
+  - it: check deployment template labels
+    template: deployment.yaml
+    set:
+      deployment:
+        template:
+          labels:
+            control-plane: controller-manager
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels.control-plane
+          value: controller-manager
+  - it: check deployment without custom labels
+    template: deployment.yaml
+    set:
+      deployment:
+        template: {}
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels
+          value:
+            service: RELEASE-NAME-extension-manager-operator
