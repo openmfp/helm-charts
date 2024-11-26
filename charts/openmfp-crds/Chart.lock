@@ -1,0 +1,6 @@
+dependencies:
+- name: account-operator-crds
+  repository: oci://ghcr.io/openmfp/helm-charts
+  version: 0.1.5
+digest: sha256:95ab4d6d6a31532cd938f1b7747d536aefae97fa86c987a0668ec59e41cbda77
+generated: "2024-11-26T18:27:58.402002+01:00"
