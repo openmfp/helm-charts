@@ -1,0 +1,13 @@
+suite: istio
+templates:
+  - certManager.yaml
+tests:
+  - it: default value, no configuration is values
+    template: certManager.yaml
+    set:
+      certManager:
+        enabled: "true"
+    asserts:
+      - equal:
+          path: spec.certManager.enabled
+          value: true

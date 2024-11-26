@@ -1,3 +1,3 @@
 {{- define "common.certManagerEnabled" -}}
-{{- default (.Values.certManager).enabled (((.Values.global).certManager).enabled) -}}
-{{- end -}}
+{{- include "common.getKeyValue" (dict "Values" .Values "key" .key) }}
+{{- end }}

@@ -1,1 +1,3 @@
-a: b
+defaults:
+  certManager:
+    enabled: "true5"

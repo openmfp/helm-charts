@@ -4,7 +4,6 @@ test global value:
     kind: VirtualService
     metadata:
       name: RELEASE-NAME-test-chart
-      namespace: NAMESPACE
     spec:
       gateways:
         - NAMESPACE/gateway
@@ -26,7 +25,6 @@ test local value:
     kind: VirtualService
     metadata:
       name: RELEASE-NAME-test-chart
-      namespace: NAMESPACE
     spec:
       gateways:
         - NAMESPACE/gateway

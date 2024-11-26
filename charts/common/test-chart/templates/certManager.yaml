@@ -1,0 +1,7 @@
+kind: Test
+apiVersion: v1
+metadata:
+  name: test
+spec:
+  certManager:
+    enabled: {{ include "common.certManagerEnabled" (dict "Values" .Values "key" "certManager.enabled") }}
