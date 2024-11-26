@@ -4,6 +4,6 @@ dependencies:
   version: 0.110.4
 - name: portal
   repository: oci://ghcr.io/openmfp/helm-charts
-  version: 0.69.112
-digest: sha256:3af98fe76913930a8966fd7c52b8f4d0ca12285d80d4194cdd4047b2c16bcbf6
-generated: "2024-11-26T18:16:02.609717729Z"
+  version: 0.69.115
+digest: sha256:a5ddfdcc209998c9ed21b716790f0df9e21238d6bf3978641db642da750b99a0
+generated: "2024-11-26T21:58:27.645041499Z"
