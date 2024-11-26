@@ -3,4 +3,3 @@ account-operator-crds:
 
 extension-content-operator-crds:
   enabled: true
-
