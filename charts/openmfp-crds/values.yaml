@@ -1,0 +1,6 @@
+account-operator-crds:
+  enabled: true
+
+extension-content-operator-crds:
+  enabled: true
+

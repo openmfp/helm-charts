@@ -1,0 +1,20 @@
+name: Build OpenMFP
+on:
+  push:
+    paths:
+      - 'charts/openmfp/**'
+      - '.github/workflows/openmfp.yaml'
+
+jobs:
+  pipeline:
+    concurrency:
+      group: openmfp-${{ github.ref }}
+      cancel-in-progress: true
+    uses: openmfp/gha/.github/workflows/pipeline-chart.yml@main
+    with:
+      chartFolder: charts
+      chartName: openmfp
+      additionalTestFilesCommand: ''
+      release_branch: main
+      chartRepos: 'bitnami=https://charts.bitnami.com/bitnami,openfga=https://openfga.github.io/helm-charts'
+    secrets: inherit
