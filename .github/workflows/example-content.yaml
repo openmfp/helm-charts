@@ -1,0 +1,28 @@
+name: Build example-content Workflow
+on:
+  push:
+    paths:
+      - 'charts/example-content/**'
+      - 'example-content.yaml'
+
+jobs:
+  pipeline:
+    concurrency:
+      group: example-content-${{ github.ref }}
+      cancel-in-progress: true
+    uses: openmfp/gha/.github/workflows/pipeline-chart.yml@main
+    with:
+      chartFolder: charts
+      chartName: example-content
+      additionalTestFilesCommand: ''
+      chartRepos: 'bitnami=https://charts.bitnami.com/bitnami,openfga=https://openfga.github.io/helm-charts'
+    secrets: inherit
+
+  updateVersionFile:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [pipeline]
+    uses: openmfp/gha/.github/workflows/job-update-version-file.yml@main
+    secrets: inherit
+    with:
+      componentVersionKey: "example-content"
+      version: ${{ needs.pipeline.outputs.version }}
