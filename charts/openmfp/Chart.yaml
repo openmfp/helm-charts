@@ -11,6 +11,6 @@ dependencies:
     repository: oci://ghcr.io/openmfp/helm-charts
     condition: components.example-content.enabled
   - name: portal
-    version: 0.69.109
+    version: 0.69.111
     repository: oci://ghcr.io/openmfp/helm-charts
     condition: components.portal.enabled
