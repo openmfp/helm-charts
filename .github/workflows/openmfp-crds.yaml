@@ -1,0 +1,19 @@
+name: Build OpenMFP CRDs
+on:
+  push:
+    paths:
+      - 'charts/openmfp-crds/**'
+      - '.github/workflows/openmfp-crds.yaml'
+
+jobs:
+  pipeline:
+    concurrency:
+      group: openmfp-crds-${{ github.ref }}
+      cancel-in-progress: true
+    uses: openmfp/gha/.github/workflows/pipeline-chart.yml@main
+    with:
+      chartFolder: charts
+      chartName: openmfp-crds
+      additionalTestFilesCommand: ''
+      release_branch: main
+    secrets: inherit

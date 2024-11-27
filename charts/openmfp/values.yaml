@@ -1,0 +1,5 @@
+components:
+  example-content:
+    enabled: false
+  portal:
+    enabled: true

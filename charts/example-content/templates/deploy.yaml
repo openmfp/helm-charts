@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.entity.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ include "common.entity.name" . }}
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.deployment.maxSurge }}
+      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: {{ include "common.entity.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "common.entity.name" . }}
+    spec:
+      serviceAccountName: {{ include "common.entity.name" . }}
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 3000
+        fsGroup: 2000
+      containers:
+      - name: {{ include "common.entity.name" . }}
+        image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        securityContext:
+          readOnlyRootFilesystem: true
+        env:
+          - name: PORT
+            value: "{{ .Values.port }}"
+        resources:
+          limits:
+            cpu: "1"
+            memory: 512Mi
+          requests:
+            cpu: 40m
+            memory: 50Mi
+        ports:
+          - name: http
+            containerPort: {{ .Values.port }}
+        volumeMounts:
+          - name: tmp-volume
+            mountPath: /var/cache/nginx
+            readOnly: false
+          - name: run-volume
+            mountPath: /var/run
+            readOnly: false
+      volumes:
+        - name: tmp-volume
+          emptyDir: {}
+        - name: run-volume
+          emptyDir: {}
