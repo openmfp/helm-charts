@@ -2,11 +2,11 @@ apiVersion: v2
 name: account-operator
 description: A Helm chart for Kubernetes
 type: application
-version: 0.4.20
+version: 0.4.21
 appVersion: "0.106.0"
 dependencies:
   - name: account-operator-crds
-    version: 0.1.5
+    version: 0.1.6
     condition: crds.enabled
     repository: file://../account-operator-crds
   - name: common
