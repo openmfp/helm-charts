@@ -12,7 +12,7 @@ Default configuration parameters, which can be overriden either globally or on a
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| kcp.enabled | bool | `false` |  |
+| kcp.enabled | bool | `false` | Enable KCP |
 
 # account-operator-crds
 
@@ -24,5 +24,5 @@ A Helm chart for Kubernetes
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| kcp.enabled | bool | `false` |  |
+| kcp.enabled | bool | `false` | Enable KCP |
 
