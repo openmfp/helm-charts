@@ -4,6 +4,8 @@ vars:
   LOCAL_BIN: bin
   CHARTS:
     sh: "ls -d charts/*/ | paste -sd ',' -"
+  CHANGED_CHARTS:
+    sh: "git status --porcelain | grep '^ M charts/' | cut -d'/' -f2 | sort -u | sed 's|^|charts/|' | paste -sd ',' -"
 tasks:
   ## Setup
   setup:kube-lint:
@@ -31,7 +33,7 @@ tasks:
     deps:
       - task: helm-docs
     cmds:
-      - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
+      - "for chart in $(echo {{.CHANGED_CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
   validate:
     cmds:
       - task: lint
