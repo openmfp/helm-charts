@@ -5,64 +5,6 @@ image:
   name: ghcr.io/openmfp/extension-content-operator
   tag: 0.16.0
 
-# The secret used to pull the image
-## @param imagePullSecret The secret used to pull the image (optional)
-# imagePullSecret: "github"
-## @param imagePullPolicy The image pull policy
-imagePullPolicy: Always
-
-# The health probe configuration
-## @param health.port The port for the health probe
-## @param health.periodSeconds The period in seconds for performing the probe
-## @param health.readiness.path The path for the readiness probe
-## @param health.readiness.initialDelaySeconds The initial delay in seconds before starting the readiness probe
-## @param health.readiness.periodSeconds The period in seconds for performing the readiness probe
-## @param health.liveness.path The path for the liveness probe
-## @param health.liveness.failureThreshold The failure threshold for the liveness probe
-## @param health.startup.path The path for the startup probe
-## @param health.startup.failureThreshold The failure threshold for the startup probe
-health:
-  port: 8081
-  periodSeconds: 10
-  readiness:
-    path: "/readyz"
-    initialDelaySeconds: 5
-    periodSeconds: 10
-  liveness:
-    path: "/healthz"
-    failureThreshold: 1
-  startup:
-    path: "/readyz"
-    failureThreshold: 30
-
-# The metrics configuration
-## @param metrics.port The port for the metrics
-metrics:
-  port: 8080
-
-# The deployment configuration
-## @param deployment.revisionHistoryLimit The number of old ReplicaSets to retain to allow rollback
-## @param deployment.resources.limits.cpu The maximum amount of CPU the container is allowed to use
-## @param deployment.resources.limits.memory The maximum amount of memory the container is allowed to use
-## @param deployment.resources.requests.cpu The amount of CPU requested for the container
-## @param deployment.resources.requests.memory The amount of memory requested for the container
-## @param deployment.template.labels The labels to add to the deployment template
-## @param deployment.template.annotations The annotations to add to the deployment template
-deployment:
-  revisionHistoryLimit: 3
-  resources:
-    limits:
-      cpu: 260m
-      memory: 512Mi
-    requests:
-      cpu: 150m
-      memory: 128Mi
-  template:
-    # labels:
-    #   control-plane: controller-manager
-    # annotations:
-    #   annotation1: test
-
 # The Custom Resource Definitions (CRDs) configuration
 ## @param crds.enabled Enable or disable the CRDs
 crds:

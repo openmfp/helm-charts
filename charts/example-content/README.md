@@ -10,7 +10,7 @@ Helm Chart for the openmfp Portal
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | common | 0.1.4 |
+| file://../common | common | 0.1.5 |
 
 ## Values
 
@@ -18,8 +18,6 @@ Default configuration parameters, which can be overriden either globally or on a
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| deployment.maxSurge | int | `5` |  |
-| deployment.maxUnavailable | int | `0` |  |
 | image.name | string | `"ghcr.io/openmfp/example-content"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecret | string | `"github"` |  |
@@ -28,7 +26,6 @@ Default configuration parameters, which can be overriden either globally or on a
 | istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
 | istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
 | istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"` |  |
-| port | int | `8080` |  |
 
 # example-content
 
@@ -40,14 +37,12 @@ Helm Chart for the openmfp Portal
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | common | 0.1.4 |
+| file://../common | common | 0.1.5 |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| deployment.maxSurge | int | `5` |  |
-| deployment.maxUnavailable | int | `0` |  |
 | image.name | string | `"ghcr.io/openmfp/example-content"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.pullSecret | string | `"github"` |  |
@@ -56,5 +51,4 @@ Helm Chart for the openmfp Portal
 | istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
 | istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
 | istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"` |  |
-| port | int | `8080` |  |
 

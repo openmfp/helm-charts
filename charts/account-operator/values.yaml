@@ -15,27 +15,6 @@ webhooks:
   certDir: /certs
 
 
-# The deployment configuration
-## @param deployment.specTemplate.annotations The annotations to add to the deployment template
-## @param deployment.specTemplate.labels The labels to add to the deployment template
-## @param deployment.revisionHistoryLimit The number of old ReplicaSets to retain to allow rollback
-## @param deployment.resources.limits.cpu The maximum amount of CPU the container is allowed to use
-## @param deployment.resources.limits.memory The maximum amount of memory the container is allowed to use
-## @param deployment.resources.requests.cpu The amount of CPU requested for the container
-## @param deployment.resources.requests.memory The amount of memory requested for the container
-deployment:
-  specTemplate:
-    annotations: {}
-    labels: {}
-  revisionHistoryLimit: 3
-  resources:
-    limits:
-      cpuOverride: 260m
-      memoryOverride: 512Mi
-    requests:
-      cpuOverride: 150m
-      memoryOverride: 128Mi
-
 # The KCP configuration
 ## @param kcp.enabled Enable KCP
 ## @param kcp.virtualWorkspaceUrl The URL for the virtual workspace
@@ -76,3 +55,8 @@ logLevel: warn
 ## @param security.mountServiceAccountToken Mount the service account token
 security:
   mountServiceAccountToken: false
+
+deployment:
+  specTemplate:
+    annotations: {}
+    labels: {}

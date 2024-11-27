@@ -2,14 +2,13 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "common.entity.name" . }}
-  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ include "common.entity.name" . }}
 spec:
   strategy:
     rollingUpdate:
-      maxSurge: {{ .Values.deployment.maxSurge }}
-      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
+      maxSurge: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxSurge") }}
+      maxUnavailable: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxUnavailable") }}
   revisionHistoryLimit: 3
   selector:
     matchLabels:
@@ -27,7 +26,7 @@ spec:
       containers:
       - name: {{ include "common.entity.name" . }}
         image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        imagePullPolicy: {{ include "common.getKeyValue" (dict "Values" .Values "key" "imagePullPolicy") }}
         securityContext:
           readOnlyRootFilesystem: true
         env:
@@ -42,7 +41,7 @@ spec:
             memory: 50Mi
         ports:
           - name: http
-            containerPort: {{ .Values.port }}
+            containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "port") }}
         volumeMounts:
           - name: tmp-volume
             mountPath: /var/cache/nginx

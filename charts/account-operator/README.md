@@ -20,11 +20,6 @@ Default configuration parameters, which can be overriden either globally or on a
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | crds.enabled | bool | `true` |  |
-| deployment.resources.limits.cpuOverride | string | `"260m"` |  |
-| deployment.resources.limits.memoryOverride | string | `"512Mi"` |  |
-| deployment.resources.requests.cpuOverride | string | `"150m"` |  |
-| deployment.resources.requests.memoryOverride | string | `"128Mi"` |  |
-| deployment.revisionHistoryLimit | int | `3` |  |
 | deployment.specTemplate.annotations | object | `{}` |  |
 | deployment.specTemplate.labels | object | `{}` |  |
 | image.name | string | `"ghcr.io/openmfp/account-operator"` |  |
@@ -64,11 +59,6 @@ A Helm chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | crds.enabled | bool | `true` |  |
-| deployment.resources.limits.cpuOverride | string | `"260m"` |  |
-| deployment.resources.limits.memoryOverride | string | `"512Mi"` |  |
-| deployment.resources.requests.cpuOverride | string | `"150m"` |  |
-| deployment.resources.requests.memoryOverride | string | `"128Mi"` |  |
-| deployment.revisionHistoryLimit | int | `3` |  |
 | deployment.specTemplate.annotations | object | `{}` |  |
 | deployment.specTemplate.labels | object | `{}` |  |
 | image.name | string | `"ghcr.io/openmfp/account-operator"` |  |

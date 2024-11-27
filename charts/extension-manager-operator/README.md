@@ -21,25 +21,8 @@ Default configuration parameters, which can be overriden either globally or on a
 |-----|------|---------|-------------|
 | commonAnnotations | object | `{}` |  |
 | crds.enabled | bool | `true` |  |
-| deployment.resources.limits.cpu | string | `"260m"` |  |
-| deployment.resources.limits.memory | string | `"512Mi"` |  |
-| deployment.resources.requests.cpu | string | `"150m"` |  |
-| deployment.resources.requests.memory | string | `"128Mi"` |  |
-| deployment.revisionHistoryLimit | int | `3` |  |
-| deployment.template | string | `nil` |  |
-| health.liveness.failureThreshold | int | `1` |  |
-| health.liveness.path | string | `"/healthz"` |  |
-| health.periodSeconds | int | `10` |  |
-| health.port | int | `8081` |  |
-| health.readiness.initialDelaySeconds | int | `5` |  |
-| health.readiness.path | string | `"/readyz"` |  |
-| health.readiness.periodSeconds | int | `10` |  |
-| health.startup.failureThreshold | int | `30` |  |
-| health.startup.path | string | `"/readyz"` |  |
 | image.name | string | `"ghcr.io/openmfp/extension-content-operator"` |  |
 | image.tag | string | `"0.16.0"` |  |
-| imagePullPolicy | string | `"Always"` |  |
-| metrics.port | int | `8080` |  |
 
 # extension-manager-operator
 
@@ -60,23 +43,6 @@ A Helm chart for extension-manager-operator
 |-----|------|---------|-------------|
 | commonAnnotations | object | `{}` |  |
 | crds.enabled | bool | `true` |  |
-| deployment.resources.limits.cpu | string | `"260m"` |  |
-| deployment.resources.limits.memory | string | `"512Mi"` |  |
-| deployment.resources.requests.cpu | string | `"150m"` |  |
-| deployment.resources.requests.memory | string | `"128Mi"` |  |
-| deployment.revisionHistoryLimit | int | `3` |  |
-| deployment.template | string | `nil` |  |
-| health.liveness.failureThreshold | int | `1` |  |
-| health.liveness.path | string | `"/healthz"` |  |
-| health.periodSeconds | int | `10` |  |
-| health.port | int | `8081` |  |
-| health.readiness.initialDelaySeconds | int | `5` |  |
-| health.readiness.path | string | `"/readyz"` |  |
-| health.readiness.periodSeconds | int | `10` |  |
-| health.startup.failureThreshold | int | `30` |  |
-| health.startup.path | string | `"/readyz"` |  |
 | image.name | string | `"ghcr.io/openmfp/extension-content-operator"` |  |
 | image.tag | string | `"0.16.0"` |  |
-| imagePullPolicy | string | `"Always"` |  |
-| metrics.port | int | `8080` |  |
 

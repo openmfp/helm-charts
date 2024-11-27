@@ -3,12 +3,6 @@ image:
   pullPolicy: IfNotPresent
   pullSecret: github
 
-deployment:
-  maxUnavailable: 0
-  maxSurge: 5
-
-port: 8080
-
 istio:
   enabled: true
   gateway:

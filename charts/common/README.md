@@ -32,6 +32,7 @@ Example
 | defaults.deployment.maxUnavailable | int | `0` | maxUnavailable |
 | defaults.deployment.resources.limits | object | `{"cpu":"100m","memory":"512Mi"}` | cpu and memory limits for the deployment |
 | defaults.deployment.resources.requests | object | `{"cpu":"40m","memory":"50Mi"}` | cpu and memory requests for the deployment |
+| defaults.deployment.revisionHistoryLimit | int | `3` | deployment revision history limit |
 | defaults.deployment.strategy | string | `"RollingUpdate"` | deployment strategy |
 | defaults.health.liveness | object | `{"failureThreshold":1,"path":"/healthz"}` | liveness probe parameters |
 | defaults.health.periodSeconds | int | `10` | health period |
@@ -41,6 +42,7 @@ Example
 | defaults.imagePullPolicy | string | `"Always"` | imagePullPolicy is the policy to use when pulling images for all charts |
 | defaults.imagePullSecret | string | `"github"` | imagePullSecret is the name of the secret that holds the docker registry credentials |
 | defaults.metrics.port | int | `8080` | metrics port |
+| defaults.port | int | `8080` | service port |
 
 # common
 
@@ -61,6 +63,7 @@ Default configuration parameters, which can be overriden either globally or on a
 | defaults.deployment.maxUnavailable | int | `0` | maxUnavailable |
 | defaults.deployment.resources.limits | object | `{"cpu":"100m","memory":"512Mi"}` | cpu and memory limits for the deployment |
 | defaults.deployment.resources.requests | object | `{"cpu":"40m","memory":"50Mi"}` | cpu and memory requests for the deployment |
+| defaults.deployment.revisionHistoryLimit | int | `3` | deployment revision history limit |
 | defaults.deployment.strategy | string | `"RollingUpdate"` | deployment strategy |
 | defaults.health.liveness | object | `{"failureThreshold":1,"path":"/healthz"}` | liveness probe parameters |
 | defaults.health.periodSeconds | int | `10` | health period |
@@ -70,4 +73,5 @@ Default configuration parameters, which can be overriden either globally or on a
 | defaults.imagePullPolicy | string | `"Always"` | imagePullPolicy is the policy to use when pulling images for all charts |
 | defaults.imagePullSecret | string | `"github"` | imagePullSecret is the name of the secret that holds the docker registry credentials |
 | defaults.metrics.port | int | `8080` | metrics port |
+| defaults.port | int | `8080` | service port |
 

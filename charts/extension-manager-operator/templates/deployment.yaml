@@ -6,7 +6,7 @@ metadata:
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
-  revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
+  revisionHistoryLimit: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.revisionHistoryLimit") }}
   selector:
     matchLabels:
       service: {{ include "common.entity.name" . }}
@@ -29,7 +29,7 @@ spec:
           - operator
           - --leader-elect
           - --log-level={{ .Values.logLevel }}
-          - "--health-probe-bind-address=:{{ .Values.health.port }}"
+          - '--health-probe-bind-address=:{{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}'
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: manager

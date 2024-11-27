@@ -280,7 +280,7 @@ operator match the snapshot:
     metadata:
       name: account-operator
     spec:
-      revisionHistoryLimit: 3
+      revisionHistoryLimit: null
       selector:
         matchLabels:
           service: account-operator
@@ -658,7 +658,7 @@ operator match the snapshot (with kubeconfigSecret):
     metadata:
       name: account-operator
     spec:
-      revisionHistoryLimit: 3
+      revisionHistoryLimit: null
       selector:
         matchLabels:
           service: account-operator
@@ -728,11 +728,11 @@ operator match the snapshot (with kubeconfigSecret):
                 periodSeconds: 10
               resources:
                 limits:
-                  cpu: 260m
+                  cpu: 100m
                   memory: 512Mi
                 requests:
-                  cpu: 150m
-                  memory: 128Mi
+                  cpu: 40m
+                  memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
@@ -1045,7 +1045,7 @@ operator match the snapshot with webhook enabled:
         cert-manager.io/inject-ca-from: NAMESPACE/account-operator-serving-cert
       name: account-operator
     spec:
-      revisionHistoryLimit: 3
+      revisionHistoryLimit: null
       selector:
         matchLabels:
           service: account-operator

@@ -1,5 +1,8 @@
 defaults:
 
+  # -- service port
+  port: 8080
+
   certManager:
     # -- toggle to enable/disable cert-manager
     enabled: false
@@ -26,8 +29,9 @@ defaults:
     maxUnavailable: 0
     # -- deployment strategy
     strategy: RollingUpdate
+    # -- deployment revision history limit
+    revisionHistoryLimit: 3
 
-  
   health:
     # -- health port
     port: 8081
