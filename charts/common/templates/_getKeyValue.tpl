@@ -4,19 +4,19 @@
 
   {{- $overrideKey := printf "%sOverride" $keyPath -}}
   {{- $globalKey := printf "global.%s" $keyPath -}}
-  {{- $defaultKey := printf "common.defaults.%s" $keyPath -}}
+  {{- $defaultKey := printf "defaults.%s" $keyPath -}}
 
   {{- $value := "" -}}
-  {{- if include "common.hasNestedKey" (list $values (splitList "." $overrideKey)) }}
-    {{- $value = include "common.getNestedValue" (list $values (splitList "." $overrideKey)) }}
-  {{- else if include "common.hasNestedKey" (list $values (splitList "." $globalKey)) }}
-    {{- $value = include "common.getNestedValue" (list $values (splitList "." $globalKey)) }}
-  {{- else if include "common.hasNestedKey" (list $values (splitList "." $defaultKey)) }}
-    {{- $value = include "common.getNestedValue" (list $values (splitList "." $defaultKey)) }}
+  {{- if eq (include "common.hasNestedKey" (dict "Values" $values "key" $overrideKey)) "true" }}
+    {{- $value = include "common.getNestedValue" (dict "Values" $values "key" $overrideKey) }}
+  {{- else if eq (include "common.hasNestedKey" (dict "Values" $values "key" $globalKey)) "true" }}
+    {{- $value = include "common.getNestedValue" (dict "Values" $values "key" $globalKey) }}
+  {{- else if eq (include "common.hasNestedKey" (dict "Values" $values "key" $defaultKey)) "true" }}
+    {{- $value = include "common.getNestedValue" (dict "Values" $values "key" $defaultKey) }}
   {{- else }}
-    {{ fail printf "Error: Key '%s' not found as Override, global or common.defaults" $keyPath }}
+    {{- $value = "" -}}
   {{- end }}
-  
+
   {{- $value -}}
 {{- end }}
 
@@ -24,43 +24,58 @@
 {{- define "common.hasNestedKey" -}}
 {{- /*
 This function checks recursively if a nested key exists within a map.
-Usage: {{ include "hasNestedKey" (list .Values "key1.key2.key3") }}
+Usage: {{ include "common.hasNestedKey" (dict "Values" .Values "key" "key1.key2.key3") }}
 Returns: true or false (boolean).
 */ -}}
-  {{- $map := index . 0 -}}
-  {{- $keyPath := index . 1 -}}
+  {{- $map := .Values -}}
+  {{- $keyPath := splitList "." .key -}}
+  {{- $output := false -}}
 
-  {{- if gt (len $keyPath) 1 }}
-    {{- if hasKey $map (first $keyPath) }}
-      {{- include "common.hasNestedKey" (list (get $map (first $keyPath)) (rest $keyPath)) }}
-    {{- else }}
-      {{- false -}}
-    {{- end }}
+  {{- if not (kindIs "map" $map) }}
+    {{- $output = false -}}
+  {{- else if eq (len $keyPath) 1 }}
+    {{- $output = hasKey $map (first $keyPath) -}}
   {{- else }}
-    {{- hasKey $map (first $keyPath) -}}
+    {{- $currentKey := first $keyPath -}}
+    {{- $remainingKeys := rest $keyPath | join "." -}}
+    {{- $nextMap := get $map $currentKey -}}
+    {{- if kindIs "map" $nextMap }}
+      {{- $output = include "common.hasNestedKey" (dict "Values" $nextMap "key" $remainingKeys) -}}
+    {{- else }}
+      {{- $output = false -}}
+    {{- end }}
   {{- end }}
-
+  {{- $output -}}
 {{- end }}
+
+
 
 {{- define "common.getNestedValue" -}}
 {{- /*
 This function retrieves the value at a nested key within a map.
-Usage: {{ include "common.getNestedValue" (list .Values "key1.key2.key3") }}
-Returns: The value at the nested key path or nil if the path does not exist.
+Usage: {{ include "common.getNestedValue" (dict "Values" .Values "key" "key1.key2.key3") }}
+Returns: The value at the nested key path or "null" if the path does not exist.
 */ -}}
-  {{- $map := index . 0 -}}
-  {{- $keyPath := index . 1 -}}
+  {{- $map := .Values -}}
+  {{- $keyPath := splitList "." .key -}}
 
-  {{- if gt (len $keyPath) 1 }}
+  {{- if not (kindIs "map" $map) }}
+    {{- fail "common.getNestedValue: Values must be a map" -}}
+  {{- else if eq (len $keyPath) 1 }}
     {{- if hasKey $map (first $keyPath) }}
-      {{- include "common.getNestedValue" (list (get $map (first $keyPath)) (rest $keyPath)) }}
+      {{- get $map (first $keyPath) -}}
     {{- else }}
       {{- "null" -}}
     {{- end }}
   {{- else }}
-    {{- get $map (first $keyPath) -}}
+    {{- $currentKey := first $keyPath -}}
+    {{- $remainingKeys := rest $keyPath | join "." -}}
+    {{- if hasKey $map $currentKey }}
+      {{- include "common.getNestedValue" (dict "Values" (get $map $currentKey) "key" $remainingKeys) -}}
+    {{- else }}
+      {{- "null" -}}
+    {{- end }}
   {{- end }}
-
 {{- end }}
 
 

@@ -1,0 +1,53 @@
+suite: certManagerEnabled
+values:
+  - ../values.yaml
+tests:
+  - it: unknow key not found neither in 'defaults' nor in 'Override' neither in 'global'
+    template: certManager.yaml
+    set:
+      certManager:
+        enabled: "true"
+      inputKey: "somekey"
+    asserts:
+      - equal:
+          path: spec.certManager.enabled
+          value: null
+  - it: certManager enabledOverride enabled
+    template: certManager.yaml
+    set:
+      certManager:
+        enabledOverride: "true"
+      inputKey: "certManager.enabled"
+    asserts:
+      - equal:
+          path: spec.certManager.enabled
+          value: true
+  - it: certManager disabled in defaults
+    template: certManager.yaml
+    set:
+      inputKey: "certManager.enabled"
+    asserts:
+      - equal:
+          path: spec.certManager.enabled
+          value: false
+  - it: certManager Override precedence over defaults
+    template: certManager.yaml
+    set:
+      inputKey: "certManager.enabled"
+      certManager:
+        enabledOverride: true
+    asserts:
+      - equal:
+          path: spec.certManager.enabled
+          value: true
+  - it: certManager global precendence over defaults
+    template: certManager.yaml
+    set:
+      inputKey: "certManager.enabled"
+      global:
+        certManager:
+          enabled: true
+    asserts:
+      - equal:
+          path: spec.certManager.enabled
+          value: true

@@ -4,4 +4,4 @@ metadata:
   name: test
 spec:
   certManager:
-    enabled: {{ include "common.certManagerEnabled" (dict "Values" .Values "key" "certManager.enabled") }}
+    enabled: {{ include "common.certManagerEnabled" (dict "Values" .Values "key" .Values.inputKey) }}
