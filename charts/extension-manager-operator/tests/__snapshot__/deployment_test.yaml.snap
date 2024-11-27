@@ -111,7 +111,7 @@ operator match the snapshot:
                 periodSeconds: 10
               resources:
                 limits:
-                  cpu: 100m
+                  cpu: 260m
                   memory: 512Mi
                 requests:
                   cpu: 40m

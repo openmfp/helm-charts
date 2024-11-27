@@ -6,6 +6,8 @@ release:
 tests:
   - it: operator match the snapshot
     set:
+      # health:
+      #   portOverride: 8080
       deployment:
         resources:
           limits:
@@ -24,10 +26,14 @@ tests:
   - it: operator match the snapshot with webhook enabled
     set:
       health:
-        port: 8081
+        # portOverride: 8081
         liveness:
-          path: "/healthz"
+          pathOverride: "/healthz"
           # failureThreshold: 1
+        startup:
+          pathOverride: "/healthz"
+        readiness:
+          initialDelaySecondsOverride: 45
       webhooks:
         enabled: true
         certDir: /certs

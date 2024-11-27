@@ -14,34 +14,6 @@ webhooks:
   enabled: false
   certDir: /certs
 
-# The health probe configuration
-## @param health.port The port for the health probe
-## @param health.periodSeconds The period in seconds for performing the probe
-## @param health.readiness.path The path for the readiness probe
-## @param health.readiness.initialDelaySeconds The initial delay in seconds before starting the readiness probe
-## @param health.readiness.periodSeconds The period in seconds for performing the readiness probe
-## @param health.liveness.path The path for the liveness probe
-## @param health.liveness.failureThreshold The failure threshold for the liveness probe
-## @param health.startup.path The path for the startup probe
-## @param health.startup.failureThreshold The failure threshold for the startup probe
-health:
-  port: 8081
-  # periodSeconds: 10
-  # readiness:
-  #   path: "/readyz"
-  #   initialDelaySeconds: 5
-  #   periodSeconds: 10
-  # liveness:
-  #   path: "/healthz"
-  #   failureThreshold: 1
-  # startup:
-  #   path: "/readyz"
-  #   failureThreshold: 30
-
-# The metrics configuration
-## @param metrics.port The port for the metrics
-metrics:
-  port: 8080
 
 # The deployment configuration
 ## @param deployment.specTemplate.annotations The annotations to add to the deployment template

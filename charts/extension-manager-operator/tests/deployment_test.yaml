@@ -19,19 +19,19 @@ tests:
       istio:
         enabled: true
       health:
-        port: 8081
+        portOverride: 8081
         liveness:
-          path: /readyz
+          pathOverride: /readyz
       metrics:
         port: 8080
       deployment:
         resources:
           limits:
-            cpu: 260m
-            memory: 512Mi
+            cpuOverride: 260m
+            memoryOverride: 512Mi
           requests:
-            cpu: 40m
-            memory: 50Mi
+            cpuOverride: 40m
+            memoryOverride: 50Mi
   - it: deployment with metrics probes
     template: deployment.yaml
     set:

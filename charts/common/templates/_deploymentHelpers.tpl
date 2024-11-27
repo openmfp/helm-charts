@@ -90,22 +90,22 @@ ports:
 {{- define "common.operatorHealthAndReadyness" }}
 livenessProbe:
   httpGet:
-    path: {{ ((.Values.health).liveness).path | default "/healthz" }}
-    port: {{ (.Values.health).port | default 3389 }}
-  failureThreshold: {{ ((.Values.health).liveness).failureThreshold | default 1 }}
-  periodSeconds: {{ (.Values.health).periodSeconds | default 10 }}
+    path: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.liveness.path") }}
+    port: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}
+  failureThreshold: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.liveness.failureThreshold") }}
+  periodSeconds: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.periodSeconds") }}
 startupProbe:
   httpGet:
-    path: {{ ((.Values.health).startup).path | default "/healthz" }}
-    port: {{ (.Values.health).port | default 3389 }}
-  failureThreshold: {{ ((.Values.health).startup).failureThreshold | default 30 }}
-  periodSeconds: {{ (.Values.health).periodSeconds | default 10 }}
+    path: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.startup.path") }}
+    port: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}
+  failureThreshold: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.startup.failureThreshold") }}
+  periodSeconds: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.periodSeconds") }}
 readinessProbe:
   httpGet:
-    path: {{ ((.Values.health).readiness).path | default "/readyz" }}
-    port: {{ (.Values.health).port | default 3389 }}
-  initialDelaySeconds: {{ ((.Values.health).readiness).initialDelaySeconds | default 45 }}
-  periodSeconds: {{ (.Values.health).periodSeconds | default 10 }}
+    path: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.readiness.path") }}
+    port: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}
+  initialDelaySeconds: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.readiness.initialDelaySeconds") }}
+  periodSeconds: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.periodSeconds") }}
 {{- end }}
 {{- define "common.security" -}}
 securityContext:
@@ -124,9 +124,9 @@ automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountT
 {{- end }}
 {{- define "common.PortsMetricsHealth" -}}
 - name: metrics
-  containerPort: {{ ((.Values).metrics).port | default 2112 }}
+  containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "metrics.port") }}
   protocol: TCP
 - name: health-port
-  containerPort: {{ (.Values.health).port | default 3389 }}
+  containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}
   protocol: TCP
 {{- end -}}

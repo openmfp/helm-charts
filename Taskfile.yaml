@@ -3,7 +3,7 @@ version: '3'
 vars:
   LOCAL_BIN: bin
   CHARTS:
-    sh: "ls charts/ | sed 's/^/charts\\//g' | paste -sd ',' -"
+    sh: "ls -d charts/*/ | paste -sd ',' -"
 tasks:
   ## Setup
   setup:kube-lint:

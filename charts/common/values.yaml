@@ -26,3 +26,27 @@ defaults:
     maxUnavailable: 0
     # -- deployment strategy
     strategy: RollingUpdate
+
+  
+  health:
+    # -- health port
+    port: 8081
+    # -- health period
+    periodSeconds: 10
+    # -- readiness probe parameters
+    readiness:
+      path: "/readyz"
+      initialDelaySeconds: 5
+      periodSeconds: 10
+    # -- liveness probe parameters
+    liveness:
+      path: "/healthz"
+      failureThreshold: 1
+    # -- startup probe parameters
+    startup:
+      path: "/readyz"
+      failureThreshold: 30
+
+  metrics:
+    # -- metrics port
+    port: 8080

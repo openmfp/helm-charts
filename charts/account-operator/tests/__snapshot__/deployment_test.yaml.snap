@@ -344,7 +344,7 @@ operator match the snapshot:
                 httpGet:
                   path: /readyz
                   port: 8081
-                initialDelaySeconds: 45
+                initialDelaySeconds: 5
                 periodSeconds: 10
               resources:
                 limits:
@@ -362,7 +362,7 @@ operator match the snapshot:
               startupProbe:
                 failureThreshold: 30
                 httpGet:
-                  path: /healthz
+                  path: /readyz
                   port: 8081
                 periodSeconds: 10
               volumeMounts: null
@@ -724,7 +724,7 @@ operator match the snapshot (with kubeconfigSecret):
                 httpGet:
                   path: /readyz
                   port: 8081
-                initialDelaySeconds: 45
+                initialDelaySeconds: 5
                 periodSeconds: 10
               resources:
                 limits:
@@ -742,7 +742,7 @@ operator match the snapshot (with kubeconfigSecret):
               startupProbe:
                 failureThreshold: 30
                 httpGet:
-                  path: /healthz
+                  path: /readyz
                   port: 8081
                 periodSeconds: 10
               volumeMounts:

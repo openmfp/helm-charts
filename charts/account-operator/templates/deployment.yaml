@@ -33,7 +33,7 @@ spec:
           - operator
           - --leader-elect
           - --log-level={{ .Values.logLevel }}
-          - "--health-probe-bind-address=:{{ .Values.health.port }}"
+          - '--health-probe-bind-address=:{{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}'
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           name: manager
           {{ include "common.security" . | nindent 10 }}
