@@ -2,3 +2,15 @@ defaults:
   certManager:
     enabled: false
   imagePullSecret: "github"
+  imagePullPolicy: Always
+  deployment:
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "512Mi"
+      requests:
+        cpu: "40m"
+        memory: "50Mi"
+    maxSurge: 5
+    maxUnavailable: 0
+    strategy: RollingUpdate

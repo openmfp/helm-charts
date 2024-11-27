@@ -4,9 +4,6 @@ image:
   # @param image.tag The image tag
   tag: latest
 
-# @param imagePullSecret The secret used to pull the image
-imagePullSecret: "github"
-
 # @param crds.enabled Enable CRDs
 crds:
   enabled: true
@@ -61,11 +58,11 @@ deployment:
   revisionHistoryLimit: 3
   resources:
     limits:
-      cpu: 260m
-      memory: 512Mi
+      cpuOverride: 260m
+      memoryOverride: 512Mi
     requests:
-      cpu: 150m
-      memory: 128Mi
+      cpuOverride: 150m
+      memoryOverride: 128Mi
 
 # The KCP configuration
 ## @param kcp.enabled Enable KCP

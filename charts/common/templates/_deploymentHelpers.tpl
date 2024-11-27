@@ -1,9 +1,9 @@
 {{- define "common.deploymentBasics" }}
 strategy:
   rollingUpdate:
-    maxSurge: {{ (and .Values.deployment .Values.deployment.maxSurge) | default 5 }}
-    maxUnavailable: {{ (and .Values.deployment .Values.deployment.maxUnavailable) | default 0 }}
-  type: {{ .Values.deployment.strategy }}
+    maxSurge: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxSurge") }}
+    maxUnavailable: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxUnavailable") }}
+  type: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.strategy") }}
 revisionHistoryLimit: 3
 selector:
   matchLabels:
@@ -18,13 +18,11 @@ image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
 {{- define "common.resources" }}
 resources:
   limits:
-    {{- if (((.Values.deployment).resources).limits).cpu }}
-    cpu: {{ (((.Values.deployment).resources).limits).cpu | quote }}
-    {{- end }}
-    memory: {{ (((.Values.deployment).resources).limits).memory | default "512Mi" | quote }}
+    cpu: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.limits.cpu") }}
+    memory: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.limits.memory") }}
   requests:
-    cpu: {{ (((.Values.deployment).resources).requests).cpu | default "40m" }}
-    memory: {{ (((.Values.deployment).resources).requests).memory | default "50Mi" | quote }}
+    cpu: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.requests.cpu") }}
+    memory: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.requests.memory") }}
 {{- end }}
 {{- define "common.ports" }}
 ports:
@@ -122,13 +120,7 @@ automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountT
 {{ .Values.terminationGracePeriodSeconds | default 10 }}
 {{- end }}
 {{- define "common.imagePullPolicy" -}}
-{{- if and .Values.global (.Values.global.imagePullPolicy) -}}
-{{ .Values.global.imagePullPolicy }}
-{{- else if .Values.imagePullPolicy -}}
-{{ .Values.imagePullPolicy }}
-{{- else -}}
-Always
-{{- end -}}
+{{ include "common.getKeyValue" (dict "Values" .Values "key" "imagePullPolicy") }}
 {{- end }}
 {{- define "common.PortsMetricsHealth" -}}
 - name: metrics

@@ -74,7 +74,7 @@ tests:
   - it: test imagePullPolicy override
     template: deployment.yaml
     set:
-      imagePullPolicy: IfNotPresent
+      imagePullPolicyOverride: IfNotPresent
     asserts:
       - equal:
           path: spec.template.spec.containers[0].imagePullPolicy

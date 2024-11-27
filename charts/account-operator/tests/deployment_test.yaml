@@ -9,11 +9,11 @@ tests:
       deployment:
         resources:
           limits:
-            cpu: 260m
-            memory: 512Mi
+            cpuOverride: 260m
+            memoryOverride: 512Mi
           requests:
-            cpu: 150m
-            memory: 128Mi
+            cpuOverride: 150m
+            memoryOverride: 128Mi
     asserts:
       - matchSnapshot: {}
   - it: operator match the snapshot (with kubeconfigSecret)
@@ -34,11 +34,11 @@ tests:
       deployment:
         resources:
           limits:
-            cpu: 260m
-            memory: 512Mi
+            cpuOverride: 260m
+            memoryOverride: 512Mi
           requests:
-            cpu: 150m
-            memory: 128Mi
+            cpuOverride: 150m
+            memoryOverride: 128Mi
     asserts:
       - matchSnapshot: {}
   - it: deployment with security context
