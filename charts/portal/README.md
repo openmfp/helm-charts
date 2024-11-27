@@ -1,0 +1,29 @@
+# portal
+
+![Version: 0.69.121](https://img.shields.io/badge/Version-0.69.121-informational?style=flat-square) ![AppVersion: 0.198.0](https://img.shields.io/badge/AppVersion-0.198.0-informational?style=flat-square)
+
+Helm Chart for the openmfp Portal
+
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| file://../common | common | 0.1.5 |
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| deployment.maxSurge | int | `5` |  |
+| deployment.maxUnavailable | int | `0` |  |
+| externalSecrets.enabled | bool | `true` |  |
+| featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
+| http.protocol | string | `"https"` |  |
+| image.name | string | `"ghcr.io/openmfp/portal"` |  |
+| image.pullPolicy | string | `"IfNotPresent"` |  |
+| imagePullSecret | string | `"github"` |  |
+| importContent | bool | `true` |  |
+| istio.enabled | bool | `true` |  |
+| port | int | `8080` |  |
+| validWebcomponentUrls | string | `".?"` |  |
+

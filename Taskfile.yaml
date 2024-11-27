@@ -12,6 +12,10 @@ tasks:
       - mkdir -p $(pwd)/{{.LOCAL_BIN}}
       - test -s {{.LOCAL_BIN}}/kube-linter || GOBIN=$(pwd)/{{.LOCAL_BIN}} go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
       - chmod +x $(pwd)/{{.LOCAL_BIN}}/kube-linter
+  setup:helm-docs:
+    internal: true
+    cmds:
+      - test -s {{.LOCAL_BIN}}/helm-docs || GOBIN=$(pwd)/{{.LOCAL_BIN}} go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
   ## Development
   lint:
     deps: []
@@ -24,6 +28,8 @@ tasks:
     deps:
       - task: helmtest
   update:
+    deps:
+      - task: helm-docs
     cmds:
       - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
   validate:
@@ -37,3 +43,8 @@ tasks:
       - task: setup:kube-lint
     cmds:
       - "{{.LOCAL_BIN}}/kube-linter lint \"charts/\" --format \"plain\""
+  helm-docs:
+    deps:
+      - task: setup:helm-docs
+    cmds:
+      - "{{.LOCAL_BIN}}/helm-docs --chart-search-root charts/ --template-files=README.md.gotmpl --template-files=./_templates.gotmpl"

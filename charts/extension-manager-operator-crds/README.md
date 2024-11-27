@@ -1,48 +1,6 @@
-# Extension Manager Operator CRDs
+# extension-manager-operator-crds
 
-This directory contains the Custom Resource Definitions (CRDs) for the Extension Manager Operator.
+![Version: 0.1.3](https://img.shields.io/badge/Version-0.1.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
-## Prerequisites
+A Helm chart for Kubernetes
 
-- Kubernetes 1.16+
-- Helm 3.0+
-
-## Installation
-
-To install the CRDs along with the Extension Manager Operator chart:
-
-```bash
-helm install my-release ./charts/extension-manager-operator --set crds.enabled=true
-```
-
-## Uninstallation
-
-To uninstall/delete the CRDs along with the `my-release` deployment:
-
-```bash
-helm uninstall my-release
-```
-
-## Configuration
-
-The following table lists the configurable parameters of the Extension Manager Operator CRDs and their default values.
-
-| Parameter                | Description                                | Default |
-|--------------------------|--------------------------------------------|---------|
-| `crds.enabled`           | Enable CRDs                                | `true`  |
-
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
-
-```bash
-helm install my-release ./charts/extension-manager-operator --set crds.enabled=false
-```
-
-Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example:
-
-```bash
-helm install my-release ./charts/extension-manager-operator -f values.yaml
-```
-
-## License
-
-This project is licensed under the Apache 2.0 License. See the [LICENSE](https://github.com/openmfp/extension-content-operator/blob/main/LICENSE) file for details.
