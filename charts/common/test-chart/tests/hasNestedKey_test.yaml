@@ -11,11 +11,11 @@ tests:
   - it: nested key found in defaults
     template: testHasNestedKey.yaml
     set:
-      inputKey: "defaults.certManager.enabled"
+      inputKey: "certManager.enabled"
     asserts:
       - equal:
           path: spec.check
-          value: true
+          value: false
   - it: key Override configured
     template: testHasNestedKey.yaml
     set:

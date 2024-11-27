@@ -1,34 +1,20 @@
 {{/* 
   Function: common.getKeyValue
   Description: 
-    Retrieves a value from the Helm chart's values.yaml file based on a prioritized key lookup.
-    The function searches for a value in the following order:
-      1. An override key (`keyPathOverride`).
-      2. A global key (`global.keyPath`).
-      3. A default key (`defaults.keyPath`).
-    If none of these keys exist, it returns an empty string.
+    Retrieves a value from values.yaml by checking keys in this order: 
+    1. Override key, 2. Global key, 3. Default key. Returns an empty string if none exist.
 
   Parameters:
-    - .key: The path to the key being retrieved.
-    - .Values: The values object passed to the Helm template.
-
-  Dependencies:
-    - Uses helper functions "common.hasNestedKey" and "common.getNestedValue" to check 
-      the existence of nested keys and retrieve their values.
-
-  Usage:
-    This function is intended to prioritize overrides and global configurations 
-    in a Helm chart's values.yaml file while providing default fallback values.
-
+    - .key: Key path to lookup.
+    - .Values: Values object.
 */}}
-
 {{- define "common.getKeyValue" -}}
   {{- $keyPath := .key -}}
   {{- $values := .Values -}}
 
   {{- $overrideKey := printf "%sOverride" $keyPath -}}
   {{- $globalKey := printf "global.%s" $keyPath -}}
-  {{- $defaultKey := printf "defaults.%s" $keyPath -}}
+  {{- $defaultKey := printf "common.defaults.%s" $keyPath -}}
 
   {{- $value := "" -}}
   {{- if eq (include "common.hasNestedKey" (dict "Values" $values "key" $overrideKey)) "true" }}

@@ -1,0 +1,4 @@
+defaults:
+  certManager:
+    enabled: false
+  imagePullSecret: "github"

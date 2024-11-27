@@ -1,3 +1,0 @@
-defaults:
-  certManager:
-    enabled: false

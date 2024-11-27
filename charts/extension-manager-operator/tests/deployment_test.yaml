@@ -79,10 +79,10 @@ tests:
       - equal:
           path: spec.template.spec.containers[0].imagePullPolicy
           value: IfNotPresent
-  - it: configure imagePullSecret
+  - it: override imagePullSecret
     template: service-account.yaml
     set:
-      imagePullSecret: my-secret
+      imagePullSecretOverride: my-secret
     asserts:
       - equal:
           path: imagePullSecrets
