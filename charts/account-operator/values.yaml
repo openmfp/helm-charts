@@ -1,62 +1,62 @@
 image:
-  # @param image.name The image repository
+  # -- The image repository
   name: ghcr.io/openmfp/account-operator
-  # @param image.tag The image tag
+  # -- The image tag
   tag: latest
 
-# @param crds.enabled Enable CRDs
 crds:
+  # -- Enable CRDs
   enabled: true
 
-# @param webhooks.enabled Enable webhooks
-# @param webhooks.certDir The directory for webhook certificates
 webhooks:
+  # -- Enable webhooks
   enabled: false
+  # -- The directory for webhook certificates
   certDir: /certs
 
-
-# The KCP configuration
-## @param kcp.enabled Enable KCP
-## @param kcp.virtualWorkspaceUrl The URL for the virtual workspace
+# -- The KCP configuration
 kcp:
+  # -- Enable KCP
   enabled: false
+  # -- The URL for the virtual workspace
   virtualWorkspaceUrl: ""
 
-# The subroutines configuration
-## @param subroutines.namespace.enabled Enable namespace subroutines
-## @param subroutines.fga.enabled Enable FGA subroutines
-## @param subroutines.fga.grpcAddr The gRPC address for FGA
-## @param subroutines.fga.rootNamespace The root namespace for FGA
-## @param subroutines.fga.objectType The object type for FGA
-## @param subroutines.fga.parentRelation The parent relation for FGA
-## @param subroutines.fga.creatorRelation The creator relation for FGA
-## @param subroutines.extension.enabled Enable extension subroutines
-## @param subroutines.extensionReady.enabled Enable extension ready subroutines
 subroutines:
   namespace:
+    # -- Enable namespace subroutines
     enabled: true
   fga:
+    # -- Enable FGA subroutines
     enabled: true
+    # -- The gRPC address for FGA
     grpcAddr: ""
+    # -- The root namespace for FGA
     rootNamespace: openmfp-root
+    # -- The object type for FGA
     objectType: account
+    # -- The parent relation for FGA
     parentRelation: parent
+    # -- The creator relation for FGA
     creatorRelation: owner
   extension:
+    # -- Enable extension subroutines
     enabled: true
   extensionReady:
+    # -- Enable extension ready subroutines
     enabled: true
 
-# @param kubeconfigSecret The secret for kubeconfig
+# -- The secret for kubeconfig
 kubeconfigSecret: ""
-# @param logLevel The log level
+# -- The log level
 logLevel: warn
 
-## @param security.mountServiceAccountToken Mount the service account token
 security:
+  # -- Mount the service account token
   mountServiceAccountToken: false
 
 deployment:
   specTemplate:
+    # -- The annotations for the deployment
     annotations: {}
+    # -- The labels for the deployment
     labels: {}

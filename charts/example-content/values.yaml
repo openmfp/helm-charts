@@ -1,7 +1,6 @@
 image:
+  # -- The image name
   name: ghcr.io/openmfp/example-content
-  pullPolicy: IfNotPresent
-  pullSecret: github
 
 istio:
   enabled: true
