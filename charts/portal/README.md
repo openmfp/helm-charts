@@ -4,13 +4,9 @@ Helm Chart for the openmfp Portal
 
 ![Version: 0.69.123](https://img.shields.io/badge/Version-0.69.123-informational?style=flat-square) ![AppVersion: 0.200.0](https://img.shields.io/badge/AppVersion-0.200.0-informational?style=flat-square)
 
-## Additional Information
+## Configuration
 
-## Requirements
-
-| Repository | Name | Version |
-|------------|------|---------|
-| file://../common | common | 0.1.5 |
+The chart supports the following configuration parameters in the table below. Additionally, default configuration parameters documented in [common/README.md](../common/README.md) are not explicitely listed in the table but are also supported.
 
 ## Values
 
@@ -30,6 +26,12 @@ Default configuration parameters, which can be overriden either globally or on a
 | istio.enabled | bool | `true` |  |
 | port | int | `8080` |  |
 | validWebcomponentUrls | string | `".?"` |  |
+
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| file://../common | common | 0.1.5 |
 
 # portal
 

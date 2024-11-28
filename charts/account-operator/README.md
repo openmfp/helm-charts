@@ -4,14 +4,9 @@ A Helm chart for Kubernetes
 
 ![Version: 0.4.21](https://img.shields.io/badge/Version-0.4.21-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.106.0](https://img.shields.io/badge/AppVersion-0.106.0-informational?style=flat-square)
 
-## Additional Information
+## Configuration
 
-## Requirements
-
-| Repository | Name | Version |
-|------------|------|---------|
-| file://../account-operator-crds | account-operator-crds | 0.1.6 |
-| file://../common | common | 0.1.5 |
+The chart supports the following configuration parameters in the table below. Additionally, default configuration parameters documented in [common/README.md](../common/README.md) are not explicitely listed in the table but are also supported.
 
 ## Values
 
@@ -41,6 +36,13 @@ Default configuration parameters, which can be overriden either globally or on a
 | subroutines.namespace.enabled | bool | `true` | Enable namespace subroutines |
 | webhooks.certDir | string | `"/certs"` | The directory for webhook certificates |
 | webhooks.enabled | bool | `false` | Enable webhooks |
+
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| file://../account-operator-crds | account-operator-crds | 0.1.6 |
+| file://../common | common | 0.1.5 |
 
 # account-operator
 
