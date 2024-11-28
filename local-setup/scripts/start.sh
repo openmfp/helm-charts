@@ -3,16 +3,27 @@
 set -e
 COL='\033[92m'
 COL_RES='\033[0m'
-# argument to select the installation flavor, options are all or min, verify if the argument was provided
-if [ "${1}" != "all" ] && [ "${1}" != "remote" ]; then
-    echo "Invalid installation flavor provided, please provide either all (start.sh all) or min (start.sh min)"
-    exit 1
-fi
+
+SCRIPT_DIR=$(dirname "$0")
 
 # Check for input argument GH_TOKEN and echo message in case not provided
 if [ -z "${GH_TOKEN}" ]; then
     echo "Please provide the GitHub Token as an environment variable"
     exit 1
+else
+  ghToken=$GH_TOKEN
+fi
+
+ghUser=""
+if [ -z "${GH_USER}" ]; then
+    if ! command -v gh &> /dev/null; then
+        echo "gh CLI could not be found. Either install the gh cli or set the GH_USER environmet variable with our github username."
+        exit 1
+    else
+      ghUser=$(gh api user --jq '.login')
+    fi
+else
+  ghUser=$GH_USER
 fi
 
 # Check if kind cluster kind is already running, exit if yes
@@ -21,24 +32,22 @@ if [ $(kind get clusters | grep -c openmfp) -gt 0 ]; then
     kind export kubeconfig --name openmfp
 else
   echo -e "$COL Creating kind cluster $COL_RES"
-  kind create cluster --config kind/kind-config.yaml --name openmfp --image=kindest/node:v1.30.2
+  kind create cluster --config $SCRIPT_DIR/../kind/kind-config.yaml --name openmfp --image=kindest/node:v1.30.2
 fi
 
-# Install flux
 echo "$COL Installing flux $COL_RES"
-flux install --components source-controller,helm-controller
+helm upgrade -i -n flux-system --create-namespace flux oci://ghcr.io/fluxcd-community/charts/flux2 \
+  --set imageAutomationController.create=false \
+  --set imageReflectionController.create=false \
+  --set kustomizeController.create=false \
+  --set notificationController.create=false
 
-# Prepare installation namespace
-echo "$COL Creating openmfp-system namespace $COL_RES"
-kubectl apply -k infrastructure/namespace
+echo "$COL Starting deployments $COL_RES"
+kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
 
 echo "$COL Creating necessary secrets $COL_RES"
-flux create secret oci ghcr-credentials -n openmfp-system --url ghcr.io --username $(gh api user | jq -r '.login') --password $GH_TOKEN
+kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
 kubectl create secret generic keycloak-admin -n openmfp-system --from-literal=secret=admin --dry-run=client -o yaml | kubectl apply -f -
-
-
-echo "$COL starting deployments $COL_RES"
-kubectl apply -k flavors/local-${1}
 
 echo "$COL waiting for istio to become ready $COL_RES"
 kubectl wait --namespace istio-system \
