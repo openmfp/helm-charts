@@ -1,48 +1,41 @@
 suite: hasNestedKey
+templates:
+  - testHasNestedKey.yaml
 tests:
   - it: nested key not found due to missing values
-    template: testHasNestedKey.yaml
-    set:
-      inputKey: "certManager.enabled"
     asserts:
       - equal:
           path: spec.check
           value: false
-  - it: nested key found in defaults
-    template: testHasNestedKey.yaml
+  - it: key configured - string
     set:
-      inputKey: "certManager.enabled"
-    asserts:
-      - equal:
-          path: spec.check
-          value: false
-  - it: key Override configured
-    template: testHasNestedKey.yaml
-    set:
-      inputKey: "certManager.enabledOverride"
-      certManager:
-        enabledOverride: true
+      testkey:
+        enabled: foo
     asserts:
       - equal:
           path: spec.check
           value: true
-  - it: key multilevel
-    template: testHasNestedKey.yaml
+  - it: key configured - bool
     set:
-      inputKey: "level1.certManager.enabledOverride"
+      testkey:
+        enabled: true
+    asserts:
+      - equal:
+          path: spec.check
+          value: true
+  - it: key configured - object
+    set:
+      testkey:
+        enabled:
+          some: object
+    asserts:
+      - equal:
+          path: spec.check
+          value: true
+  - it: key multilevel - wrong type
+    set:
       level1:
-        certManager:
-          enabledOverride: true
-    asserts:
-      - equal:
-          path: spec.check
-          value: true
-  - it: key not found because of missing override
-    template: testHasNestedKey.yaml
-    set:
-      inputKey: "certManager.enabledOverride"
-      certManager:
-        enabled: someval
+        testkey: "foo"
     asserts:
       - equal:
           path: spec.check

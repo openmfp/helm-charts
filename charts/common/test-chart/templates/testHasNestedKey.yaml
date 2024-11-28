@@ -3,4 +3,4 @@ apiVersion: v1
 metadata:
   name: testKeyFunctions
 spec:
-  check: {{ include "common.hasNestedKey" (dict "Values" .Values "key" .Values.inputKey) }}
+  check: {{ include "common.hasNestedKey" (dict "Values" .Values "key" "testkey.enabled") }}
