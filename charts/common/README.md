@@ -44,6 +44,8 @@ Example
 | defaults.imagePullSecret | string | `"github"` | imagePullSecret is the name of the secret that holds the docker registry credentials |
 | defaults.istio.enabled | bool | `false` | toggle to enable/disable istio |
 | defaults.istio.gateway.name | string | `"gateway"` | name of the gateway |
+| defaults.istio.https.enabled | bool | `true` | toggle to enable/disable https |
+| defaults.istio.quitSidecar | bool | `true` | toggle sidecar injection |
 | defaults.metrics.port | int | `8080` | metrics port |
 | defaults.port | int | `8080` | service port |
 | defaults.securityContext.fsGroup | int | `2000` | fsGroup id to run the container |
@@ -83,6 +85,8 @@ Default configuration parameters, which can be overriden either globally or on a
 | defaults.imagePullSecret | string | `"github"` | imagePullSecret is the name of the secret that holds the docker registry credentials |
 | defaults.istio.enabled | bool | `false` | toggle to enable/disable istio |
 | defaults.istio.gateway.name | string | `"gateway"` | name of the gateway |
+| defaults.istio.https.enabled | bool | `true` | toggle to enable/disable https |
+| defaults.istio.quitSidecar | bool | `true` | toggle sidecar injection |
 | defaults.metrics.port | int | `8080` | metrics port |
 | defaults.port | int | `8080` | service port |
 | defaults.securityContext.fsGroup | int | `2000` | fsGroup id to run the container |

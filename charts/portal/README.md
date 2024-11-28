@@ -2,7 +2,7 @@
 
 Helm Chart for the openmfp Portal
 
-![Version: 0.69.124](https://img.shields.io/badge/Version-0.69.124-informational?style=flat-square) ![AppVersion: 0.201.0](https://img.shields.io/badge/AppVersion-0.201.0-informational?style=flat-square)
+![Version: 0.69.125](https://img.shields.io/badge/Version-0.69.125-informational?style=flat-square) ![AppVersion: 0.203.0](https://img.shields.io/badge/AppVersion-0.203.0-informational?style=flat-square)
 
 ## Configuration
 
@@ -29,7 +29,7 @@ Default configuration parameters, which can be overriden either globally or on a
 
 # portal
 
-![Version: 0.69.124](https://img.shields.io/badge/Version-0.69.124-informational?style=flat-square) ![AppVersion: 0.201.0](https://img.shields.io/badge/AppVersion-0.201.0-informational?style=flat-square)
+![Version: 0.69.125](https://img.shields.io/badge/Version-0.69.125-informational?style=flat-square) ![AppVersion: 0.203.0](https://img.shields.io/badge/AppVersion-0.203.0-informational?style=flat-square)
 
 Helm Chart for the openmfp Portal
 
