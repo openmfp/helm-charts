@@ -41,8 +41,13 @@ Example
 | defaults.health.startup | object | `{"failureThreshold":30,"path":"/readyz"}` | startup probe parameters |
 | defaults.imagePullPolicy | string | `"Always"` | imagePullPolicy is the policy to use when pulling images for all charts |
 | defaults.imagePullSecret | string | `"github"` | imagePullSecret is the name of the secret that holds the docker registry credentials |
+| defaults.istio.enabled | bool | `false` | toggle to enable/disable istio |
+| defaults.istio.gateway.name | string | `"gateway"` | name of the gateway |
 | defaults.metrics.port | int | `8080` | metrics port |
 | defaults.port | int | `8080` | service port |
+| defaults.securityContext.fsGroup | int | `2000` | fsGroup id to run the container |
+| defaults.securityContext.runAsGroup | int | `3000` | group id to run the container |
+| defaults.securityContext.runAsUser | int | `1000` | user id to run the container |
 
 # common
 
@@ -74,6 +79,11 @@ Default configuration parameters, which can be overriden either globally or on a
 | defaults.health.startup | object | `{"failureThreshold":30,"path":"/readyz"}` | startup probe parameters |
 | defaults.imagePullPolicy | string | `"Always"` | imagePullPolicy is the policy to use when pulling images for all charts |
 | defaults.imagePullSecret | string | `"github"` | imagePullSecret is the name of the secret that holds the docker registry credentials |
+| defaults.istio.enabled | bool | `false` | toggle to enable/disable istio |
+| defaults.istio.gateway.name | string | `"gateway"` | name of the gateway |
 | defaults.metrics.port | int | `8080` | metrics port |
 | defaults.port | int | `8080` | service port |
+| defaults.securityContext.fsGroup | int | `2000` | fsGroup id to run the container |
+| defaults.securityContext.runAsGroup | int | `3000` | group id to run the container |
+| defaults.securityContext.runAsUser | int | `1000` | user id to run the container |
 

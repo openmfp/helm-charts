@@ -29,11 +29,16 @@ tasks:
   test:
     deps:
       - task: helmtest
-  update:
+  update-changed:
     deps:
       - task: helm-docs
     cmds:
       - "for chart in $(echo {{.CHANGED_CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
+  update:
+    deps:
+      - task: helm-docs
+    cmds:
+      - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
   validate:
     cmds:
       - task: lint

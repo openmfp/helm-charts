@@ -17,7 +17,7 @@ tests:
       - matchSnapshot: {}
     set:
       istio:
-        enabled: true
+        enabledOverride: true
       health:
         portOverride: 8081
         liveness:

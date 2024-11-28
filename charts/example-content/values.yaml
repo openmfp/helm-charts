@@ -3,9 +3,6 @@ image:
   name: ghcr.io/openmfp/example-content
 
 istio:
-  enabled: true
-  gateway:
-    name: gateway
   virtualService:
     hosts:
       - your-host.com

@@ -33,7 +33,7 @@ spec:
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: manager
-          {{ include "common.security" . | nindent 10 }}
+          {{ include "common.container.securityContext" . | nindent 10 }}
           ports:
           {{ include "common.PortsMetricsHealth" . | nindent 10 }}
           {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}

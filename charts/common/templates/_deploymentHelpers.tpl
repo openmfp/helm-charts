@@ -4,7 +4,7 @@ strategy:
     maxSurge: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxSurge") }}
     maxUnavailable: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxUnavailable") }}
   type: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.strategy") }}
-revisionHistoryLimit: 3
+revisionHistoryLimit: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.revisionHistoryLimit") }}
 selector:
   matchLabels:
     app: {{ .Release.Name }}
@@ -27,9 +27,9 @@ resources:
 {{- define "common.ports" }}
 ports:
   - name: http
-    containerPort: {{ .Values.port | default 8080 }}
+    containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "port") }}
     protocol: TCP
-  {{ include "common.PortsMetricsHealth" | nindent 4 }}
+  {{ include "common.PortsMetricsHealth" (dict "Values" .Values) | nindent 2 }}
 {{- end}}
 
 {{- define "common.technicalIssuers" }}
@@ -107,15 +107,6 @@ readinessProbe:
   initialDelaySeconds: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.readiness.initialDelaySeconds") }}
   periodSeconds: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.periodSeconds") }}
 {{- end }}
-{{- define "common.security" -}}
-securityContext:
-  runAsNonRoot: true
-  readOnlyRootFilesystem: true
-  seccompProfile:
-    type: RuntimeDefault
-serviceAccountName: {{ .Release.Name }}
-automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountToken false) }}
-{{- end }}
 {{- define "common.terminationGracePeriodSeconds" -}}
 {{ .Values.terminationGracePeriodSeconds | default 10 }}
 {{- end }}
@@ -130,3 +121,20 @@ automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountT
   containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}
   protocol: TCP
 {{- end -}}
+
+{{- define "common.container.securityContext" -}}
+securityContext:
+  runAsNonRoot: true
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: RuntimeDefault
+serviceAccountName: {{ .Release.Name }}
+automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountToken false) }}
+{{- end }}
+
+{{- define "common.spec.securityContext" -}}
+securityContext:
+  runAsUser: {{ include "common.getKeyValue" (dict "Values" .Values "key" "securityContext.runAsUser") }}
+  runAsGroup: {{ include "common.getKeyValue" (dict "Values" .Values "key" "securityContext.runAsGroup") }}
+  fsGroup: {{ include "common.getKeyValue" (dict "Values" .Values "key" "securityContext.fsGroup") }}
+{{- end }}

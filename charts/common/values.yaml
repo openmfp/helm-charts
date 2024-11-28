@@ -54,3 +54,18 @@ defaults:
   metrics:
     # -- metrics port
     port: 8080
+
+  istio:
+    # -- toggle to enable/disable istio
+    enabled: false
+    gateway:
+      # -- name of the gateway
+      name: gateway
+
+  securityContext:
+    # -- user id to run the container
+    runAsUser: 1000
+    # -- group id to run the container
+    runAsGroup: 3000
+    # -- fsGroup id to run the container
+    fsGroup: 2000

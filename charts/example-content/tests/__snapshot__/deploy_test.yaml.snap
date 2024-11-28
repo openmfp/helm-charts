@@ -21,24 +21,36 @@ matches the snapshot:
             app: RELEASE-NAME-example-content
         spec:
           containers:
-            - env:
+            - automountServiceAccountToken: true
+              env:
                 - name: PORT
-                  value: ""
+                  value: "8080"
               image: ghcr.io/openmfp/example-content:1.0.0
               imagePullPolicy: Always
               name: RELEASE-NAME-example-content
               ports:
                 - containerPort: 8080
                   name: http
+                  protocol: TCP
+                - containerPort: 8080
+                  name: metrics
+                  protocol: TCP
+                - containerPort: 8081
+                  name: health-port
+                  protocol: TCP
               resources:
                 limits:
-                  cpu: "1"
+                  cpu: 100m
                   memory: 512Mi
                 requests:
                   cpu: 40m
                   memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: RELEASE-NAME
               volumeMounts:
                 - mountPath: /var/cache/nginx
                   name: tmp-volume
@@ -79,24 +91,36 @@ matches the snapshot with FRONTEND_PORT:
             app: RELEASE-NAME-example-content
         spec:
           containers:
-            - env:
+            - automountServiceAccountToken: true
+              env:
                 - name: PORT
-                  value: ""
+                  value: "8080"
               image: ghcr.io/openmfp/example-content:1.0.0
               imagePullPolicy: Always
               name: RELEASE-NAME-example-content
               ports:
                 - containerPort: 8080
                   name: http
+                  protocol: TCP
+                - containerPort: 8080
+                  name: metrics
+                  protocol: TCP
+                - containerPort: 8081
+                  name: health-port
+                  protocol: TCP
               resources:
                 limits:
-                  cpu: "1"
+                  cpu: 100m
                   memory: 512Mi
                 requests:
                   cpu: 40m
                   memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: RELEASE-NAME
               volumeMounts:
                 - mountPath: /var/cache/nginx
                   name: tmp-volume

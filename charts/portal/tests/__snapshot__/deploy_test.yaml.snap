@@ -56,9 +56,16 @@ matches the snapshot:
               ports:
                 - containerPort: 8080
                   name: http
+                  protocol: TCP
+                - containerPort: 8080
+                  name: metrics
+                  protocol: TCP
+                - containerPort: 8081
+                  name: health-port
+                  protocol: TCP
               resources:
                 limits:
-                  cpu: "1"
+                  cpu: 100m
                   memory: 512Mi
                 requests:
                   cpu: 40m
