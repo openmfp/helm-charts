@@ -1,0 +1,16 @@
+suite: istio
+templates:
+  - istio-virtualservice.yaml
+release:
+  namespace: openmfp-system
+values:
+  - ../test-values.yaml
+tests:
+  - it: matches the snapshot
+    asserts:
+      - matchSnapshot: {}
+  - it: matches the snapshot (with path prefix)
+    set:
+      domain.pathPrefix: /auth
+    asserts:
+      - matchSnapshot: {}

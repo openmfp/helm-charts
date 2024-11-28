@@ -1,0 +1,108 @@
+istio:
+  virtualservice:
+    # -- istio virtual service hosts
+    hosts: [auth.openmfp.org]
+
+# -- debug mode
+debug: false
+
+crossplane:
+  # -- toggle to enable/disable crossplane
+  enabled: false
+
+  # -- crossplane provider config
+  providerConfig:
+    name: keycloak-provider-config
+    namespace: openmfp-system
+
+  # -- crossplane realm config
+  realm:
+    name: openmfp
+    displayName: OpenMFP
+    registrationAllowed: false
+
+  # -- crossplane clients config
+  clients:
+    openmfp:
+      name: OpenMFP
+      validRedirectUris:
+        - http://localhost:8000/callback*
+
+  # -- crossplane identity providers config
+  identityProviders:
+    sap:
+      authorizationUrl: https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7/oauth2/v2.0/authorize
+      tokenUrl: https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7/oauth2/v2.0/token
+      issuer: https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7/v2.0
+      clientId: 82b4c72c-ff99-4df6-ba4f-fb634d1fc491
+      clientSecretRef:
+        name: sap-client-secret
+        namespace: openmfp-system
+        key: client-secret
+      clientSecretRemoteRef: dxp-core-team/manual-secrets/sap-client-secret
+
+# -- configuration passed to the child 'keyclaok' chart
+# https://github.com/bitnami/charts/tree/main/bitnami/keycloak
+keycloak:
+  extraEnvVars: |
+    - name: KEYCLOAK_USER
+      value: keycloak-admin
+    - name: KEYCLOAK_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-admin
+          key: secret
+  postgresql:
+    auth:
+      existingSecret: ""
+      secretKeys:
+        userPasswordKey: password
+        adminPasswordKey: password
+
+keycloakConfig:
+  # -- url of the keycloak server
+  url: http://keycloak-http.openmfp-system.svc.cluster.local:8080
+  userRegistration:
+    # -- toggle to enable/disable user registration
+    enabled: true
+  # -- redirect urls
+  redirectUrls: []
+  # -- realm configuration
+  realm:
+    name: master
+  # -- client configuration
+  client:
+    name: openmfp
+    targetSecret:
+      name: portal-client-secret-openmfp
+      namespace: openmfp-system
+    tokenLifespan: 3600
+  # -- admin user configuration
+  admin:
+    username:
+      value: keycloak-admin
+    password:
+      valueFrom:
+        secretKeyRef:
+          name: keycloak-admin
+          key: secret
+
+# -- service configuration
+service:
+  name: keycloak
+
+# -- domain configuration
+domain:
+  name: openmfp.org
+  pathPrefix: ""
+
+# -- job configuration
+job:
+  serviceAccount: keycloak-client-creation
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+
+# -- external secrets configuration
+externalSecrets:
+  keycloakAdminRemoteRef: dxp-core-team/manual-secrets/keycloak-admin
+  postgres-adminRemoteRef: dxp-core-team/manual-secrets/postgres-admin-password

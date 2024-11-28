@@ -1,0 +1,45 @@
+{{- if .Values.crossplane.enabled -}}
+{{- range $key, $val := .Values.crossplane.clients }}
+---  
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: Client
+metadata:
+  name: {{ $key }}
+spec:
+  forProvider:
+    enabled: true
+    accessType: CONFIDENTIAL
+    clientId: {{ $key }}
+    standardFlowEnabled: true
+    name: {{ $val.name }}
+    realmIdRef:
+      name: {{ $.Values.crossplane.realm.name }}
+    validRedirectUris: {{ toYaml $val.validRedirectUris | nindent 6 }}
+  providerConfigRef:
+    name: {{ $.Values.crossplane.providerConfig.name }}
+  writeConnectionSecretToRef:
+    name: {{ $.Values.keycloakConfig.client.targetSecret.name }}
+    namespace: {{ $.Values.keycloakConfig.client.targetSecret.namespace }}
+
+---
+
+apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
+kind: ClientDefaultScopes
+metadata:
+  name: {{ $key }}-default-scopes
+spec:
+  forProvider:
+    clientIdRef:
+      name: {{ $key }}
+    defaultScopes:
+    - profile
+    - email
+    - basic
+    - acr
+    - groups
+    realmIdRef:
+      name: {{ $.Values.crossplane.realm.name }}
+  providerConfigRef:
+    name: {{ $.Values.crossplane.providerConfig.name }}
+{{ end -}}
+{{- end -}}
