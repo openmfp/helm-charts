@@ -64,7 +64,7 @@ spec:
           value: "{{ .Values.featureToggles }}"
         {{- end }}
         - name: PORT
-          value: "{{ .Values.port }}"
+          value: "{{ include "common.getKeyValue" (dict "Values" .Values "key" "port") }}"
         - name: REGION
           value: {{ .Values.region }}
         - name: IMAGE_TAG

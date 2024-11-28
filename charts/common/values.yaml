@@ -69,3 +69,7 @@ defaults:
     runAsGroup: 3000
     # -- fsGroup id to run the container
     fsGroup: 2000
+
+  externalSecrets:
+    # -- toggle to enable/disable external-secrets
+    enabled: true
