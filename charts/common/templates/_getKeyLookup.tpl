@@ -21,12 +21,13 @@
     {{- $value = include "common.getNestedValue" (dict "Values" $values "key" $overrideKey) }}
   {{- else if eq (include "common.hasNestedKey" (dict "Values" $values "key" $globalKey)) "true" }}
     {{- $value = include "common.getNestedValue" (dict "Values" $values "key" $globalKey) }}
+  {{- else if eq (include "common.hasNestedKey" (dict "Values" $values "key" $keyPath)) "true" }}
+    {{- $value = include "common.getNestedValue" (dict "Values" $values "key" $keyPath) }}
   {{- else if eq (include "common.hasNestedKey" (dict "Values" $values "key" $defaultKey)) "true" }}
     {{- $value = include "common.getNestedValue" (dict "Values" $values "key" $defaultKey) }}
-  {{- else }}
+  {{- else -}}
     {{- $value = "" -}}
-  {{- end }}
-
+  {{- end -}}
   {{- $value -}}
 {{- end }}
 

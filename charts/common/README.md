@@ -34,6 +34,7 @@ Example
 | defaults.deployment.resources.requests | object | `{"cpu":"40m","memory":"50Mi"}` | cpu and memory requests for the deployment |
 | defaults.deployment.revisionHistoryLimit | int | `3` | deployment revision history limit |
 | defaults.deployment.strategy | string | `"RollingUpdate"` | deployment strategy |
+| defaults.externalSecrets.enabled | bool | `true` | toggle to enable/disable external-secrets |
 | defaults.health.liveness | object | `{"failureThreshold":1,"path":"/healthz"}` | liveness probe parameters |
 | defaults.health.periodSeconds | int | `10` | health period |
 | defaults.health.port | int | `8081` | health port |
@@ -72,6 +73,7 @@ Default configuration parameters, which can be overriden either globally or on a
 | defaults.deployment.resources.requests | object | `{"cpu":"40m","memory":"50Mi"}` | cpu and memory requests for the deployment |
 | defaults.deployment.revisionHistoryLimit | int | `3` | deployment revision history limit |
 | defaults.deployment.strategy | string | `"RollingUpdate"` | deployment strategy |
+| defaults.externalSecrets.enabled | bool | `true` | toggle to enable/disable external-secrets |
 | defaults.health.liveness | object | `{"failureThreshold":1,"path":"/healthz"}` | liveness probe parameters |
 | defaults.health.periodSeconds | int | `10` | health period |
 | defaults.health.port | int | `8081` | health port |

@@ -3,7 +3,7 @@ version: '3'
 vars:
   LOCAL_BIN: bin
   CHARTS:
-    sh: "ls -d charts/*/ | paste -sd ',' -"
+    sh: "printf '%s,%s' $(ls -d charts/*/ | paste -sd ',' -) 'charts/common/test-chart'"
   CHANGED_CHARTS:
     sh: "git status --porcelain | grep '^ M charts/' | cut -d'/' -f2 | sort -u | sed 's|^|charts/|' | paste -sd ',' -"
 tasks:
@@ -28,6 +28,7 @@ tasks:
       - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm unittest $chart; done"
   test:
     deps:
+      - task: update
       - task: helmtest
   update-changed:
     deps:

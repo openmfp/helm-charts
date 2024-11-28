@@ -2,7 +2,7 @@
 
 Helm Chart for the openmfp Portal
 
-![Version: 0.69.123](https://img.shields.io/badge/Version-0.69.123-informational?style=flat-square) ![AppVersion: 0.200.0](https://img.shields.io/badge/AppVersion-0.200.0-informational?style=flat-square)
+![Version: 0.69.124](https://img.shields.io/badge/Version-0.69.124-informational?style=flat-square) ![AppVersion: 0.201.0](https://img.shields.io/badge/AppVersion-0.201.0-informational?style=flat-square)
 
 ## Configuration
 
@@ -14,17 +14,11 @@ Default configuration parameters, which can be overriden either globally or on a
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| deployment.maxSurge | int | `5` |  |
-| deployment.maxUnavailable | int | `0` |  |
-| externalSecrets.enabled | bool | `true` |  |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
 | http.protocol | string | `"https"` |  |
 | image.name | string | `"ghcr.io/openmfp/portal"` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| imagePullSecret | string | `"github"` |  |
+| image.pullPolicyOverride | string | `"IfNotPresent"` |  |
 | importContent | bool | `true` |  |
-| istio.enabled | bool | `true` |  |
-| port | int | `8080` |  |
 | validWebcomponentUrls | string | `".?"` |  |
 
 ## Requirements
@@ -35,7 +29,7 @@ Default configuration parameters, which can be overriden either globally or on a
 
 # portal
 
-![Version: 0.69.123](https://img.shields.io/badge/Version-0.69.123-informational?style=flat-square) ![AppVersion: 0.200.0](https://img.shields.io/badge/AppVersion-0.200.0-informational?style=flat-square)
+![Version: 0.69.124](https://img.shields.io/badge/Version-0.69.124-informational?style=flat-square) ![AppVersion: 0.201.0](https://img.shields.io/badge/AppVersion-0.201.0-informational?style=flat-square)
 
 Helm Chart for the openmfp Portal
 
@@ -49,16 +43,10 @@ Helm Chart for the openmfp Portal
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| deployment.maxSurge | int | `5` |  |
-| deployment.maxUnavailable | int | `0` |  |
-| externalSecrets.enabled | bool | `true` |  |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
 | http.protocol | string | `"https"` |  |
 | image.name | string | `"ghcr.io/openmfp/portal"` |  |
-| image.pullPolicy | string | `"IfNotPresent"` |  |
-| imagePullSecret | string | `"github"` |  |
+| image.pullPolicyOverride | string | `"IfNotPresent"` |  |
 | importContent | bool | `true` |  |
-| istio.enabled | bool | `true` |  |
-| port | int | `8080` |  |
 | validWebcomponentUrls | string | `".?"` |  |
 

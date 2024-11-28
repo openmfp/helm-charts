@@ -2,7 +2,7 @@
 
 The OpenMFP chart for Kubernetes
 
-![Version: 0.0.13](https://img.shields.io/badge/Version-0.0.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
+![Version: 0.0.14](https://img.shields.io/badge/Version-0.0.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
 
 ## Configuration
 
@@ -22,11 +22,11 @@ Default configuration parameters, which can be overriden either globally or on a
 | Repository | Name | Version |
 |------------|------|---------|
 | oci://ghcr.io/openmfp/helm-charts | example-content | 0.110.4 |
-| oci://ghcr.io/openmfp/helm-charts | portal | 0.69.122 |
+| oci://ghcr.io/openmfp/helm-charts | portal | 0.69.123 |
 
 # openmfp
 
-![Version: 0.0.13](https://img.shields.io/badge/Version-0.0.13-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
+![Version: 0.0.14](https://img.shields.io/badge/Version-0.0.14-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
 
 The OpenMFP chart for Kubernetes
 
@@ -35,7 +35,7 @@ The OpenMFP chart for Kubernetes
 | Repository | Name | Version |
 |------------|------|---------|
 | oci://ghcr.io/openmfp/helm-charts | example-content | 0.110.4 |
-| oci://ghcr.io/openmfp/helm-charts | portal | 0.69.122 |
+| oci://ghcr.io/openmfp/helm-charts | portal | 0.69.123 |
 
 ## Values
 
