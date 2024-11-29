@@ -27,7 +27,7 @@ Default configuration parameters, which can be overriden either globally or on a
 
 # example-content
 
-## Execute the linting in the pipeline
+![Version: 0.110.5](https://img.shields.io/badge/Version-0.110.5-informational?style=flat-square) ![AppVersion: 0.124.0](https://img.shields.io/badge/AppVersion-0.124.0-informational?style=flat-square)
 
 Helm Chart for the openmfp Portal
 
