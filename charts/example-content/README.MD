@@ -29,9 +29,7 @@ Default configuration parameters, which can be overriden either globally or on a
 
 ## Execute the linting in the pipeline
 
-```shell
-helm lint -f test-values.yaml
-```
+Helm Chart for the openmfp Portal
 
 ## Requirements
 
