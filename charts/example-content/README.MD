@@ -33,7 +33,18 @@ Default configuration parameters, which can be overriden either globally or on a
 helm lint -f test-values.yaml
 ```
 
-## Debug the chart output
-```shell
-helm template --debug . -f test-values.yaml
-```
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| file://../common | common | 0.1.5 |
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
+| istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
+| istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
+| istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"` |  |
+
