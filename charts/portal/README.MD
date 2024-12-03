@@ -1,12 +1,23 @@
-# Helm chart of the jukebox
+# portal
 
-## Execute the linting in the pipeline
+![Version: 0.69.127](https://img.shields.io/badge/Version-0.69.127-informational?style=flat-square) ![AppVersion: 0.204.0](https://img.shields.io/badge/AppVersion-0.204.0-informational?style=flat-square)
 
-```shell
-helm lint -f test-values.yaml
-```
+Helm Chart for the openmfp Portal
 
-## Debug the chart output
-```shell
-helm template --debug . -f test-values.yaml
-```
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| file://../common | common | 0.1.5 |
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
+| http.protocol | string | `"https"` |  |
+| image.name | string | `"ghcr.io/openmfp/portal"` |  |
+| image.pullPolicyOverride | string | `"IfNotPresent"` |  |
+| importContent | bool | `true` |  |
+| validWebcomponentUrls | string | `".?"` |  |
+

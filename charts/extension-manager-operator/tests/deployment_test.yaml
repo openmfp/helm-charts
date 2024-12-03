@@ -1,0 +1,100 @@
+suite: operator
+templates:
+  - deployment.yaml
+  - service-account.yaml
+  - cluster-role.yaml
+  - cluster-rolebinding.yaml
+values:
+  - ../test-values.yaml
+chart:
+  version: 1.0.0
+  appVersion: 1.0.0
+release:
+  name: extension-manager-operator
+tests:
+  - it: operator match the snapshot
+    asserts:
+      - matchSnapshot: {}
+    set:
+      istio:
+        enabledOverride: true
+      health:
+        portOverride: 8081
+        liveness:
+          pathOverride: /readyz
+      metrics:
+        port: 8080
+      deployment:
+        resources:
+          limits:
+            cpuOverride: 260m
+            memoryOverride: 512Mi
+          requests:
+            cpuOverride: 40m
+            memoryOverride: 50Mi
+  - it: deployment with metrics probes
+    template: deployment.yaml
+    set:
+      health:
+        port: 8081
+        liveness:
+          path: /healthz
+      metrics:
+        port: 8082
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].livenessProbe
+          value:
+            failureThreshold: 1
+            httpGet:
+              path: /healthz
+              port: 8081
+            periodSeconds: 10
+  - it: check deployment template labels
+    template: deployment.yaml
+    set:
+      deployment:
+        template:
+          labels:
+            control-plane: controller-manager
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels.control-plane
+          value: controller-manager
+  - it: check deployment without custom labels
+    template: deployment.yaml
+    set:
+      deployment:
+        template: {}
+    asserts:
+      - equal:
+          path: spec.template.metadata.labels
+          value:
+            service: extension-manager-operator
+  - it: test imagePullPolicy override
+    template: deployment.yaml
+    set:
+      imagePullPolicyOverride: IfNotPresent
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].imagePullPolicy
+          value: IfNotPresent
+  - it: override imagePullSecret
+    template: service-account.yaml
+    set:
+      imagePullSecretOverride: my-secret
+    asserts:
+      - equal:
+          path: imagePullSecrets
+          value: 
+            - name: my-secret
+  - it: configure global imagePullSecret
+    template: service-account.yaml
+    set:
+      global:
+        imagePullSecret: my-secret
+    asserts:
+      - equal:
+          path: imagePullSecrets
+          value: 
+            - name: my-secret

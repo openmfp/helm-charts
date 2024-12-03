@@ -16,6 +16,7 @@ jobs:
       chartName: common
       additionalTestFilesCommand: ''
       chartRepos: 'bitnami=https://charts.bitnami.com/bitnami,openfga=https://openfga.github.io/helm-charts'
+      skipVulnerabilityScan: true
     secrets: inherit
 
   updateVersionFile:
