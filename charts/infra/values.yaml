@@ -12,8 +12,9 @@ gateway:
       hosts:
         - "*"
 
-clusterRole:
-  enabled: false
+rbac:
+  clusterRole:
+    enabled: false
 
 kcp:
   enabled: false
