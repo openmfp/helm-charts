@@ -2,7 +2,7 @@
   Function: common.getKeyValue
   Description: 
     Retrieves a value from values.yaml by checking keys in this order: 
-    1. Override key, 2. Global key, 3. Default key. Returns an empty string if none exist.
+    1. Override key, 2. Global key, 3. Chart key ,4. Default key. Returns an empty string if none exist.
 
   Parameters:
     - .key: Key path to lookup.
