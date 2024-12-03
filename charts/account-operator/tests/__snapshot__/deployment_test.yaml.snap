@@ -209,7 +209,7 @@ operator match the snapshot:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
-      name: RELEASE-NAME-account-operator
+      name: account-operator
     rules:
       - apiGroups:
           - core.openmfp.io
@@ -265,32 +265,31 @@ operator match the snapshot:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
-      name: RELEASE-NAME-account-operator
+      name: account-operator
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: ClusterRole
-      name: RELEASE-NAME-account-operator
+      name: account-operator
     subjects:
       - kind: ServiceAccount
-        name: RELEASE-NAME-account-operator
+        name: account-operator
         namespace: NAMESPACE
   4: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: RELEASE-NAME-account-operator
-      namespace: NAMESPACE
+      name: account-operator
     spec:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-account-operator
+          service: account-operator
       template:
         metadata:
           annotations: null
           labels:
             control-plane: controller-manager
-            service: RELEASE-NAME-account-operator
+            service: account-operator
         spec:
           containers:
             - args:
@@ -298,6 +297,7 @@ operator match the snapshot:
                 - --leader-elect
                 - --log-level=warn
                 - --health-probe-bind-address=:8081
+              automountServiceAccountToken: false
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -327,11 +327,11 @@ operator match the snapshot:
                   value: /certs
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
+                failureThreshold: 1
                 httpGet:
                   path: /healthz
                   port: 8081
-                initialDelaySeconds: 15
-                periodSeconds: 20
+                periodSeconds: 10
               name: manager
               ports:
                 - containerPort: 8080
@@ -354,9 +354,19 @@ operator match the snapshot:
                   cpu: 150m
                   memory: 128Mi
               securityContext:
+                readOnlyRootFilesystem: true
                 runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: account-operator
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8081
+                periodSeconds: 10
               volumeMounts: null
-          serviceAccountName: RELEASE-NAME-account-operator
+          serviceAccountName: account-operator
           terminationGracePeriodSeconds: 10
           volumes: null
   5: |
@@ -365,8 +375,7 @@ operator match the snapshot:
       - name: github
     kind: ServiceAccount
     metadata:
-      name: RELEASE-NAME-account-operator
-      namespace: NAMESPACE
+      name: account-operator
 operator match the snapshot (with kubeconfigSecret):
   1: |
     apiVersion: apiextensions.k8s.io/v1
@@ -578,7 +587,7 @@ operator match the snapshot (with kubeconfigSecret):
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
-      name: RELEASE-NAME-account-operator
+      name: account-operator
     rules:
       - apiGroups:
           - core.openmfp.io
@@ -634,32 +643,31 @@ operator match the snapshot (with kubeconfigSecret):
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
-      name: RELEASE-NAME-account-operator
+      name: account-operator
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: ClusterRole
-      name: RELEASE-NAME-account-operator
+      name: account-operator
     subjects:
       - kind: ServiceAccount
-        name: RELEASE-NAME-account-operator
+        name: account-operator
         namespace: NAMESPACE
   4: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: RELEASE-NAME-account-operator
-      namespace: NAMESPACE
+      name: account-operator
     spec:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-account-operator
+          service: account-operator
       template:
         metadata:
           annotations: null
           labels:
             control-plane: controller-manager
-            service: RELEASE-NAME-account-operator
+            service: account-operator
         spec:
           containers:
             - args:
@@ -667,6 +675,7 @@ operator match the snapshot (with kubeconfigSecret):
                 - --leader-elect
                 - --log-level=warn
                 - --health-probe-bind-address=:8081
+              automountServiceAccountToken: false
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -698,11 +707,11 @@ operator match the snapshot (with kubeconfigSecret):
                   value: /api-kubeconfig/kubeconfig
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
+                failureThreshold: 1
                 httpGet:
                   path: /healthz
                   port: 8081
-                initialDelaySeconds: 15
-                periodSeconds: 20
+                periodSeconds: 10
               name: manager
               ports:
                 - containerPort: 8080
@@ -719,17 +728,27 @@ operator match the snapshot (with kubeconfigSecret):
                 periodSeconds: 10
               resources:
                 limits:
-                  cpu: 260m
+                  cpu: 100m
                   memory: 512Mi
                 requests:
-                  cpu: 150m
-                  memory: 128Mi
+                  cpu: 40m
+                  memory: 50Mi
               securityContext:
+                readOnlyRootFilesystem: true
                 runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: account-operator
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8081
+                periodSeconds: 10
               volumeMounts:
                 - mountPath: /api-kubeconfig
                   name: external-api-server
-          serviceAccountName: RELEASE-NAME-account-operator
+          serviceAccountName: account-operator
           terminationGracePeriodSeconds: 10
           volumes:
             - name: external-api-server
@@ -741,8 +760,7 @@ operator match the snapshot (with kubeconfigSecret):
       - name: github
     kind: ServiceAccount
     metadata:
-      name: RELEASE-NAME-account-operator
-      namespace: NAMESPACE
+      name: account-operator
 operator match the snapshot with webhook enabled:
   1: |
     apiVersion: apiextensions.k8s.io/v1
@@ -954,7 +972,7 @@ operator match the snapshot with webhook enabled:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
-      name: RELEASE-NAME-account-operator
+      name: account-operator
     rules:
       - apiGroups:
           - core.openmfp.io
@@ -1010,35 +1028,34 @@ operator match the snapshot with webhook enabled:
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
-      name: RELEASE-NAME-account-operator
+      name: account-operator
     roleRef:
       apiGroup: rbac.authorization.k8s.io
       kind: ClusterRole
-      name: RELEASE-NAME-account-operator
+      name: account-operator
     subjects:
       - kind: ServiceAccount
-        name: RELEASE-NAME-account-operator
+        name: account-operator
         namespace: NAMESPACE
   4: |
     apiVersion: apps/v1
     kind: Deployment
     metadata:
       annotations:
-        cert-manager.io/inject-ca-from: NAMESPACE/RELEASE-NAME-account-operator-serving-cert
-      name: RELEASE-NAME-account-operator
-      namespace: NAMESPACE
+        cert-manager.io/inject-ca-from: NAMESPACE/account-operator-serving-cert
+      name: account-operator
     spec:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-account-operator
+          service: account-operator
       template:
         metadata:
           annotations:
             traffic.sidecar.istio.io/excludeInboundPorts: "9443"
           labels:
             control-plane: controller-manager
-            service: RELEASE-NAME-account-operator
+            service: account-operator
         spec:
           containers:
             - args:
@@ -1046,6 +1063,7 @@ operator match the snapshot with webhook enabled:
                 - --leader-elect
                 - --log-level=warn
                 - --health-probe-bind-address=:8081
+              automountServiceAccountToken: false
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -1075,11 +1093,11 @@ operator match the snapshot with webhook enabled:
                   value: /certs
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
+                failureThreshold: 1
                 httpGet:
                   path: /healthz
                   port: 8081
-                initialDelaySeconds: 15
-                periodSeconds: 20
+                periodSeconds: 10
               name: manager
               ports:
                 - containerPort: 8080
@@ -1095,7 +1113,7 @@ operator match the snapshot with webhook enabled:
                 httpGet:
                   path: /readyz
                   port: 8081
-                initialDelaySeconds: 5
+                initialDelaySeconds: 45
                 periodSeconds: 10
               resources:
                 limits:
@@ -1105,39 +1123,48 @@ operator match the snapshot with webhook enabled:
                   cpu: 150m
                   memory: 128Mi
               securityContext:
+                readOnlyRootFilesystem: true
                 runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: account-operator
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /healthz
+                  port: 8081
+                periodSeconds: 10
               volumeMounts:
                 - mountPath: /certs
                   name: cert
                   readOnly: true
-          serviceAccountName: RELEASE-NAME-account-operator
+          serviceAccountName: account-operator
           terminationGracePeriodSeconds: 10
           volumes:
             - name: cert
               secret:
                 defaultMode: 420
-                secretName: RELEASE-NAME-account-operator-webhook-server-cert
+                secretName: account-operator-webhook-server-cert
   5: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
     kind: ServiceAccount
     metadata:
-      name: RELEASE-NAME-account-operator
-      namespace: NAMESPACE
+      name: account-operator
   6: |
     apiVersion: admissionregistration.k8s.io/v1
     kind: MutatingWebhookConfiguration
     metadata:
       annotations:
-        cert-manager.io/inject-ca-from: NAMESPACE/RELEASE-NAME-account-operator-serving-cert
-      name: RELEASE-NAME-account-operator-mutating-webhook-configuration
+        cert-manager.io/inject-ca-from: NAMESPACE/account-operator-serving-cert
+      name: account-operator-mutating-webhook-configuration
     webhooks:
       - admissionReviewVersions:
           - v1
         clientConfig:
           service:
-            name: RELEASE-NAME-account-operator-webhook
+            name: account-operator-webhook
             namespace: NAMESPACE
             path: /mutate-core-openmfp-io-v1alpha1-account
         failurePolicy: Fail
@@ -1156,30 +1183,27 @@ operator match the snapshot with webhook enabled:
     apiVersion: cert-manager.io/v1
     kind: Issuer
     metadata:
-      name: RELEASE-NAME-account-operator-selfsigned-issuer
-      namespace: null
+      name: account-operator-selfsigned-issuer
     spec:
       selfSigned: {}
   8: |
     apiVersion: cert-manager.io/v1
     kind: Certificate
     metadata:
-      name: RELEASE-NAME-account-operator-serving-cert
-      namespace: null
+      name: account-operator-serving-cert
     spec:
       dnsNames:
-        - RELEASE-NAME-account-operator-webhook.NAMESPACE.svc
-        - RELEASE-NAME-account-operator-webhook.NAMESPACE.svc.cluster.local
+        - account-operator-webhook.NAMESPACE.svc
+        - account-operator-webhook.NAMESPACE.svc.cluster.local
       issuerRef:
         kind: Issuer
-        name: RELEASE-NAME-account-operator-selfsigned-issuer
-      secretName: RELEASE-NAME-account-operator-webhook-server-cert
+        name: account-operator-selfsigned-issuer
+      secretName: account-operator-webhook-server-cert
   9: |
     apiVersion: v1
     kind: Service
     metadata:
-      name: RELEASE-NAME-account-operator-webhook
-      namespace: NAMESPACE
+      name: account-operator-webhook
     spec:
       ports:
         - port: 443
@@ -1187,4 +1211,4 @@ operator match the snapshot with webhook enabled:
           targetPort: 9443
       selector:
         control-plane: controller-manager
-        service: RELEASE-NAME-account-operator
+        service: account-operator

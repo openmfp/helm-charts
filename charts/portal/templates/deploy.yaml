@@ -2,15 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "common.entity.name" . }}
-  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ include "common.entity.name" . }}
 spec:
   strategy:
     rollingUpdate:
-      maxSurge: {{ .Values.deployment.maxSurge }}
-      maxUnavailable: {{ .Values.deployment.maxUnavailable }}
-  revisionHistoryLimit: 3
+      maxSurge: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxSurge") }}
+      maxUnavailable: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxUnavailable") }}
+  revisionHistoryLimit: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.revisionHistoryLimit") }}
   selector:
     matchLabels:
       app: {{ include "common.entity.name" . }}
@@ -20,16 +19,12 @@ spec:
         app: {{ include "common.entity.name" . }}
     spec:
       serviceAccountName: {{ include "common.entity.name" . }}
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 3000
-        fsGroup: 2000
+      {{- include "common.spec.securityContext" (dict "Values" .Values) | nindent 6 }}
       containers:
       - name: {{ include "common.entity.name" . }}
         image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        securityContext:
-          readOnlyRootFilesystem: true
+        imagePullPolicy: {{ include "common.imagePullPolicy" . }}
+        {{ include "common.container.securityContext" . | nindent 8 }}
         env:
         - name: HTTP_PROTOCOL
           value: {{ .Values.http.protocol }}
@@ -69,7 +64,7 @@ spec:
           value: "{{ .Values.featureToggles }}"
         {{- end }}
         - name: PORT
-          value: "{{ .Values.port }}"
+          value: "{{ include "common.getKeyValue" (dict "Values" .Values "key" "port") }}"
         - name: REGION
           value: {{ .Values.region }}
         - name: IMAGE_TAG
@@ -92,13 +87,5 @@ spec:
         - name: VALID_WEBCOMPONENT_URLS
           value: '{{ .Values.validWebcomponentUrls }}'
         {{- end }}
-        resources:
-          limits:
-            cpu: "1"
-            memory: 512Mi
-          requests:
-            cpu: 40m
-            memory: 50Mi
-        ports:
-          - name: http
-            containerPort: {{ .Values.port }}
+        {{ include "common.resources" . | nindent 8 }}
+        {{- include "common.ports" (dict "Values" .Values) | nindent 8 -}}

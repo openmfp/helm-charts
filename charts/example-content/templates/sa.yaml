@@ -3,5 +3,4 @@ kind: ServiceAccount
 metadata:
   name: {{ include "common.entity.name" . }}
   namespace: {{ .Release.Namespace }}
-imagePullSecrets:
-  - name: {{ .Values.image.pullSecret }}
+{{- include "common.imagePullSecret" (dict "Values" .Values) }}

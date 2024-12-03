@@ -1,4 +1,4 @@
 {{- define "common.imagePullSecret" }}
 imagePullSecrets:
-  - name: {{ default .Values.imagePullSecret (.Values.global).imagePullSecret }}
+  - name: {{ include "common.getKeyValue" (dict "Values" .Values "key" "imagePullSecret") }}
 {{- end -}}

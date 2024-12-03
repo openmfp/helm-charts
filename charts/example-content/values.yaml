@@ -1,18 +1,8 @@
 image:
+  # -- The image name
   name: ghcr.io/openmfp/example-content
-  pullPolicy: IfNotPresent
-  pullSecret: github
-
-deployment:
-  maxUnavailable: 0
-  maxSurge: 5
-
-port: 8080
 
 istio:
-  enabled: true
-  gateway:
-    name: gateway
   virtualService:
     hosts:
       - your-host.com

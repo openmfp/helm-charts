@@ -1,12 +1,21 @@
-# Helm chart of the jukebox
+# example-content
 
-## Execute the linting in the pipeline
+![Version: 0.110.6](https://img.shields.io/badge/Version-0.110.6-informational?style=flat-square) ![AppVersion: 0.124.0](https://img.shields.io/badge/AppVersion-0.124.0-informational?style=flat-square)
 
-```shell
-helm lint -f test-values.yaml
-```
+Helm Chart for the openmfp Portal
 
-## Debug the chart output
-```shell
-helm template --debug . -f test-values.yaml
-```
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| file://../common | common | 0.1.5 |
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
+| istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
+| istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
+| istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"` |  |
+

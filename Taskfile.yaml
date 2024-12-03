@@ -3,27 +3,56 @@ version: '3'
 vars:
   LOCAL_BIN: bin
   CHARTS:
-    sh: "ls charts/ | sed 's/^/charts\\//g' | paste -sd ',' -"
+    sh: "printf '%s,%s' $(ls -d charts/*/ | paste -sd ',' -) 'charts/common/test-chart'"
+  CHANGED_CHARTS:
+    sh: "git status --porcelain | grep '^ M charts/' | cut -d'/' -f2 | sort -u | sed 's|^|charts/|' | paste -sd ',' -"
 tasks:
+  ## Setup
+  setup:kube-lint:
+    internal: true
+    cmds:
+      - mkdir -p $(pwd)/{{.LOCAL_BIN}}
+      - test -s {{.LOCAL_BIN}}/kube-linter || GOBIN=$(pwd)/{{.LOCAL_BIN}} go install golang.stackrox.io/kube-linter/cmd/kube-linter@latest
+      - chmod +x $(pwd)/{{.LOCAL_BIN}}/kube-linter
+  setup:helm-docs:
+    internal: true
+    cmds:
+      - test -s {{.LOCAL_BIN}}/helm-docs || GOBIN=$(pwd)/{{.LOCAL_BIN}} go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
   ## Development
   lint:
     deps: []
     cmds:
       - "ct lint --target-branch main --validate-maintainers=false --charts={{.CHARTS}}"
-  package:
-    cmds:
-      - helm package ./charts/openmfp
   helmtest:
     cmds:
       - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm unittest $chart; done"
   test:
     deps:
+      - task: update
       - task: helmtest
+  update-changed:
+    deps:
+      - task: helm-docs
+    cmds:
+      - "for chart in $(echo {{.CHANGED_CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
   update:
+    deps:
+      - task: helm-docs
     cmds:
       - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
   validate:
     cmds:
       - task: lint
-      - task: package
+      # - task: package
       - task: test
+      - task: vulnerability
+  vulnerability:
+    deps:
+      - task: setup:kube-lint
+    cmds:
+      - "{{.LOCAL_BIN}}/kube-linter lint \"charts/\" --format \"plain\""
+  helm-docs:
+    deps:
+      - task: setup:helm-docs
+    cmds:
+      - "{{.LOCAL_BIN}}/helm-docs --chart-search-root charts/ --template-files=README.md.gotmpl"

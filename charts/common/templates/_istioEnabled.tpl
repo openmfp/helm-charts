@@ -1,3 +1,3 @@
 {{- define "common.istioEnabled" -}}
-{{- default (.Values.istio).enabled (((.Values.global).istio).enabled) -}}
+{{ include "common.getKeyValue" (dict "Values" .Values "key" "istio.enabled") }}
 {{- end -}}
