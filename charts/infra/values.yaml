@@ -19,8 +19,10 @@ kcp:
   enabled: false
 #  host: ""
 
-auth:
-#  host: ""
+keycloak:
+  enabled: false
+  hosts:
+    - "login.microsoftonline.com"
 
 externalSecrets:
   accountOperatorSaKubeconfig: account-operator-sa-kubeconfig

@@ -1,12 +1,11 @@
-{{- if (.Values.auth).host -}}
+{{- if (.Values.keycloak).enabled -}}
 apiVersion: networking.istio.io/v1beta1
 kind: ServiceEntry
 metadata:
   name: auth
 spec:
   hosts:
-  - {{ .Values.auth.host }}
-  - login.microsoftonline.com
+  {{- .Values.keycloak.hosts | toYaml | nindent 2 }}
   location: MESH_EXTERNAL
   ports:
   - name: https

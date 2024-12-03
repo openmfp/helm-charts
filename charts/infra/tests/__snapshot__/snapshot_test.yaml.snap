@@ -52,6 +52,22 @@ disables externalsecrets:
           relations
             define owner: [user]
             define member: [user] or owner
+  4: |
+    apiVersion: core.openmfp.io/v1alpha1
+    kind: Store
+    metadata:
+      name: test
+      namespace: test
+    spec:
+      coreModule: |2-
+        module core
+
+        type user
+
+        type account
+          relations
+            define owner: [user]
+            define member: [user] or owner
 matches the snapshot:
   1: |
     apiVersion: external-secrets.io/v1beta1
@@ -91,6 +107,22 @@ matches the snapshot:
             number: 8080
             protocol: HTTP
   3: |
+    apiVersion: core.openmfp.io/v1alpha1
+    kind: Store
+    metadata:
+      name: test
+      namespace: test
+    spec:
+      coreModule: |2-
+        module core
+
+        type user
+
+        type account
+          relations
+            define owner: [user]
+            define member: [user] or owner
+  4: |
     apiVersion: core.openmfp.io/v1alpha1
     kind: Store
     metadata:
