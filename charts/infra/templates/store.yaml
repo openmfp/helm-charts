@@ -1,4 +1,5 @@
-{{- range .Values.stores }}
+{{- if (.Values.fga).enabled }}
+{{- range .Values.fga.stores }}
 ---
 apiVersion: core.openmfp.io/v1alpha1
 kind: Store
@@ -9,3 +10,4 @@ spec:
   coreModule: |
     {{ .coreModuleName | nindent 4 }}
 {{- end}}
+{{- end }}

@@ -27,7 +27,9 @@ keycloak:
 externalSecrets:
   accountOperatorSaKubeconfig: account-operator-sa-kubeconfig
 
-stores: []
+fga:
+  enabled: true
+  stores: []
 
 certificate:
   gardener:
