@@ -61,11 +61,6 @@ defaults:
     gateway:
       # -- name of the gateway
       name: gateway
-    # -- toggle sidecar injection
-    quitSidecar: true
-    https:
-      # -- toggle to enable/disable https
-      enabled: true
 
   securityContext:
     # -- user id to run the container
