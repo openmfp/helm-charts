@@ -7,7 +7,7 @@ appVersion: "0.0.0"
 
 dependencies:
   - name: example-content
-    version: 0.110.7
+    version: 0.110.8
     repository: oci://ghcr.io/openmfp/helm-charts
     condition: components.example-content.enabled
   - name: portal
