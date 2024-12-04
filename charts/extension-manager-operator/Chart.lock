@@ -1,9 +1,9 @@
 dependencies:
 - name: extension-manager-operator-crds
-  repository: file://../extension-manager-operator-crds
+  repository: oci://ghcr.io/openmfp/helm-charts
   version: 0.1.3
 - name: common
   repository: oci://ghcr.io/openmfp/helm-charts
   version: 0.1.5
-digest: sha256:a7220ffac52a89ada29ed6b6a62f7877d7972eda5988cef709bc5d6fc7ff078a
-generated: "2024-12-04T16:20:04.140407333+02:00"
+digest: sha256:2688423cd8e784a91db8fe3503866ca5284da8c8aa1596dbf43f3786bc2f9404
+generated: "2024-12-04T16:44:54.438153194+02:00"
