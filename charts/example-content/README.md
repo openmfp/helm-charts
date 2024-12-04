@@ -1,6 +1,6 @@
 # example-content
 
-![Version: 0.110.8](https://img.shields.io/badge/Version-0.110.8-informational?style=flat-square) ![AppVersion: 0.126.0](https://img.shields.io/badge/AppVersion-0.126.0-informational?style=flat-square)
+![Version: 0.110.9](https://img.shields.io/badge/Version-0.110.9-informational?style=flat-square) ![AppVersion: 0.126.0](https://img.shields.io/badge/AppVersion-0.126.0-informational?style=flat-square)
 
 Helm Chart for the openmfp Portal
 

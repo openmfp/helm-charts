@@ -1,6 +1,6 @@
 # extension-manager-operator
 
-![Version: 0.22.34](https://img.shields.io/badge/Version-0.22.34-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.66.0](https://img.shields.io/badge/AppVersion-0.66.0-informational?style=flat-square)
+![Version: 0.22.35](https://img.shields.io/badge/Version-0.22.35-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.66.0](https://img.shields.io/badge/AppVersion-0.66.0-informational?style=flat-square)
 
 A Helm chart for extension-manager-operator
 
