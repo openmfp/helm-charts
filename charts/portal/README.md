@@ -1,6 +1,6 @@
 # portal
 
-![Version: 0.69.147](https://img.shields.io/badge/Version-0.69.147-informational?style=flat-square) ![AppVersion: 0.225.0](https://img.shields.io/badge/AppVersion-0.225.0-informational?style=flat-square)
+![Version: 0.69.148](https://img.shields.io/badge/Version-0.69.148-informational?style=flat-square) ![AppVersion: 0.225.0](https://img.shields.io/badge/AppVersion-0.225.0-informational?style=flat-square)
 
 Helm Chart for the openmfp Portal
 
