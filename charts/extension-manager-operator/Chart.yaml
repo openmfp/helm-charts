@@ -6,9 +6,9 @@ version: 0.22.36
 appVersion: "0.77.0"
 dependencies:
   - name: extension-manager-operator-crds
-    version: 0.1.4
+    version: 0.1.3
     condition: crds.enabled
-    repository: file://../extension-manager-operator-crds
+    repository: oci://ghcr.io/openmfp/helm-charts
   - name: common
     version: 0.1.5
     repository: oci://ghcr.io/openmfp/helm-charts
