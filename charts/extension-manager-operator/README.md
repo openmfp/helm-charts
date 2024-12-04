@@ -8,7 +8,7 @@ A Helm chart for extension-manager-operator
 
 | Repository | Name | Version |
 |------------|------|---------|
-| file://../extension-manager-operator-crds | extension-manager-operator-crds | 0.1.3 |
+| file://../extension-manager-operator-crds | extension-manager-operator-crds | 0.1.4 |
 | oci://ghcr.io/openmfp/helm-charts | common | 0.1.5 |
 
 ## Values
