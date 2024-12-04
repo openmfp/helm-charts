@@ -13,7 +13,7 @@ The `common` chart is a library of common resources that are shared across all o
 | Repository | Name | Version |
 |------------|------|---------|
 | oci://ghcr.io/openmfp/helm-charts | example-content | 0.110.8 |
-| oci://ghcr.io/openmfp/helm-charts | portal | 0.69.147 |
+| oci://ghcr.io/openmfp/helm-charts | portal | 0.69.148 |
 
 ## Values
 
