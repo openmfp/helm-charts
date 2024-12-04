@@ -27,6 +27,7 @@ crossplane:
       name: OpenMFP
       # -- valid redirect uris for the client
       validRedirectUris:
+        # -- keycloak callback url
         - http://localhost:8000/callback*
 
   # -- crossplane identity providers config
