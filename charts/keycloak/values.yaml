@@ -21,10 +21,11 @@ crossplane:
     displayName: OpenMFP
     registrationAllowed: false
 
-  # -- crossplane clients config
   clients:
     openmfp:
+      # -- name of the client
       name: OpenMFP
+      # -- valid redirect uris for the client
       validRedirectUris:
         - http://localhost:8000/callback*
 

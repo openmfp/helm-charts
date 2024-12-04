@@ -36,7 +36,8 @@ Example
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| crossplane.clients | object | `{"openmfp":{"name":"OpenMFP","validRedirectUris":["http://localhost:8000/callback*"]}}` | crossplane clients config |
+| crossplane.clients.openmfp.name | string | `"OpenMFP"` | name of the client |
+| crossplane.clients.openmfp.validRedirectUris | list | `["http://localhost:8000/callback*"]` | valid redirect uris for the client |
 | crossplane.enabled | bool | `false` | toggle to enable/disable crossplane |
 | crossplane.identityProviders | object | `{"sap":{"authorizationUrl":"https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7/oauth2/v2.0/authorize","clientId":"82b4c72c-ff99-4df6-ba4f-fb634d1fc491","clientSecretRef":{"key":"client-secret","name":"sap-client-secret","namespace":"openmfp-system"},"clientSecretRemoteRef":"dxp-core-team/manual-secrets/sap-client-secret","issuer":"https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7/v2.0","tokenUrl":"https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7/oauth2/v2.0/token"}}` | crossplane identity providers config |
 | crossplane.providerConfig | object | `{"name":"keycloak-provider-config","namespace":"openmfp-system"}` | crossplane provider config |
