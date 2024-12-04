@@ -14,3 +14,5 @@ jobs:
         uses: losisin/helm-docs-github-action@v1
         with:
           fail-on-diff: true
+          chart-search-root: charts/
+          template-files: README.md.gotmpl
