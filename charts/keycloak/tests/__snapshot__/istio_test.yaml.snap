@@ -6,7 +6,7 @@ matches the snapshot:
       name: RELEASE-NAME-keycloak
     spec:
       gateways:
-        - openmfp-system/
+        - openmfp-system/test
       hosts:
         - keycloak.openmfp.org
       http:
@@ -23,7 +23,7 @@ matches the snapshot (with path prefix):
       name: RELEASE-NAME-keycloak
     spec:
       gateways:
-        - openmfp-system/
+        - openmfp-system/test
       hosts:
         - keycloak.openmfp.org
       http:

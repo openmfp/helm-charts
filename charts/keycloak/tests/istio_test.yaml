@@ -10,6 +10,8 @@ tests:
     set:
       istio:
         enabled: true
+        gateway:
+          name: test
     asserts:
       - matchSnapshot: {}
   - it: matches the snapshot (with path prefix)
@@ -17,5 +19,7 @@ tests:
       domain.pathPrefix: /auth
       istio:
         enabled: true
+        gateway:
+          name: test
     asserts:
       - matchSnapshot: {}
