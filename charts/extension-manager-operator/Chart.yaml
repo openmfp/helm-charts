@@ -11,4 +11,4 @@ dependencies:
     repository: file://../extension-manager-operator-crds
   - name: common
     version: 0.1.5
-    repository: file://../common
+    repository: oci://ghcr.io/openmfp/helm-charts
