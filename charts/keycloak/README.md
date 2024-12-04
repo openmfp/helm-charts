@@ -12,7 +12,7 @@ The `common` chart is a library of common resources that are shared across all o
 
 | Repository | Name | Version |
 |------------|------|---------|
-| file://../common | common | 0.1.5 |
+| oci://ghcr.io/openmfp/helm-charts | common | 0.1.5 |
 | oci://registry-1.docker.io/bitnamicharts | keycloak(keycloak) | 24.2.2 |
 
 ## Values

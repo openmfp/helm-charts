@@ -8,7 +8,7 @@ A Helm chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
-| file://../common | common | 0.1.5 |
+| oci://ghcr.io/openmfp/helm-charts | common | 0.1.5 |
 
 ## Values
 

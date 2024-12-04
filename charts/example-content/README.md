@@ -8,7 +8,7 @@ Helm Chart for the openmfp Portal
 
 | Repository | Name | Version |
 |------------|------|---------|
-| file://../common | common | 0.1.5 |
+| oci://ghcr.io/openmfp/helm-charts | common | 0.1.5 |
 
 ## Values
 

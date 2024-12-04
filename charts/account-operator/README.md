@@ -8,8 +8,8 @@ A Helm chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
-| file://../account-operator-crds | account-operator-crds | 0.1.6 |
-| file://../common | common | 0.1.5 |
+| oci://ghcr.io/openmfp/helm-charts | account-operator-crds | 0.1.6 |
+| oci://ghcr.io/openmfp/helm-charts | common | 0.1.5 |
 
 ## Values
 
