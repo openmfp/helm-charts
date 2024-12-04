@@ -17,6 +17,6 @@ jobs:
           chart-search-root: charts/
           template-files: README.md.gotmpl
           git-push: true
-          git-push-user-name: "John Doe"
-          git-push-user-email: "john.doe@example.com"
+          git-push-user-name: "openmfp-technical-user"
+          git-push-user-email: "openmfp@gmail.com"
           git-commit-message: "chore: update Helm documentation"
