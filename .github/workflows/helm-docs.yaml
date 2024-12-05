@@ -1,6 +1,12 @@
 name: Verify Helm Docs up-to-date
+
 on:
-  - pull_request
+  workflow_run:
+    workflows: 
+      - "Build Keycloak"
+      - "Build extension-manager-operator Workflow"
+    types:
+      - completed
 
 jobs:
 
