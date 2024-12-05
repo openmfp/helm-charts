@@ -2,7 +2,7 @@
 
 A Helm chart for extension-manager-operator
 
-![Version: 0.22.36](https://img.shields.io/badge/Version-0.22.36-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.77.0](https://img.shields.io/badge/AppVersion-0.77.0-informational?style=flat-square)
+![Version: 0.22.37](https://img.shields.io/badge/Version-0.22.37-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.77.0](https://img.shields.io/badge/AppVersion-0.77.0-informational?style=flat-square)
 
 ## Additional Information
 
@@ -12,7 +12,7 @@ The `common` chart is a library of common resources that are shared across all o
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | common | 0.1.5 |
+| oci://ghcr.io/openmfp/helm-charts | common | 0.1.6 |
 | oci://ghcr.io/openmfp/helm-charts | extension-manager-operator-crds | 0.1.3 |
 
 ## Values
