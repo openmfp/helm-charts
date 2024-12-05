@@ -5,6 +5,8 @@ on:
     workflows: 
       - "Build Keycloak"
       - "Build extension-manager-operator Workflow"
+    branches:
+      - '*'
     types:
       - completed
 
