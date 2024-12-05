@@ -4,6 +4,8 @@ templates:
 chart:
   version: 1.0.0
   appVersion: 1.0.0
+release:
+  name: portal
 tests:
   - it: matches the snapshot
     values:

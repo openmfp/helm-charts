@@ -4,14 +4,13 @@ matches the snapshot:
     kind: Deployment
     metadata:
       labels:
-        app: RELEASE-NAME-portal
-      name: RELEASE-NAME-portal
-      namespace: NAMESPACE
+        app: portal
+      name: portal
     spec:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          app: RELEASE-NAME-portal
+          app: portal
       strategy:
         rollingUpdate:
           maxSurge: 5
@@ -19,10 +18,11 @@ matches the snapshot:
       template:
         metadata:
           labels:
-            app: RELEASE-NAME-portal
+            app: portal
         spec:
           containers:
-            - env:
+            - automountServiceAccountToken: true
+              env:
                 - name: HTTP_PROTOCOL
                   value: https
                 - name: OIDC_CLIENT_ID_PORTAL
@@ -51,22 +51,33 @@ matches the snapshot:
                 - name: VALID_WEBCOMPONENT_URLS
                   value: .?
               image: ghcr.io/openmfp/portal:1.0.0
-              imagePullPolicy: IfNotPresent
-              name: RELEASE-NAME-portal
+              imagePullPolicy: Always
+              name: portal
               ports:
                 - containerPort: 8080
                   name: http
+                  protocol: TCP
+                - containerPort: 8080
+                  name: metrics
+                  protocol: TCP
+                - containerPort: 8081
+                  name: health-port
+                  protocol: TCP
               resources:
                 limits:
-                  cpu: "1"
+                  cpu: 100m
                   memory: 512Mi
                 requests:
                   cpu: 40m
                   memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: portal
           securityContext:
             fsGroup: 2000
             runAsGroup: 3000
             runAsUser: 1000
-          serviceAccountName: RELEASE-NAME-portal
+          serviceAccountName: portal

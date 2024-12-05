@@ -1,0 +1,139 @@
+operator match the snapshot:
+  1: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: extension-manager-operator
+    rules:
+      - apiGroups:
+          - core.openmfp.io
+        resources:
+          - contentconfigurations
+          - contentconfigurations/status
+        verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+      - apiGroups:
+          - coordination.k8s.io
+        resources:
+          - leases
+        verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+      - apiGroups:
+          - ""
+        resources:
+          - events
+        verbs:
+          - get
+          - list
+          - watch
+          - create
+          - update
+          - patch
+          - delete
+      - apiGroups:
+          - ""
+        resources:
+          - namespaces
+        verbs:
+          - get
+          - list
+          - watch
+  2: |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: extension-manager-operator
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: extension-manager-operator
+    subjects:
+      - kind: ServiceAccount
+        name: extension-manager-operator
+        namespace: NAMESPACE
+  3: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: extension-manager-operator
+    spec:
+      revisionHistoryLimit: 3
+      selector:
+        matchLabels:
+          service: extension-manager-operator
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "true"
+          labels:
+            service: extension-manager-operator
+        spec:
+          containers:
+            - args:
+                - operator
+                - --leader-elect
+                - --log-level=
+                - --health-probe-bind-address=:8081
+              automountServiceAccountToken: true
+              image: ghcr.io/openmfp/extension-content-operator:1.0.0
+              imagePullPolicy: Always
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /readyz
+                  port: 8081
+                periodSeconds: 10
+              name: manager
+              ports:
+                - containerPort: 8080
+                  name: metrics
+                  protocol: TCP
+                - containerPort: 8081
+                  name: health-port
+                  protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8081
+                initialDelaySeconds: 5
+                periodSeconds: 10
+              resources:
+                limits:
+                  cpu: 260m
+                  memory: 512Mi
+                requests:
+                  cpu: 40m
+                  memory: 50Mi
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: extension-manager-operator
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8081
+                periodSeconds: 10
+          serviceAccountName: extension-manager-operator
+          terminationGracePeriodSeconds: 10
+  4: |
+    apiVersion: v1
+    imagePullSecrets:
+      - name: github
+    kind: ServiceAccount
+    metadata:
+      name: extension-manager-operator

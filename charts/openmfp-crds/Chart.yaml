@@ -2,11 +2,11 @@ apiVersion: v2
 name: openmfp-crds
 description: A chart containing CRD Definitions for OpenMFP
 type: application
-version: 0.0.1
+version: 0.0.3
 appVersion: "0.0.0"
 
 dependencies:
   - name: account-operator-crds
-    version: 0.1.5
+    version: 0.1.6
     repository: oci://ghcr.io/openmfp/helm-charts
     condition: components.account-operator-crds.enabled

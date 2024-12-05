@@ -3,6 +3,8 @@ templates:
   - vs.yaml
 values:
   - ../values.yaml
+chart:
+  namespace: default
 tests:
   - it: test global value
     asserts:

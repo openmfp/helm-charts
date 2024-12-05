@@ -1,4 +1,4 @@
-{{- if eq (include "common.istioEnabled" .) "true" -}}
+{{- if eq (include "common.getNestedValue" (dict "Values" .Values "key" "istio.enabled")) "true" -}}
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   gateways:
-    - {{ .Release.Namespace }}/{{ .Values.istio.gateway.name }}
+    - {{ .Release.Namespace }}/{{ include "common.getKeyValue" (dict "Values" .Values "istio.gateway.name") }}
   hosts:
     {{- .Values.istio.virtualService.hosts | toYaml | nindent 2}}
   http:

@@ -1,8 +1,21 @@
 suite: operator
 chart:
   appVersion: 0.0.0
+release:
+  name: account-operator
 tests:
   - it: operator match the snapshot
+    set:
+      # health:
+      #   portOverride: 8080
+      deployment:
+        resources:
+          limits:
+            cpuOverride: 260m
+            memoryOverride: 512Mi
+          requests:
+            cpuOverride: 150m
+            memoryOverride: 128Mi
     asserts:
       - matchSnapshot: {}
   - it: operator match the snapshot (with kubeconfigSecret)
@@ -12,7 +25,44 @@ tests:
       - matchSnapshot: {}
   - it: operator match the snapshot with webhook enabled
     set:
+      health:
+        # portOverride: 8081
+        liveness:
+          pathOverride: "/healthz"
+          # failureThreshold: 1
+        startup:
+          pathOverride: "/healthz"
+        readiness:
+          initialDelaySecondsOverride: 45
       webhooks:
         enabled: true
+        certDir: /certs
+      deployment:
+        resources:
+          limits:
+            cpuOverride: 260m
+            memoryOverride: 512Mi
+          requests:
+            cpuOverride: 150m
+            memoryOverride: 128Mi
     asserts:
       - matchSnapshot: {}
+  - it: deployment with security context
+    template: deployment.yaml
+    set:
+      security:
+        mountServiceAccountToken: true
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].securityContext
+          value:
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
+      - equal:
+          path: spec.template.spec.containers[0].serviceAccountName
+          value: account-operator
+      - equal:
+          path: spec.template.spec.containers[0].automountServiceAccountToken
+          value: true
