@@ -1,0 +1,37 @@
+gateway:
+  annotations: {}
+  apiVersion: networking.istio.io/v1
+  name: gateway
+  selector:
+    istio: gateway
+  servers:
+    - port:
+        number: 8080
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
+
+rbac:
+  clusterRole:
+    enabled: false
+
+kcp:
+  enabled: false
+#  host: ""
+
+keycloak:
+  enabled: false
+  hosts:
+    - "login.microsoftonline.com"
+
+externalSecrets:
+  accountOperatorSaKubeconfig: account-operator-sa-kubeconfig
+
+fga:
+  enabled: true
+  stores: []
+
+certificate:
+  gardener:
+    enabled: false
