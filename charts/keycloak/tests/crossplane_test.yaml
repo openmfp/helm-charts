@@ -1,0 +1,15 @@
+suite: crossplane
+release:
+  name: keycloak
+  namespace: openmfp-system
+templates:
+  - crossplane/*
+values:
+  - ../test-values.yaml
+set:
+  crossplane:
+    enabled: true
+tests:
+  - it: matches the snapshot
+    asserts:
+      - matchSnapshot: {}
