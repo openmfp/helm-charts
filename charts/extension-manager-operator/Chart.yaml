@@ -2,7 +2,7 @@ apiVersion: v2
 name: extension-manager-operator
 description: A Helm chart for extension-manager-operator
 type: application
-version: 0.22.36
+version: 0.22.37
 appVersion: "0.77.0"
 dependencies:
   - name: extension-manager-operator-crds
@@ -10,5 +10,5 @@ dependencies:
     condition: crds.enabled
     repository: oci://ghcr.io/openmfp/helm-charts
   - name: common
-    version: 0.1.5
+    version: 0.1.6
     repository: oci://ghcr.io/openmfp/helm-charts
