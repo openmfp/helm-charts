@@ -1,0 +1,20 @@
+{{- if .Values.crossplane.enabled -}}
+apiVersion: realm.keycloak.crossplane.io/v1alpha1
+kind: Realm
+metadata:
+  name: {{ .Values.crossplane.realm.name}}
+spec:
+  forProvider:
+    accessCodeLifespan: 1h
+    attributes:
+      organizationsEnabled: "true"
+    displayName: {{ .Values.crossplane.realm.displayName }}
+    displayNameHtml: <b>{{ .Values.crossplane.realm.displayName }}</b>
+    enabled: true
+    realm: {{ .Values.crossplane.realm.name }}
+    loginWithEmailAllowed: true
+    registrationEmailAsUsername: true
+    registrationAllowed: {{ .Values.crossplane.realm.registrationAllowed }}
+  providerConfigRef:
+    name: {{ .Values.crossplane.providerConfig.name }}
+{{- end -}}
