@@ -4,24 +4,9 @@ on:
 
 jobs:
 
-  chekc-statuses:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: actions/create-outputs@v0.0.0-fake
-      id: test
-    - uses: LouisBrunner/checks-action@v2.0.0
-      if: always()
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        name: Test XYZ
-        conclusion: ${{ job.status }}
-        output: |
-          {"summary":"${{ steps.test.outputs.summary }}"}
-
   update-helm-docs:
     runs-on: ubuntu-latest
-    needs: [chekc-statuses]
+    # needs: [chekc-statuses]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,3 +21,5 @@ jobs:
           git-push-user-name: "openmfp-technical-user"
           git-push-user-email: "openmfp@gmail.com"
           git-commit-message: "chore: update Helm documentation"
+        env:
+          GITHUB_TOKEN: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
