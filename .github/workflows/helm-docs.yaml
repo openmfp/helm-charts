@@ -18,4 +18,4 @@ jobs:
           chart-search-root: charts/
           template-files: README.md.gotmpl
           git-push: true
-          skip-version-footer: true
+          skip-version-footer: false
