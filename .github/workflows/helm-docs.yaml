@@ -14,7 +14,7 @@ jobs:
       - name: Run helm-docs
         uses: losisin/helm-docs-github-action@v1
         with:
-          fail-on-diff: false
+          fail-on-diff: true
           chart-search-root: charts/
           template-files: README.md.gotmpl
-          git-push: true
+          git-push: false
