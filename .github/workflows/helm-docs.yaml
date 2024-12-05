@@ -18,3 +18,4 @@ jobs:
           chart-search-root: charts/account-operator/
           template-files: README.md.gotmpl
           git-push: true
+          skip-version-footer: true
