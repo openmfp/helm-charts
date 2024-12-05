@@ -1,0 +1,37 @@
+matches the snapshot:
+  1: |
+    apiVersion: networking.istio.io/v1beta1
+    kind: VirtualService
+    metadata:
+      name: RELEASE-NAME-keycloak
+    spec:
+      gateways:
+        - openmfp-system/test
+      hosts:
+        - keycloak.openmfp.org
+      http:
+        - route:
+            - destination:
+                host: keycloak.openmfp-system.svc.cluster.local
+                port:
+                  number: null
+matches the snapshot (with path prefix):
+  1: |
+    apiVersion: networking.istio.io/v1beta1
+    kind: VirtualService
+    metadata:
+      name: RELEASE-NAME-keycloak
+    spec:
+      gateways:
+        - openmfp-system/test
+      hosts:
+        - keycloak.openmfp.org
+      http:
+        - match:
+            - uri:
+                prefix: /auth
+          route:
+            - destination:
+                host: keycloak.openmfp-system.svc.cluster.local
+                port:
+                  number: null
