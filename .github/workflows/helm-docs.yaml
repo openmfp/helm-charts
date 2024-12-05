@@ -1,4 +1,4 @@
-name: Check if helm-docs are up-to-date
+name: Check if helm-docs are up-to-date 
 on:
   - pull_request
   - push
