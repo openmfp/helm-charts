@@ -3,6 +3,19 @@ on:
   - pull_request
 
 jobs:
+
+  wait-for-other-workflows:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Other Workflows to Complete
+        uses: jakejarvis/wait-for-other-jobs@v1
+        with:
+          check_name: 'All Other Workflows'
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Proceed After All Workflows Complete
+        run: echo "All workflows have completed."
+
   generate:
     runs-on: ubuntu-latest
     steps:
