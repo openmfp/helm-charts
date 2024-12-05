@@ -4,20 +4,24 @@ on:
 
 jobs:
 
-  wait-for-other-workflows:
+  chekc-statuses:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for Other Workflows to Complete
-        uses: jakejarvis/wait-for-other-jobs@v1
-        with:
-          check_name: 'All Other Workflows'
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Proceed After All Workflows Complete
-        run: echo "All workflows have completed."
+    - uses: actions/checkout@v1
+    - uses: actions/create-outputs@v0.0.0-fake
+      id: test
+    - uses: LouisBrunner/checks-action@v2.0.0
+      if: always()
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: Test XYZ
+        conclusion: ${{ job.status }}
+        output: |
+          {"summary":"${{ steps.test.outputs.summary }}"}
 
-  generate:
+  update-helm-docs:
     runs-on: ubuntu-latest
+    needs: [chekc-statuses]
     steps:
       - uses: actions/checkout@v4
         with:
