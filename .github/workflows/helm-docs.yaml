@@ -15,6 +15,6 @@ jobs:
         uses: losisin/helm-docs-github-action@v1
         with:
           fail-on-diff: false
-          chart-search-root: charts/
+          chart-search-root: charts/account-operator/
           template-files: README.md.gotmpl
           git-push: true
