@@ -2,7 +2,7 @@
 
 A Helm chart for extension-manager-operator
 
-![Version: 0.22.36](https://img.shields.io/badge/Version-0.22.36-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.77.0](https://img.shields.io/badge/AppVersion-0.77.0-informational?style=flat-square)
+![Version: 0.22.37](https://img.shields.io/badge/Version-0.22.37-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.77.0](https://img.shields.io/badge/AppVersion-0.77.0-informational?style=flat-square)
 
 ## Additional Information
 
