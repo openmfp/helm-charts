@@ -27,4 +27,8 @@ spec:
     portal:
       virtualService:
         hosts:
-          - portal.openmfp.local
+          - "*"
+      validWebcomponentUrls: "portal.openmfp.local"
+      trust:
+        openmfp:
+          baseDomains: "portal.openmfp.local"
