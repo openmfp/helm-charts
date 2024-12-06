@@ -17,8 +17,14 @@ spec:
   values:
     global:
       imagePullSecret: ghcr-credentials
+      istio:
+        enabled: true
     components:
       example-content:
         enabled: true
       portal:
         enabled: true
+    portal:
+      virtualService:
+        hosts:
+          - portal.openmfp.local
