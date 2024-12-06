@@ -3,7 +3,7 @@ version: '3'
 vars:
   LOCAL_BIN: bin
   CHARTS:
-    sh: "printf '%s,%s' $(ls -d charts/*/ | paste -sd ',' -) 'charts/common/test-chart'"
+    sh: "printf '%s' $(ls -d charts/*/ | paste -sd ',' -)"
   CHANGED_CHARTS:
     sh: "git status --porcelain | grep '^ M charts/' | cut -d'/' -f2 | sort -u | sed 's|^|charts/|' | paste -sd ',' -"
 tasks:
@@ -55,4 +55,4 @@ tasks:
     deps:
       - task: setup:helm-docs
     cmds:
-      - "{{.LOCAL_BIN}}/helm-docs --chart-search-root charts/ --template-files=README.md.gotmpl"
+      - "{{.LOCAL_BIN}}/helm-docs --chart-search-root charts/ --template-files=README.md.gotmpl --skip-version-footer=false"

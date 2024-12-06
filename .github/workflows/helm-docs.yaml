@@ -1,11 +1,11 @@
-name: Verify Helm Docs up-to-date
+name: Check if helm-docs are up-to-date 
 on:
-  push:
-    branches:
-      - main
+  - pull_request
+  - push
 
 jobs:
-  generate:
+
+  check-helm-docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,10 +14,7 @@ jobs:
       - name: Run helm-docs
         uses: losisin/helm-docs-github-action@v1
         with:
-          fail-on-diff: false
+          fail-on-diff: true
           chart-search-root: charts/
           template-files: README.md.gotmpl
-          git-push: true
-          git-push-user-name: "openmfp-technical-user"
-          git-push-user-email: "openmfp@gmail.com"
-          git-commit-message: "chore: update Helm documentation"
+          git-push: false

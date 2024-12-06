@@ -51,4 +51,3 @@ Example
 | defaults.securityContext.fsGroup | int | `2000` | fsGroup id to run the container |
 | defaults.securityContext.runAsGroup | int | `3000` | group id to run the container |
 | defaults.securityContext.runAsUser | int | `1000` | user id to run the container |
-

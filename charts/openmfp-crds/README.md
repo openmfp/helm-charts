@@ -12,8 +12,7 @@ The `common` chart is a library of common resources that are shared across all o
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | account-operator-crds | 0.1.6 |
-| oci://ghcr.io/openmfp/helm-charts | extension-manager-operator-crds | 0.1.4 |
+| oci://ghcr.io/openmfp/helm-charts | account-operator-crds | 0.1.7 |
 
 ## Values
 
@@ -37,5 +36,4 @@ Example
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | account-operator-crds.enabled | bool | `true` |  |
-| extension-manager-operator-crds.enabled | bool | `true` |  |
-
+| extension-content-operator-crds.enabled | bool | `true` |  |

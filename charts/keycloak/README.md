@@ -2,7 +2,7 @@
 
 A Helm chart for Kubernetes
 
-![Version: 0.59.23](https://img.shields.io/badge/Version-0.59.23-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Version: 0.59.24](https://img.shields.io/badge/Version-0.59.24-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
 ## Additional Information
 
@@ -12,7 +12,7 @@ The `common` chart is a library of common resources that are shared across all o
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | common | 0.1.5 |
+| oci://ghcr.io/openmfp/helm-charts | common | 0.1.6 |
 | oci://registry-1.docker.io/bitnamicharts | keycloak(keycloak) | 24.2.3 |
 
 ## Values
@@ -56,4 +56,3 @@ Example
 | keycloakConfig.url | string | `"http://keycloak-http.openmfp-system.svc.cluster.local:8080"` | url of the keycloak server |
 | keycloakConfig.userRegistration.enabled | bool | `true` | toggle to enable/disable user registration |
 | service | object | `{"name":"keycloak"}` | service configuration |
-

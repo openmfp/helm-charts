@@ -30,4 +30,3 @@ Example
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | kcp.enabled | bool | `false` | Enable KCP |
-
