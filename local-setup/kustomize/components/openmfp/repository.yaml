@@ -7,6 +7,6 @@ spec:
   interval: 5m
   url: oci://ghcr.io/openmfp/helm-charts/openmfp
   ref:
-    semver: "0.0.54"
+    semver: "*"
   secretRef:
     name: ghcr-credentials
