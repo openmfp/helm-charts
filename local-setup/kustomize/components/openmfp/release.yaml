@@ -18,47 +18,7 @@ spec:
     global:
       imagePullSecret: ghcr-credentials
     components:
-      infra:
-        enabled: false
-      kcp:
-        enabled: false
-      account-operator:
-        enabled: false
-      account-ui:
-        enabled: false
-      example-crd-gateway:
-        enabled: false
-      iam-service:
-        enabled: false
-      modular-models-operator:
-        enabled: false
-      openfga:
-        enabled: false
-    keycloak:
-      externalSecrets:
-        enabled: false
-      crossplane:
+      example-content:
         enabled: true
-    example-ui:
-      istio:
+      portal:
         enabled: true
-        gateway:
-          name: gateway
-        virtualService:
-          hosts:
-            - "*"
-          matchers:
-            - match:
-                - uri:
-                    exact: /ui/example-content
-                - uri:
-                    prefix: /ui/example-content/
-
-    example-resources:
-      contentConfigurations:
-        providers: true
-      contentProtocolDomain: http://localhost:8000
-    portal:
-      virtualService:
-        hosts:
-          - "*"

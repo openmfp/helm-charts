@@ -11,3 +11,7 @@ spec:
   releaseName: openmfp-crds
   values:
     imagePullSecret: ghcr-credentials
+    extension-manager-operator-crds:
+      enabled: true
+    account-operator-crds:
+      enabled: true
