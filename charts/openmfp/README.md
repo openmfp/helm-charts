@@ -2,7 +2,7 @@
 
 The OpenMFP chart for Kubernetes
 
-![Version: 0.0.50](https://img.shields.io/badge/Version-0.0.50-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
+![Version: 0.0.51](https://img.shields.io/badge/Version-0.0.51-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
 
 ## Additional Information
 
@@ -13,7 +13,7 @@ The `common` chart is a library of common resources that are shared across all o
 | Repository | Name | Version |
 |------------|------|---------|
 | oci://ghcr.io/openmfp/helm-charts | example-content | 0.110.10 |
-| oci://ghcr.io/openmfp/helm-charts | portal | 0.69.155 |
+| oci://ghcr.io/openmfp/helm-charts | portal | 0.69.157 |
 
 ## Values
 
