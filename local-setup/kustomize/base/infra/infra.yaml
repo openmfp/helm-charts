@@ -34,6 +34,11 @@ spec:
     externalSecrets:
       enabled: false
     gateway:
+      annotations: {}
+      apiVersion: networking.istio.io/v1
+      name: gateway
+      selector:
+        istio: gateway
       servers:
         - port:
             number: 8000
