@@ -1,5 +1,5 @@
 account-operator-crds:
   enabled: true
 
-extension-content-operator-crds:
+extension-manager-operator-crds:
   enabled: true
