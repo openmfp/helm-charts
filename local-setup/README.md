@@ -20,16 +20,16 @@ upgrade the Helm releases to their latest chart version based on semver ranges.
   ```sh
   brew install kind
   ```
+- [Secrets]: configure the following environment variables:
+```sh
+export KEYCLOAK_SECRET='' # client secret for the 'openmfp' keycloak client
+export GH_TOKEN='' # token used to pull the openmfp docker images
+```
 - [Helm](https://helm.sh/): In order to bootstrap flux, helm is required. Checkout various ways to install helm [here](https://helm.sh/docs/intro/install/)
   On macOS using Homebrew:
   ```sh
   brew install helm
-  ```
-
-## Optional Prerequisites
-- [GitHub CLI](https://cli.github.com/): The GitHub CLI is used to determine your current username. Either specify the `GH_USER` environment variable or install the [Github CLI](https://github.com/cli/cli#installation).</br>
-   
-  On macOS or Linux using Homebrew:
+  ```./local-setup/scripts/start.sh
   ```sh
   brew install gh
   ```

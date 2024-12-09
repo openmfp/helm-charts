@@ -28,7 +28,17 @@ spec:
       virtualService:
         hosts:
           - "*"
-      validWebcomponentUrls: "portal.openmfp.local"
+      validWebcomponentUrls: ".?"
+      environment: local
+      featureToggles: "enableSessionAutoRefresh=true"
+      developmentLandcsape: "true"
+      frontendPort: 8000
       trust:
         openmfp:
-          baseDomains: "portal.openmfp.local"
+          baseDomains: "localhost"
+          discoveryEndpoint: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/master/.well-known/openid-configuration
+          authDomain: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/auth
+          tokenUrl: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/token
+          oidcClientSecretName: openmfp-client
+          loginAudience: openmfp
+          secretKeyRef: attribute.client_secret

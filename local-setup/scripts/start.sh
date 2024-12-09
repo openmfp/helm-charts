@@ -26,6 +26,15 @@ else
   ghUser=$GH_USER
 fi
 
+kkSecret=""
+if [ -z "${KEYCLOAK_SECRET}" ]; then
+      echo "KEYCLOAK_SECRET not found."
+      exit 1
+else
+  kkSecret=$KEYCLOAK_SECRET
+fi
+
+
 # Check if kind cluster kind is already running, exit if yes
 if [ $(kind get clusters | grep -c openmfp) -gt 0 ]; then
     echo -e "$COL Kind cluster already running, using existing $COL_RES"
@@ -48,6 +57,7 @@ kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
 echo "$COL Creating necessary secrets $COL_RES"
 kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
 kubectl create secret generic keycloak-admin -n openmfp-system --from-literal=secret=admin --dry-run=client -o yaml | kubectl apply -f -
+kubectl create secret generic portal-client-secret-openmfp -n openmfp-system --from-literal=attribute.client_secret=$kkSecret --dry-run=client -o yaml | kubectl apply -f -
 
 echo "$COL waiting for istio to become ready $COL_RES"
 kubectl wait --namespace istio-system \
