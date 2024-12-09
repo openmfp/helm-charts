@@ -25,6 +25,17 @@ matches the snapshot:
               env:
                 - name: HTTP_PROTOCOL
                   value: https
+                - name: OIDC_CLIENT_ID_OPENMFP
+                  value: openmfp
+                - name: OIDC_CLIENT_SECRET_OPENMFP
+                  valueFrom:
+                    secretKeyRef:
+                      key: attribute.client_secret
+                      name: portal-client-secret-openmfp
+                - name: DISCOVERY_ENDPOINT_OPENMFP
+                  value: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/master/.well-known/openid-configuration
+                - name: BASE_DOMAINS_OPENMFP
+                  value: localhost
                 - name: OIDC_CLIENT_ID_PORTAL
                   value: "12345"
                 - name: OIDC_CLIENT_SECRET_PORTAL
@@ -37,7 +48,9 @@ matches the snapshot:
                 - name: BASE_DOMAINS_PORTAL
                   value: portal.example.com,portal2.example.com
                 - name: IDP_NAMES
-                  value: portal
+                  value: openmfp,portal
+                - name: DEVELOPMENT_INSTANCE
+                  value: "true"
                 - name: FEATURE_TOGGLES
                   value: enableSessionAutoRefresh=true
                 - name: PORT
@@ -48,6 +61,10 @@ matches the snapshot:
                   value: 1.0.0
                 - name: IMAGE_NAME
                   value: ghcr.io/openmfp/portal
+                - name: FRONTEND_PORT
+                  value: "8000"
+                - name: ENVIRONMENT
+                  value: local
                 - name: VALID_WEBCOMPONENT_URLS
                   value: .?
               image: ghcr.io/openmfp/portal:1.0.0
