@@ -3,19 +3,42 @@ image:
   pullPolicyOverride: IfNotPresent
 
 http:
+  # -- protocol
   protocol: https
 
+# -- import content toggle
 importContent: true
 
 validWebcomponentUrls: ".?"
 featureToggles: "enableSessionAutoRefresh=true"
 
+virtualService:
+  # -- virtual service hosts
+  hosts:
+    - "*"
+
+# -- environment
+environment: local
+
+# -- development landscape toggle
+developmentLandcsape: "true"
+
+# -- frontend port
+frontendPort: 8000
+
 trust:
   openmfp:
+    # -- base domains
     baseDomains: "localhost"
-#    discoveryEndpoint: http://openmfp-keycloak/keycloak/realms/master/.well-known/openid-configuration
-    authDomain: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
-    tokenUrl: http://openmfp-keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
+    # -- discovery endpoint (if specified, authDomain and tokenUrl are not required)
+    discoveryEndpoint: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/master/.well-known/openid-configuration
+    # -- auth domain (if discoveryEndpoint is not specified)
+    authDomain: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/auth
+    # -- token url (if discoveryEndpoint is not specified)
+    tokenUrl: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/token
+    # -- oidc client secret name
     oidcClientSecretName: openmfp-client
+    # -- login audience
     loginAudience: openmfp
+    # -- secret key reference
     secretKeyRef: attribute.client_secret
