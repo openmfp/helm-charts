@@ -32,4 +32,3 @@ fga:
   enabled: true
   # -- The list of FGA stores to be created
   stores: []
-
