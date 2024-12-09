@@ -1,4 +1,9 @@
 istio:
+  enabled: true
+  serviceEntries:
+    https:
+      enabled: true
+      hosts: [ "example.com" ]
   gateway:
     apiVersion: networking.istio.io/v1
     name: gateway
@@ -13,6 +18,7 @@ istio:
           - "*"
 
 fga:
+  enabled: true
   stores:
     - name: test
       namespace: test

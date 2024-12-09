@@ -17,6 +17,22 @@ matches the snapshot:
             define member: [user] or owner
   2: |
     apiVersion: networking.istio.io/v1
+    kind: Gateway
+    metadata:
+      name: gateway
+      namespace: NAMESPACE
+    spec:
+      selector:
+        istio: gateway
+      servers:
+        - hosts:
+            - '*'
+          port:
+            name: http
+            number: 8080
+            protocol: HTTP
+  3: |
+    apiVersion: networking.istio.io/v1
     kind: ServiceEntry
     metadata:
       name: openmfp-https

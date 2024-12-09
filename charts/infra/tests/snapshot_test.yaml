@@ -3,12 +3,6 @@ values:
   - ../test-values.yaml
 tests:
   - it: matches the snapshot
-    set:
-      istio:
-        serviceEntries:
-          https:
-            enabled: true
-            hosts: ["example.com"]
     asserts:
       - matchSnapshot: {}
 
