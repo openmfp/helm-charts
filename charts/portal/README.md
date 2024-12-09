@@ -43,12 +43,12 @@ Example
 | image.name | string | `"ghcr.io/openmfp/portal"` |  |
 | image.pullPolicyOverride | string | `"IfNotPresent"` |  |
 | importContent | bool | `true` | import content toggle |
-| trust.openmfp.authDomain | string | `"https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/auth"` | auth domain (if discoveryEndpoint is not specified) |
+| trust.openmfp.authDomain | string | `"https://auth.provider.external/realms/openmfp/protocol/openid-connect/auth"` | auth domain (if discoveryEndpoint is not specified) |
 | trust.openmfp.baseDomains | string | `"localhost"` | base domains |
-| trust.openmfp.discoveryEndpoint | string | `"https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/master/.well-known/openid-configuration"` | discovery endpoint (if specified, authDomain and tokenUrl are not required) |
+| trust.openmfp.discoveryEndpoint | string | `"https://auth.provider.external/realms/master/.well-known/openid-configuration"` | discovery endpoint (if specified, authDomain and tokenUrl are not required) |
 | trust.openmfp.loginAudience | string | `"openmfp"` | login audience |
 | trust.openmfp.oidcClientSecretName | string | `"openmfp-client"` | oidc client secret name |
 | trust.openmfp.secretKeyRef | string | `"attribute.client_secret"` | secret key reference |
-| trust.openmfp.tokenUrl | string | `"https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/token"` | token url (if discoveryEndpoint is not specified) |
+| trust.openmfp.tokenUrl | string | `"https://auth.provider.external/realms/openmfp/protocol/openid-connect/token"` | token url (if discoveryEndpoint is not specified) |
 | validWebcomponentUrls | string | `".?"` |  |
 | virtualService.hosts | list | `["*"]` | virtual service hosts |

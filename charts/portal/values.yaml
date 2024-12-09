@@ -31,11 +31,11 @@ trust:
     # -- base domains
     baseDomains: "localhost"
     # -- discovery endpoint (if specified, authDomain and tokenUrl are not required)
-    discoveryEndpoint: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/master/.well-known/openid-configuration
+    discoveryEndpoint: https://auth.provider.external/realms/master/.well-known/openid-configuration
     # -- auth domain (if discoveryEndpoint is not specified)
-    authDomain: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/auth
+    authDomain: https://auth.provider.external/realms/openmfp/protocol/openid-connect/auth
     # -- token url (if discoveryEndpoint is not specified)
-    tokenUrl: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/token
+    tokenUrl: https://auth.provider.external/realms/openmfp/protocol/openid-connect/token
     # -- oidc client secret name
     oidcClientSecretName: openmfp-client
     # -- login audience

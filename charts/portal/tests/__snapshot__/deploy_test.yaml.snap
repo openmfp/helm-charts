@@ -33,7 +33,7 @@ matches the snapshot:
                       key: attribute.client_secret
                       name: portal-client-secret-openmfp
                 - name: DISCOVERY_ENDPOINT_OPENMFP
-                  value: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/master/.well-known/openid-configuration
+                  value: https://auth.provider.external/realms/master/.well-known/openid-configuration
                 - name: BASE_DOMAINS_OPENMFP
                   value: localhost
                 - name: OIDC_CLIENT_ID_PORTAL
