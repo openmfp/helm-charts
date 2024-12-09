@@ -1,20 +1,20 @@
 matches the snapshot:
   1: |
-    apiVersion: networking.istio.io/v1
-    kind: Gateway
+    apiVersion: core.openmfp.io/v1alpha1
+    kind: Store
     metadata:
-      name: gateway
-      namespace: NAMESPACE
+      name: test
+      namespace: test
     spec:
-      selector:
-        istio: gateway
-      servers:
-        - hosts:
-            - '*'
-          port:
-            name: http
-            number: 8080
-            protocol: HTTP
+      coreModule: |2-
+        module core
+
+        type user
+
+        type account
+          relations
+            define owner: [user]
+            define member: [user] or owner
   2: |
     apiVersion: networking.istio.io/v1
     kind: ServiceEntry

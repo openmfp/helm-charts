@@ -1,3 +1,4 @@
+{{- if eq (include "common.getKeyValue" (dict "Values" .Values "key" "istio.enabled")) "true" -}}
 apiVersion: {{ .Values.istio.networking.apiVersion }}
 kind: Gateway
 metadata:
@@ -12,3 +13,4 @@ spec:
 {{ .Values.istio.gateway.selector | toYaml | indent 4 }}
   servers:
 {{ toYaml .Values.istio.gateway.servers | indent 4 }}
+{{- end -}}
