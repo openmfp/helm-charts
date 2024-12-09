@@ -2,7 +2,7 @@ apiVersion: v2
 name: infra
 description: OpenMFP network infrastructure
 type: application
-version: 0.57.6
+version: 0.57.7
 appVersion: "1.16.0"
 
 dependencies:
