@@ -3,12 +3,13 @@ values:
   - ../test-values.yaml
 tests:
   - it: matches the snapshot
-    asserts:
-      - matchSnapshot: {}
-  - it: disables externalsecrets
     set:
-      externalSecrets:
-        accountOperatorSaKubeconfig: null
+      istio:
+        serviceEntries:
+          https:
+            enabled: true
+            hosts: ["example.com"]
     asserts:
       - matchSnapshot: {}
+
 
