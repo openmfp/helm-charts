@@ -1,26 +1,5 @@
 disables externalsecrets:
   1: |
-    apiVersion: external-secrets.io/v1beta1
-    kind: ExternalSecret
-    metadata:
-      name: account-operator-sa-kubeconfig
-      namespace: NAMESPACE
-    spec:
-      data:
-        - remoteRef:
-            conversionStrategy: Default
-            key: null
-            property: kubeconfig
-          secretKey: kubeconfig
-      refreshInterval: 10m
-      secretStoreRef:
-        kind: SecretStore
-        name: environment-store
-      target:
-        creationPolicy: Owner
-        deletionPolicy: Retain
-        name: account-operator-sa-kubeconfig
-  2: |
     apiVersion: networking.istio.io/v1
     kind: Gateway
     metadata:
@@ -38,27 +17,6 @@ disables externalsecrets:
             protocol: HTTP
 matches the snapshot:
   1: |
-    apiVersion: external-secrets.io/v1beta1
-    kind: ExternalSecret
-    metadata:
-      name: account-operator-sa-kubeconfig
-      namespace: NAMESPACE
-    spec:
-      data:
-        - remoteRef:
-            conversionStrategy: Default
-            key: account-operator-sa-kubeconfig
-            property: kubeconfig
-          secretKey: kubeconfig
-      refreshInterval: 10m
-      secretStoreRef:
-        kind: SecretStore
-        name: environment-store
-      target:
-        creationPolicy: Owner
-        deletionPolicy: Retain
-        name: account-operator-sa-kubeconfig
-  2: |
     apiVersion: networking.istio.io/v1
     kind: Gateway
     metadata:
