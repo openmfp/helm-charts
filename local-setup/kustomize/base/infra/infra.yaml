@@ -31,32 +31,18 @@ spec:
   values:
     crossplane:
       enabled: true
-    externalSecrets:
-      enabled: false
-    gateway:
-      annotations: {}
-      apiVersion: networking.istio.io/v1
-      name: gateway
-      selector:
-        istio: gateway
-      servers:
-        - port:
-            number: 8000
-            name: http
-            protocol: HTTP
-          hosts:
-            - "*"
-    stores:
-      - name: test
-        namespace: openmfp-system
-        coreModuleName: |
-          module core
-          
-          type account
-            relations
-              define member: [user] or owner
-              define owner: [user]
-          
-          type user
-
-
+    istio:
+      enabled: true
+      gateway:
+        annotations: {}
+        apiVersion: networking.istio.io/v1
+        name: gateway
+        selector:
+          istio: gateway
+        servers:
+          - port:
+              number: 8000
+              name: http
+              protocol: HTTP
+            hosts:
+              - "*"
