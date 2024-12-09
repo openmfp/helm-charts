@@ -2,7 +2,7 @@
 
 A Helm chart for Kubernetes
 
-![Version: 0.1.7](https://img.shields.io/badge/Version-0.1.7-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
+![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
 
 ## Additional Information
 
@@ -37,6 +37,7 @@ Example
 | defaults.deployment.revisionHistoryLimit | int | `3` | deployment revision history limit |
 | defaults.deployment.strategy | string | `"RollingUpdate"` | deployment strategy |
 | defaults.externalSecrets.enabled | bool | `true` | toggle to enable/disable external-secrets |
+| defaults.fga.enabled | bool | `false` | toggle to enable/disable experimental FGA features |
 | defaults.health.liveness | object | `{"failureThreshold":1,"path":"/healthz"}` | liveness probe parameters |
 | defaults.health.periodSeconds | int | `10` | health period |
 | defaults.health.port | int | `8081` | health port |

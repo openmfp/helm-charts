@@ -27,9 +27,9 @@ else
 fi
 
 kkSecret=""
+# it is possible to setup a keycloak client secret using the  KEYCLOAK_SECRET environment variable
 if [ -z "${KEYCLOAK_SECRET}" ]; then
-      echo "KEYCLOAK_SECRET not found."
-      exit 1
+  kkSecret=openmfp-keylcoak-secret
 else
   kkSecret=$KEYCLOAK_SECRET
 fi

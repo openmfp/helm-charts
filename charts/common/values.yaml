@@ -62,6 +62,10 @@ defaults:
       # -- name of the gateway
       name: gateway
 
+  fga:
+    # -- toggle to enable/disable experimental FGA features
+    enabled: false
+
   securityContext:
     # -- user id to run the container
     runAsUser: 1000

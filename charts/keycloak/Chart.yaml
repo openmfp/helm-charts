@@ -12,5 +12,5 @@ dependencies:
     version: 24.2.3
     repository: oci://registry-1.docker.io/bitnamicharts
   - name: common
-    version: 0.1.7
+    version: 0.1.8
     repository: oci://ghcr.io/openmfp/helm-charts

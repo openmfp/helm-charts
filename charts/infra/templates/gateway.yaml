@@ -1,14 +1,16 @@
-apiVersion: {{ .Values.gateway.apiVersion }}
+{{- if eq (include "common.getKeyValue" (dict "Values" .Values "key" "istio.enabled")) "true" -}}
+apiVersion: {{ .Values.istio.networking.apiVersion }}
 kind: Gateway
 metadata:
-  name: {{ .Values.gateway.name}}
+  name: {{ .Values.istio.gateway.name}}
   namespace: {{ .Release.Namespace }}
-{{- if .Values.gateway.annotations }}
+{{- if .Values.istio.gateway.annotations }}
   annotations:
-    {{- toYaml .Values.gateway.annotations | nindent 4 }}
+    {{- toYaml .Values.istio.gateway.annotations | nindent 4 }}
 {{- end }}
 spec:
   selector:
-{{ .Values.gateway.selector | toYaml | indent 4 }}
+{{ .Values.istio.gateway.selector | toYaml | indent 4 }}
   servers:
-{{ toYaml .Values.gateway.servers | indent 4 }}
+{{ toYaml .Values.istio.gateway.servers | indent 4 }}
+{{- end -}}

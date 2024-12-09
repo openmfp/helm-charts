@@ -20,20 +20,15 @@ upgrade the Helm releases to their latest chart version based on semver ranges.
   ```sh
   brew install kind
   ```
-- [Secrets]: configure the following environment variables:
-```sh
-export KEYCLOAK_SECRET='' # client secret for the 'openmfp' keycloak client
-export GH_TOKEN='' # token used to pull the openmfp docker images
-```
 - [Helm](https://helm.sh/): In order to bootstrap flux, helm is required. Checkout various ways to install helm [here](https://helm.sh/docs/intro/install/)
   On macOS using Homebrew:
   ```sh
   brew install helm
-  ```./local-setup/scripts/start.sh
-  ```sh
-  brew install gh
   ```
-
+- Either specify your github.com username using the `GH_USER` environment variable OR install the gh cli using:
+    ```sh
+    brew install gh
+    ```
 
 ## Bootstrap local environment
 
@@ -49,3 +44,7 @@ To start the boostrapping and local installation invoke
 ```
 
 Once the process is completed you can access the environment using http://localhost:8000
+
+# Optional Steps
+
+- Keycloak client secret: It is possible to set a custom keycloak client secret by setting the `KEYCLOAK_SECRET` environment variable before running the boostrap script.
