@@ -2,10 +2,10 @@ apiVersion: v2
 name: infra
 description: The infra openmfp chart configures a number of common infrastructure components for the OpenMFP platform.
 type: application
-version: 0.58.0
+version: 0.59.0
 appVersion: "1.16.0"
 
 dependencies:
   - name: common
-    version: 0.1.7
+    version: 0.1.8
     repository: oci://ghcr.io/openmfp/helm-charts
