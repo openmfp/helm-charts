@@ -37,6 +37,7 @@ Example
 | defaults.deployment.revisionHistoryLimit | int | `3` | deployment revision history limit |
 | defaults.deployment.strategy | string | `"RollingUpdate"` | deployment strategy |
 | defaults.externalSecrets.enabled | bool | `true` | toggle to enable/disable external-secrets |
+| defaults.fga.enabled | bool | `false` | toggle to enable/disable experimental FGA features |
 | defaults.health.liveness | object | `{"failureThreshold":1,"path":"/healthz"}` | liveness probe parameters |
 | defaults.health.periodSeconds | int | `10` | health period |
 | defaults.health.port | int | `8081` | health port |
