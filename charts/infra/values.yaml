@@ -1,37 +1,34 @@
-gateway:
-  annotations: {}
-  apiVersion: networking.istio.io/v1
-  name: gateway
-  selector:
-    istio: gateway
-  servers:
-    - port:
-        number: 8080
-        name: http
-        protocol: HTTP
-      hosts:
-        - "*"
-
-rbac:
-  clusterRole:
-    enabled: false
-
-kcp:
-  enabled: false
-#  host: ""
-
-keycloak:
-  enabled: false
-  hosts:
-    - "login.microsoftonline.com"
-
-externalSecrets:
-  accountOperatorSaKubeconfig: account-operator-sa-kubeconfig
+istio:
+  networking:
+    # -- The istio apiVersion used for networking resources in this chart eg. networking.istio.io/v1, networking.istio.io/v1beta1
+    apiVersion: networking.istio.io/v1
+  gateway:
+    # -- Annotations to be applied to the istio gateway
+    annotations: {}
+    # -- The istio apiVersion of the gateway resource eg, networking.istio.io/v1, networking.istio.io/v1beta1
+    apiVersion:
+    # -- The name of the istio gateway resource
+    name: gateway
+    selector:
+      # -- The istio ingress gateway selector
+      istio: gateway
+    # -- The "servers" section of the istio gateway. By default it is configured for a local kind setup. Adjust to be a https port for productive deployments
+    servers:
+      - port:
+          number: 8080
+          name: http
+          protocol: HTTP
+        hosts:
+          - "*"
+  serviceEntries:
+    https:
+      # -- A toggle to enable the service entries for external https communication
+      enabled: false
+      # -- The list of hosts to be added to the service entry
+      hosts: []
 
 fga:
+  # -- An experimental toggle to enable the FGA integration
   enabled: true
+  # -- The list of FGA stores to be created
   stores: []
-
-certificate:
-  gardener:
-    enabled: false

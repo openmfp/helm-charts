@@ -1,63 +1,20 @@
-disables externalsecrets:
-  1: |
-    apiVersion: external-secrets.io/v1beta1
-    kind: ExternalSecret
-    metadata:
-      name: account-operator-sa-kubeconfig
-      namespace: NAMESPACE
-    spec:
-      data:
-        - remoteRef:
-            conversionStrategy: Default
-            key: null
-            property: kubeconfig
-          secretKey: kubeconfig
-      refreshInterval: 10m
-      secretStoreRef:
-        kind: SecretStore
-        name: environment-store
-      target:
-        creationPolicy: Owner
-        deletionPolicy: Retain
-        name: account-operator-sa-kubeconfig
-  2: |
-    apiVersion: networking.istio.io/v1
-    kind: Gateway
-    metadata:
-      name: gateway
-      namespace: NAMESPACE
-    spec:
-      selector:
-        istio: gateway
-      servers:
-        - hosts:
-            - '*'
-          port:
-            name: http
-            number: 8080
-            protocol: HTTP
 matches the snapshot:
   1: |
-    apiVersion: external-secrets.io/v1beta1
-    kind: ExternalSecret
+    apiVersion: core.openmfp.io/v1alpha1
+    kind: Store
     metadata:
-      name: account-operator-sa-kubeconfig
-      namespace: NAMESPACE
+      name: test
+      namespace: test
     spec:
-      data:
-        - remoteRef:
-            conversionStrategy: Default
-            key: account-operator-sa-kubeconfig
-            property: kubeconfig
-          secretKey: kubeconfig
-      refreshInterval: 10m
-      secretStoreRef:
-        kind: SecretStore
-        name: environment-store
-      target:
-        creationPolicy: Owner
-        deletionPolicy: Retain
-        name: account-operator-sa-kubeconfig
+      coreModule: |2-
+        module core
+
+        type user
+
+        type account
+          relations
+            define owner: [user]
+            define member: [user] or owner
   2: |
     apiVersion: networking.istio.io/v1
     kind: Gateway
@@ -74,3 +31,18 @@ matches the snapshot:
             name: http
             number: 8080
             protocol: HTTP
+  3: |
+    apiVersion: networking.istio.io/v1
+    kind: ServiceEntry
+    metadata:
+      name: openmfp-https
+      namespace: NAMESPACE
+    spec:
+      hosts:
+        - example.com
+      location: MESH_EXTERNAL
+      ports:
+        - name: https
+          number: 443
+          protocol: TLS
+      resolution: DNS

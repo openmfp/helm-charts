@@ -1,8 +1,8 @@
 # infra
 
-OpenMFP network infrastructure
+The infra openmfp chart configures a number of common infrastructure components for the OpenMFP platform.
 
-![Version: 0.57.7](https://img.shields.io/badge/Version-0.57.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Version: 0.59.0](https://img.shields.io/badge/Version-0.59.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
 ## Additional Information
 
@@ -12,9 +12,23 @@ The `common` chart is a library of common resources that are shared across all o
 
 | Repository | Name | Version |
 |------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | common | 0.1.7 |
+| oci://ghcr.io/openmfp/helm-charts | common | 0.1.8 |
 
 ## Values
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| fga.enabled | bool | `true` | An experimental toggle to enable the FGA integration |
+| fga.stores | list | `[]` | The list of FGA stores to be created |
+| istio.gateway.annotations | object | `{}` | Annotations to be applied to the istio gateway |
+| istio.gateway.apiVersion | string | `nil` | The istio apiVersion of the gateway resource eg, networking.istio.io/v1, networking.istio.io/v1beta1 |
+| istio.gateway.name | string | `"gateway"` | The name of the istio gateway resource |
+| istio.gateway.selector.istio | string | `"gateway"` | The istio ingress gateway selector |
+| istio.gateway.servers | list | `[{"hosts":["*"],"port":{"name":"http","number":8080,"protocol":"HTTP"}}]` | The "servers" section of the istio gateway. By default it is configured for a local kind setup. Adjust to be a https port for productive deployments |
+| istio.networking.apiVersion | string | `"networking.istio.io/v1"` | The istio apiVersion used for networking resources in this chart eg. networking.istio.io/v1, networking.istio.io/v1beta1 |
+| istio.serviceEntries.https.enabled | bool | `false` | A toggle to enable the service entries for external https communication |
+| istio.serviceEntries.https.hosts | list | `[]` | The list of hosts to be added to the service entry |
+
+## Overriding Values
 
 The values in the `defaults:` section can be reused from other charts by using the lookup function "common.getKeyValue". It implements lookup on three levels:
 
@@ -32,22 +46,3 @@ Example
 3) .Values.deployment.resources.limits.memory =  1024MB
 4) .Values.common.defaults.deployment.resources.limits.memory = default 512MB
 ```
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| certificate.gardener.enabled | bool | `false` |  |
-| externalSecrets.accountOperatorSaKubeconfig | string | `"account-operator-sa-kubeconfig"` |  |
-| fga.enabled | bool | `true` |  |
-| fga.stores | list | `[]` |  |
-| gateway.annotations | object | `{}` |  |
-| gateway.apiVersion | string | `"networking.istio.io/v1"` |  |
-| gateway.name | string | `"gateway"` |  |
-| gateway.selector.istio | string | `"gateway"` |  |
-| gateway.servers[0].hosts[0] | string | `"*"` |  |
-| gateway.servers[0].port.name | string | `"http"` |  |
-| gateway.servers[0].port.number | int | `8080` |  |
-| gateway.servers[0].port.protocol | string | `"HTTP"` |  |
-| kcp.enabled | bool | `false` |  |
-| keycloak.enabled | bool | `false` |  |
-| keycloak.hosts[0] | string | `"login.microsoftonline.com"` |  |
-| rbac.clusterRole.enabled | bool | `false` |  |

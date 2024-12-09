@@ -6,4 +6,4 @@ version: 0.69.163
 dependencies:
   - name: common
     repository: oci://ghcr.io/openmfp/helm-charts
-    version: 0.1.7
+    version: 0.1.8

@@ -5,10 +5,5 @@ tests:
   - it: matches the snapshot
     asserts:
       - matchSnapshot: {}
-  - it: disables externalsecrets
-    set:
-      externalSecrets:
-        accountOperatorSaKubeconfig: null
-    asserts:
-      - matchSnapshot: {}
+
 
