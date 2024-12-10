@@ -13,4 +13,6 @@ spec:
     global:
       imagePullSecrets: 
         - "ghcr-credentials"
+    crossplane:
+      enabled: true
     debug: true
