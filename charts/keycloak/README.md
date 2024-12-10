@@ -2,7 +2,7 @@
 
 A Helm chart for Kubernetes
 
-![Version: 0.59.28](https://img.shields.io/badge/Version-0.59.28-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Version: 0.59.29](https://img.shields.io/badge/Version-0.59.29-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
 ## Additional Information
 
@@ -92,5 +92,6 @@ Example
 | keycloakConfig.redirectUrls | list | `[]` | redirect urls |
 | keycloakConfig.url | string | `"http://keycloak-http.openmfp-system.svc.cluster.local:8080"` | url of the keycloak server |
 | keycloakConfig.userRegistration.enabled | bool | `true` | toggle to enable/disable user registration |
-| service | object | `{"name":"keycloak"}` | service configuration |
+| service | object | `{"name":"keycloak","port":8080}` | service configuration |
 | service.name | string | `"keycloak"` | service name |
+| service.port | int | `8080` | service port |

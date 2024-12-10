@@ -14,7 +14,7 @@ matches the snapshot:
             - destination:
                 host: keycloak.openmfp-system.svc.cluster.local
                 port:
-                  number: null
+                  number: 8080
 matches the snapshot (with path prefix):
   1: |
     apiVersion: networking.istio.io/v1beta1
@@ -34,4 +34,4 @@ matches the snapshot (with path prefix):
             - destination:
                 host: keycloak.openmfp-system.svc.cluster.local
                 port:
-                  number: null
+                  number: 8080
