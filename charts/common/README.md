@@ -2,31 +2,8 @@
 
 A Helm chart for Kubernetes
 
-![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
-
-## Additional Information
-
-The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and default values that can be used by other charts.
-
+![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
 ## Values
-
-The values in the `defaults:` section can be reused from other charts by using the lookup function "common.getKeyValue". It implements lookup on three levels:
-
-1. Looks for `keyOverride` in the chart's values.yaml
-2. Looks for `global.key` in the chart's or parent chart's values.yaml
-3. Uses the `key` in the chart's values.yaml
-4. Uses the `common.defaults.key` value from the table below.
-
-1 has precendence over 2 over 3 over 4 respectively. This approach allows for individual charts to have minimal configuration, while still being able to override parameters locally.
-
-Example
-```
-1) .Values.deployment.resources.limits.memoryOveride =  4096MB
-2) .Values.global.deployment.resources.limits.memory =  2048MB
-3) .Values.deployment.resources.limits.memory =  1024MB
-4) .Values.common.defaults.deployment.resources.limits.memory = default 512MB
-```
-
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | defaults.certManager.enabled | bool | `false` | toggle to enable/disable cert-manager |
@@ -52,3 +29,22 @@ Example
 | defaults.securityContext.fsGroup | int | `2000` | fsGroup id to run the container |
 | defaults.securityContext.runAsGroup | int | `3000` | group id to run the container |
 | defaults.securityContext.runAsUser | int | `1000` | user id to run the container |
+
+## Overriding Values
+
+The values in the `defaults:` section can be reused from other charts by using the lookup function "common.getKeyValue". It implements lookup on three levels:
+
+1. Looks for `keyOverride` in the chart's values.yaml
+2. Looks for `global.key` in the chart's or parent chart's values.yaml
+3. Uses the `key` in the chart's values.yaml
+4. Uses the `common.defaults.key` value from the table below.
+
+1 has precendence over 2 over 3 over 4 respectively. This approach allows for individual charts to have minimal configuration, while still being able to override parameters locally.
+
+Example
+```
+1) .Values.deployment.resources.limits.memoryOveride =  4096MB
+2) .Values.global.deployment.resources.limits.memory =  2048MB
+3) .Values.deployment.resources.limits.memory =  1024MB
+4) .Values.common.defaults.deployment.resources.limits.memory = default 512MB
+```
