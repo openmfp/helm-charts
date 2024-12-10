@@ -13,14 +13,41 @@ spec:
     global:
       imagePullSecrets: 
         - "ghcr-credentials"
-    crossplane:
-      enabled: true
-    debug: true
+      externalSecrets:
+        enabled: false
     istio:
       enabled: true
       virtualservice:
-        hosts: ["auth.localhost"]
-    service:
-      port: 8080
+        hosts: ["*"]
+      https:
+        enabled: false
+    crossplane:
+      enabled: true
+      realm:
+        registrationAllowed: true
+
+    keycloak:
+      httpRelativePath: "/keycloak/"
+      logging:
+        level: DEBUG
+      auth:
+        adminUser: keycloak-admin
+        existingSecret: keycloak-admin
+        passwordSecretKey: secret
+      resourcesPreset: none
+      postgresql:
+        nameOverride: postgresql-keycloak
+        auth:
+          username: keycloak
+          existingSecret: ""
+        primary:
+          resourcesPreset: none
+
     keycloakConfig:
-      url: http://keycloak-headless.openmfp-system.svc.cluster.local:8080
+      url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
+      redirectUrls: ["http://localhost:8000/callback*"]
+    domain:
+      pathPrefix: "/keycloak"
+    service:
+      port: 80
+      name: openmfp-keycloak
