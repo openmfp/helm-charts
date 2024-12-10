@@ -21,7 +21,7 @@ spec:
         enabled: true
     components:
       example-content:
-        enabled: true
+        enabled: false
       portal:
         enabled: true
     portal:
@@ -36,9 +36,9 @@ spec:
       trust:
         openmfp:
           baseDomains: "localhost"
-          discoveryEndpoint: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/master/.well-known/openid-configuration
-          authDomain: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/auth
-          tokenUrl: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/token
+          discoveryEndpoint: http://auth.localhost:8000/realms/master/.well-known/openid-configuration
+          authDomain: http://auth.localhost:8000/realms/openmfp/protocol/openid-connect/auth
+          tokenUrl: http://auth.localhost:8000/realms/openmfp/protocol/openid-connect/token
           oidcClientSecretName: openmfp-client
           loginAudience: openmfp
           secretKeyRef: attribute.client_secret
