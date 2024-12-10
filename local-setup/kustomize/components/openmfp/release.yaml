@@ -1,0 +1,44 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: openmfp
+  namespace: openmfp-system
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: openmfp
+  releaseName: openmfp
+  dependsOn:
+    - name: openmfp-crds
+      namespace: openmfp-system
+    - name: infra
+      namespace: openmfp-system
+  values:
+    global:
+      imagePullSecret: ghcr-credentials
+      istio:
+        enabled: true
+    components:
+      example-content:
+        enabled: true
+      portal:
+        enabled: true
+    portal:
+      virtualService:
+        hosts:
+          - "*"
+      validWebcomponentUrls: ".?"
+      environment: local
+      featureToggles: "enableSessionAutoRefresh=true"
+      developmentLandcsape: "true"
+      frontendPort: 8000
+      trust:
+        openmfp:
+          baseDomains: "localhost"
+          discoveryEndpoint: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/master/.well-known/openid-configuration
+          authDomain: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/auth
+          tokenUrl: https://auth.d1.openmfp.dxp.k8s.ondemand.com/realms/openmfp/protocol/openid-connect/token
+          oidcClientSecretName: openmfp-client
+          loginAudience: openmfp
+          secretKeyRef: attribute.client_secret
