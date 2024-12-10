@@ -4,16 +4,11 @@ The infra openmfp chart configures a number of common infrastructure components 
 
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
-## Additional Information
-
-The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and default values that can be used by other charts.
-
 ## Requirements
 
-| Repository | Name | Sources |
-|------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | common | [source](https://github.com/openmfp/helm-charts/tree/main/charts/common)|
-
+| Repository | Name | Description | Sources |
+|------------|------|-------------|---------|
+| `oci://ghcr.io/openmfp/helm-charts` | `common` | The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and [default values](https://github.com/openmfp/helm-charts/blob/main/charts/common/values.yaml) that can be used by other charts. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/common)|
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
