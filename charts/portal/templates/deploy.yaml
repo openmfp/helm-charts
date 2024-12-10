@@ -36,7 +36,7 @@ spec:
             secretKeyRef:
               name: portal-client-secret-{{ $idp.secretKey | default $key }}
               key: {{ $idp.secretKeyRef | default "secret" }}
-      {{ if $idp.discoveryEndpoint }}
+      {{ if not (eq $idp.discoveryEndpoint "") }}
         - name: DISCOVERY_ENDPOINT_{{ $key | upper | replace "-" "_" }}
           value: {{ $idp.discoveryEndpoint }}
       {{- else }}
