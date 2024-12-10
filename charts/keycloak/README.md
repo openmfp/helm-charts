@@ -69,8 +69,9 @@ A Helm chart for Kubernetes
 | keycloakConfig.redirectUrls | list | `[]` | redirect urls |
 | keycloakConfig.url | string | `"http://keycloak-http.openmfp-system.svc.cluster.local:8080"` | url of the keycloak server |
 | keycloakConfig.userRegistration.enabled | bool | `true` | toggle to enable/disable user registration |
-| service | object | `{"name":"keycloak"}` | service configuration |
+| service | object | `{"name":"keycloak","port":8080}` | service configuration |
 | service.name | string | `"keycloak"` | service name |
+| service.port | int | `8080` | service port |
 
 ## Overriding Values
 

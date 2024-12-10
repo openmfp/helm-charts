@@ -124,6 +124,8 @@ keycloakConfig:
 service:
   # -- service name
   name: keycloak
+  # -- service port
+  port: 8080
 
 # -- domain configuration
 domain:
