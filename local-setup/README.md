@@ -36,6 +36,12 @@ The `scripts/start.sh` contains all steps needed to bootstrap the local environm
 - Create kind cluster called `openmfp`
 - install flux
 - prepare secrets
+
+```sh
+## [Secrets]: configure the following environment variables:
+export KEYCLOAK_SECRET='' # client secret for the 'openmfp' keycloak client
+export GH_TOKEN='' # token used to pull the openmfp docker images
+```
 - apply flux deployment configuration
 
 To start the boostrapping and local installation invoke
