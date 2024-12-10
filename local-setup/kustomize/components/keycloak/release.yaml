@@ -1,0 +1,26 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: openmfp-system
+spec:
+  interval: 5m
+  chartRef:
+    kind: OCIRepository
+    name: keycloak
+  releaseName: keycloak
+  values:
+    global:
+      imagePullSecrets: 
+        - "ghcr-credentials"
+    crossplane:
+      enabled: true
+    debug: true
+    istio:
+      enabled: true
+      virtualservice:
+        hosts: ["auth.localhost"]
+    service:
+      port: 8080
+    keycloakConfig:
+      url: http://keycloak-headless.openmfp-system.svc.cluster.local:8080
