@@ -2,7 +2,7 @@
 
 Helm Chart for the openmfp Portal
 
-![Version: 0.69.165](https://img.shields.io/badge/Version-0.69.165-informational?style=flat-square) ![AppVersion: 0.237.0](https://img.shields.io/badge/AppVersion-0.237.0-informational?style=flat-square)
+![Version: 0.69.166](https://img.shields.io/badge/Version-0.69.166-informational?style=flat-square) ![AppVersion: 0.237.0](https://img.shields.io/badge/AppVersion-0.237.0-informational?style=flat-square)
 
 ## Additional Information
 
@@ -35,9 +35,20 @@ Example
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| developmentLandcsape | string | `"true"` | development landscape toggle |
+| environment | string | `"local"` | environment |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
-| http.protocol | string | `"https"` |  |
+| frontendPort | int | `8000` | frontend port |
+| http.protocol | string | `"https"` | protocol |
 | image.name | string | `"ghcr.io/openmfp/portal"` |  |
 | image.pullPolicyOverride | string | `"IfNotPresent"` |  |
-| importContent | bool | `true` |  |
+| importContent | bool | `true` | import content toggle |
+| trust.openmfp.authDomain | string | `"https://auth.provider.external/realms/openmfp/protocol/openid-connect/auth"` | auth domain (if discoveryEndpoint is not specified) |
+| trust.openmfp.baseDomains | string | `"localhost"` | base domains |
+| trust.openmfp.discoveryEndpoint | string | `"https://auth.provider.external/realms/master/.well-known/openid-configuration"` | discovery endpoint (if specified, authDomain and tokenUrl are not required) |
+| trust.openmfp.loginAudience | string | `"openmfp"` | login audience |
+| trust.openmfp.oidcClientSecretName | string | `"openmfp-client"` | oidc client secret name |
+| trust.openmfp.secretKeyRef | string | `"attribute.client_secret"` | secret key reference |
+| trust.openmfp.tokenUrl | string | `"https://auth.provider.external/realms/openmfp/protocol/openid-connect/token"` | token url (if discoveryEndpoint is not specified) |
 | validWebcomponentUrls | string | `".?"` |  |
+| virtualService.hosts | list | `["*"]` | virtual service hosts |
