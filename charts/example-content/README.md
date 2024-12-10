@@ -2,19 +2,20 @@
 
 Helm Chart for the openmfp Portal
 
-![Version: 0.110.15](https://img.shields.io/badge/Version-0.110.15-informational?style=flat-square) ![AppVersion: 0.126.0](https://img.shields.io/badge/AppVersion-0.126.0-informational?style=flat-square)
-
-## Additional Information
-
-The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and default values that can be used by other charts.
-
 ## Requirements
 
-| Repository | Name | Version |
-|------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | common | 0.1.8 |
-
+| Repository | Name | Description | Sources |
+|------------|------|-------------|---------|
+| `oci://ghcr.io/openmfp/helm-charts` | `common` | The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and [default values](https://github.com/openmfp/helm-charts/blob/main/charts/common/values.yaml) that can be used by other charts. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/common)|
 ## Values
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
+| istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
+| istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
+| istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"` |  |
+
+## Overriding Values
 
 The values in the `defaults:` section can be reused from other charts by using the lookup function "common.getKeyValue". It implements lookup on three levels:
 
@@ -32,10 +33,3 @@ Example
 3) .Values.deployment.resources.limits.memory =  1024MB
 4) .Values.common.defaults.deployment.resources.limits.memory = default 512MB
 ```
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
-| istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
-| istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
-| istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"` |  |

@@ -2,20 +2,22 @@
 
 The OpenMFP chart for Kubernetes
 
-![Version: 0.0.61](https://img.shields.io/badge/Version-0.0.61-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
-
-## Additional Information
-
-The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and default values that can be used by other charts.
+![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Requirements
 
-| Repository | Name | Version |
-|------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | example-content | 0.110.14 |
-| oci://ghcr.io/openmfp/helm-charts | portal | 0.69.165 |
+| Repository | Name | Description | Sources |
+|------------|------|-------------|---------|
+| `oci://ghcr.io/openmfp/helm-charts` | `portal` | The openmfp portal chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/portal)|
+| `oci://ghcr.io/openmfp/helm-charts` | `example-content` | The openmfp example-content chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/example-content)|
 
 ## Values
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| components.example-content.enabled | bool | `false` |  |
+| components.portal.enabled | bool | `true` |  |
+
+## Overriding Values
 
 The values in the `defaults:` section can be reused from other charts by using the lookup function "common.getKeyValue". It implements lookup on three levels:
 
@@ -33,8 +35,3 @@ Example
 3) .Values.deployment.resources.limits.memory =  1024MB
 4) .Values.common.defaults.deployment.resources.limits.memory = default 512MB
 ```
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| components.example-content.enabled | bool | `false` |  |
-| components.portal.enabled | bool | `true` |  |
