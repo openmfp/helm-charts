@@ -3,7 +3,7 @@ name: keycloak
 description: A Helm chart for Kubernetes
 
 type: application
-version: 0.59.29
+version: 0.59.31
 appVersion: "1.16.0"
 
 dependencies:
@@ -12,5 +12,5 @@ dependencies:
     version: 24.2.3
     repository: oci://registry-1.docker.io/bitnamicharts
   - name: common
-    version: 0.1.8
+    version: 0.1.9
     repository: oci://ghcr.io/openmfp/helm-charts
