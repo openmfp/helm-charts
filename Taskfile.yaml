@@ -22,7 +22,7 @@ tasks:
   lint:
     deps: []
     cmds:
-      - "ct lint --target-branch main --validate-maintainers=false --charts={{.CHARTS}}"
+      - "ct lint --target-branch main --validate-maintainers=false --helm-dependency-extra-args='--skip-refresh' --charts={{.CHARTS}}"
   helmtest:
     cmds:
       - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm unittest $chart; done"
