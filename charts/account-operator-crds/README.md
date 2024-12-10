@@ -2,13 +2,13 @@
 
 A Helm chart for Kubernetes
 
-![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
-
-## Additional Information
-
-The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and default values that can be used by other charts.
-
+![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 ## Values
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| kcp.enabled | bool | `false` | Enable KCP |
+
+## Overriding Values
 
 The values in the `defaults:` section can be reused from other charts by using the lookup function "common.getKeyValue". It implements lookup on three levels:
 
@@ -26,7 +26,15 @@ Example
 3) .Values.deployment.resources.limits.memory =  1024MB
 4) .Values.common.defaults.deployment.resources.limits.memory = default 512MB
 ```
+# account-operator-crds
+
+![Version: 0.1.8](https://img.shields.io/badge/Version-0.1.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+
+A Helm chart for Kubernetes
+
+## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | kcp.enabled | bool | `false` | Enable KCP |
+

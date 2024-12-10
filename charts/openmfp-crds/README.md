@@ -2,20 +2,22 @@
 
 A chart containing CRD Definitions for OpenMFP
 
-![Version: 0.0.8](https://img.shields.io/badge/Version-0.0.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.0.0](https://img.shields.io/badge/AppVersion-0.0.0-informational?style=flat-square)
-
-## Additional Information
-
-The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and default values that can be used by other charts.
+![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Requirements
 
-| Repository | Name | Version |
-|------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | account-operator-crds | 0.1.8 |
-| oci://ghcr.io/openmfp/helm-charts | extension-manager-operator-crds | 0.1.5 |
+| Repository | Name | Description | Sources |
+|------------|------|-------------|---------|
+| `oci://ghcr.io/openmfp/helm-charts` | `account-operator-crds` | The openmfp account-operator-crds chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/account-operator-crds)|
+| `oci://ghcr.io/openmfp/helm-charts` | `extension-manager-operator-crds` | The openmfp extension-manager-operator-crds chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/extension-manager-operator-crds)|
 
 ## Values
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| account-operator-crds.enabled | bool | `true` |  |
+| extension-manager-operator-crds.enabled | bool | `true` |  |
+
+## Overriding Values
 
 The values in the `defaults:` section can be reused from other charts by using the lookup function "common.getKeyValue". It implements lookup on three levels:
 
@@ -33,8 +35,3 @@ Example
 3) .Values.deployment.resources.limits.memory =  1024MB
 4) .Values.common.defaults.deployment.resources.limits.memory = default 512MB
 ```
-
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| account-operator-crds.enabled | bool | `true` |  |
-| extension-manager-operator-crds.enabled | bool | `true` |  |
