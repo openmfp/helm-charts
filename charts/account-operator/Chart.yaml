@@ -2,8 +2,8 @@ apiVersion: v2
 name: account-operator
 description: A Helm chart for Kubernetes
 type: application
-version: 0.5.8
-appVersion: "0.111.0"
+version: 0.5.9
+appVersion: "0.112.0"
 dependencies:
   - name: account-operator-crds
     version: 0.1.8
