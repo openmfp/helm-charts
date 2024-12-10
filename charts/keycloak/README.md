@@ -10,10 +10,10 @@ The `common` chart is a library of common resources that are shared across all o
 
 ## Requirements
 
-| Repository | Name | Version |
+| Repository | Name | Sources |
 |------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | common | 0.1.8 |
-| oci://registry-1.docker.io/bitnamicharts | keycloak(keycloak) | 24.2.3 |
+| oci://ghcr.io/openmfp/helm-charts | common | [source](https://github.com/openmfp/helm-charts/tree/main/charts/common)|
+| oci://ghcr.io/openmfp/helm-charts | keycloak | [source](https://github.com/bitnami/charts/tree/main/bitnami/keycloak) |
 
 ## Values
 
