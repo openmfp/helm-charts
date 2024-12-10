@@ -45,7 +45,6 @@ Example
 | importContent | bool | `true` | import content toggle |
 | trust.openmfp.authDomain | string | `"https://auth.provider.external/realms/openmfp/protocol/openid-connect/auth"` | auth domain (if discoveryEndpoint is not specified) |
 | trust.openmfp.baseDomains | string | `"localhost"` | base domains |
-| trust.openmfp.discoveryEndpoint | string | `"https://auth.provider.external/realms/master/.well-known/openid-configuration"` | discovery endpoint (if specified, authDomain and tokenUrl are not required) |
 | trust.openmfp.loginAudience | string | `"openmfp"` | login audience |
 | trust.openmfp.oidcClientSecretName | string | `"openmfp-client"` | oidc client secret name |
 | trust.openmfp.secretKeyRef | string | `"attribute.client_secret"` | secret key reference |
