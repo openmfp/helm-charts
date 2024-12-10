@@ -1,21 +1,5 @@
-# openmfp
-
-The OpenMFP chart for Kubernetes
-
-![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
-
-## Requirements
-
-| Repository | Name | Description | Sources |
-|------------|------|-------------|---------|
-| `oci://ghcr.io/openmfp/helm-charts` | `portal` | The openmfp portal chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/portal)|
-| `oci://ghcr.io/openmfp/helm-charts` | `example-content` | The openmfp example-content chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/example-content)|
-
-## Values
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| components.example-content.enabled | bool | `false` |  |
-| components.portal.enabled | bool | `true` |  |
+{{ template "chart.valuesHeader" . }}
+{{ template "chart.valuesTable" . }}
 
 ## Overriding Values
 
