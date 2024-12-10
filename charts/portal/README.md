@@ -2,7 +2,7 @@
 
 Helm Chart for the openmfp Portal
 
-![Version: 0.69.166](https://img.shields.io/badge/Version-0.69.166-informational?style=flat-square) ![AppVersion: 0.237.0](https://img.shields.io/badge/AppVersion-0.237.0-informational?style=flat-square)
+![Version: 0.69.167](https://img.shields.io/badge/Version-0.69.167-informational?style=flat-square) ![AppVersion: 0.237.0](https://img.shields.io/badge/AppVersion-0.237.0-informational?style=flat-square)
 
 ## Additional Information
 
@@ -45,6 +45,7 @@ Example
 | importContent | bool | `true` | import content toggle |
 | trust.openmfp.authDomain | string | `"https://auth.provider.external/realms/openmfp/protocol/openid-connect/auth"` | auth domain (if discoveryEndpoint is not specified) |
 | trust.openmfp.baseDomains | string | `"localhost"` | base domains |
+| trust.openmfp.discoveryEndpoint | string | `"https://auth.provider.external/realms/master/.well-known/openid-configuration"` | discovery endpoint. If specified (different than ""), authDomain and tokenUrl are not required |
 | trust.openmfp.loginAudience | string | `"openmfp"` | login audience |
 | trust.openmfp.oidcClientSecretName | string | `"openmfp-client"` | oidc client secret name |
 | trust.openmfp.secretKeyRef | string | `"attribute.client_secret"` | secret key reference |
