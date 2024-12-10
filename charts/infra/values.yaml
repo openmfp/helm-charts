@@ -28,7 +28,5 @@ istio:
       hosts: []
 
 fga:
-  # -- An experimental toggle to enable the FGA integration
-  enabled: true
   # -- The list of FGA stores to be created
   stores: []

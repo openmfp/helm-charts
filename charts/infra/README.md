@@ -2,7 +2,7 @@
 
 The infra openmfp chart configures a number of common infrastructure components for the OpenMFP platform.
 
-![Version: 0.59.0](https://img.shields.io/badge/Version-0.59.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 ## Additional Information
 
@@ -10,14 +10,13 @@ The `common` chart is a library of common resources that are shared across all o
 
 ## Requirements
 
-| Repository | Name | Version |
+| Repository | Name | Sources |
 |------------|------|---------|
-| oci://ghcr.io/openmfp/helm-charts | common | 0.1.8 |
+| oci://ghcr.io/openmfp/helm-charts | common | [source](https://github.com/openmfp/helm-charts/tree/main/charts/common)|
 
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| fga.enabled | bool | `true` | An experimental toggle to enable the FGA integration |
 | fga.stores | list | `[]` | The list of FGA stores to be created |
 | istio.gateway.annotations | object | `{}` | Annotations to be applied to the istio gateway |
 | istio.gateway.apiVersion | string | `nil` | The istio apiVersion of the gateway resource eg, networking.istio.io/v1, networking.istio.io/v1beta1 |
