@@ -49,3 +49,21 @@ spec:
           oidcClientSecretName: openmfp-client
           loginAudience: openmfp
           secretKeyRef: attribute.client_secret
+    infra:
+      crossplane:
+        enabled: true
+      istio:
+        enabled: true
+        gateway:
+          annotations: {}
+          apiVersion: networking.istio.io/v1
+          name: gateway
+          selector:
+            istio: gateway
+          servers:
+            - port:
+                number: 8000
+                name: http
+                protocol: HTTP
+              hosts:
+                - "*"
