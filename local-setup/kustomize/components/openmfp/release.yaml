@@ -25,20 +25,27 @@ spec:
       portal:
         enabled: true
     portal:
+      baseDomains:
+        - "localhost"
+      cookieDomain: "localhost"
+      http:
+        protocol: http
       virtualService:
         hosts:
           - "*"
+      crdGatewayApiUrl: "http://localhost:8000/example-gateway/graphql"
       validWebcomponentUrls: ".?"
       environment: local
       featureToggles: "enableSessionAutoRefresh=true"
       developmentLandcsape: "true"
       frontendPort: 8000
+      importContent: false
       trust:
         openmfp:
           baseDomains: "localhost"
-          discoveryEndpoint: http://auth.localhost:8000/realms/master/.well-known/openid-configuration
-          authDomain: http://auth.localhost:8000/realms/openmfp/protocol/openid-connect/auth
-          tokenUrl: http://auth.localhost:8000/realms/openmfp/protocol/openid-connect/token
+          discoveryEndpoint: ""
+          authDomain: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
+          tokenUrl: http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
           oidcClientSecretName: openmfp-client
           loginAudience: openmfp
           secretKeyRef: attribute.client_secret
