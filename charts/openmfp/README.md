@@ -10,6 +10,7 @@ The OpenMFP chart for Kubernetes
 |------------|------|-------------|---------|
 | `oci://ghcr.io/openmfp/helm-charts` | `portal` | The openmfp portal chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/portal)|
 | `oci://ghcr.io/openmfp/helm-charts` | `example-content` | The openmfp example-content chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/example-content)|
+| `oci://ghcr.io/openmfp/helm-charts` | `infra` | The openmfp infra chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/infra)|
 
 ## Values
 | Key | Type | Default | Description |
