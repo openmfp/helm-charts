@@ -45,7 +45,7 @@ spec:
           baseDomains: "localhost"
           discoveryEndpoint: ""
           authDomain: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
-          tokenUrl: http://openmfp-keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
+          tokenUrl: http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
           oidcClientSecretName: openmfp-client
           loginAudience: openmfp
           secretKeyRef: attribute.client_secret

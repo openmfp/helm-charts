@@ -25,6 +25,8 @@ spec:
       enabled: true
       realm:
         registrationAllowed: true
+        name: openmfp
+        displayName: OpenMFP
 
     keycloak:
       httpRelativePath: "/keycloak/"
@@ -44,10 +46,10 @@ spec:
           resourcesPreset: none
 
     keycloakConfig:
-      url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
+      url: http://keycloak.openmfp-system.svc.cluster.local/keycloak
       redirectUrls: ["http://localhost:8000/callback*"]
     domain:
       pathPrefix: "/keycloak"
     service:
       port: 80
-      name: openmfp-keycloak
+      name: keycloak
