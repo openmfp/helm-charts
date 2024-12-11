@@ -28,7 +28,6 @@ tasks:
       - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm unittest $chart; done"
   test:
     deps:
-      - task: update
       - task: helmtest
   update-changed:
     deps:
