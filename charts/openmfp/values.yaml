@@ -3,3 +3,5 @@ components:
     enabled: false
   portal:
     enabled: true
+  infra:
+    enabled: true
