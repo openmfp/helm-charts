@@ -79,7 +79,7 @@ kubectl wait --namespace openmfp-system \
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
-  --timeout=120s openmfp
+  --timeout=480s openmfp
 
 echo "You can access http://localhost:8000 to access the portal"
 
