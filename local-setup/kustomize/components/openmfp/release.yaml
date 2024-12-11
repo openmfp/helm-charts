@@ -12,8 +12,6 @@ spec:
   dependsOn:
     - name: openmfp-crds
       namespace: openmfp-system
-    - name: infra
-      namespace: openmfp-system
   values:
     global:
       imagePullSecret: ghcr-credentials
@@ -23,6 +21,8 @@ spec:
       example-content:
         enabled: false
       portal:
+        enabled: true
+      infra:
         enabled: true
     portal:
       baseDomains:
