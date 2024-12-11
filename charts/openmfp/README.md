@@ -15,6 +15,7 @@ The OpenMFP chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | components.example-content.enabled | bool | `false` |  |
+| components.infra.enabled | bool | `true` |  |
 | components.portal.enabled | bool | `true` |  |
 
 ## Overriding Values
