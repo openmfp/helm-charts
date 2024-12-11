@@ -17,13 +17,26 @@ spec:
       imagePullSecret: ghcr-credentials
       istio:
         enabled: true
+        gateway:
+          name: gateway
     components:
       example-content:
-        enabled: false
+        enabled: true
       portal:
         enabled: true
       infra:
         enabled: true
+    example-content:
+      istio:
+        virtualService:
+          hosts:
+            - content.localhost
+          matchers:
+            - match:
+                - uri:
+                    exact: /ui/example-content
+                - uri:
+                    prefix: /ui/example-content/
     portal:
       baseDomains:
         - "localhost"

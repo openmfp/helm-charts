@@ -1,9 +1,12 @@
 components:
   example-content:
+    # -- enable example-content component
     enabled: false
   portal:
+    # -- enable portal component
     enabled: true
   infra:
+    # -- enable infra component
     enabled: true
   extension-manager-operator:
     enabled: true
