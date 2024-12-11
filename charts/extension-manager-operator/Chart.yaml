@@ -2,8 +2,8 @@ apiVersion: v2
 name: extension-manager-operator
 description: A Helm chart for extension-manager-operator
 type: application
-version: 0.22.47
-appVersion: "0.77.0"
+version: 0.22.48
+appVersion: "0.78.0"
 dependencies:
   - name: extension-manager-operator-crds
     version: 0.1.6
