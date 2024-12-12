@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   gateways:
-    - {{ .Release.Namespace }}/{{ include "common.getKeyValue" (dict "Values" .Values "istio.gateway.name") }}
+    - {{ .Release.Namespace }}/{{ include "common.getKeyValue" (dict "Values" .Values "keys" "istio.gateway.name") }}
   hosts:
     {{- .Values.istio.virtualService.hosts | toYaml | nindent 2}}
   http:
