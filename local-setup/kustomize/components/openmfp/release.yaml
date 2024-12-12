@@ -26,11 +26,13 @@ spec:
         enabled: true
       infra:
         enabled: true
+      extension-manager-operator:
+        enabled: true
     example-content:
       istio:
         virtualService:
           hosts:
-            - content.localhost
+            - localhost
           matchers:
             - match:
                 - uri:

@@ -1,0 +1,735 @@
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: providers
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: |-
+      {
+        "name": "overview",
+        "creationTimestamp": "2022-05-17T11:37:17Z",
+        "luigiConfigFragment": {
+          "data": {
+            "nodes": [
+              {
+                "pathSegment": "marketplace",
+                "label": "Marketplace",
+                "entityType": "main",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "keepSelectedForChildren": true,
+                "url": "http://localhost:8000/ui/example-content/index.html#/global-catalog",
+                "children": [
+                  {
+                    "pathSegment": ":id",
+                    "url": "http://localhost:8000/ui/example-content/index.html#/catalog-item/:id",
+                    "hideFromNav": true,
+                    "label": "Service Details"
+                  }
+                ]
+              },
+              {
+                "pathSegment": "capabilities",
+                "label": "Marketplace",
+                "entityType": "main.account",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "keepSelectedForChildren": true,
+                "url": "http://localhost:8000/ui/example-content/index.html#/global-catalog",
+                "children": [
+                  {
+                    "pathSegment": ":id",
+                    "url": "http://localhost:8000/ui/example-content/index.html#/catalog-item/:id",
+                    "hideFromNav": true,
+                    "label": "Service Details"
+                  }
+                ]
+              },
+              {
+                "entityType": "main.overview::compound",
+                "url": "http://localhost:8000/ui/wc/main.js#root-overview",
+                "context": {
+                  "title": "Resource Overview"
+                },
+                "layoutConfig": {
+                  "row": "2",
+                  "column": "1 / -1"
+                },
+                "webcomponent": {
+                  "selfRegistered": true
+                }
+              },
+              {
+                "entityType": "main.account.dashboard::compound",
+                "url": "http://localhost:8000/ui/wc/main.js#account-overview",
+                "context": {
+                  "title": "Resource Overview"
+                },
+                "layoutConfig": {
+                  "row": "2",
+                  "column": "1 / -1"
+                },
+                "webcomponent": {
+                  "selfRegistered": true
+                }
+              }
+            ]
+          }
+        }
+      }
+    contentType: json
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: home
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: |-
+      {
+        "name": "overview",
+        "creationTimestamp": "2022-05-17T11:37:17Z",
+        "luigiConfigFragment": {
+          "data": {
+            "nodes": [
+              {
+                "entityType": "global",
+                "pathSegment": "home",
+                "hideFromNav": true,
+                "defineEntity": {
+                  "id": "main"
+                },
+                "children": [
+                  {
+                    "pathSegment": "overview",
+                    "label": "Overview",
+                    "icon": "home",
+                    "defineEntity": {
+                      "id": "overview"
+                    },
+                    "compound": {
+                      "renderer": {
+                        "use": "grid",
+                        "config": {
+                          "columns": "1fr 1fr 1fr 1fr"
+                        }
+                      }
+                    }
+                  }
+                ]
+              },
+              {
+                "entityType": "main.overview::compound",
+                "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
+                "context": {
+                  "border": "shadow",
+                  "title": "Welcome to ApeirORA Portal",
+                  "description": " "
+                },
+                "layoutConfig": {
+                  "row": "1",
+                  "column": "1 / -1"
+                }
+              },
+              {
+                "entityType": "main.account",
+                "pathSegment": "dashboard",
+                "label": "Dashboard",
+                "defineEntity": {
+                  "id": "dashboard"
+                },
+                "compound": {
+                  "renderer": {
+                    "use": "grid",
+                    "config": {
+                      "columns": "1fr 1fr 1fr 1fr"
+                    }
+                  }
+                }
+              },
+              {
+                "entityType": "main.account.dashboard::compound",
+                "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
+                "context": {
+                  "border": "shadow",
+                  "title": "Account Level Dashboard",
+                  "description": "Comprehensive account overview dashboard for an account running inside an ApeiroRA instance"
+                },
+                "layoutConfig": {
+                  "row": "1",
+                  "column": "1 / -1"
+                }
+              }
+            ]
+          }
+        }
+      }
+    contentType: json
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: kafka-streams-test-account
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: '{"name":"kafka-streams-test-account","creationTimestamp":"2022-05-17T11:37:17Z","luigiConfigFragment":[{"data":{"nodes":[{"pathSegment":"kafka-streams-test-account","label":"kafka-streams-test-account","entityType":"main.account","loadingIndicator":{"enabled":false},"category":{"label":"Kafka
+      Streams","icon":"dimension","collapsible":true},"url":"http://localhost:8000/ui/example-content/index.html#/openmcp/control-planes","context":{"title":"Kafka
+      Streams"}},{"pathSegment":"kafka-streams-test-account/child/0","label":"Child
+      kafka-streams-test-account 0","category":"Kafka Streams","entityType":"main.account","loadingIndicator":{"enabled":false},"viewUrl":"http://localhost:8000/ui/example-content/index.html#/openmcp","context":{"title":"Kafka
+      Streams"}},{"pathSegment":"kafka-streams-test-account/child/1","label":"Child
+      kafka-streams-test-account 1","category":"Kafka Streams","entityType":"main.account","loadingIndicator":{"enabled":false},"viewUrl":"http://localhost:8000/ui/example-content/index.html#/openmcp","context":{"title":"Kafka
+      Streams"}},{"entityType":"main.account.dashboard::compound","url":"https://luigiwebcomponents.gitlab.io/ms-adaptive-cards/main.js","context":{"title":"Activated
+      Services from Marketplace","style":"padding: 1rem","disableBorder":true,"card":{"$schema":"http://adaptivecards.io/schemas/adaptive-card.json","type":"AdaptiveCard","version":"1.0","speak":"<s>The
+      forecast for Seattle January 20 is mostly clear with a High of 51 degrees and
+      Low of 40 degrees</s>","body":[{"type":"TextBlock","text":"Kafka Streams","size":"large","isSubtle":true,"wrap":true},{"type":"TextBlock","text":"Mon,
+      Nov 4, 2019 6:21 PM","spacing":"none","wrap":true},{"type":"ColumnSet","columns":[{"type":"Column","width":"auto","items":[{"type":"Image","url":"https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png","size":"small","altText":"Mostly
+      cloudy weather"}]},{"type":"Column","width":"auto","items":[{"type":"TextBlock","text":"47","size":"extraLarge","spacing":"none","wrap":true}]},{"type":"Column","width":"stretch","items":[{"type":"TextBlock","text":"Hi
+      93","horizontalAlignment":"left","wrap":true},{"type":"TextBlock","text":"Lo
+      46","horizontalAlignment":"left","spacing":"none","wrap":true}]}]}]}},"layoutConfig":{"column":"auto","row":"auto"}}]}}]}'
+    contentType: json
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: infra
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: |-
+      {
+        "name": "overview",
+        "creationTimestamp": "2022-05-17T11:37:17Z",
+        "luigiConfigFragment": {
+          "data": {
+            "nodes": [
+              {
+                "pathSegment": "ironcore",
+                "label": "Compute",
+                "entityType": "main.account",
+                "category": {
+                  "label": "Infrastructure",
+                  "icon": "https://avatars.githubusercontent.com/u/147836484?s=200&v=4",
+                  "collapsible": false
+                },
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "keepSelectedForChildren": true,
+                "url": "http://localhost:8000/ui/example-content/index.html#/iron-core/compute",
+                "children": [],
+                "context": {
+                  "title": "Iron Core Compute",
+                  "content": " "
+                }
+              },
+              {
+                "pathSegment": "network",
+                "label": "Network",
+                "entityType": "main.account",
+                "category": "Infrastructure",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "keepSelectedForChildren": true,
+                "url": "http://localhost:8000/ui/example-content/index.html#/iron-core/network",
+                "children": [],
+                "context": {
+                  "title": "Iron Core Network",
+                  "content": " "
+                }
+              },
+              {
+                "pathSegment": "openmcp",
+                "label": "Control Planes",
+                "entityType": "main.account",
+                "category": {
+                  "label": "Shared Services",
+                  "icon": "http://localhost:8000/ui/wc/assets/openmcp.png",
+                  "collapsible": false
+                },
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "keepSelectedForChildren": true,
+                "url": "http://localhost:8000/ui/example-content/index.html#/openmcp/control-planes",
+                "children": [],
+                "context": {
+                  "title": "OpenMCP",
+                  "content": " "
+                }
+              }
+            ]
+          }
+        }
+      }
+    contentType: json
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: gardener
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: |-
+      {
+        "name": "gardener",
+        "creationTimestamp": "2022-05-17T11:37:17Z",
+        "luigiConfigFragment": {
+          "data": {
+            "nodes": [
+              {
+                "entityType": "main.account",
+                "pathSegment": "gardener",
+                "label": "Projects",
+                "category": {
+                  "label": "Gardener",
+                  "icon": "https://d.ing.gardener-op.mfp-dev.shoot.canary.k8s-hana.ondemand.com/static/assets/logo.svg",
+                  "collapsible": false
+                },
+                "virtualTree": true,
+                "initialRoute": "namespace",
+                "url": "https://d.ing.gardener-op.mfp-dev.shoot.canary.k8s-hana.ondemand.com",
+                "icon": "https://d.ing.gardener-op.mfp-dev.shoot.canary.k8s-hana.ondemand.com/static/assets/logo.svg",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "requiredIFramePermissions": {
+                  "sandbox": [
+                    "allow-forms",
+                    "allow-modals",
+                    "allow-popups",
+                    "allow-popups-to-escape-sandbox",
+                    "allow-same-origin",
+                    "allow-scripts",
+                    "allow-download"
+                  ],
+                  "allow": [
+                    "clipboard-read",
+                    "clipboard-write"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    contentType: json
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: compute-engine-demo-root
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: '{"name":"compute-engine-demo-root","creationTimestamp":"2022-05-17T11:37:17Z","luigiConfigFragment":[{"data":{"nodes":[{"pathSegment":"compute-engine-demo-root","label":"compute-engine-demo-root","entityType":"main.account","loadingIndicator":{"enabled":false},"category":{"label":"Compute
+      Engine","icon":"dimension","collapsible":true},"url":"http://localhost:8000/ui/example-content/index.html#/openmcp/control-planes","context":{"title":"Compute
+      Engine"}},{"pathSegment":"compute-engine-demo-root/child/0","label":"Child compute-engine-demo-root
+      0","category":"Compute Engine","entityType":"main.account","loadingIndicator":{"enabled":false},"viewUrl":"http://localhost:8000/ui/example-content/index.html#/openmcp","context":{"title":"Compute
+      Engine"}},{"entityType":"main.account.dashboard::compound","url":"https://luigiwebcomponents.gitlab.io/ms-adaptive-cards/main.js","context":{"title":"Activated
+      Services from Marketplace","style":"padding: 1rem","disableBorder":true,"card":{"$schema":"http://adaptivecards.io/schemas/adaptive-card.json","type":"AdaptiveCard","version":"1.0","speak":"<s>The
+      forecast for Seattle January 20 is mostly clear with a High of 51 degrees and
+      Low of 40 degrees</s>","body":[{"type":"TextBlock","text":"Compute Engine","size":"large","isSubtle":true,"wrap":true},{"type":"TextBlock","text":"Mon,
+      Nov 4, 2019 6:21 PM","spacing":"none","wrap":true},{"type":"ColumnSet","columns":[{"type":"Column","width":"auto","items":[{"type":"Image","url":"https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png","size":"small","altText":"Mostly
+      cloudy weather"}]},{"type":"Column","width":"auto","items":[{"type":"TextBlock","text":"16","size":"extraLarge","spacing":"none","wrap":true}]},{"type":"Column","width":"stretch","items":[{"type":"TextBlock","text":"Hi
+      71","horizontalAlignment":"left","wrap":true},{"type":"TextBlock","text":"Lo
+      30","horizontalAlignment":"left","spacing":"none","wrap":true}]}]}]}},"layoutConfig":{"column":"auto","row":"auto"}}]}}]}'
+    contentType: json
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: compute-engine-demo
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: |2-
+
+      {
+        "name": "compute-engine-demo",
+        "creationTimestamp": "2022-05-17T11:37:17Z",
+        "luigiConfigFragment": {
+          "data": {
+            "nodes": [
+              {
+                "pathSegment": "compute-engine-demo",
+                "label": "compute-engine-demo",
+                "entityType": "main.account",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "category": {
+                  "label": "Compute\n      Engine",
+                  "icon": "dimension",
+                  "collapsible": true
+                },
+                "url": "http://localhost:8000/ui/example-content/index.html#/openmcp/control-planes",
+                "context": {
+                  "title": "Compute\n      Engine"
+                }
+              },
+              {
+                "pathSegment": "compute-engine-demo/child/0",
+                "label": "Child compute-engine-demo\n      0",
+                "category": "Compute Engine",
+                "entityType": "main.account",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "url": "http://localhost:8000/ui/example-content/index.html#/openmcp",
+                "context": {
+                  "title": "Compute\n      Engine"
+                }
+              },
+              {
+                "pathSegment": "compute-engine-demo/child/1",
+                "label": "Child compute-engine-demo\n      1",
+                "category": "Compute Engine",
+                "entityType": "main.account",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "url": "http://localhost:8000/ui/example-content/index.html#/openmcp",
+                "context": {
+                  "title": "Compute\n      Engine"
+                }
+              },
+              {
+                "entityType": "main.account.dashboard::compound",
+                "url": "https://luigiwebcomponents.gitlab.io/ms-adaptive-cards/main.js",
+                "context": {
+                  "title": "Activated\n      Services from Marketplace",
+                  "style": "padding: 1rem",
+                  "disableBorder": true,
+                  "card": {
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "type": "AdaptiveCard",
+                    "version": "1.0",
+                    "speak": "<s>The\n      forecast for Seattle January 20 is mostly clear with a High of 51 degrees and\n      Low of 40 degrees</s>",
+                    "body": [
+                      {
+                        "type": "TextBlock",
+                        "text": "Compute Engine",
+                        "size": "large",
+                        "isSubtle": true,
+                        "wrap": true
+                      },
+                      {
+                        "type": "TextBlock",
+                        "text": "Mon,\n      Nov 4, 2019 6:21 PM",
+                        "spacing": "none",
+                        "wrap": true
+                      },
+                      {
+                        "type": "ColumnSet",
+                        "columns": [
+                          {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                              {
+                                "type": "Image",
+                                "url": "https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png",
+                                "size": "small",
+                                "altText": "Mostly\n      cloudy weather"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                              {
+                                "type": "TextBlock",
+                                "text": "52",
+                                "size": "extraLarge",
+                                "spacing": "none",
+                                "wrap": true
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                              {
+                                "type": "TextBlock",
+                                "text": "Hi\n      84",
+                                "horizontalAlignment": "left",
+                                "wrap": true
+                              },
+                              {
+                                "type": "TextBlock",
+                                "text": "Lo\n      7",
+                                "horizontalAlignment": "left",
+                                "spacing": "none",
+                                "wrap": true
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "layoutConfig": {
+                  "column": "auto",
+                  "row": "auto"
+                }
+              }
+            ]
+          }
+        }
+      }
+    contentType: json
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: cloud-storage-test-account
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: |2-
+
+      {
+        "name": "cloud-storage-test-account",
+        "creationTimestamp": "2022-05-17T11:37:17Z",
+        "luigiConfigFragment": {
+          "data": {
+            "nodes": [
+              {
+                "pathSegment": "cloud-storage-test-account",
+                "label": "cloud-storage-test-account",
+                "entityType": "main.account",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "category": {
+                  "label": "Cloud\n      Storage",
+                  "icon": "dimension",
+                  "collapsible": true
+                },
+                "url": "http://localhost:8000/ui/example-content/index.html#/openmcp/control-planes",
+                "context": {
+                  "title": "Cloud\n      Storage"
+                }
+              },
+              {
+                "pathSegment": "cloud-storage-test-account/child/0",
+                "label": "Child\n      cloud-storage-test-account 0",
+                "category": "Cloud Storage",
+                "entityType": "main.account",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "url": "http://localhost:8000/ui/example-content/index.html#/openmcp",
+                "context": {
+                  "title": "Cloud\n      Storage"
+                }
+              },
+              {
+                "pathSegment": "cloud-storage-test-account/child/1",
+                "label": "Child\n      cloud-storage-test-account 1",
+                "category": "Cloud Storage",
+                "entityType": "main.account",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "url": "http://localhost:8000/ui/example-content/index.html#/openmcp",
+                "context": {
+                  "title": "Cloud\n      Storage"
+                }
+              },
+              {
+                "pathSegment": "cloud-storage-test-account/child/2",
+                "label": "Child\n      cloud-storage-test-account 2",
+                "category": "Cloud Storage",
+                "entityType": "main.account",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "url": "http://localhost:8000/ui/example-content/index.html#/openmcp",
+                "context": {
+                  "title": "Cloud\n      Storage"
+                }
+              },
+              {
+                "entityType": "main.account.dashboard::compound",
+                "url": "https://luigiwebcomponents.gitlab.io/ms-adaptive-cards/main.js",
+                "context": {
+                  "title": "Activated\n      Services from Marketplace",
+                  "style": "padding: 1rem",
+                  "disableBorder": true,
+                  "card": {
+                    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                    "type": "AdaptiveCard",
+                    "version": "1.0",
+                    "speak": "<s>The\n      forecast for Seattle January 20 is mostly clear with a High of 51 degrees and\n      Low of 40 degrees</s>",
+                    "body": [
+                      {
+                        "type": "TextBlock",
+                        "text": "Cloud Storage",
+                        "size": "large",
+                        "isSubtle": true,
+                        "wrap": true
+                      },
+                      {
+                        "type": "TextBlock",
+                        "text": "Mon,\n      Nov 4, 2019 6:21 PM",
+                        "spacing": "none",
+                        "wrap": true
+                      },
+                      {
+                        "type": "ColumnSet",
+                        "columns": [
+                          {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                              {
+                                "type": "Image",
+                                "url": "https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png",
+                                "size": "small",
+                                "altText": "Mostly\n      cloudy weather"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                              {
+                                "type": "TextBlock",
+                                "text": "22",
+                                "size": "extraLarge",
+                                "spacing": "none",
+                                "wrap": true
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                              {
+                                "type": "TextBlock",
+                                "text": "Hi\n      65",
+                                "horizontalAlignment": "left",
+                                "wrap": true
+                              },
+                              {
+                                "type": "TextBlock",
+                                "text": "Lo\n      44",
+                                "horizontalAlignment": "left",
+                                "spacing": "none",
+                                "wrap": true
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "layoutConfig": {
+                  "column": "auto",
+                  "row": "auto"
+                }
+              }
+            ]
+          }
+        }
+      }
+    contentType: json
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: cloud-storage-demo-root
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: '{"name":"cloud-storage-demo-root","creationTimestamp":"2022-05-17T11:37:17Z","luigiConfigFragment":[{"data":{"nodes":[{"pathSegment":"cloud-storage-demo-root","label":"cloud-storage-demo-root","entityType":"main.account","loadingIndicator":{"enabled":false},"category":{"label":"Cloud
+      Storage","icon":"dimension","collapsible":true},"url":"http://localhost:8000/ui/example-content/index.html#/openmcp/control-planes","context":{"title":"Cloud
+      Storage"}},{"pathSegment":"cloud-storage-demo-root/child/0","label":"Child cloud-storage-demo-root
+      0","category":"Cloud Storage","entityType":"main.account","loadingIndicator":{"enabled":false},"viewUrl":"http://localhost:8000/ui/example-content/index.html#/openmcp","context":{"title":"Cloud
+      Storage"}},{"entityType":"main.account.dashboard::compound","url":"https://luigiwebcomponents.gitlab.io/ms-adaptive-cards/main.js","context":{"title":"Activated
+      Services from Marketplace","style":"padding: 1rem","disableBorder":true,"card":{"$schema":"http://adaptivecards.io/schemas/adaptive-card.json","type":"AdaptiveCard","version":"1.0","speak":"<s>The
+      forecast for Seattle January 20 is mostly clear with a High of 51 degrees and
+      Low of 40 degrees</s>","body":[{"type":"TextBlock","text":"Cloud Storage","size":"large","isSubtle":true,"wrap":true},{"type":"TextBlock","text":"Mon,
+      Nov 4, 2019 6:21 PM","spacing":"none","wrap":true},{"type":"ColumnSet","columns":[{"type":"Column","width":"auto","items":[{"type":"Image","url":"https://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png","size":"small","altText":"Mostly
+      cloudy weather"}]},{"type":"Column","width":"auto","items":[{"type":"TextBlock","text":"2","size":"extraLarge","spacing":"none","wrap":true}]},{"type":"Column","width":"stretch","items":[{"type":"TextBlock","text":"Hi
+      89","horizontalAlignment":"left","wrap":true},{"type":"TextBlock","text":"Lo
+      1","horizontalAlignment":"left","spacing":"none","wrap":true}]}]}]}},"layoutConfig":{"column":"auto","row":"auto"}}]}}]}'
+    contentType: json
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: account-ui
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: |-
+      {
+        "name": "accounts",
+        "creationTimestamp": "2022-05-17T11:37:17Z",
+        "luigiConfigFragment": {
+            "data": {
+              "nodes": [
+                {
+                  "pathSegment": "create",
+                  "hideFromNav": true,
+                  "entityType": "main",
+                  "loadingIndicator": {
+                    "enabled": false
+                  },
+                  "keepSelectedForChildren": true,
+                  "url": "http://localhost:8000/ui/account-ui/modal/create",
+                  "children": []
+                },
+                {
+                  "pathSegment": "accounts",
+                  "label": "Accounts",
+                  "entityType": "main",
+                  "loadingIndicator": {
+                    "enabled": false
+                  },
+                  "keepSelectedForChildren": true,
+                  "url": "http://localhost:8000/ui/account-ui/accounts",
+                  "children": [
+                    {
+                      "pathSegment": ":accountId",
+                      "hideFromNav": true,
+                      "keepSelectedForChildren": false,
+                      "defineEntity": {
+                        "id": "account"
+                      },
+                      "context": {
+                        "accountId": ":accountId"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "pathSegment": "overview",
+                  "label": "Overview",
+                  "entityType": "main.account",
+                  "loadingIndicator": {
+                    "enabled": false
+                  },
+                  "visibleForFeatureToggles": ["oldAccount"],
+                  "url": "http://localhost:8000/ui/account-ui/accounts/:accountId"
+                }
+              ]
+            }
+          }
+      }
+    contentType: json
