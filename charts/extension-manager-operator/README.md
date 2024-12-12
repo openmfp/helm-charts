@@ -15,8 +15,8 @@ A Helm chart for extension-manager-operator
 |-----|------|---------|-------------|
 | commonAnnotations | object | `{}` |  |
 | crds.enabled | bool | `true` |  |
-| image.name | string | `"ghcr.io/openmfp/extension-content-operator"` |  |
-| image.tag | string | `"0.16.0"` |  |
+| image.name | string | `"ghcr.io/openmfp/extension-manager-operator"` |  |
+| image.tag | string | `"0.22.48"` |  |
 
 ## Overriding Values
 
