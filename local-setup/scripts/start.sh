@@ -82,7 +82,7 @@ kubectl wait --namespace openmfp-system \
   --timeout=480s openmfp
 
 echo "$COL Applying configuration $COL_RES"
-kubectl apply -f $SCRIPT_DIR/../../yaml/contentconfigurations.yaml
+kubectl apply -f $SCRIPT_DIR/../yaml/contentconfigurations.yaml
 
 echo "You can access http://localhost:8000 to access the portal"
 

@@ -30,15 +30,23 @@ spec:
         enabled: true
     example-content:
       istio:
+        enabled: true
         virtualService:
           hosts:
-            - localhost
+            - "*"
           matchers:
             - match:
-                - uri:
-                    exact: /ui/example-content
-                - uri:
-                    prefix: /ui/example-content/
+              - uri:
+                  prefix: /ui/
+                # - uri:
+                #     exact: /ui/example-content
+                # - uri:
+                #     prefix: /ui/example-content/
+            # - match:
+            #     - uri:
+            #         exact: /ui/wc
+            #     - uri:
+            #         prefix: /ui/wc/
     portal:
       baseDomains:
         - "localhost"

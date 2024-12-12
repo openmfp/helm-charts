@@ -670,66 +670,66 @@ spec:
       1","horizontalAlignment":"left","spacing":"none","wrap":true}]}]}]}},"layoutConfig":{"column":"auto","row":"auto"}}]}}]}'
     contentType: json
 ---
-apiVersion: core.openmfp.io/v1alpha1
-kind: ContentConfiguration
-metadata:
-  name: account-ui
-  namespace: openmfp-system
-spec:
-  inlineConfiguration:
-    content: |-
-      {
-        "name": "accounts",
-        "creationTimestamp": "2022-05-17T11:37:17Z",
-        "luigiConfigFragment": {
-            "data": {
-              "nodes": [
-                {
-                  "pathSegment": "create",
-                  "hideFromNav": true,
-                  "entityType": "main",
-                  "loadingIndicator": {
-                    "enabled": false
-                  },
-                  "keepSelectedForChildren": true,
-                  "url": "http://localhost:8000/ui/account-ui/modal/create",
-                  "children": []
-                },
-                {
-                  "pathSegment": "accounts",
-                  "label": "Accounts",
-                  "entityType": "main",
-                  "loadingIndicator": {
-                    "enabled": false
-                  },
-                  "keepSelectedForChildren": true,
-                  "url": "http://localhost:8000/ui/account-ui/accounts",
-                  "children": [
-                    {
-                      "pathSegment": ":accountId",
-                      "hideFromNav": true,
-                      "keepSelectedForChildren": false,
-                      "defineEntity": {
-                        "id": "account"
-                      },
-                      "context": {
-                        "accountId": ":accountId"
-                      }
-                    }
-                  ]
-                },
-                {
-                  "pathSegment": "overview",
-                  "label": "Overview",
-                  "entityType": "main.account",
-                  "loadingIndicator": {
-                    "enabled": false
-                  },
-                  "visibleForFeatureToggles": ["oldAccount"],
-                  "url": "http://localhost:8000/ui/account-ui/accounts/:accountId"
-                }
-              ]
-            }
-          }
-      }
-    contentType: json
+# apiVersion: core.openmfp.io/v1alpha1
+# kind: ContentConfiguration
+# metadata:
+#   name: account-ui
+#   namespace: openmfp-system
+# spec:
+#   inlineConfiguration:
+#     content: |-
+#       {
+#         "name": "accounts",
+#         "creationTimestamp": "2022-05-17T11:37:17Z",
+#         "luigiConfigFragment": {
+#             "data": {
+#               "nodes": [
+#                 {
+#                   "pathSegment": "create",
+#                   "hideFromNav": true,
+#                   "entityType": "main",
+#                   "loadingIndicator": {
+#                     "enabled": false
+#                   },
+#                   "keepSelectedForChildren": true,
+#                   "url": "http://localhost:8000/ui/account-ui/modal/create",
+#                   "children": []
+#                 },
+#                 {
+#                   "pathSegment": "accounts",
+#                   "label": "Accounts",
+#                   "entityType": "main",
+#                   "loadingIndicator": {
+#                     "enabled": false
+#                   },
+#                   "keepSelectedForChildren": true,
+#                   "url": "http://localhost:8000/ui/account-ui/accounts",
+#                   "children": [
+#                     {
+#                       "pathSegment": ":accountId",
+#                       "hideFromNav": true,
+#                       "keepSelectedForChildren": false,
+#                       "defineEntity": {
+#                         "id": "account"
+#                       },
+#                       "context": {
+#                         "accountId": ":accountId"
+#                       }
+#                     }
+#                   ]
+#                 },
+#                 {
+#                   "pathSegment": "overview",
+#                   "label": "Overview",
+#                   "entityType": "main.account",
+#                   "loadingIndicator": {
+#                     "enabled": false
+#                   },
+#                   "visibleForFeatureToggles": ["oldAccount"],
+#                   "url": "http://localhost:8000/ui/account-ui/accounts/:accountId"
+#                 }
+#               ]
+#             }
+#           }
+#       }
+#     contentType: json
