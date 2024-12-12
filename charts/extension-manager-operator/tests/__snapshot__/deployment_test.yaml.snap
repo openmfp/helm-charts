@@ -87,7 +87,7 @@ operator match the snapshot:
                 - --log-level=
                 - --health-probe-bind-address=:8081
               automountServiceAccountToken: true
-              image: ghcr.io/openmfp/extension-content-operator:1.0.0
+              image: ghcr.io/openmfp/extension-manager-operator:1.0.0
               imagePullPolicy: Always
               livenessProbe:
                 failureThreshold: 1

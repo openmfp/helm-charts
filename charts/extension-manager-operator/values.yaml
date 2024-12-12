@@ -2,8 +2,8 @@
 ## @param image.name The image repository
 ## @param image.tag The image tag
 image:
-  name: ghcr.io/openmfp/extension-content-operator
-  tag: 0.16.0
+  name: ghcr.io/openmfp/extension-manager-operator
+  tag: 0.22.48
 
 # The Custom Resource Definitions (CRDs) configuration
 ## @param crds.enabled Enable or disable the CRDs
