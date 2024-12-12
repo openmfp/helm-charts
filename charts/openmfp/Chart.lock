@@ -8,5 +8,8 @@ dependencies:
 - name: infra
   repository: oci://ghcr.io/openmfp/helm-charts
   version: 0.60.2
-digest: sha256:e4e3d861cd40ddbd9aa5aaba34adee9e8cdc1711752666866d235a5635a342d8
-generated: "2024-12-12T12:13:39.422032897Z"
+- name: extension-manager-operator
+  repository: oci://ghcr.io/openmfp/helm-charts
+  version: 0.22.50
+digest: sha256:d77eea1bdaffbe06b6f1e1e6dd7ad6aa23c21d4b6da8347676805c9aad03d4a3
+generated: "2024-12-12T14:34:43.345273546+02:00"
