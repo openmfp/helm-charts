@@ -27,6 +27,7 @@ spec:
         registrationAllowed: true
         name: openmfp
         displayName: OpenMFP
+      identityProviders: {}
 
     keycloak:
       httpRelativePath: "/keycloak/"
