@@ -5,3 +5,5 @@ components:
     enabled: true
   infra:
     enabled: true
+  extension-manager-operator:
+    enabled: true
