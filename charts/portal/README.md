@@ -12,7 +12,6 @@ Helm Chart for the openmfp Portal
 |-----|------|---------|-------------|
 | baseDomains[0] | string | `"localhost"` | base domains for VirtualService |
 | cookieDomain | string | `"localhost"` | cookie domain |
-| crdGatewayApiUrl | string | `"http://localhost:8000/example-gateway/graphql"` | crd gateway api url |
 | developmentLandcsape | string | `"true"` | development landscape toggle |
 | environment | string | `"local"` | environment |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |

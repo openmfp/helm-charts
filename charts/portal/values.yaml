@@ -33,9 +33,6 @@ baseDomains:
 # -- cookie domain
 cookieDomain: "localhost"
 
-# -- crd gateway api url
-crdGatewayApiUrl: "http://localhost:8000/example-gateway/graphql"
-
 trust:
   openmfp:
     # -- base domains

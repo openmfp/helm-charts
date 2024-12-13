@@ -47,7 +47,6 @@ spec:
       virtualService:
         hosts:
           - "*"
-      crdGatewayApiUrl: "http://localhost:8000/example-gateway/graphql"
       validWebcomponentUrls: ".?"
       environment: local
       featureToggles: "enableSessionAutoRefresh=true"
