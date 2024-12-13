@@ -1,0 +1,9 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: helm-charts
+Upstream-Contact: 
+Source: https://github.com/openmfp/helm-charts
+
+Files: *
+Copyright: 2024 SAP SE or an SAP affiliate company and openMFP contributors and helm-charts contributors.
+License: Apache-2.0
+
