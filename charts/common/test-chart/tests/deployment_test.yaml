@@ -1,0 +1,24 @@
+suite: deployment
+templates:
+  - deployment.yaml
+values:
+  - ../values.yaml
+chart:
+  namespace: default
+  appVersion: 0.1.0
+tests:
+  - it: test tag default
+    asserts:
+      - matchSnapshot: {}
+  - it: test tag override
+    set:
+      image:
+        tag: 1.0.0
+    asserts:
+      - matchSnapshot: {}
+  - it: test name override
+    set:
+      image:
+        name: my-image
+    asserts:
+      - matchSnapshot: {}
