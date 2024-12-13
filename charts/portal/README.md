@@ -10,21 +10,23 @@ Helm Chart for the openmfp Portal
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| baseDomains[0] | string | `"localhost"` | base domains for VirtualService |
+| cookieDomain | string | `"localhost"` | cookie domain |
 | developmentLandcsape | string | `"true"` | development landscape toggle |
 | environment | string | `"local"` | environment |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
 | frontendPort | int | `8000` | frontend port |
-| http.protocol | string | `"https"` | protocol |
+| http.protocol | string | `"http"` | protocol |
 | image.name | string | `"ghcr.io/openmfp/portal"` |  |
 | image.pullPolicyOverride | string | `"IfNotPresent"` |  |
-| importContent | bool | `true` | import content toggle |
-| trust.openmfp.authDomain | string | `"https://auth.provider.external/realms/openmfp/protocol/openid-connect/auth"` | auth domain (if discoveryEndpoint is not specified) |
+| importContent | bool | `false` | import content toggle |
+| trust.openmfp.authDomain | string | `"http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth"` | auth domain (if discoveryEndpoint is not specified) |
 | trust.openmfp.baseDomains | string | `"localhost"` | base domains |
-| trust.openmfp.discoveryEndpoint | string | `"https://auth.provider.external/realms/master/.well-known/openid-configuration"` | discovery endpoint. If specified (different than ""), authDomain and tokenUrl are not required |
+| trust.openmfp.discoveryEndpoint | string | `""` | discovery endpoint. If specified (different than ""), authDomain and tokenUrl are not required |
 | trust.openmfp.loginAudience | string | `"openmfp"` | login audience |
 | trust.openmfp.oidcClientSecretName | string | `"openmfp-client"` | oidc client secret name |
 | trust.openmfp.secretKeyRef | string | `"attribute.client_secret"` | secret key reference |
-| trust.openmfp.tokenUrl | string | `"https://auth.provider.external/realms/openmfp/protocol/openid-connect/token"` | token url (if discoveryEndpoint is not specified) |
+| trust.openmfp.tokenUrl | string | `"http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token"` | token url (if discoveryEndpoint is not specified) |
 | validWebcomponentUrls | string | `".?"` |  |
 | virtualService.hosts | list | `["*"]` | virtual service hosts |
 

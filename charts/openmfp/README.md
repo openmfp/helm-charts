@@ -16,10 +16,10 @@ The OpenMFP chart for Kubernetes
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| components.example-content.enabled | bool | `false` |  |
-| components.extension-manager-operator.enabled | bool | `true` |  |
-| components.infra.enabled | bool | `true` |  |
-| components.portal.enabled | bool | `true` |  |
+| components.example-content.enabled | bool | `false` | enable example-content component |
+| components.extension-manager-operator.enabled | bool | `true` | enable extension-manager-operator component |
+| components.infra.enabled | bool | `true` | enable infra component |
+| components.portal.enabled | bool | `true` | enable portal component |
 
 ## Overriding Values
 

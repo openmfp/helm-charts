@@ -24,7 +24,7 @@ matches the snapshot:
             - automountServiceAccountToken: true
               env:
                 - name: HTTP_PROTOCOL
-                  value: https
+                  value: http
                 - name: OIDC_CLIENT_ID_OPENMFP
                   value: openmfp
                 - name: OIDC_CLIENT_SECRET_OPENMFP
@@ -32,8 +32,10 @@ matches the snapshot:
                     secretKeyRef:
                       key: attribute.client_secret
                       name: portal-client-secret-openmfp
-                - name: DISCOVERY_ENDPOINT_OPENMFP
-                  value: https://auth.provider.external/realms/master/.well-known/openid-configuration
+                - name: TOKEN_URL_OPENMFP
+                  value: http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
+                - name: AUTH_SERVER_URL_OPENMFP
+                  value: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
                 - name: BASE_DOMAINS_OPENMFP
                   value: localhost
                 - name: OIDC_CLIENT_ID_PORTAL
@@ -61,6 +63,8 @@ matches the snapshot:
                   value: 1.0.0
                 - name: IMAGE_NAME
                   value: ghcr.io/openmfp/portal
+                - name: COOKIE_DOMAIN
+                  value: localhost
                 - name: FRONTEND_PORT
                   value: "8000"
                 - name: ENVIRONMENT
@@ -171,7 +175,7 @@ matches the snapshot with istio disabled:
             - automountServiceAccountToken: true
               env:
                 - name: HTTP_PROTOCOL
-                  value: https
+                  value: http
                 - name: OIDC_CLIENT_ID_OPENMFP
                   value: openmfp
                 - name: OIDC_CLIENT_SECRET_OPENMFP
@@ -179,8 +183,10 @@ matches the snapshot with istio disabled:
                     secretKeyRef:
                       key: attribute.client_secret
                       name: portal-client-secret-openmfp
-                - name: DISCOVERY_ENDPOINT_OPENMFP
-                  value: https://auth.provider.external/realms/master/.well-known/openid-configuration
+                - name: TOKEN_URL_OPENMFP
+                  value: http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
+                - name: AUTH_SERVER_URL_OPENMFP
+                  value: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
                 - name: BASE_DOMAINS_OPENMFP
                   value: localhost
                 - name: OIDC_CLIENT_ID_PORTAL
@@ -208,6 +214,8 @@ matches the snapshot with istio disabled:
                   value: 1.0.0
                 - name: IMAGE_NAME
                   value: ghcr.io/openmfp/portal
+                - name: COOKIE_DOMAIN
+                  value: localhost
                 - name: FRONTEND_PORT
                   value: "8000"
                 - name: ENVIRONMENT

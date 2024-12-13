@@ -12,18 +12,34 @@ spec:
   dependsOn:
     - name: openmfp-crds
       namespace: openmfp-system
-    - name: infra
-      namespace: openmfp-system
+    - name: istio-istiod
+      namespace: istio-system
   values:
     global:
       imagePullSecret: ghcr-credentials
       istio:
         enabled: true
+        gateway:
+          name: gateway
     components:
       example-content:
-        enabled: false
+        enabled: true
       portal:
         enabled: true
+      infra:
+        enabled: true
+      extension-manager-operator:
+        enabled: true
+    example-content:
+      istio:
+        enabled: true
+        virtualService:
+          hosts:
+            - "*"
+          matchers:
+            - match:
+              - uri:
+                  prefix: /ui/
     portal:
       baseDomains:
         - "localhost"
@@ -33,7 +49,6 @@ spec:
       virtualService:
         hosts:
           - "*"
-      crdGatewayApiUrl: "http://localhost:8000/example-gateway/graphql"
       validWebcomponentUrls: ".?"
       environment: local
       featureToggles: "enableSessionAutoRefresh=true"
@@ -49,3 +64,21 @@ spec:
           oidcClientSecretName: openmfp-client
           loginAudience: openmfp
           secretKeyRef: attribute.client_secret
+    infra:
+      crossplane:
+        enabled: true
+      istio:
+        enabled: true
+        gateway:
+          annotations: {}
+          apiVersion: networking.istio.io/v1
+          name: gateway
+          selector:
+            istio: gateway
+          servers:
+            - port:
+                number: 8000
+                name: http
+                protocol: HTTP
+              hosts:
+                - "*"
