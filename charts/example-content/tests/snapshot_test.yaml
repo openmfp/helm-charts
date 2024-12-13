@@ -1,0 +1,9 @@
+suite: snapshot
+chart:
+  appVersion: "1.0.0"
+tests:
+  - it: matches the snapshot
+    values:
+      - ../test-values.yaml
+    asserts:
+      - matchSnapshot: {}

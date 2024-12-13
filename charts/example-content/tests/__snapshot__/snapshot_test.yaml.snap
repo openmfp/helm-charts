@@ -1,0 +1,151 @@
+matches the snapshot:
+  1: |
+    apiVersion: core.openmfp.io/v1alpha1
+    kind: ContentConfiguration
+    metadata:
+      name: home
+      namespace: NAMESPACE
+    spec:
+      inlineConfiguration:
+        content: |-
+          {
+            "name": "overview",
+            "creationTimestamp": "2022-05-17T11:37:17Z",
+            "luigiConfigFragment": {
+              "data": {
+                "nodes": [
+                  {
+                    "entityType": "global",
+                    "pathSegment": "home",
+                    "hideFromNav": true,
+                    "defineEntity": {
+                      "id": "main"
+                    },
+                    "children": [
+                      {
+                        "pathSegment": "overview",
+                        "label": "Overview",
+                        "icon": "home",
+                        "defineEntity": {
+                          "id": "overview"
+                        },
+                        "compound": {
+                          "renderer": {
+                            "use": "grid",
+                            "config": {
+                              "columns": "1fr 1fr 1fr 1fr"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "entityType": "main.overview::compound",
+                    "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
+                    "context": {
+                      "border": "shadow",
+                      "title": "Welcome to OpenMFP Portal",
+                      "description": " "
+                    },
+                    "layoutConfig": {
+                      "row": "1",
+                      "column": "1 / -1"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        contentType: json
+  2: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: RELEASE-NAME-example-content
+      name: RELEASE-NAME-example-content
+    spec:
+      revisionHistoryLimit: 3
+      selector:
+        matchLabels:
+          app: RELEASE-NAME-example-content
+      strategy:
+        rollingUpdate:
+          maxSurge: 5
+          maxUnavailable: 0
+      template:
+        metadata:
+          labels:
+            app: RELEASE-NAME-example-content
+        spec:
+          containers:
+            - automountServiceAccountToken: true
+              env:
+                - name: PORT
+                  value: "8080"
+              image: ghcr.io/openmfp/example-content:1.0.0
+              imagePullPolicy: Always
+              name: RELEASE-NAME-example-content
+              ports:
+                - containerPort: 8080
+                  name: http
+                  protocol: TCP
+                - containerPort: 8080
+                  name: metrics
+                  protocol: TCP
+                - containerPort: 8081
+                  name: health-port
+                  protocol: TCP
+              resources:
+                limits:
+                  cpu: 100m
+                  memory: 512Mi
+                requests:
+                  cpu: 40m
+                  memory: 50Mi
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              serviceAccountName: RELEASE-NAME
+              volumeMounts:
+                - mountPath: /var/cache/nginx
+                  name: tmp-volume
+                  readOnly: false
+                - mountPath: /var/run
+                  name: run-volume
+                  readOnly: false
+          securityContext:
+            fsGroup: 2000
+            runAsGroup: 3000
+            runAsUser: 1000
+          serviceAccountName: RELEASE-NAME-example-content
+          volumes:
+            - emptyDir: {}
+              name: tmp-volume
+            - emptyDir: {}
+              name: run-volume
+  3: |
+    apiVersion: v1
+    imagePullSecrets:
+      - name: github
+    kind: ServiceAccount
+    metadata:
+      name: RELEASE-NAME-example-content
+      namespace: NAMESPACE
+  4: |
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: RELEASE-NAME-example-content
+      namespace: NAMESPACE
+    spec:
+      ports:
+        - name: http
+          port: 8080
+          protocol: TCP
+      selector:
+        app: RELEASE-NAME-example-content
+      type: ClusterIP
