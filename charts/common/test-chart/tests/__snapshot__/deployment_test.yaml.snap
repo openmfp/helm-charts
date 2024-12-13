@@ -10,7 +10,6 @@ test name override:
         matchLabels:
           service: RELEASE-NAME-test-chart
       template:
-        metadata: null
         spec:
           containers:
             automountServiceAccountToken: true
@@ -69,7 +68,6 @@ test tag default:
         matchLabels:
           service: RELEASE-NAME-test-chart
       template:
-        metadata: null
         spec:
           containers:
             automountServiceAccountToken: true
@@ -128,7 +126,6 @@ test tag override:
         matchLabels:
           service: RELEASE-NAME-test-chart
       template:
-        metadata: null
         spec:
           containers:
             automountServiceAccountToken: true
