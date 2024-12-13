@@ -44,21 +44,21 @@ else
   kind create cluster --config $SCRIPT_DIR/../kind/kind-config.yaml --name openmfp --image=kindest/node:v1.30.2
 fi
 
-echo "$COL Installing flux $COL_RES"
+echo -e "$COL Installing flux $COL_RES"
 helm upgrade -i -n flux-system --create-namespace flux oci://ghcr.io/fluxcd-community/charts/flux2 \
   --set imageAutomationController.create=false \
   --set imageReflectionController.create=false \
   --set kustomizeController.create=false \
   --set notificationController.create=false
 
-echo "$COL Starting deployments $COL_RES"
+echo -e "$COL Starting deployments $COL_RES"
 kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
 
-echo "$COL Creating necessary secrets $COL_RES"
+echo -e "$COL Creating necessary secrets $COL_RES"
 kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
 kubectl create secret generic keycloak-admin -n openmfp-system --from-literal=secret=admin --dry-run=client -o yaml | kubectl apply -f -
 
-echo "$COL waiting for istio to become ready $COL_RES"
+echo -e "$COL Waiting for istio to become ready $COL_RES"
 kubectl wait --namespace istio-system \
   --for=condition=Ready helmreleases \
   --timeout=120s istio-base
@@ -71,11 +71,11 @@ kubectl wait --namespace istio-system \
   --for=condition=Ready helmreleases \
   --timeout=120s istio-gateway
 
-echo "$COL waiting for openmfp to become ready $COL_RES"
+echo -e "$COL Waiting for openmfp to become ready $COL_RES"
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
-  --timeout=120s openmfp-crds
+  --timeout=480s openmfp-crds
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
