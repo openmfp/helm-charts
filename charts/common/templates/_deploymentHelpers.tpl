@@ -138,3 +138,23 @@ securityContext:
   runAsGroup: {{ include "common.getKeyValue" (dict "Values" .Values "key" "securityContext.runAsGroup") }}
   fsGroup: {{ include "common.getKeyValue" (dict "Values" .Values "key" "securityContext.fsGroup") }}
 {{- end }}
+
+{{- define "common.image.tag" -}}
+{{- if (.Values.image).tag }}
+{{- .Values.image.tag }}
+{{- else }}
+{{- .Chart.AppVersion }}
+{{- end }}
+{{- end }}
+
+{{- define "common.image.name" -}}
+{{- if (.Values.image).name }}
+{{- .Values.image.name }}
+{{- else }}
+{{- .Chart.Name }}
+{{- end }}
+{{- end }}
+
+{{- define "common.image" -}}
+{{ include "common.image.name" . }}:{{ include "common.image.tag" . }}
+{{- end }}
