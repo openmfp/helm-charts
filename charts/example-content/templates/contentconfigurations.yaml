@@ -44,37 +44,8 @@ spec:
                 "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
                 "context": {
                   "border": "shadow",
-                  "title": "Welcome to ApeirORA Portal",
+                  "title": "Welcome to OpenMFP Portal",
                   "description": " "
-                },
-                "layoutConfig": {
-                  "row": "1",
-                  "column": "1 / -1"
-                }
-              },
-              {
-                "entityType": "main.account",
-                "pathSegment": "dashboard",
-                "label": "Dashboard",
-                "defineEntity": {
-                  "id": "dashboard"
-                },
-                "compound": {
-                  "renderer": {
-                    "use": "grid",
-                    "config": {
-                      "columns": "1fr 1fr 1fr 1fr"
-                    }
-                  }
-                }
-              },
-              {
-                "entityType": "main.account.dashboard::compound",
-                "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
-                "context": {
-                  "border": "shadow",
-                  "title": "Account Level Dashboard",
-                  "description": "Comprehensive account overview dashboard for an account running inside an ApeiroRA instance"
                 },
                 "layoutConfig": {
                   "row": "1",
