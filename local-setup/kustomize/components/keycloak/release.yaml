@@ -9,6 +9,13 @@ spec:
     kind: OCIRepository
     name: keycloak
   releaseName: keycloak
+  dependsOn:
+    - name: openmfp-crds
+      namespace: openmfp-system
+    - name: istio-istiod
+      namespace: istio-system
+    - name: crossplane
+      namespace: crossplane-system
   values:
     global:
       imagePullSecrets: 

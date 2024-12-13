@@ -12,6 +12,8 @@ spec:
   dependsOn:
     - name: openmfp-crds
       namespace: openmfp-system
+    - name: istio-istiod
+      namespace: istio-system
   values:
     global:
       imagePullSecret: ghcr-credentials
