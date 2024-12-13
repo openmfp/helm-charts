@@ -12,3 +12,7 @@ istio:
               exact: /ui/example-content
           - uri:
               prefix: /ui/example-content/
+
+contentConfigurations:
+  # -- This content configuration enables a basic homepage in the portal
+  home: true
