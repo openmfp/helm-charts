@@ -1,0 +1,177 @@
+test name override:
+  1: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: RELEASE-NAME-test-chart
+    spec:
+      revisionHistoryLimit: 3
+      selector:
+        matchLabels:
+          service: RELEASE-NAME-test-chart
+      template:
+        metadata: null
+        spec:
+          containers:
+            automountServiceAccountToken: true
+            image: my-image:0.1.0
+            imagePullPolicy: Always
+            livenessProbe:
+              failureThreshold: 1
+              httpGet:
+                path: /healthz
+                port: 8081
+              periodSeconds: 10
+            name: manager
+            ports:
+              - containerPort: 8080
+                name: metrics
+                protocol: TCP
+              - containerPort: 8081
+                name: health-port
+                protocol: TCP
+            readinessProbe:
+              httpGet:
+                path: /readyz
+                port: 8081
+              initialDelaySeconds: 5
+              periodSeconds: 10
+            resources:
+              limits:
+                cpu: 100m
+                memory: 512Mi
+              requests:
+                cpu: 40m
+                memory: 50Mi
+            securityContext:
+              readOnlyRootFilesystem: true
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+            serviceAccountName: RELEASE-NAME
+            startupProbe:
+              failureThreshold: 30
+              httpGet:
+                path: /readyz
+                port: 8081
+              periodSeconds: 10
+          serviceAccountName: RELEASE-NAME-test-chart
+          terminationGracePeriodSeconds: 10
+test tag default:
+  1: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: RELEASE-NAME-test-chart
+    spec:
+      revisionHistoryLimit: 3
+      selector:
+        matchLabels:
+          service: RELEASE-NAME-test-chart
+      template:
+        metadata: null
+        spec:
+          containers:
+            automountServiceAccountToken: true
+            image: test-chart:0.1.0
+            imagePullPolicy: Always
+            livenessProbe:
+              failureThreshold: 1
+              httpGet:
+                path: /healthz
+                port: 8081
+              periodSeconds: 10
+            name: manager
+            ports:
+              - containerPort: 8080
+                name: metrics
+                protocol: TCP
+              - containerPort: 8081
+                name: health-port
+                protocol: TCP
+            readinessProbe:
+              httpGet:
+                path: /readyz
+                port: 8081
+              initialDelaySeconds: 5
+              periodSeconds: 10
+            resources:
+              limits:
+                cpu: 100m
+                memory: 512Mi
+              requests:
+                cpu: 40m
+                memory: 50Mi
+            securityContext:
+              readOnlyRootFilesystem: true
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+            serviceAccountName: RELEASE-NAME
+            startupProbe:
+              failureThreshold: 30
+              httpGet:
+                path: /readyz
+                port: 8081
+              periodSeconds: 10
+          serviceAccountName: RELEASE-NAME-test-chart
+          terminationGracePeriodSeconds: 10
+test tag override:
+  1: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: RELEASE-NAME-test-chart
+    spec:
+      revisionHistoryLimit: 3
+      selector:
+        matchLabels:
+          service: RELEASE-NAME-test-chart
+      template:
+        metadata: null
+        spec:
+          containers:
+            automountServiceAccountToken: true
+            image: test-chart:1.0.0
+            imagePullPolicy: Always
+            livenessProbe:
+              failureThreshold: 1
+              httpGet:
+                path: /healthz
+                port: 8081
+              periodSeconds: 10
+            name: manager
+            ports:
+              - containerPort: 8080
+                name: metrics
+                protocol: TCP
+              - containerPort: 8081
+                name: health-port
+                protocol: TCP
+            readinessProbe:
+              httpGet:
+                path: /readyz
+                port: 8081
+              initialDelaySeconds: 5
+              periodSeconds: 10
+            resources:
+              limits:
+                cpu: 100m
+                memory: 512Mi
+              requests:
+                cpu: 40m
+                memory: 50Mi
+            securityContext:
+              readOnlyRootFilesystem: true
+              runAsNonRoot: true
+              seccompProfile:
+                type: RuntimeDefault
+            serviceAccountName: RELEASE-NAME
+            startupProbe:
+              failureThreshold: 30
+              httpGet:
+                path: /readyz
+                port: 8081
+              periodSeconds: 10
+          serviceAccountName: RELEASE-NAME-test-chart
+          terminationGracePeriodSeconds: 10
