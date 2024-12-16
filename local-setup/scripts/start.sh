@@ -17,7 +17,7 @@ fi
 ghUser=""
 if [ -z "${GH_USER}" ]; then
     if ! command -v gh &> /dev/null; then
-        echo "gh CLI could not be found. Please install the GitHub CLI or set the 'GH_USER' environment variable with your GitHub username."
+        echo "gh CLI could not be found. Either install the gh cli or set the GH_USER environment variable with our GitHub username."
         exit 1
     else
       ghUser=$(gh api user --jq '.login')
