@@ -1,6 +1,6 @@
 # extension-manager-operator
 
-A Helm chart for extension-manager-operator
+A Helm chart for extension-manager-operator which manages resources like ContentConfigurations and exposes REST `/validate` endpoint
 
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
