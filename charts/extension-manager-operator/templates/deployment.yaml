@@ -44,6 +44,7 @@ spec:
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: server
+          {{- include "common.container.securityContext" . | nindent 10 }}
           ports:
           - containerPort: {{ .Values.validationServer.port }}
           {{- include "common.PortsMetricsHealth" . | nindent 10 -}}
