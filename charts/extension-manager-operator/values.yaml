@@ -13,3 +13,11 @@ crds:
 ## @param commonAnnotations Annotations to add to all deployed objects
 ##
 commonAnnotations: {}
+
+validationServer:
+  # -- enable the validation server
+  enabled: false
+  # -- port for the validation server
+  port: 8088
+  # -- host for the validation VirtualService
+  host: "*"
