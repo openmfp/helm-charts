@@ -4,17 +4,17 @@ Helm Chart for the openmfp Portal
 
 ## Requirements
 
-| Repository | Name | Description | Sources |
-|------------|------|-------------|---------|
-| `oci://ghcr.io/openmfp/helm-charts` | `common` | The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and [default values](https://github.com/openmfp/helm-charts/blob/main/charts/common/values.yaml) that can be used by other charts. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/common)|
+| Repository                          | Name     | Description                                                                                                                                                                                                                                                                                                 | Sources                                                                  |
+| ----------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `oci://ghcr.io/openmfp/helm-charts` | `common` | The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and [default values](https://github.com/openmfp/helm-charts/blob/main/charts/common/values.yaml) that can be used by other charts. | [source](https://github.com/openmfp/helm-charts/tree/main/charts/common) |
 ## Values
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
-| contentConfigurations.home | bool | `true` | This content configuration enables a basic homepage in the portal |
-| image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
-| istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
-| istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
-| istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"` |  |
+| Key                                                  | Type   | Default                             | Description                                                       |
+| ---------------------------------------------------- | ------ | ----------------------------------- | ----------------------------------------------------------------- |
+| contentConfigurations.home                           | bool   | `true`                              | This content configuration enables a basic homepage in the portal |
+| image.name                                           | string | `"ghcr.io/openmfp/example-content"` | The image name                                                    |
+| istio.virtualService.hosts[0]                        | string | `"your-host.com"`                   |                                                                   |
+| istio.virtualService.matchers[0].match[0].uri.exact  | string | `"/ui/example-content"`             |                                                                   |
+| istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"`            |                                                                   |
 
 ## Overriding Values
 
@@ -25,12 +25,12 @@ The values in the `defaults:` section can be reused from other charts by using t
 3. Uses the `key` in the chart's values.yaml
 4. Uses the `common.defaults.key` value from the table below.
 
-1 has precendence over 2 over 3 over 4 respectively. This approach allows for individual charts to have minimal configuration, while still being able to override parameters locally.
+1 has precedence over 2 over 3 over 4 respectively. This approach allows for individual charts to have minimal configuration, while still being able to override parameters locally.
 
 Example
 ```
-1) .Values.deployment.resources.limits.memoryOveride =  4096MB
-2) .Values.global.deployment.resources.limits.memory =  2048MB
-3) .Values.deployment.resources.limits.memory =  1024MB
+1) .Values.deployment.resources.limits.memoryOverride = 4096MB
+2) .Values.global.deployment.resources.limits.memory = 2048MB
+3) .Values.deployment.resources.limits.memory = 1024MB
 4) .Values.common.defaults.deployment.resources.limits.memory = default 512MB
 ```
