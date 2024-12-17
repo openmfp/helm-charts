@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         service: {{ include "common.entity.name" . }}
+        app: {{ include "common.entity.name" . }}
       {{- if ((.Values.deployment).template).labels }}
       {{ .Values.deployment.template.labels | toYaml | nindent 8 }}
       {{- end }}
@@ -35,7 +36,19 @@ spec:
           name: manager
           {{ include "common.container.securityContext" . | nindent 10 }}
           ports:
-          {{ include "common.PortsMetricsHealth" . | nindent 10 }}
+          {{- include "common.PortsMetricsHealth" . | nindent 10 -}}
+          {{- include "common.operatorHealthAndReadyness" . | nindent 10 -}}
+          {{- include "common.resources" . | nindent 10 }}
+        {{- if .Values.validationServer.enabled }}
+        - args:
+          - server
+          image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
+          imagePullPolicy: {{ include "common.imagePullPolicy" . }}
+          name: server
+          {{- include "common.container.securityContext" . | nindent 10 }}
+          ports:
+          - containerPort: {{ .Values.validationServer.port }}
+          {{- include "common.PortsMetricsHealth" . | nindent 10 -}}
           {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}
-          {{ include "common.resources" . | nindent 10 }}
+        {{- end }}
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}

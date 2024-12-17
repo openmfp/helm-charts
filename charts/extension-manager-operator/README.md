@@ -1,6 +1,6 @@
 # extension-manager-operator
 
-A Helm chart for extension-manager-operator
+A Helm chart for extension-manager-operator which manages resources like ContentConfigurations and exposes REST `/validate` endpoint
 
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
@@ -17,6 +17,9 @@ A Helm chart for extension-manager-operator
 | crds.enabled | bool | `true` |  |
 | image.name | string | `"ghcr.io/openmfp/extension-manager-operator"` |  |
 | image.tag | string | `"0.22.48"` |  |
+| validationServer.enabled | bool | `false` | enable the validation server |
+| validationServer.host | string | `"*"` | host for the validation VirtualService |
+| validationServer.port | int | `8088` | port for the validation server |
 
 ## Overriding Values
 
