@@ -70,6 +70,7 @@ tests:
       - equal:
           path: spec.template.metadata.labels
           value:
+            app: extension-manager-operator
             service: extension-manager-operator
   - it: test imagePullPolicy override
     template: deployment.yaml
@@ -98,3 +99,12 @@ tests:
           path: imagePullSecrets
           value: 
             - name: my-secret
+  - it: with validationServer
+    template: deployment.yaml
+    set:
+      validationServer:
+        enabled: true
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[1].name
+          value: server
