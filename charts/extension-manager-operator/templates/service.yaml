@@ -1,0 +1,16 @@
+{{- if .Values.validationServer.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "common.entity.name" . }}-server
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ include "common.entity.name" . }}
+spec:
+  selector:
+    app: {{ include "common.entity.name" . }}
+  ports:
+    - protocol: TCP
+      port: {{ .Values.validationServer.port }}
+      targetPort: {{ .Values.validationServer.port }}
+{{- end }}

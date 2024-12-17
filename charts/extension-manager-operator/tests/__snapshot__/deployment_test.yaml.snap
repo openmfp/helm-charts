@@ -78,6 +78,7 @@ operator match the snapshot:
           annotations:
             sidecar.istio.io/inject: "true"
           labels:
+            app: extension-manager-operator
             service: extension-manager-operator
         spec:
           containers:
