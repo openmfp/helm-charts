@@ -30,7 +30,9 @@ spec:
       portal:
         enabled: true
       extension-manager-operator:
-        enabled: false
+        enabled: true
+        istio:
+          enabled: true
         validationServer:
           enabled: true
     example-content:
@@ -85,3 +87,4 @@ spec:
                 protocol: HTTP
               hosts:
                 - "*"
+
