@@ -1,6 +1,6 @@
 # keycloak
 
-A Helm chart for Kubernetes
+A Helm chart to deploy keycloak as OIDC provider in openmfp
 
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
