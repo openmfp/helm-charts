@@ -8,7 +8,7 @@ SCRIPT_DIR=$(dirname "$0")
 
 # Check for input argument GH_TOKEN and echo message in case not provided
 if [ -z "${GH_TOKEN}" ]; then
-    echo "Please provide the GitHub Token as an environment variable"
+    echo "Please set the 'GITHUB_TOKEN' environment variable with a GitHub token that has 'read:packages' scope."
     exit 1
 else
   ghToken=$GH_TOKEN
@@ -17,7 +17,7 @@ fi
 ghUser=""
 if [ -z "${GH_USER}" ]; then
     if ! command -v gh &> /dev/null; then
-        echo "gh CLI could not be found. Either install the gh cli or set the GH_USER environmet variable with our github username."
+        echo "gh CLI could not be found. Please install the GitHub CLI or set the 'GH_USER' environment variable with your GitHub username."
         exit 1
     else
       ghUser=$(gh api user --jq '.login')
@@ -27,7 +27,7 @@ else
 fi
 
 kkSecret=""
-# it is possible to setup a keycloak client secret using the  KEYCLOAK_SECRET environment variable
+# it is possible to setup a keycloak client secret using the KEYCLOAK_SECRET environment variable
 if [ -z "${KEYCLOAK_SECRET}" ]; then
   kkSecret=openmfp-keylcoak-secret
 else
@@ -71,7 +71,7 @@ kubectl wait --namespace istio-system \
   --for=condition=Ready helmreleases \
   --timeout=120s istio-gateway
 
-echo -e "$COL Waiting for openmfp to become ready $COL_RES"
+echo -e "$COL Waiting for OpenMFP to become ready $COL_RES (this may take a while)"
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
@@ -81,5 +81,8 @@ kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
   --timeout=480s openmfp
 
-echo "You can access http://localhost:8000 to access the portal"
+echo "-------------------------------------"
+echo "Installation Complete ♥!"
+echo "-------------------------------------"
+echo "You can access the portal at: http://localhost:8000"
 
