@@ -1,7 +1,7 @@
 apiVersion: v2
 name: common
-description: A Helm chart for Kubernetes
+description: A Helm chart containing reuse templates
 
 type: library
 
-version: 0.2.0
+version: 0.2.1
