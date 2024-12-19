@@ -10,6 +10,6 @@ dependencies:
   version: 0.60.2
 - name: extension-manager-operator
   repository: oci://ghcr.io/openmfp/helm-charts
-  version: 0.22.59
-digest: sha256:88229a6fca8f92f64ca85c140712e5f031572594b0c33ad68ca5ace4b2be6fa1
-generated: "2024-12-19T15:13:08.276145159Z"
+  version: 0.22.50
+digest: sha256:4fd051165f70a4390821b4a0e34b3a19fa9af02c091a4b74d339042c5d10179c
+generated: "2024-12-19T17:15:31.753437191+02:00"
