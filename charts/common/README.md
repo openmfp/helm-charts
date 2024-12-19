@@ -1,6 +1,6 @@
 # common
 
-A Helm chart for Kubernetes
+A Helm chart containing reuse templates
 
 ![Type: library](https://img.shields.io/badge/Type-library-informational?style=flat-square)
 ## Values
