@@ -8,7 +8,7 @@ metadata:
 spec:
   forProvider:
     enabled: true
-    accessType: CONFIDENTIAL
+    accessType: {{ default "CONFIDENTIAL" $val.accessType }}
     clientId: {{ $key }}
     standardFlowEnabled: true
     name: {{ $val.name }}
