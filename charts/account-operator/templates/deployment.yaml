@@ -27,7 +27,7 @@ spec:
         traffic.sidecar.istio.io/excludeInboundPorts: "9443"
         {{- end }}
     spec:
-      serviceAccountName: {{ include "common.entity.name" . }}
+      {{ include "common.container.securityContext" . | nindent 6 }}
       containers:
         - args:
           - operator
@@ -36,7 +36,6 @@ spec:
           - '--health-probe-bind-address=:{{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}'
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           name: manager
-          {{ include "common.container.securityContext" . | nindent 10 }}
           ports:
           {{ include "common.PortsMetricsHealth" . | nindent 10 }}
           {{- if .Values.webhooks.enabled }}

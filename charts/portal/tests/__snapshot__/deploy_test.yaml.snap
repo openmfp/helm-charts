@@ -20,9 +20,9 @@ matches the snapshot:
           labels:
             app: portal
         spec:
+          automountServiceAccountToken: true
           containers:
-            - automountServiceAccountToken: true
-              env:
+            - env:
                 - name: HTTP_PROTOCOL
                   value: http
                 - name: OIDC_CLIENT_ID_OPENMFP
@@ -91,14 +91,9 @@ matches the snapshot:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              securityContext:
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
-                seccompProfile:
-                  type: RuntimeDefault
-              serviceAccountName: portal
           securityContext:
-            fsGroup: 2000
-            runAsGroup: 3000
-            runAsUser: 1000
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           serviceAccountName: portal
