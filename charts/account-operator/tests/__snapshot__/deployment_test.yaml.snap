@@ -291,13 +291,13 @@ operator match the snapshot:
             control-plane: controller-manager
             service: account-operator
         spec:
+          automountServiceAccountToken: false
           containers:
             - args:
                 - operator
                 - --leader-elect
                 - --log-level=warn
                 - --health-probe-bind-address=:8081
-              automountServiceAccountToken: false
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -353,12 +353,6 @@ operator match the snapshot:
                 requests:
                   cpu: 150m
                   memory: 128Mi
-              securityContext:
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
-                seccompProfile:
-                  type: RuntimeDefault
-              serviceAccountName: account-operator
               startupProbe:
                 failureThreshold: 30
                 httpGet:
@@ -366,6 +360,11 @@ operator match the snapshot:
                   port: 8081
                 periodSeconds: 10
               volumeMounts: null
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           serviceAccountName: account-operator
           terminationGracePeriodSeconds: 10
           volumes: null
@@ -669,13 +668,13 @@ operator match the snapshot (with kubeconfigSecret):
             control-plane: controller-manager
             service: account-operator
         spec:
+          automountServiceAccountToken: false
           containers:
             - args:
                 - operator
                 - --leader-elect
                 - --log-level=warn
                 - --health-probe-bind-address=:8081
-              automountServiceAccountToken: false
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -733,12 +732,6 @@ operator match the snapshot (with kubeconfigSecret):
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              securityContext:
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
-                seccompProfile:
-                  type: RuntimeDefault
-              serviceAccountName: account-operator
               startupProbe:
                 failureThreshold: 30
                 httpGet:
@@ -748,6 +741,11 @@ operator match the snapshot (with kubeconfigSecret):
               volumeMounts:
                 - mountPath: /api-kubeconfig
                   name: external-api-server
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           serviceAccountName: account-operator
           terminationGracePeriodSeconds: 10
           volumes:
@@ -1057,13 +1055,13 @@ operator match the snapshot with webhook enabled:
             control-plane: controller-manager
             service: account-operator
         spec:
+          automountServiceAccountToken: false
           containers:
             - args:
                 - operator
                 - --leader-elect
                 - --log-level=warn
                 - --health-probe-bind-address=:8081
-              automountServiceAccountToken: false
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -1122,12 +1120,6 @@ operator match the snapshot with webhook enabled:
                 requests:
                   cpu: 150m
                   memory: 128Mi
-              securityContext:
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
-                seccompProfile:
-                  type: RuntimeDefault
-              serviceAccountName: account-operator
               startupProbe:
                 failureThreshold: 30
                 httpGet:
@@ -1138,6 +1130,11 @@ operator match the snapshot with webhook enabled:
                 - mountPath: /certs
                   name: cert
                   readOnly: true
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           serviceAccountName: account-operator
           terminationGracePeriodSeconds: 10
           volumes:

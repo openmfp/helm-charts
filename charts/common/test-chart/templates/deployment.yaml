@@ -12,12 +12,11 @@ spec:
       service: {{ include "common.entity.name" . }}
   template:
     spec:
-      serviceAccountName: {{ include "common.entity.name" . }}
+      {{ include "common.container.securityContext" . | nindent 6 }}
       containers:
           image: {{ include "common.image" . }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: manager
-          {{ include "common.container.securityContext" . | nindent 10 }}
           ports:
           {{ include "common.PortsMetricsHealth" . | nindent 10 }}
           {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}
