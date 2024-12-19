@@ -19,6 +19,6 @@ dependencies:
     repository: oci://ghcr.io/openmfp/helm-charts
     condition: components.infra.enabled
   - name: extension-manager-operator
-    version: 0.22.50
+    version: 0.22.60
     repository: oci://ghcr.io/openmfp/helm-charts
     condition: components.extension-manager-operator.enabled
