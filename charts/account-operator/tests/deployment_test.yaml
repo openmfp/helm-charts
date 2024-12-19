@@ -54,15 +54,15 @@ tests:
         mountServiceAccountToken: true
     asserts:
       - equal:
-          path: spec.template.spec.containers[0].securityContext
+          path: spec.template.spec.securityContext
           value:
             runAsNonRoot: true
             readOnlyRootFilesystem: true
             seccompProfile:
               type: RuntimeDefault
       - equal:
-          path: spec.template.spec.containers[0].serviceAccountName
+          path: spec.template.spec.serviceAccountName
           value: account-operator
       - equal:
-          path: spec.template.spec.containers[0].automountServiceAccountToken
+          path: spec.template.spec.automountServiceAccountToken
           value: true
