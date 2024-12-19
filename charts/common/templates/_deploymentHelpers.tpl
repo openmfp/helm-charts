@@ -128,7 +128,7 @@ securityContext:
   readOnlyRootFilesystem: true
   seccompProfile:
     type: RuntimeDefault
-serviceAccountName: {{ .Release.Name }}
+serviceAccountName: {{ include "common.entity.name" }}
 automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountToken false) }}
 {{- end }}
 
