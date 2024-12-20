@@ -1,4 +1,4 @@
-{{- if .Values.crossplane.enabled -}}
+{{- if eq (include "common.getNestedValue" (dict "Values" .Values "key" "crossplane.enabled")) "true" -}}
 {{- range $key, $val := .Values.crossplane.identityProviders }}
 apiVersion: oidc.keycloak.crossplane.io/v1alpha1
 kind: IdentityProvider
