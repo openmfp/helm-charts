@@ -20,7 +20,6 @@ matches the snapshot:
           labels:
             app: portal
         spec:
-          automountServiceAccountToken: true
           containers:
             - env:
                 - name: HTTP_PROTOCOL
@@ -96,7 +95,6 @@ matches the snapshot:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
-          serviceAccountName: portal
   2: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
@@ -166,7 +164,6 @@ matches the snapshot with istio disabled:
           labels:
             app: portal
         spec:
-          automountServiceAccountToken: true
           containers:
             - env:
                 - name: HTTP_PROTOCOL
@@ -242,7 +239,6 @@ matches the snapshot with istio disabled:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
-          serviceAccountName: portal
   2: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
