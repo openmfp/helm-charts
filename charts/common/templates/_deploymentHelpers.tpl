@@ -126,6 +126,9 @@ readinessProbe:
 {{- define "common.container.securityContext" -}}
 securityContext:
   readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
 {{- end }}
 
 
