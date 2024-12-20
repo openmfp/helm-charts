@@ -20,7 +20,6 @@ matches the snapshot:
           labels:
             app: portal
         spec:
-          automountServiceAccountToken: true
           containers:
             - env:
                 - name: HTTP_PROTOCOL
@@ -96,4 +95,3 @@ matches the snapshot:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
-          serviceAccountName: portal
