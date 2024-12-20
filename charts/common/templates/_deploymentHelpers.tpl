@@ -122,10 +122,19 @@ readinessProbe:
   protocol: TCP
 {{- end -}}
 
+
 {{- define "common.container.securityContext" -}}
 securityContext:
-  runAsNonRoot: true
   readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+{{- end }}
+
+
+{{- define "common.pod.securityContext" -}}
+securityContext:
+  runAsNonRoot: true
   seccompProfile:
     type: RuntimeDefault
 serviceAccountName: {{ include "common.entity.name" }}
