@@ -57,7 +57,6 @@ tests:
           path: spec.template.spec.securityContext
           value:
             runAsNonRoot: true
-            readOnlyRootFilesystem: true
             seccompProfile:
               type: RuntimeDefault
       - equal:

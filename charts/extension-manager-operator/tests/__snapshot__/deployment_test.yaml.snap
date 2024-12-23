@@ -81,7 +81,6 @@ operator match the snapshot:
             app: extension-manager-operator
             service: extension-manager-operator
         spec:
-          automountServiceAccountToken: true
           containers:
             - args:
                 - operator
@@ -128,7 +127,6 @@ operator match the snapshot:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
-          serviceAccountName: extension-manager-operator
           terminationGracePeriodSeconds: 10
   4: |
     apiVersion: v1
