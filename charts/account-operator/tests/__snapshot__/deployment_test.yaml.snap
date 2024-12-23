@@ -353,6 +353,11 @@ operator match the snapshot:
                 requests:
                   cpu: 150m
                   memory: 128Mi
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
               startupProbe:
                 failureThreshold: 30
                 httpGet:
@@ -361,7 +366,6 @@ operator match the snapshot:
                 periodSeconds: 10
               volumeMounts: null
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
@@ -732,6 +736,11 @@ operator match the snapshot (with kubeconfigSecret):
                 requests:
                   cpu: 40m
                   memory: 50Mi
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
               startupProbe:
                 failureThreshold: 30
                 httpGet:
@@ -742,7 +751,6 @@ operator match the snapshot (with kubeconfigSecret):
                 - mountPath: /api-kubeconfig
                   name: external-api-server
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
@@ -1120,6 +1128,11 @@ operator match the snapshot with webhook enabled:
                 requests:
                   cpu: 150m
                   memory: 128Mi
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
               startupProbe:
                 failureThreshold: 30
                 httpGet:
@@ -1131,7 +1144,6 @@ operator match the snapshot with webhook enabled:
                   name: cert
                   readOnly: true
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault

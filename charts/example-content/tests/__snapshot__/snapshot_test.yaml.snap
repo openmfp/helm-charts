@@ -80,8 +80,7 @@ matches the snapshot:
             app: RELEASE-NAME-example-content
         spec:
           containers:
-            - automountServiceAccountToken: true
-              env:
+            - env:
                 - name: PORT
                   value: "8080"
               image: ghcr.io/openmfp/example-content:1.0.0
@@ -109,7 +108,6 @@ matches the snapshot:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
-              serviceAccountName: RELEASE-NAME
               volumeMounts:
                 - mountPath: /var/cache/nginx
                   name: tmp-volume
