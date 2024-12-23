@@ -24,7 +24,7 @@ spec:
       {{ .Values.deployment.template.annotations | toYaml | nindent 8 }}
       {{- end }}
     spec:
-      {{ include "common.container.securityContext" . | nindent 6 }}
+      {{ include "common.pod.securityContext" . | nindent 6 }}
       containers:
         - args:
           - operator
