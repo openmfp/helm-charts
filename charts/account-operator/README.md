@@ -1,6 +1,6 @@
 # account-operator
 
-A Helm chart for Kubernetes
+A Helm chart to deploy OpenMFP Account-Operator
 
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 

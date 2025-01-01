@@ -8,7 +8,7 @@ metadata:
 spec:
   forProvider:
     enabled: true
-    accessType: CONFIDENTIAL
+    accessType: {{ default "CONFIDENTIAL" $val.accessType }}
     clientId: {{ $key }}
     standardFlowEnabled: true
     name: {{ $val.name }}
@@ -17,9 +17,11 @@ spec:
     validRedirectUris: {{ toYaml $val.validRedirectUris | nindent 6 }}
   providerConfigRef:
     name: {{ $.Values.crossplane.providerConfig.name }}
+{{- if ne $val.accessType "PUBLIC" }}
   writeConnectionSecretToRef:
     name: {{ $.Values.keycloakConfig.client.targetSecret.name }}
     namespace: {{ $.Values.keycloakConfig.client.targetSecret.namespace }}
+{{- end }}
 
 ---
 

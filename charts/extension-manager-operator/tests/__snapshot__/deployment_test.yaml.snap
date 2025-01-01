@@ -81,13 +81,13 @@ operator match the snapshot:
             app: extension-manager-operator
             service: extension-manager-operator
         spec:
+          automountServiceAccountToken: true
           containers:
             - args:
                 - operator
                 - --leader-elect
                 - --log-level=
                 - --health-probe-bind-address=:8081
-              automountServiceAccountToken: true
               image: ghcr.io/openmfp/extension-manager-operator:1.0.0
               imagePullPolicy: Always
               livenessProbe:
@@ -117,18 +117,16 @@ operator match the snapshot:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              securityContext:
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
-                seccompProfile:
-                  type: RuntimeDefault
-              serviceAccountName: extension-manager-operator
               startupProbe:
                 failureThreshold: 30
                 httpGet:
                   path: /readyz
                   port: 8081
                 periodSeconds: 10
+          securityContext:
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           serviceAccountName: extension-manager-operator
           terminationGracePeriodSeconds: 10
   4: |

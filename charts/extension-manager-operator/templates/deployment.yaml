@@ -24,7 +24,7 @@ spec:
       {{ .Values.deployment.template.annotations | toYaml | nindent 8 }}
       {{- end }}
     spec:
-      serviceAccountName: {{ include "common.entity.name" . }}
+      {{ include "common.pod.securityContext" . | nindent 6 }}
       containers:
         - args:
           - operator
@@ -34,7 +34,6 @@ spec:
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: manager
-          {{ include "common.container.securityContext" . | nindent 10 }}
           ports:
           {{- include "common.PortsMetricsHealth" . | nindent 10 -}}
           {{- include "common.operatorHealthAndReadyness" . | nindent 10 -}}
@@ -45,7 +44,6 @@ spec:
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: server
-          {{- include "common.container.securityContext" . | nindent 10 }}
           ports:
           - containerPort: {{ .Values.validationServer.port }}
           {{- include "common.PortsMetricsHealth" . | nindent 10 -}}

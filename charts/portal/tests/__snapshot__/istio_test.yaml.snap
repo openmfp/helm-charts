@@ -21,8 +21,7 @@ matches the snapshot:
             app: portal
         spec:
           containers:
-            - automountServiceAccountToken: true
-              env:
+            - env:
                 - name: HTTP_PROTOCOL
                   value: http
                 - name: OIDC_CLIENT_ID_OPENMFP
@@ -91,17 +90,11 @@ matches the snapshot:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              securityContext:
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
-                seccompProfile:
-                  type: RuntimeDefault
-              serviceAccountName: portal
           securityContext:
-            fsGroup: 2000
-            runAsGroup: 3000
-            runAsUser: 1000
-          serviceAccountName: portal
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
   2: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
@@ -172,8 +165,7 @@ matches the snapshot with istio disabled:
             app: portal
         spec:
           containers:
-            - automountServiceAccountToken: true
-              env:
+            - env:
                 - name: HTTP_PROTOCOL
                   value: http
                 - name: OIDC_CLIENT_ID_OPENMFP
@@ -242,17 +234,11 @@ matches the snapshot with istio disabled:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              securityContext:
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
-                seccompProfile:
-                  type: RuntimeDefault
-              serviceAccountName: portal
           securityContext:
-            fsGroup: 2000
-            runAsGroup: 3000
-            runAsUser: 1000
-          serviceAccountName: portal
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
   2: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
