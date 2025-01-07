@@ -4,9 +4,9 @@ A Helm chart for Kubernetes
 
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 ## Values
-| Key         | Type | Default | Description |
-| ----------- | ---- | ------- | ----------- |
-| kcp.enabled | bool | `false` | Enable KCP  |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| kcp.enabled | bool | `false` | Enable KCP |
 
 ## Overriding Values
 
