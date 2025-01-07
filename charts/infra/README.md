@@ -6,21 +6,21 @@ The infra openmfp chart configures a number of common infrastructure components 
 
 ## Requirements
 
-| Repository                          | Name     | Description                                                                                                                                                                                                                                                                                                 | Sources                                                                  |
-| ----------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `oci://ghcr.io/openmfp/helm-charts` | `common` | The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and [default values](https://github.com/openmfp/helm-charts/blob/main/charts/common/values.yaml) that can be used by other charts. | [source](https://github.com/openmfp/helm-charts/tree/main/charts/common) |
+| Repository | Name | Description | Sources |
+|------------|------|-------------|---------|
+| `oci://ghcr.io/openmfp/helm-charts` | `common` | The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and [default values](https://github.com/openmfp/helm-charts/blob/main/charts/common/values.yaml) that can be used by other charts. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/common)|
 ## Values
-| Key                                | Type   | Default                                                                    | Description                                                                                                                                          |
-| ---------------------------------- | ------ | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| fga.stores                         | list   | `[]`                                                                       | The list of FGA stores to be created                                                                                                                 |
-| istio.gateway.annotations          | object | `{}`                                                                       | Annotations to be applied to the istio gateway                                                                                                       |
-| istio.gateway.apiVersion           | string | `nil`                                                                      | The istio apiVersion of the gateway resource eg, networking.istio.io/v1, networking.istio.io/v1beta1                                                 |
-| istio.gateway.name                 | string | `"gateway"`                                                                | The name of the istio gateway resource                                                                                                               |
-| istio.gateway.selector.istio       | string | `"gateway"`                                                                | The istio ingress gateway selector                                                                                                                   |
-| istio.gateway.servers              | list   | `[{"hosts":["*"],"port":{"name":"http","number":8080,"protocol":"HTTP"}}]` | The "servers" section of the istio gateway. By default it is configured for a local kind setup. Adjust to be a https port for productive deployments |
-| istio.networking.apiVersion        | string | `"networking.istio.io/v1"`                                                 | The istio apiVersion used for networking resources in this chart eg. networking.istio.io/v1, networking.istio.io/v1beta1                             |
-| istio.serviceEntries.https.enabled | bool   | `false`                                                                    | A toggle to enable the service entries for external https communication                                                                              |
-| istio.serviceEntries.https.hosts   | list   | `[]`                                                                       | The list of hosts to be added to the service entry                                                                                                   |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| fga.stores | list | `[]` | The list of FGA stores to be created |
+| istio.gateway.annotations | object | `{}` | Annotations to be applied to the istio gateway |
+| istio.gateway.apiVersion | string | `nil` | The istio apiVersion of the gateway resource eg, networking.istio.io/v1, networking.istio.io/v1beta1 |
+| istio.gateway.name | string | `"gateway"` | The name of the istio gateway resource |
+| istio.gateway.selector.istio | string | `"gateway"` | The istio ingress gateway selector |
+| istio.gateway.servers | list | `[{"hosts":["*"],"port":{"name":"http","number":8080,"protocol":"HTTP"}}]` | The "servers" section of the istio gateway. By default it is configured for a local kind setup. Adjust to be a https port for productive deployments |
+| istio.networking.apiVersion | string | `"networking.istio.io/v1"` | The istio apiVersion used for networking resources in this chart eg. networking.istio.io/v1, networking.istio.io/v1beta1 |
+| istio.serviceEntries.https.enabled | bool | `false` | A toggle to enable the service entries for external https communication |
+| istio.serviceEntries.https.hosts | list | `[]` | The list of hosts to be added to the service entry |
 
 ## Overriding Values
 
