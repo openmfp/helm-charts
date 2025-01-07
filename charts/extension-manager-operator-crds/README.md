@@ -5,7 +5,7 @@ A Helm chart for Kubernetes
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 ## Values
 | Key | Type | Default | Description |
-| --- | ---- | ------- | ----------- |
+|-----|------|---------|-------------|
 
 ## Overriding Values
 

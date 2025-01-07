@@ -6,16 +6,16 @@ A chart containing CRD Definitions for OpenMFP
 
 ## Requirements
 
-| Repository                          | Name                              | Description                                        | Sources                                                                                           |
-| ----------------------------------- | --------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `oci://ghcr.io/openmfp/helm-charts` | `account-operator-crds`           | The openmfp account-operator-crds chart.           | [source](https://github.com/openmfp/helm-charts/tree/main/charts/account-operator-crds)           |
-| `oci://ghcr.io/openmfp/helm-charts` | `extension-manager-operator-crds` | The openmfp extension-manager-operator-crds chart. | [source](https://github.com/openmfp/helm-charts/tree/main/charts/extension-manager-operator-crds) |
+| Repository | Name | Description | Sources |
+|------------|------|-------------|---------|
+| `oci://ghcr.io/openmfp/helm-charts` | `account-operator-crds` | The openmfp account-operator-crds chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/account-operator-crds)|
+| `oci://ghcr.io/openmfp/helm-charts` | `extension-manager-operator-crds` | The openmfp extension-manager-operator-crds chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/extension-manager-operator-crds)|
 
 ## Values
-| Key                                     | Type | Default | Description |
-| --------------------------------------- | ---- | ------- | ----------- |
-| account-operator-crds.enabled           | bool | `true`  |             |
-| extension-manager-operator-crds.enabled | bool | `true`  |             |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| account-operator-crds.enabled | bool | `true` |  |
+| extension-manager-operator-crds.enabled | bool | `true` |  |
 
 ## Overriding Values
 
