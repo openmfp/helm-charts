@@ -137,8 +137,6 @@ securityContext:
   runAsNonRoot: true
   seccompProfile:
     type: RuntimeDefault
-serviceAccountName: {{ include "common.entity.name" . }}
-automountServiceAccountToken: {{ not (eq (.Values.security).mountServiceAccountToken false) }}
 {{- end }}
 
 {{- define "common.spec.securityContext" -}}
