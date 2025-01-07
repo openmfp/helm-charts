@@ -291,7 +291,7 @@ operator match the snapshot:
             control-plane: controller-manager
             service: account-operator
         spec:
-          automountServiceAccountToken: false
+          automountServiceAccountToken: true
           containers:
             - args:
                 - operator
@@ -672,7 +672,7 @@ operator match the snapshot (with kubeconfigSecret):
             control-plane: controller-manager
             service: account-operator
         spec:
-          automountServiceAccountToken: false
+          automountServiceAccountToken: true
           containers:
             - args:
                 - operator
@@ -1063,7 +1063,7 @@ operator match the snapshot with webhook enabled:
             control-plane: controller-manager
             service: account-operator
         spec:
-          automountServiceAccountToken: false
+          automountServiceAccountToken: true
           containers:
             - args:
                 - operator
