@@ -52,7 +52,7 @@ logLevel: warn
 
 security:
   # -- Mount the service account token
-  mountServiceAccountToken: false
+  mountServiceAccountToken: true
 
 deployment:
   specTemplate:
