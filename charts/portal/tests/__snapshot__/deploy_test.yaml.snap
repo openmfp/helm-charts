@@ -90,6 +90,8 @@ matches the snapshot:
                 requests:
                   cpu: 40m
                   memory: 50Mi
+          imagePullSecrets:
+            - name: github
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
