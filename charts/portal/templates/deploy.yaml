@@ -19,7 +19,11 @@ spec:
         app: {{ include "common.entity.name" . }}
     spec:
       {{- include "common.imagePullSecret" . | indent 6}}
-      {{ include "common.container.securityContext" . | nindent 6 }}
+      securityContext:
+        readOnlyRootFilesystem: true
+        runAsNonRoot: false
+        seccompProfile:
+          type: RuntimeDefault
       containers:
       - name: {{ include "common.entity.name" . }}
         image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
