@@ -90,6 +90,8 @@ matches the snapshot:
                 requests:
                   cpu: 40m
                   memory: 50Mi
+          imagePullSecrets:
+            - name: github
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
@@ -234,6 +236,8 @@ matches the snapshot with istio disabled:
                 requests:
                   cpu: 40m
                   memory: 50Mi
+          imagePullSecrets:
+            - name: github
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
