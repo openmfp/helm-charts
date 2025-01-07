@@ -4,17 +4,17 @@ Helm Chart for the openmfp Portal
 
 ## Requirements
 
-| Repository                          | Name     | Description                                                                                                                                                                                                                                                                                                 | Sources                                                                  |
-| ----------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `oci://ghcr.io/openmfp/helm-charts` | `common` | The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and [default values](https://github.com/openmfp/helm-charts/blob/main/charts/common/values.yaml) that can be used by other charts. | [source](https://github.com/openmfp/helm-charts/tree/main/charts/common) |
+| Repository | Name | Description | Sources |
+|------------|------|-------------|---------|
+| `oci://ghcr.io/openmfp/helm-charts` | `common` | The `common` chart is a library of common resources that are shared across all other charts in the repository. It has no templates, but provides helm template functions and [default values](https://github.com/openmfp/helm-charts/blob/main/charts/common/values.yaml) that can be used by other charts. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/common)|
 ## Values
-| Key                                                  | Type   | Default                             | Description                                                       |
-| ---------------------------------------------------- | ------ | ----------------------------------- | ----------------------------------------------------------------- |
-| contentConfigurations.home                           | bool   | `true`                              | This content configuration enables a basic homepage in the portal |
-| image.name                                           | string | `"ghcr.io/openmfp/example-content"` | The image name                                                    |
-| istio.virtualService.hosts[0]                        | string | `"your-host.com"`                   |                                                                   |
-| istio.virtualService.matchers[0].match[0].uri.exact  | string | `"/ui/example-content"`             |                                                                   |
-| istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"`            |                                                                   |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| contentConfigurations.home | bool | `true` | This content configuration enables a basic homepage in the portal |
+| image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
+| istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
+| istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
+| istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"` |  |
 
 ## Overriding Values
 

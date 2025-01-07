@@ -6,20 +6,20 @@ The OpenMFP chart for Kubernetes
 
 ## Requirements
 
-| Repository                          | Name                         | Description                                   | Sources                                                                                      |
-| ----------------------------------- | ---------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `oci://ghcr.io/openmfp/helm-charts` | `portal`                     | The openmfp portal chart.                     | [source](https://github.com/openmfp/helm-charts/tree/main/charts/portal)                     |
-| `oci://ghcr.io/openmfp/helm-charts` | `example-content`            | The openmfp example-content chart.            | [source](https://github.com/openmfp/helm-charts/tree/main/charts/example-content)            |
-| `oci://ghcr.io/openmfp/helm-charts` | `infra`                      | The openmfp infra chart.                      | [source](https://github.com/openmfp/helm-charts/tree/main/charts/infra)                      |
-| `oci://ghcr.io/openmfp/helm-charts` | `extension-manager-operator` | The openmfp extension-manager-operator chart. | [source](https://github.com/openmfp/helm-charts/tree/main/charts/extension-manager-operator) |
+| Repository | Name | Description | Sources |
+|------------|------|-------------|---------|
+| `oci://ghcr.io/openmfp/helm-charts` | `portal` | The openmfp portal chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/portal)|
+| `oci://ghcr.io/openmfp/helm-charts` | `example-content` | The openmfp example-content chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/example-content)|
+| `oci://ghcr.io/openmfp/helm-charts` | `infra` | The openmfp infra chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/infra)|
+| `oci://ghcr.io/openmfp/helm-charts` | `extension-manager-operator` | The openmfp extension-manager-operator chart. |[source](https://github.com/openmfp/helm-charts/tree/main/charts/extension-manager-operator)|
 
 ## Values
-| Key                                           | Type | Default | Description                                 |
-| --------------------------------------------- | ---- | ------- | ------------------------------------------- |
-| components.example-content.enabled            | bool | `false` | enable example-content component            |
-| components.extension-manager-operator.enabled | bool | `true`  | enable extension-manager-operator component |
-| components.infra.enabled                      | bool | `true`  | enable infra component                      |
-| components.portal.enabled                     | bool | `true`  | enable portal component                     |
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| components.example-content.enabled | bool | `false` | enable example-content component |
+| components.extension-manager-operator.enabled | bool | `true` | enable extension-manager-operator component |
+| components.infra.enabled | bool | `true` | enable infra component |
+| components.portal.enabled | bool | `true` | enable portal component |
 
 ## Overriding Values
 
