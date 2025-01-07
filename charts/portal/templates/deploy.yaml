@@ -18,6 +18,7 @@ spec:
       labels:
         app: {{ include "common.entity.name" . }}
     spec:
+      {{- include "common.imagePullSecret" . | indent 6}}
       {{ include "common.container.securityContext" . | nindent 6 }}
       containers:
       - name: {{ include "common.entity.name" . }}
