@@ -1,4 +1,5 @@
 # Default code owners
 * @openmfp/frame
-go.mod
-go.sum
+Chart.lock
+Chart.yaml
+*.tgz
