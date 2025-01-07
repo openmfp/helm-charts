@@ -94,7 +94,7 @@ matches the snapshot:
             - name: github
           securityContext:
             readOnlyRootFilesystem: true
-            runAsNonRoot: true
+            runAsNonRoot: false
             seccompProfile:
               type: RuntimeDefault
   2: |
@@ -240,7 +240,7 @@ matches the snapshot with istio disabled:
             - name: github
           securityContext:
             readOnlyRootFilesystem: true
-            runAsNonRoot: true
+            runAsNonRoot: false
             seccompProfile:
               type: RuntimeDefault
   2: |

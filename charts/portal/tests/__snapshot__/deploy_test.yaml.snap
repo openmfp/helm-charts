@@ -94,6 +94,6 @@ matches the snapshot:
             - name: github
           securityContext:
             readOnlyRootFilesystem: true
-            runAsNonRoot: true
+            runAsNonRoot: false
             seccompProfile:
               type: RuntimeDefault

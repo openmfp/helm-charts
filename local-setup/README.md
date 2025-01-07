@@ -15,6 +15,7 @@ upgrade the Helm releases to their latest chart version based on semver ranges.
 ## Prerequisites
 
 - [Docker](https://www.docker.com) or [podman](https://podman.io): install either docker or podman in order to run the kind cluster
+  Resources: configure at least 10GB of memory for docker
 - [Kind](https://kind.sigs.k8s.io/): In order to have a local kubernetes cluster you can use kind. Kind Installation: [Kind Quick Start](https://kind.sigs.k8s.io/docs/user/quick-start/)
   On macOS using Homebrew:
   ```sh
