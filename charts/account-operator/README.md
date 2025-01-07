@@ -23,7 +23,7 @@ A Helm chart to deploy OpenMFP Account-Operator
 | kcp.virtualWorkspaceUrl | string | `""` | The URL for the virtual workspace |
 | kubeconfigSecret | string | `""` | The secret for kubeconfig |
 | logLevel | string | `"warn"` | The log level |
-| security.mountServiceAccountToken | bool | `false` | Mount the service account token |
+| security.mountServiceAccountToken | bool | `true` | Mount the service account token |
 | subroutines.extension.enabled | bool | `true` | Enable extension subroutines |
 | subroutines.extensionReady.enabled | bool | `true` | Enable extension ready subroutines |
 | subroutines.fga.creatorRelation | string | `"owner"` | The creator relation for FGA |
