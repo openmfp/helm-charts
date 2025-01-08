@@ -19,7 +19,7 @@ spec:
         app: {{ include "common.entity.name" . }}
     spec:
       {{- include "common.imagePullSecret" . | indent 6}}
-      {{ include "common.container.securityContext" . | nindent 6 }}
+      {{ include "common.pod.securityContext" . | nindent 6 }}
       containers:
       - name: {{ include "common.entity.name" . }}
         image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
@@ -88,3 +88,4 @@ spec:
         {{- end }}
         {{ include "common.resources" . | nindent 8 }}
         {{- include "common.ports" (dict "Values" .Values) | nindent 8 -}}
+        {{ include "common.container.securityContext" . | nindent 8 }}
