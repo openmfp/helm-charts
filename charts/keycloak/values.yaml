@@ -34,8 +34,7 @@ crossplane:
       validRedirectUris:
         # -- keycloak callback url
         - http://localhost:8000/callback*
-  trustedAudiences:
-    - gardener
+  trustedAudiences: []
 
   # -- crossplane identity providers config
   identityProviders:
