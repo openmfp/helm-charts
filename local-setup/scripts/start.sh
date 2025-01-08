@@ -9,7 +9,7 @@ SCRIPT_DIR=$(dirname "$0")
 
 # Check for input argument GH_TOKEN and echo message in case not provided
 if [ -z "${GH_TOKEN}" ]; then
-    echo "Please set the 'GITHUB_TOKEN' environment variable with a GitHub token that has 'read:packages' scope."
+    echo "Please set the 'GH_TOKEN' environment variable with a GitHub token that has 'read:packages' scope."
     exit 1
 else
   ghToken=$GH_TOKEN
