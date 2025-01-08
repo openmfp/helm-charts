@@ -43,8 +43,8 @@ jobs:
 
     - name: Run start.sh
       env:
-        # GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_TOKEN: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # GH_TOKEN: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
         GH_USER: ${{ github.repository_owner }}
       run: |
         chmod +x /home/runner/work/helm-charts/helm-charts/local-setup/scripts/start.sh
