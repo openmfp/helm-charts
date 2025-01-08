@@ -4,12 +4,12 @@ dependencies:
   version: 0.111.11
 - name: portal
   repository: oci://ghcr.io/openmfp/helm-charts
-  version: 0.69.224
+  version: 0.70.0
 - name: infra
   repository: oci://ghcr.io/openmfp/helm-charts
   version: 0.60.7
 - name: extension-manager-operator
   repository: oci://ghcr.io/openmfp/helm-charts
   version: 0.22.76
-digest: sha256:2d8ebaf64c1cb6a9b3ba82665616ea73fbe1e507607aabe1d445cde3d201612b
-generated: "2025-01-08T09:48:53.449907395Z"
+digest: sha256:cfdeae50b51e34135fc103a909ade681402eb2cfc7c5b76ca97ae7858523856b
+generated: "2025-01-08T13:25:30.220696171Z"
