@@ -26,10 +26,10 @@ jobs:
     - name: Verify KIND installation
       run: kind version
 
-    # - name: Run start.sh
-    #   env:
-    #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   run: |
-    #     ./local-setup/scripts/start.sh
+    - name: Run start.sh
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        ./local-setup/scripts/start.sh
 
 
