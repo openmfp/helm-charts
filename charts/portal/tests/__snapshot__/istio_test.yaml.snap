@@ -71,6 +71,8 @@ matches the snapshot:
                   value: local
                 - name: VALID_WEBCOMPONENT_URLS
                   value: .?
+                - name: TEST_TEST
+                  value: test test
               image: ghcr.io/openmfp/portal:1.0.0
               imagePullPolicy: Always
               name: portal
@@ -223,6 +225,8 @@ matches the snapshot with istio disabled:
                   value: local
                 - name: VALID_WEBCOMPONENT_URLS
                   value: .?
+                - name: TEST_TEST
+                  value: test test
               image: ghcr.io/openmfp/portal:1.0.0
               imagePullPolicy: Always
               name: portal
