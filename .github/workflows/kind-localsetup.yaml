@@ -12,14 +12,21 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: engineerd/setup-kind@v0.6.0
-      with:
-        version: "v0.24.0"
-
-    - name: Run start.sh
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     # Step 2: Install KIND
+    - name: Install KIND
       run: |
-        ./local-setup/scripts/start.sh
+          curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
+          chmod +x ./kind
+          sudo mv ./kind /usr/local/bin/kind
+
+      # Step 3: Verify KIND installation
+    - name: Verify KIND installation
+      run: kind version
+
+    # - name: Run start.sh
+    #   env:
+    #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   run: |
+    #     ./local-setup/scripts/start.sh
 
 
