@@ -35,7 +35,7 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 | crossplane.realm.displayName | string | `"OpenMFP"` | realm display name |
 | crossplane.realm.name | string | `"openmfp"` | realm name |
 | crossplane.realm.registrationAllowed | bool | `false` | realm registration allowed |
-| crossplane.trustedAudiences[0] | string | `"gardener"` |  |
+| crossplane.trustedAudiences | list | `[]` |  |
 | debug | bool | `false` | debug mode |
 | domain | object | `{"name":"openmfp.org","pathPrefix":""}` | domain configuration |
 | domain.name | string | `"openmfp.org"` | domain name |
