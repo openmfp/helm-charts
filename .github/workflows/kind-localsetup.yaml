@@ -1,0 +1,15 @@
+name: Test local setup
+on:
+  pull_request:
+    branches:
+      - '**'
+
+
+jobs:
+  kind-localsetup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+
