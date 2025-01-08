@@ -20,6 +20,7 @@ matches the snapshot:
           labels:
             app: portal
         spec:
+          automountServiceAccountToken: true
           containers:
             - env:
                 - name: HTTP_PROTOCOL
@@ -70,6 +71,8 @@ matches the snapshot:
                   value: local
                 - name: VALID_WEBCOMPONENT_URLS
                   value: .?
+                - name: TEST_TEST
+                  value: test test
               image: ghcr.io/openmfp/portal:1.0.0
               imagePullPolicy: Always
               name: portal
@@ -90,10 +93,15 @@ matches the snapshot:
                 requests:
                   cpu: 40m
                   memory: 50Mi
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
           imagePullSecrets:
             - name: github
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
+          serviceAccountName: portal
