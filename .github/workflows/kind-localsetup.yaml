@@ -5,7 +5,7 @@ on:
       - '**'
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: localsetup-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
