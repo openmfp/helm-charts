@@ -32,6 +32,15 @@ jobs:
         chmod 700 get_helm.sh
         ./get_helm.sh
 
+
+    - name: Install the gh cli
+      uses: ksivamuthu/actions-setup-gh-cli@<VERSION>
+      with:
+        version: 2.24.3
+    - run: |
+        gh version
+
+
     - name: Run start.sh
       env:
         # GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
