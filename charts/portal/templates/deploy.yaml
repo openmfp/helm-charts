@@ -86,6 +86,10 @@ spec:
         - name: VALID_WEBCOMPONENT_URLS
           value: '{{ .Values.validWebcomponentUrls }}'
         {{- end }}
+        {{ range .Values.extraEnvVars }}
+        - name: {{ .name }}
+          value: {{ .value }}
+        {{ end }}
         {{ include "common.resources" . | nindent 8 }}
         {{- include "common.ports" (dict "Values" .Values) | nindent 8 -}}
         {{ include "common.container.securityContext" . | nindent 8 }}

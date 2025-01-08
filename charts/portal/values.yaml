@@ -33,6 +33,9 @@ baseDomains:
 # -- cookie domain
 cookieDomain: "localhost"
 
+# -- A way to provide additional experimental environment variables
+extraEnvVars: {}
+
 trust:
   openmfp:
     # -- base domains
