@@ -3,7 +3,7 @@ name: keycloak
 description: A Helm chart to deploy keycloak as OIDC provider in openmfp
 
 type: application
-version: 0.60.4
+version: 0.60.5
 appVersion: "1.16.0"
 
 dependencies:
