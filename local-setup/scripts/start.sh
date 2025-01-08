@@ -55,13 +55,15 @@ echo -e "$COL Starting deployments $COL_RES"
 kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
 
 echo -e "$COL Creating necessary secrets $COL_RES"
-kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken -o yaml > secret.yaml
+kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=${GH_TOKEN} -o yaml > secret.yaml << EOF
+# Dry-run check (optional)
+# uncomment the following line if you want to see the generated YAML manifest without creating the secret
+# --dry-run=client
+EOF
 kubectl apply -f secret.yaml
 rm secret.yaml
 
-kubectl create secret generic keycloak-admin -n openmfp-system --from-literal=secret=admin -o yaml > secret.yaml
-kubectl apply -f secret.yaml
-rm secret.yaml
+kubectl create secret generic keycloak-admin -n openmfp-system --from-literal=secret=admin --dry-run=client -o yaml | kubectl apply -f -
 
 echo -e "$COL Waiting for istio to become ready $COL_RES"
 kubectl wait --namespace istio-system \
