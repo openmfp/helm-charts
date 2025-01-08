@@ -14,6 +14,7 @@ Helm Chart for the openmfp Portal
 | cookieDomain | string | `"localhost"` | cookie domain |
 | developmentLandcsape | string | `"true"` | development landscape toggle |
 | environment | string | `"local"` | environment |
+| extraEnvVars | object | `{}` | A way to provide additional experimental environment variables |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
 | frontendPort | int | `8000` | frontend port |
 | http.protocol | string | `"http"` | protocol |

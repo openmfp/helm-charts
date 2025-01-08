@@ -12,3 +12,7 @@ trust:
     discoveryEndpoint: https://auth.example.com/.well-known/openid-configuration
     loginAudience: "12345"
     oidcClientSecretName: portal
+
+extraEnvVars:
+  - name: TEST_TEST
+    value: test test
