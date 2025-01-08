@@ -79,7 +79,7 @@ kubectl wait --namespace openmfp-system \
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
-  --timeout=480s openmfp
+  --timeout=880s openmfp
 
 echo "-------------------------------------"
 echo "Installation Complete ♥!"
