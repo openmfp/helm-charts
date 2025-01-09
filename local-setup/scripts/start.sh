@@ -73,8 +73,34 @@ kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
   --timeout=480s openmfp
 
-echo "${COL}-------------------------------------${COL_RES}"
-echo "${COL}[$(date '+%H:%M:%S')] Installation Complete ♥!${COL_RES}"
-echo "${COL}-------------------------------------${COL_RES}"
-echo "${COL}You can access the portal at: http://localhost:8000${COL_RES}"
+# Check if curl is available
+if command -v curl &> /dev/null; then
+  URL="http://localhost:8000"
+  TIMEOUT=120
+  INTERVAL=5
+  END=$((SECONDS + TIMEOUT))
+  while [ $SECONDS -lt $END ]; do
+    HTTP_CODE=$(curl -o /dev/null -s -w "%{http_code}" $URL)
+    if [ $HTTP_CODE -eq 200 ]; then
+      echo "${COL}[$(date '+%H:%M:%S')] Waiting for Portal to respond...${COL_RES}"
+      echo "${COL}-------------------------------------${COL_RES}"
+      echo "${COL}[$(date '+%H:%M:%S')] Installation Complete ♥!${COL_RES}"
+      echo "${COL}-------------------------------------${COL_RES}"
+      echo "${COL}You can access the portal at: http://localhost:8000${COL_RES}"
+      exit 0
+    fi
+    sleep $INTERVAL
+  done
+else
+  echo "[SKIPPED] Skipped test call to portal, as curl is not available."
+  echo "${COL}-------------------------------------${COL_RES}"
+  echo "${COL}[$(date '+%H:%M:%S')] Installation Complete ♥!${COL_RES}"
+  echo "${COL}-------------------------------------${COL_RES}"
+  echo "${COL}You can access the portal at: http://localhost:8000${COL_RES}"
+  exit 0
+fi
+echo "Timeout reached without receiving 200 response code, something went wrong. In case this does not resolve, please create a github issue in https://github.com/openmfp/helm-charts."
+exit 1
+
+
 
