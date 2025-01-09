@@ -59,9 +59,9 @@ jobs:
 
     - name: Run start.sh
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PULLSECRET_TOKEN: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
-        PULLSECRET_USER: ${{ github.repository_owner }}
+        # GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # GH_USER: ${{ github.repository_owner }}
+        GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         GH_USER: ${{ github.repository_owner }}
       run: |
         docker info
