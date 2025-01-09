@@ -87,8 +87,8 @@ kubectl get pods -A
 kubectl get helmreleases -A
 kubectl get deployments -A
 
-# describe all pods which are not RUNNING
-kubectl get pods -A --field-selector=status.phase!=RUNNING -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
+# describe all pods which are not Running
+kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
 
 # describe all helmreleases which are not Ready yet
 kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
