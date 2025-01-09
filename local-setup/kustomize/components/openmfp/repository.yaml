@@ -8,6 +8,6 @@ spec:
   url: oci://ghcr.io/openmfp/helm-charts/openmfp
   ref:
     # renovate: datasource=docker registryUrl=https://ghcr.io depName=ghcr.io/openmfp/helm-charts-priv/openmfp
-    semver: 0.0.110
+    semver: 0.35.180
   secretRef:
     name: ghcr-credentials
