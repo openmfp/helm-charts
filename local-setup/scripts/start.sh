@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# set -e
-set -x
+set -e
 COL='\033[92m'
 COL_RES='\033[0m'
 
