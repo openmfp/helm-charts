@@ -19,6 +19,7 @@ The OpenMFP chart for Kubernetes
 | components.example-content.enabled | bool | `false` | enable example-content component |
 | components.extension-manager-operator.enabled | bool | `true` | enable extension-manager-operator component |
 | components.infra.enabled | bool | `true` | enable infra component |
+| components.keycloak.enabled | bool | `true` | enable keycloak component |
 | components.portal.enabled | bool | `true` | enable portal component |
 
 ## Overriding Values
