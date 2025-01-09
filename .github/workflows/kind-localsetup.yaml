@@ -61,12 +61,9 @@ jobs:
 
     - uses: peter-evans/create-or-update-comment@v3
       with:
-        token: ${{ steps.generate-token.outputs.token }}
-        repository: ${{ github.repository }}
         issue-number: 163
         body: "GH Token created"
-        edit-mode: replace
-        comment-id: issuecomment-2581030847
+        reactions: '+1'
 
     # Debug step: test docker pull
     - name: Test docker pull
