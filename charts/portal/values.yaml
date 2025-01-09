@@ -52,3 +52,16 @@ trust:
     loginAudience: openmfp
     # -- secret key reference
     secretKeyRef: attribute.client_secret
+
+health:
+  # -- health port to be used by probes
+  port: 8080
+  readiness:
+    # -- path used for the readiness probe
+    path: /rest/health
+  liveness:
+    # -- path used for the liveness probe
+    path: /rest/health
+  startup:
+    # -- path used for the startup probe
+    path: /rest/health

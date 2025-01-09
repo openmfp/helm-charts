@@ -3,14 +3,13 @@
 DEBUG=${DEBUG:-false}
 
 if [ "${DEBUG}" = "true" ]; then
-  echo "DEBUG on"
   set -x
 else
-  echo "DEBUG off"
   set -e
 fi
 
 COL='\033[92m'
+RED='\033[91m'
 COL_RES='\033[0m'
 
 SCRIPT_DIR=$(dirname "$0")
@@ -35,39 +34,31 @@ else
   ghUser=$GH_USER
 fi
 
-kkSecret=""
-# it is possible to setup a keycloak client secret using the KEYCLOAK_SECRET environment variable
-if [ -z "${KEYCLOAK_SECRET}" ]; then
-  kkSecret=openmfp-keylcoak-secret
-else
-  kkSecret=$KEYCLOAK_SECRET
-fi
-
-
 # Check if kind cluster kind is already running, exit if yes
 if [ $(kind get clusters | grep -c openmfp) -gt 0 ]; then
-    echo -e "$COL Kind cluster already running, using existing $COL_RES"
+    echo -e "${COL}[$(date '+%H:%M:%S')] Kind cluster already running, using existing ${COL_RES}"
     kind export kubeconfig --name openmfp
 else
-  echo -e "$COL Creating kind cluster $COL_RES"
+  echo -e "${COL}[$(date '+%H:%M:%S')] Creating kind cluster ${COL_RES}"
   kind create cluster --config $SCRIPT_DIR/../kind/kind-config.yaml --name openmfp --image=kindest/node:v1.30.2
 fi
 
-echo -e "$COL Installing flux $COL_RES"
+echo -e "${COL}[$(date '+%H:%M:%S')] Installing flux ${COL_RES}"
 helm upgrade -i -n flux-system --create-namespace flux oci://ghcr.io/fluxcd-community/charts/flux2 \
   --set imageAutomationController.create=false \
   --set imageReflectionController.create=false \
   --set kustomizeController.create=false \
   --set notificationController.create=false
 
-echo -e "$COL Starting deployments $COL_RES"
+echo -e "${COL}[$(date '+%H:%M:%S')] Starting deployments ${COL_RES}"
 kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
 
-echo -e "$COL Creating necessary secrets $COL_RES"
+echo -e "${COL}[$(date '+%H:%M:%S')] Creating necessary secrets ${COL_RES}"
 kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
+
 kubectl create secret generic keycloak-admin -n openmfp-system --from-literal=secret=admin --dry-run=client -o yaml | kubectl apply -f -
 
-echo -e "$COL Waiting for istio to become ready $COL_RES"
+echo -e "${COL}[$(date '+%H:%M:%S')] Waiting for istio to become ready ${COL_RES}"
 kubectl wait --namespace istio-system \
   --for=condition=Ready helmreleases \
   --timeout=120s istio-base
@@ -80,7 +71,7 @@ kubectl wait --namespace istio-system \
   --for=condition=Ready helmreleases \
   --timeout=120s istio-gateway
 
-echo -e "$COL Waiting for OpenMFP CRDs to become ready $COL_RES"
+echo -e "${COL}[$(date '+%H:%M:%S')] Waiting for OpenMFP CRDs to become ready ${COL_RES} (this may take a few minutes)"
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
@@ -108,8 +99,8 @@ if [ "${DEBUG}" = "true" ]; then
   kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
 fi
 
-echo "-------------------------------------"
-echo "Installation Complete ♥!"
-echo "-------------------------------------"
-echo "You can access the portal at: http://localhost:8000"
-
+echo -e "${COL}-------------------------------------${COL_RES}"
+echo -e "${COL}[$(date '+%H:%M:%S')] Installation Complete ${RED}♥${COL}!${COL_RES}"
+echo -e "${COL}-------------------------------------${COL_RES}"
+echo -e "${COL}You can access the portal at: http://localhost:8000${COL_RES}"
+exit 0
