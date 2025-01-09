@@ -75,6 +75,12 @@ matches the snapshot:
                   value: test test
               image: ghcr.io/openmfp/portal:1.0.0
               imagePullPolicy: Always
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /rest/health
+                  port: 8081
+                periodSeconds: 10
               name: portal
               ports:
                 - containerPort: 8080
@@ -86,6 +92,12 @@ matches the snapshot:
                 - containerPort: 8081
                   name: health-port
                   protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /rest/health
+                  port: 8081
+                initialDelaySeconds: 5
+                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -98,6 +110,12 @@ matches the snapshot:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /rest/health
+                  port: 8081
+                periodSeconds: 10
           imagePullSecrets:
             - name: github
           securityContext:
@@ -229,6 +247,12 @@ matches the snapshot with istio disabled:
                   value: test test
               image: ghcr.io/openmfp/portal:1.0.0
               imagePullPolicy: Always
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /rest/health
+                  port: 8081
+                periodSeconds: 10
               name: portal
               ports:
                 - containerPort: 8080
@@ -240,6 +264,12 @@ matches the snapshot with istio disabled:
                 - containerPort: 8081
                   name: health-port
                   protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /rest/health
+                  port: 8081
+                initialDelaySeconds: 5
+                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -252,6 +282,12 @@ matches the snapshot with istio disabled:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /rest/health
+                  port: 8081
+                periodSeconds: 10
           imagePullSecrets:
             - name: github
           securityContext:
