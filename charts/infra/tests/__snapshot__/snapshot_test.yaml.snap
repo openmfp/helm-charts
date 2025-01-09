@@ -6,7 +6,7 @@ matches the snapshot:
       name: test
       namespace: test
     spec:
-      coreModule: |2-
+      coreModule: |2
         module core
 
         type user
@@ -15,6 +15,10 @@ matches the snapshot:
           relations
             define owner: [user]
             define member: [user] or owner
+      tuples:
+        - object: account:a
+          relation: owner
+          user: user:a
   2: |
     apiVersion: networking.istio.io/v1
     kind: Gateway
