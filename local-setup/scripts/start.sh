@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # set -e
+set -x
 COL='\033[92m'
 COL_RES='\033[0m'
 
@@ -83,9 +84,11 @@ kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
   --timeout=480s openmfp
 
-kubectl get pods -A
+kubectl get pods -A -o wide
 kubectl get helmreleases -A
 kubectl get deployments -A
+kubectl get secrets -A
+kubectl get nodes -o wide
 
 # describe all pods which are not Running
 kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
