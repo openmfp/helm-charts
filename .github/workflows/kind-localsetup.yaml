@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest-large
 
     steps:
+    # Step 1: Checkout the code
     - uses: actions/checkout@v4
 
      # Step 2: Install KIND
@@ -35,7 +36,7 @@ jobs:
         chmod 700 get_helm.sh
         ./get_helm.sh
 
-
+    # Step 4: Install github cli
     - name: Install the gh cli
       uses: ksivamuthu/actions-setup-gh-cli@v3
       with:
@@ -43,6 +44,7 @@ jobs:
     - run: |
         gh version
 
+    # Step 5: generate GH_TOKEN with permissions to pull private images
     - name: Generate a token
       id: generate-token
       uses: actions/create-github-app-token@v1
@@ -55,12 +57,9 @@ jobs:
           extension-manager-operator
           portal
 
-
-
+    # Step 6: Run start.sh
     - name: Run start.sh
       env:
-        # GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # GH_USER: ${{ github.repository_owner }}
         GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         GH_USER: ${{ github.repository_owner }}
       run: |
