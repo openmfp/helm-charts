@@ -16,56 +16,56 @@ jobs:
     # Step 1: Checkout the code
     - uses: actions/checkout@v4
 
-    #  # Step 2: Install KIND
-    # - name: Install KIND
-    #   run: |
-    #       # For AMD64 / x86_64
-    #       [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-amd64
-    #       # For ARM64
-    #       [ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-arm64
-    #       chmod +x ./kind
-    #       sudo mv ./kind /usr/local/bin/kind
+     # Step 2: Install KIND
+    - name: Install KIND
+      run: |
+          # For AMD64 / x86_64
+          [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-amd64
+          # For ARM64
+          [ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-arm64
+          chmod +x ./kind
+          sudo mv ./kind /usr/local/bin/kind
 
-    #   # Step 3: Verify KIND installation
-    # - name: Verify KIND installation
-    #   run: kind version
+      # Step 3: Verify KIND installation
+    - name: Verify KIND installation
+      run: kind version
     
-    # - name: Install HELM
-    #   run: |
-    #     curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-    #     chmod 700 get_helm.sh
-    #     ./get_helm.sh
+    - name: Install HELM
+      run: |
+        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+        chmod 700 get_helm.sh
+        ./get_helm.sh
 
-    # # Step 4: Install github cli
-    # - name: Install the gh cli
-    #   uses: ksivamuthu/actions-setup-gh-cli@v3
-    #   with:
-    #     version: 2.24.3
-    # - run: |
-    #     gh version
+    # Step 4: Install github cli
+    - name: Install the gh cli
+      uses: ksivamuthu/actions-setup-gh-cli@v3
+      with:
+        version: 2.24.3
+    - run: |
+        gh version
 
-    # # Step 5: generate GH_TOKEN with permissions to pull private images
-    # - name: Generate a token
-    #   id: generate-token
-    #   uses: actions/create-github-app-token@v1
-    #   with:
-    #     app-id: "838464"
-    #     private-key: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
-    #     owner: ${{ github.repository_owner }}
-    #     repositories: |
-    #       example-content
-    #       extension-manager-operator
-    #       portal
+    # Step 5: generate GH_TOKEN with permissions to pull private images
+    - name: Generate a token
+      id: generate-token
+      uses: actions/create-github-app-token@v1
+      with:
+        app-id: "838464"
+        private-key: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
+        owner: ${{ github.repository_owner }}
+        repositories: |
+          example-content
+          extension-manager-operator
+          portal
 
-    # # Step 6: Run start.sh
-    # - name: Run start.sh
-    #   env:
-    #     GH_TOKEN: ${{ steps.generate-token.outputs.token }}
-    #     GH_USER: ${{ github.repository_owner }}
-    #     DEBUG: true
-    #   run: |
-    #     chmod +x /home/runner/work/helm-charts/helm-charts/local-setup/scripts/start.sh
-    #     /home/runner/work/helm-charts/helm-charts/local-setup/scripts/start.sh
+    # Step 6: Run start.sh
+    - name: Run start.sh
+      env:
+        GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+        GH_USER: ${{ github.repository_owner }}
+        DEBUG: true
+      run: |
+        chmod +x ./local-setup/scripts/start.sh
+        ./local-setup/scripts/start.sh
 
     # Step 7: Prepare the NodeJS/playwright environment
     - name: Cache node modules
@@ -96,5 +96,6 @@ jobs:
     - name: End2End tests
       run: |
         echo "Running e2e tests"
-        # node local-setup/e2e/test-register-and-navigate.js
-        node local-setup/e2e/test-example.js
+        sleep 10
+        node local-setup/e2e/test-register-and-navigate.js
+        # node local-setup/e2e/test-example.js
