@@ -75,6 +75,7 @@ kubectl wait --namespace openmfp-system \
 
 # Check if curl is available
 if command -v curl &> /dev/null; then
+  echo "${COL}[$(date '+%H:%M:%S')] Waiting for Portal to respond...${COL_RES}"
   URL="http://localhost:8000"
   TIMEOUT=120
   INTERVAL=5
@@ -82,7 +83,6 @@ if command -v curl &> /dev/null; then
   while [ $SECONDS -lt $END ]; do
     HTTP_CODE=$(curl -o /dev/null -s -w "%{http_code}" $URL)
     if [ $HTTP_CODE -eq 200 ]; then
-      echo "${COL}[$(date '+%H:%M:%S')] Waiting for Portal to respond...${COL_RES}"
       echo "${COL}-------------------------------------${COL_RES}"
       echo "${COL}[$(date '+%H:%M:%S')] Installation Complete ♥!${COL_RES}"
       echo "${COL}-------------------------------------${COL_RES}"
