@@ -82,6 +82,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        cache-dependency-path: 'local-setup/e2e'
+
     - name: Clean install of npm dependencies
       run: npm ci
     - name: End2End tests
