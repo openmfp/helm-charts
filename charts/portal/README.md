@@ -18,6 +18,7 @@ Helm Chart for the openmfp Portal
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
 | frontendPort | int | `8000` | frontend port |
 | health.liveness.path | string | `"/rest/health"` | path used for the liveness probe |
+| health.port | int | `8080` | health port to be used by probes |
 | health.readiness.path | string | `"/rest/health"` | path used for the readiness probe |
 | health.startup.path | string | `"/rest/health"` | path used for the startup probe |
 | http.protocol | string | `"http"` | protocol |

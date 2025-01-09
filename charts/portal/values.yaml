@@ -54,6 +54,8 @@ trust:
     secretKeyRef: attribute.client_secret
 
 health:
+  # -- health port to be used by probes
+  port: 8080
   readiness:
     # -- path used for the readiness probe
     path: /rest/health
