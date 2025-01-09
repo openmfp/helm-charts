@@ -104,7 +104,7 @@ jobs:
           curl -s http://localhost:8000/ > /dev/null || true
           if [ $? -eq 0 ]; then
             echo "Service is ready."
-            sleep 5
+            sleep 50
             break
           fi
           echo "Service not ready, retrying in 2 seconds..."
