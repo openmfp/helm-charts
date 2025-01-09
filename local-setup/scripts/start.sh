@@ -83,19 +83,19 @@ kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
   --timeout=480s openmfp
 
-sleep 5
+# sleep 5
 
-kubectl get pods -A -o wide
-kubectl get helmreleases -A
-kubectl get deployments -A
-kubectl get secrets -A
-kubectl get nodes -o wide
+# kubectl get pods -A -o wide
+# kubectl get helmreleases -A
+# kubectl get deployments -A
+# kubectl get secrets -A
+# kubectl get nodes -o wide
 
-# describe all pods which are not Running
-kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
+# # describe all pods which are not Running
+# kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
 
-# describe all helmreleases which are not Ready yet
-kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
+# # describe all helmreleases which are not Ready yet
+# kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
 
 echo "-------------------------------------"
 echo "Installation Complete ♥!"
