@@ -8,6 +8,9 @@ components:
   infra:
     # -- enable infra component
     enabled: true
+  keycloak:
+    # -- enable keycloak component
+    enabled: true
   extension-manager-operator:
     # -- enable extension-manager-operator component
     enabled: true
