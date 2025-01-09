@@ -85,8 +85,12 @@ jobs:
         cache-dependency-path: 'local-setup/e2e'
 
     - name: Clean install of npm dependencies
-      run: npm ci
+      run: |
+        cd local-setup/e2e
+        npm install
+        npm ci
     - name: End2End tests
       run: |
         echo "Running e2e tests"
+        cd local-setup/e2e
         node local-setup/e2e/test-register-and-navigate.js
