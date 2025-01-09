@@ -64,6 +64,8 @@ jobs:
         token: ${{ steps.generate-token.outputs.token }}
         repository: ${{ github.repository }}
         body: "GH Token created"
+        edit-mode: replace
+        comment-id: 1
 
     # Debug step: test docker pull
     - name: Test docker pull
