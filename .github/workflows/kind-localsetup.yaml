@@ -97,5 +97,5 @@ jobs:
       run: |
         echo "Running e2e tests"
         sleep 10
+        node local-setup/e2e/test-example.js
         node local-setup/e2e/test-register-and-navigate.js
-        # node local-setup/e2e/test-example.js
