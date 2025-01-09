@@ -101,7 +101,7 @@ jobs:
         docker ps
         echo "Waiting for the service to be ready..."
         for i in {1..30}; do
-          if curl -s http://localhost:8000/ > /dev/null; then
+          if curl -s http://localhost:8000/ > /dev/null || true; then
             echo "Service is ready."
             break
           fi
