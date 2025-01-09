@@ -89,6 +89,7 @@ jobs:
         cd local-setup/e2e
         npm install
         npm ci
+        npx playwright install 
     - name: End2End tests
       run: |
         echo "Running e2e tests"
