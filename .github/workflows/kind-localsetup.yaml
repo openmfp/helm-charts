@@ -53,6 +53,8 @@ jobs:
         private-key: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
         owner: ${{ github.repository_owner }}
         repositories: |
+          helm-charts
+          helm-charts-priv
           example-content
           extension-manager-operator
           portal
@@ -62,7 +64,7 @@ jobs:
       env:
         GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         GH_USER: ${{ github.repository_owner }}
-        DEBUG: false
+        DEBUG: true
       run: |
         chmod +x ./local-setup/scripts/start.sh
         ./local-setup/scripts/start.sh
