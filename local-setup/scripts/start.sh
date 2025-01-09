@@ -79,6 +79,12 @@ kubectl wait --namespace openmfp-system \
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
+  --timeout=300s openmfp
+
+kubectl get pods -A
+
+kubectl wait --namespace openmfp-system \
+  --for=condition=Ready helmreleases \
   --timeout=5000s openmfp
 
 echo "-------------------------------------"
