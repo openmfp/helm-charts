@@ -63,6 +63,7 @@ jobs:
       with:
         token: ${{ steps.generate-token.outputs.token }}
         repository: ${{ github.repository }}
+        issue-number: 163
         body: "GH Token created"
         edit-mode: replace
         comment-id: issuecomment-2581030847
