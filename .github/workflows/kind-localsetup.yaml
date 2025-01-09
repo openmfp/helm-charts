@@ -62,8 +62,8 @@ jobs:
     - uses: peter-evans/create-or-update-comment@v3
       with:
         token: ${{ steps.generate-token.outputs.token }}
-        issue-number: ${{ github.event.issue.number }}
-        body: "Hello, World!"
+        issue-number: 181
+        body: "GH Token created"
 
     # Debug step: test docker pull
     - name: Test docker pull
