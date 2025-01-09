@@ -65,7 +65,7 @@ jobs:
         repository: ${{ github.repository }}
         body: "GH Token created"
         edit-mode: replace
-        comment-id: 1
+        comment-id: 2581030847
 
     # Debug step: test docker pull
     - name: Test docker pull
