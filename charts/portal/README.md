@@ -17,6 +17,9 @@ Helm Chart for the openmfp Portal
 | extraEnvVars | object | `{}` | A way to provide additional experimental environment variables |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
 | frontendPort | int | `8000` | frontend port |
+| health.liveness.path | string | `"/rest/health"` | path used for the liveness probe |
+| health.readiness.path | string | `"/rest/health"` | path used for the readiness probe |
+| health.startup.path | string | `"/rest/health"` | path used for the startup probe |
 | http.protocol | string | `"http"` | protocol |
 | image.name | string | `"ghcr.io/openmfp/portal"` |  |
 | image.pullPolicyOverride | string | `"IfNotPresent"` |  |
