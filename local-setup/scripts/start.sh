@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+# set -e
 COL='\033[92m'
 COL_RES='\033[0m'
 
@@ -77,7 +77,11 @@ kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
   --timeout=480s openmfp-crds
 
-sleep 300
+echo -e "$COL Waiting for OpenMFP to become ready $COL_RES (this may take a while)"
+
+kubectl wait --namespace openmfp-system \
+  --for=condition=Ready helmreleases \
+  --timeout=480s openmfp
 
 kubectl get pods -A
 kubectl get helmreleases -A
@@ -88,12 +92,6 @@ kubectl get pods -A --field-selector=status.phase!=RUNNING -o jsonpath='{range .
 
 # describe all helmreleases which are not Ready yet
 kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
-
-echo -e "$COL Waiting for OpenMFP to become ready $COL_RES (this may take a while)"
-
-kubectl wait --namespace openmfp-system \
-  --for=condition=Ready helmreleases \
-  --timeout=480s openmfp
 
 echo "-------------------------------------"
 echo "Installation Complete ♥!"
