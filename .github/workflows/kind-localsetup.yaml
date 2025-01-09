@@ -62,7 +62,7 @@ jobs:
       env:
         GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         GH_USER: ${{ github.repository_owner }}
-        DEBUG: true
+        DEBUG: false
       run: |
         chmod +x ./local-setup/scripts/start.sh
         ./local-setup/scripts/start.sh
@@ -96,6 +96,9 @@ jobs:
     - name: End2End tests
       run: |
         sleep 10
+
+        kubectl get pods -A
+        kubectl get svc -A
 
         # debug commands
         docker ps
