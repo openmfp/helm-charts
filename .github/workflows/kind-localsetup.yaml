@@ -95,6 +95,19 @@ jobs:
     # Step 10: Run the end-to-end tests
     - name: End2End tests
       run: |
+        # debug commands
+        curl http://127.0.0.1:8000
+        docker ps | grep kind
+        echo "Waiting for the service to be ready..."
+        for i in {1..30}; do
+          if curl -s http://localhost:8000/ > /dev/null; then
+            echo "Service is ready."
+            break
+          fi
+          echo "Service not ready, retrying in 2 seconds..."
+          sleep 2
+        done
+
         echo "Running e2e tests"
         sleep 10
         node local-setup/e2e/test-example.js
