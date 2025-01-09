@@ -64,7 +64,7 @@ kubectl wait --namespace istio-system \
   --for=condition=Ready helmreleases \
   --timeout=120s istio-gateway
 
-echo "${COL}[$(date '+%H:%M:%S')] Waiting for OpenMFP to become ready ${COL_RES} (this may take a while)"
+echo "${COL}[$(date '+%H:%M:%S')] Waiting for OpenMFP to become ready ${COL_RES} (this may take a few minutes)"
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
