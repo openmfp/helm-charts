@@ -43,11 +43,25 @@ jobs:
     - run: |
         gh version
 
+    - name: Generate a token
+      id: generate-token
+      uses: actions/create-github-app-token@v1
+      with:
+        app-id: "838464"
+        private-key: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
+        owner: ${{ github.repository_owner }}
+        repositories: |
+          example-content
+          extension-manager-operator
+          portal
+
+
 
     - name: Run start.sh
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # GH_TOKEN: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
+        PULLSECRET_TOKEN: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
+        PULLSECRET_USER: ${{ github.repository_owner }}
         GH_USER: ${{ github.repository_owner }}
       run: |
         docker info

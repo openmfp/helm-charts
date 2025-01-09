@@ -56,7 +56,7 @@ echo -e "$COL Starting deployments $COL_RES"
 kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
 
 echo -e "$COL Creating necessary secrets $COL_RES"
-kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
+kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$PULLSECRET_USER --docker-password=$PULLSECRET_TOKEN --dry-run=client -o yaml | kubectl apply -f -
 kubectl create secret generic keycloak-admin -n openmfp-system --from-literal=secret=admin --dry-run=client -o yaml | kubectl apply -f -
 
 echo -e "$COL Waiting for istio to become ready $COL_RES"
@@ -83,6 +83,8 @@ echo -e "$COL Waiting for OpenMFP to become ready $COL_RES (this may take a whil
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
   --timeout=480s openmfp
+
+sleep 5
 
 kubectl get pods -A -o wide
 kubectl get helmreleases -A
