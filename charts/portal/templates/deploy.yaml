@@ -93,3 +93,5 @@ spec:
         {{ include "common.resources" . | nindent 8 }}
         {{- include "common.ports" (dict "Values" .Values) | nindent 8 -}}
         {{ include "common.container.securityContext" . | nindent 8 }}
+        {{ include "common.healthAndReadiness" . | nindent 8 }}
+
