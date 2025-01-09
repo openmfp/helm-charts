@@ -57,17 +57,17 @@ jobs:
           extension-manager-operator
           portal
 
-    # Step 6: Run start.sh
-    - name: Run start.sh
-      env:
-        GH_TOKEN: ${{ steps.generate-token.outputs.token }}
-        GH_USER: ${{ github.repository_owner }}
-        DEBUG: true
-      run: |
-        docker info
-        openssl version
-        chmod +x /home/runner/work/helm-charts/helm-charts/local-setup/scripts/start.sh
-        /home/runner/work/helm-charts/helm-charts/local-setup/scripts/start.sh
+    # # Step 6: Run start.sh
+    # - name: Run start.sh
+    #   env:
+    #     GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+    #     GH_USER: ${{ github.repository_owner }}
+    #     DEBUG: true
+    #   run: |
+    #     docker info
+    #     openssl version
+    #     chmod +x /home/runner/work/helm-charts/helm-charts/local-setup/scripts/start.sh
+    #     /home/runner/work/helm-charts/helm-charts/local-setup/scripts/start.sh
 
     # Step 7: Prepare the NodeJS/playwright environment
     - name: Cache node modules
