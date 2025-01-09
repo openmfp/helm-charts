@@ -7,6 +7,9 @@ metadata:
   name: {{ .name }}
   namespace: {{ .namespace }}
 spec:
+{{- with .tuples }}
+  tuples: {{ . | toYaml | nindent 4 }}    
+{{- end }}
   coreModule: |
     {{ .coreModuleName | nindent 4 }}
 {{- end}}

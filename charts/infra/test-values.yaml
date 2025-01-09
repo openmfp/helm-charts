@@ -31,3 +31,7 @@ fga:
           relations
             define owner: [user]
             define member: [user] or owner
+      tuples:
+      - object: account:a
+        relation: owner
+        user: user:a
