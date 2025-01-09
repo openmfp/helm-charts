@@ -71,17 +71,25 @@ kubectl wait --namespace istio-system \
   --for=condition=Ready helmreleases \
   --timeout=120s istio-gateway
 
-echo -e "$COL Waiting for OpenMFP to become ready $COL_RES (this may take a while)"
+echo -e "$COL Waiting for OpenMFP CRDs to become ready $COL_RES"
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
   --timeout=480s openmfp-crds
 
-sleep 150
+sleep 300
 
 kubectl get pods -A
 kubectl get helmreleases -A
 kubectl get deployments -A
+
+# describe all pods which are not RUNNING
+kubectl get pods -A --field-selector=status.phase!=RUNNING -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
+
+# describe all helmreleases which are not Ready yet
+kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
+
+echo -e "$COL Waiting for OpenMFP to become ready $COL_RES (this may take a while)"
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
