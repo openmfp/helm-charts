@@ -79,7 +79,7 @@ matches the snapshot:
                 failureThreshold: 1
                 httpGet:
                   path: /rest/health
-                  port: 8081
+                  port: 8080
                 periodSeconds: 10
               name: portal
               ports:
@@ -89,13 +89,13 @@ matches the snapshot:
                 - containerPort: 8080
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8080
                   name: health-port
                   protocol: TCP
               readinessProbe:
                 httpGet:
                   path: /rest/health
-                  port: 8081
+                  port: 8080
                 initialDelaySeconds: 5
                 periodSeconds: 10
               resources:
@@ -114,7 +114,7 @@ matches the snapshot:
                 failureThreshold: 30
                 httpGet:
                   path: /rest/health
-                  port: 8081
+                  port: 8080
                 periodSeconds: 10
           imagePullSecrets:
             - name: github
@@ -251,7 +251,7 @@ matches the snapshot with istio disabled:
                 failureThreshold: 1
                 httpGet:
                   path: /rest/health
-                  port: 8081
+                  port: 8080
                 periodSeconds: 10
               name: portal
               ports:
@@ -261,13 +261,13 @@ matches the snapshot with istio disabled:
                 - containerPort: 8080
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8080
                   name: health-port
                   protocol: TCP
               readinessProbe:
                 httpGet:
                   path: /rest/health
-                  port: 8081
+                  port: 8080
                 initialDelaySeconds: 5
                 periodSeconds: 10
               resources:
@@ -286,7 +286,7 @@ matches the snapshot with istio disabled:
                 failureThreshold: 30
                 httpGet:
                   path: /rest/health
-                  port: 8081
+                  port: 8080
                 periodSeconds: 10
           imagePullSecrets:
             - name: github
