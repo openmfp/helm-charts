@@ -16,25 +16,25 @@ jobs:
     # Step 1: Checkout the code
     - uses: actions/checkout@v4
 
-     # Step 2: Install KIND
-    - name: Install KIND
-      run: |
-          # For AMD64 / x86_64
-          [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-amd64
-          # For ARM64
-          [ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-arm64
-          chmod +x ./kind
-          sudo mv ./kind /usr/local/bin/kind
+    #  # Step 2: Install KIND
+    # - name: Install KIND
+    #   run: |
+    #       # For AMD64 / x86_64
+    #       [ $(uname -m) = x86_64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-amd64
+    #       # For ARM64
+    #       [ $(uname -m) = aarch64 ] && curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.26.0/kind-linux-arm64
+    #       chmod +x ./kind
+    #       sudo mv ./kind /usr/local/bin/kind
 
-      # Step 3: Verify KIND installation
-    - name: Verify KIND installation
-      run: kind version
+    #   # Step 3: Verify KIND installation
+    # - name: Verify KIND installation
+    #   run: kind version
     
-    - name: Install HELM
-      run: |
-        curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-        chmod 700 get_helm.sh
-        ./get_helm.sh
+    # - name: Install HELM
+    #   run: |
+    #     curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+    #     chmod 700 get_helm.sh
+    #     ./get_helm.sh
 
     # Step 4: Install github cli
     - name: Install the gh cli
