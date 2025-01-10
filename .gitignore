@@ -2,3 +2,4 @@
 .vscode/settings.json
 .secret
 bin/
+node_modules/
