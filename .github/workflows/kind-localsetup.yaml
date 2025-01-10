@@ -162,26 +162,24 @@ jobs:
       run: |
         sleep 10
 
-        kubectl get pods -A
-        kubectl get svc -A
+        # kubectl get pods -A
+        # kubectl get svc -A
 
-        # debug commands
-        docker ps
-        echo "Waiting for the service to be ready..."
-        for i in {1..30}; do
-          curl -s http://localhost:8000/ > /dev/null || true
-          if [ $? -eq 0 ]; then
-            echo "Service is ready."
-            sleep 50
-            break
-          fi
-          echo "Service not ready, retrying in 2 seconds..."
-          sleep 2
-        done
+        # # debug commands
+        # docker ps
+        # echo "Waiting for the service to be ready..."
+        # for i in {1..30}; do
+        #   curl -s http://localhost:8000/ > /dev/null || true
+        #   if [ $? -eq 0 ]; then
+        #     echo "Service is ready."
+        #     sleep 50
+        #     break
+        #   fi
+        #   echo "Service not ready, retrying in 2 seconds..."
+        #   sleep 2
+        # done
 
-        curl -s -i http://localhost:8000/ || true
+        # curl -s -i http://localhost:8000/ || true
 
-        echo "Running sample test"
         node local-setup/e2e/test-example.js
-        echo "Running e2e tests"
-        node local-setup/e2e/test-register-and-navigate.js
+        npx playwright test
