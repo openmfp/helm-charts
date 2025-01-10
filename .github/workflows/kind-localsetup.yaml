@@ -59,11 +59,11 @@ jobs:
         #   extension-manager-operator
         #   portal
 
-    - uses: peter-evans/create-or-update-comment@v3
-      with:
-        issue-number: 181
-        body: "GH Token created"
-        reactions: '+1'
+    # - uses: peter-evans/create-or-update-comment@v3
+    #   with:
+    #     issue-number: 181
+    #     body: "GH Token created"
+    #     reactions: '+1'
 
     # # Debug step: test docker pull
     # - name: Test docker pull

@@ -4,9 +4,9 @@ DEBUG=${DEBUG:-false}
 
 if [ "${DEBUG}" = "true" ]; then
   set -x
-# else
-#   set -e
 fi
+
+set -e
 
 COL='\033[92m'
 RED='\033[91m'
@@ -75,7 +75,7 @@ echo -e "${COL}[$(date '+%H:%M:%S')] Waiting for OpenMFP CRDs to become ready ${
 
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
-  --timeout=480s openmfp-crds
+  --timeout=280s openmfp-crds
 
 echo -e "$COL Waiting for OpenMFP to become ready $COL_RES (this may take a while)"
 
