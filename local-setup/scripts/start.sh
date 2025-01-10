@@ -4,8 +4,8 @@ DEBUG=${DEBUG:-false}
 
 if [ "${DEBUG}" = "true" ]; then
   set -x
-else
-  set -e
+# else
+#   set -e
 fi
 
 COL='\033[92m'
@@ -82,22 +82,6 @@ echo -e "$COL Waiting for OpenMFP to become ready $COL_RES (this may take a whil
 kubectl wait --namespace openmfp-system \
   --for=condition=Ready helmreleases \
   --timeout=480s openmfp
-
-if [ "${DEBUG}" = "true" ]; then
-  sleep 5
-
-  kubectl get pods -A -o wide
-  kubectl get helmreleases -A
-  kubectl get deployments -A
-  kubectl get secrets -A
-  kubectl get nodes -o wide
-
-  # describe all pods which are not Running
-  kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
-
-  # describe all helmreleases which are not Ready yet
-  kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
-fi
 
 echo -e "${COL}-------------------------------------${COL_RES}"
 echo -e "${COL}[$(date '+%H:%M:%S')] Installation Complete ${RED}♥${COL}!${COL_RES}"

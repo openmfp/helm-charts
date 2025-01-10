@@ -75,6 +75,7 @@ jobs:
 
     # Step 6: Run start.sh
     - name: Run start.sh
+      id: run_start_sh
       env:
         GH_TOKEN: ${{ steps.generate-token.outputs.token }}
         GH_USER: ${{ github.repository_owner }}
@@ -82,6 +83,31 @@ jobs:
       run: |
         chmod +x ./local-setup/scripts/start.sh
         ./local-setup/scripts/start.sh
+      continue-on-error: true
+
+    # debug step 6
+    - name: Debug6
+      if: steps.run_start_sh.outcome == 'failure'
+      run: |
+        docker ps
+        curl -s -i http://localhost:8000/ || true
+
+        kubectl get pods -A -o wide
+        kubectl get svc -A
+        kubectl get helmreleases -A
+        kubectl get deployments -A
+        kubectl get secrets -A
+        kubectl get nodes -o wide
+
+        # describe all pods which are not Running
+        kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
+
+        # describe all helmreleases which are not Ready yet
+        kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
+
+        docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ steps.generate-token.outputs.token }}
+        docker pull ghcr.io/openmfp/portal:0.287.0
+
 
     # Step 7: Prepare the NodeJS/playwright environment
     - name: Cache node modules
