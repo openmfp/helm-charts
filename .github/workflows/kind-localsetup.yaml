@@ -37,29 +37,29 @@ jobs:
         ./local-setup/scripts/start.sh
       continue-on-error: true
 
-    # - name: Debug
-    #   if: steps.run_start_sh.outcome == 'failure'
-    #   run: |
-    #     set -x
-    #     docker ps
-    #     curl -s -i http://localhost:8000/ || true
+    - name: Debug
+      if: steps.run_start_sh.outcome == 'failure'
+      run: |
+        set -x
+        docker ps
+        curl -s -i http://localhost:8000/ || true
 
-    #     kubectl get pods -A -o wide
-    #     kubectl get svc -A
-    #     kubectl get helmreleases -A
-    #     kubectl get deployments -A
-    #     kubectl get secrets -A
-    #     kubectl get crds -A
-    #     kubectl get nodes -o wide
-    #     echo "Describe all pods which are not Running"
-    #     kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
-    #     echo "Describe all helmreleases which are not Ready yet"
-    #     kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
-    #     echo "Print imagePullSecret"
-    #     kubectl get secret ghcr-credentials -n openmfp-system -o yaml
-    #     echo "Test docker login and pull"
-    #     docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ steps.generate-token.outputs.token }}
-    #     docker pull ghcr.io/openmfp/portal:0.287.0
+        kubectl get pods -A -o wide
+        kubectl get svc -A
+        kubectl get helmreleases -A
+        kubectl get deployments -A
+        kubectl get secrets -A
+        kubectl get crds -A
+        kubectl get nodes -o wide
+        echo "Describe all pods which are not Running"
+        kubectl get pods -A --field-selector=status.phase!=Running -o jsonpath='{range .items[*]}{.metadata.namespace} {.metadata.name}{"\n"}{end}' | while read namespace name; do kubectl describe pod $name -n $namespace; done
+        echo "Describe all helmreleases which are not Ready yet"
+        kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
+        echo "Print imagePullSecret"
+        kubectl get secret ghcr-credentials -n openmfp-system -o yaml
+        echo "Test docker login and pull"
+        docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ steps.generate-token.outputs.token }}
+        docker pull ghcr.io/openmfp/portal:0.287.0
 
 
     # Step 4: Prepare the NodeJS/playwright environment
@@ -90,26 +90,5 @@ jobs:
     # Step 7: Run the end-to-end tests
     - name: End2End tests
       run: |
-        sleep 10
-
-        # kubectl get pods -A
-        # kubectl get svc -A
-
-        # # debug commands
-        # docker ps
-        # echo "Waiting for the service to be ready..."
-        # for i in {1..30}; do
-        #   curl -s http://localhost:8000/ > /dev/null || true
-        #   if [ $? -eq 0 ]; then
-        #     echo "Service is ready."
-        #     sleep 50
-        #     break
-        #   fi
-        #   echo "Service not ready, retrying in 2 seconds..."
-        #   sleep 2
-        # done
-
-        # curl -s -i http://localhost:8000/ || true
-
         cd local-setup/e2e/
         npx playwright test
