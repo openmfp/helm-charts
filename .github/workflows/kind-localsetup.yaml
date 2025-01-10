@@ -91,10 +91,11 @@ jobs:
       run: |
         set -x
         echo ${{ steps.generate-token.outputs.token }} > token.txt
-        cat token.txt
 
         curl -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" https://api.github.com/user
 
+        cat token.txt
+        
         docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ steps.generate-token.outputs.token }}
         docker pull ghcr.io/openmfp/portal:0.287.0
 
