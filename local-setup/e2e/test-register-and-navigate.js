@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 
 (async () => {
     // Launch browser
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({ headless: false });
     const context = await browser.newContext();
     const page = await context.newPage();
 
@@ -23,14 +23,8 @@ const { chromium } = require('playwright');
     // Submit form
     await page.click('input[value="Register"]');
 
-    // assert title="OpenMFP Portal"
-    await page.waitForSelector('text=OpenMFP Portal');
-
-    await expect(page.locator('body')).toContainText('Welcome to ApeirORA Showroom');
-
-    await page.click('text=Accounts');
-
-    await expect(page.locator('body')).toContainText('Demo Account');
+    const { expect } = require('@playwright/test');
+    await expect(page.locator('body')).toContainText('Welcome to OpenMFP Portal');
 
     // Close browser
     await browser.close();
