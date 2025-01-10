@@ -65,13 +65,13 @@ jobs:
         body: "GH Token created"
         reactions: '+1'
 
-    # Debug step: test docker pull
-    - name: Test docker pull
-      # GH_TOKEN: ${{ steps.generate-token.outputs.token }}
-      # GH_USER: ${{ github.repository_owner }}
-      run: |
-        docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ steps.generate-token.outputs.token }}
-        docker pull ghcr.io/openmfp/portal:0.287.0
+    # # Debug step: test docker pull
+    # - name: Test docker pull
+    #   # GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+    #   # GH_USER: ${{ github.repository_owner }}
+    #   run: |
+    #     docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ steps.generate-token.outputs.token }}
+    #     docker pull ghcr.io/openmfp/portal:0.287.0
 
     # Step 6: Run start.sh
     - name: Run start.sh
