@@ -181,4 +181,5 @@ jobs:
 
         # curl -s -i http://localhost:8000/ || true
 
+        cd local-setup/e2e/
         npx playwright test
