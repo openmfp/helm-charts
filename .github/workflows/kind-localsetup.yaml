@@ -53,12 +53,12 @@ jobs:
         private-key: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
         owner: ${{ github.repository_owner }}
         skip-token-revoke: true
-        # repositories: |
-        #   helm-charts
-        #   helm-charts-priv
-        #   example-content
-        #   extension-manager-operator
-        #   portal
+        repositories: |
+          portal
+          helm-charts
+          helm-charts-priv
+          example-content
+          extension-manager-operator
 
     # - uses: peter-evans/create-or-update-comment@v3
     #   with:
