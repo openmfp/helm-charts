@@ -52,6 +52,7 @@ jobs:
         app-id: "838464"
         private-key: ${{ secrets.OPENMFP_PUBLISHER_PRIVATE_KEY }}
         owner: ${{ github.repository_owner }}
+        skip-token-revoke: true
         # repositories: |
         #   helm-charts
         #   helm-charts-priv
