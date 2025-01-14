@@ -7,6 +7,7 @@ A Helm chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | kcp.enabled | bool | `false` | Enable KCP |
+| kcp.identityHash | string | `""` |  |
 
 ## Overriding Values
 
