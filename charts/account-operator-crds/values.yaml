@@ -1,3 +1,4 @@
 kcp:
   # -- Enable KCP
   enabled: false
+  identityHash: ""
