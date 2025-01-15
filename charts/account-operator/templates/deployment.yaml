@@ -79,8 +79,8 @@ spec:
           {{- end }}
           volumeMounts:
           {{- if .Values.kubeconfigSecret }}
-            - name: external-api-server
-              mountPath: /api-kubeconfig
+          - name: external-api-server
+            mountPath: /api-kubeconfig
           {{- end }}
           {{- if .Values.webhooks.enabled }}
           - mountPath: {{ .Values.webhooks.certDir }}
