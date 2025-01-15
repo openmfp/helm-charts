@@ -1,9 +1,9 @@
 dependencies:
 - name: keycloak
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 24.4.3
+  version: 24.4.4
 - name: common
   repository: oci://ghcr.io/openmfp/helm-charts
   version: 0.2.7
-digest: sha256:8bbeee09050106a383a799a22127bcdc5b71ac684b6a31fa10afd64c3a6d16fc
-generated: "2025-01-15T13:13:40.642002905Z"
+digest: sha256:325b3cbd8c09704cda69f479e662909dc48e9dfb26fef7b90289eb8e78a82d3d
+generated: "2025-01-15T21:58:45.692265458Z"
