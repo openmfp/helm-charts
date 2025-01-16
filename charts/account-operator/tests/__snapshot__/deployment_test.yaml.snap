@@ -365,6 +365,10 @@ operator match the snapshot:
                   port: 8081
                 periodSeconds: 10
               volumeMounts: null
+          hostAliases:
+            - hostnames:
+                - kcp.dev.local
+              ip: 10.96.0.100
           securityContext:
             runAsNonRoot: true
             seccompProfile:
