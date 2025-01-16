@@ -16,6 +16,10 @@ tests:
           requests:
             cpuOverride: 150m
             memoryOverride: 128Mi
+        hostAliases:
+          - hostnames:
+              - kcp.dev.local
+            ip: 10.96.0.100
     asserts:
       - matchSnapshot: {}
   - it: operator match the snapshot (with kubeconfigSecret)

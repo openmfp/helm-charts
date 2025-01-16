@@ -88,6 +88,17 @@ spec:
             readOnly: true
           {{- end }}
       terminationGracePeriodSeconds: 10
+      {{- if .Values.deployment.hostAliases }}
+      hostAliases:
+      {{- range .Values.deployment.hostAliases }}
+        - ip: {{ .ip }}
+          hostnames:
+        {{- range .hostnames }}
+            - {{ . }}
+        {{- end }}
+      {{- end }}
+      {{- else }}
+      {{- end }}
       volumes:
         {{- if .Values.kubeconfigSecret }}
         - name: external-api-server
