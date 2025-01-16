@@ -14,6 +14,7 @@ A Helm chart to deploy OpenMFP Account-Operator
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | crds.enabled | bool | `true` | Enable CRDs |
+| deployment.hostAliases | list | `[]` |  |
 | deployment.specTemplate.annotations | object | `{}` | The annotations for the deployment |
 | deployment.specTemplate.labels | object | `{}` | The labels for the deployment |
 | image.name | string | `"ghcr.io/openmfp/account-operator"` | The image repository |
