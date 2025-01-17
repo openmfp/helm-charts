@@ -4,7 +4,7 @@ dependencies:
   version: 0.111.14
 - name: portal
   repository: oci://ghcr.io/openmfp/helm-charts
-  version: 0.71.11
+  version: 0.71.12
 - name: infra
   repository: oci://ghcr.io/openmfp/helm-charts
   version: 0.60.8
@@ -14,5 +14,5 @@ dependencies:
 - name: keycloak
   repository: oci://ghcr.io/openmfp/helm-charts
   version: 0.60.11
-digest: sha256:7100fa47b73f666d9971b62f8bfaf6149631b8d9fac15a1a8adf01ed0b18e822
-generated: "2025-01-16T13:22:27.612776778Z"
+digest: sha256:09534dca96c45f2c136649da129c70d80d4d6bd8f1aaff6004e0381e53a79993
+generated: "2025-01-17T06:52:59.579318721Z"
