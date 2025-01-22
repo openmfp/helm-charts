@@ -5,6 +5,9 @@ on:
       - '**'
     paths:
       - 'local-setup/**'
+  push:
+    branches:
+      - 'main'
 
 concurrency:
   group: localsetup-${{ github.ref }}
