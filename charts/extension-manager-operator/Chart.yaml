@@ -4,6 +4,7 @@ description: A Helm chart for extension-manager-operator which manages resources
 type: application
 version: 0.22.86
 appVersion: "0.103.0"
+
 dependencies:
   - name: extension-manager-operator-crds
     version: 0.1.7
