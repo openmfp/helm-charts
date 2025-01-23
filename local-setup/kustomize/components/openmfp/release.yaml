@@ -25,15 +25,8 @@ spec:
         gateway:
           name: gateway
     components:
-      infra:
-        enabled: true
       example-content:
         enabled: true
-      portal:
-        enabled: true
-      extension-manager-operator:
-        validationServer:
-          enabled: true
     example-content:
       istio:
         enabled: true
