@@ -4,6 +4,7 @@ description: A Helm chart to deploy OpenMFP Account-Operator
 type: application
 version: 0.5.60
 appVersion: "0.148.0"
+
 dependencies:
   - name: account-operator-crds
     version: 0.1.11
