@@ -50,6 +50,9 @@ spec:
   dependsOn:
     - name: istio-base
       namespace: istio-system
+  values:
+    cni:
+      enabled: true
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -83,4 +86,11 @@ spec:
           - name: status-port
             port: 15021
             nodePort: 32000
-
+---
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+spec:
+  components:
+    cni:
+      namespace: istio-system
+      enabled: true
