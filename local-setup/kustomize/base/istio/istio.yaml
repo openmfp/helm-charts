@@ -94,3 +94,4 @@ spec:
     cni:
       namespace: istio-system
       enabled: true
+---
