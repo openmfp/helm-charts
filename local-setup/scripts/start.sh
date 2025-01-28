@@ -53,9 +53,6 @@ helm upgrade -i -n flux-system --create-namespace flux oci://ghcr.io/fluxcd-comm
 echo -e "${COL}[$(date '+%H:%M:%S')] Starting deployments ${COL_RES}"
 kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
 
-sleep 5
-kubectl apply -f $SCRIPT_DIR/../kustomize/base/istio-operator
-
 echo -e "${COL}[$(date '+%H:%M:%S')] Creating necessary secrets ${COL_RES}"
 kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
 
