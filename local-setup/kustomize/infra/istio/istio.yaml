@@ -77,7 +77,7 @@ spec:
       service:
         type: NodePort
         ports:
-          - name: http2
+          - name: http
             port: 8000
             nodePort: 30000
           - name: https
