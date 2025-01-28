@@ -1,0 +1,12 @@
+---
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-operator
+  namespace: istio-system
+spec:
+  components:
+    cni:
+      namespace: istio-system
+      enabled: true
+---

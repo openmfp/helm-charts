@@ -86,12 +86,24 @@ spec:
           - name: status-port
             port: 15021
             nodePort: 32000
+
 ---
-apiVersion: install.istio.io/v1alpha1
-kind: IstioOperator
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: istio-cni
+  namespace: istio-system
 spec:
-  components:
-    cni:
+  interval: 5m
+  chart:
+    spec:
+      chart: cni
+      version: 1.24.2
+      sourceRef:
+        kind: HelmRepository
+        name: istio
+  releaseName: istio-cni
+  dependsOn:
+    - name: istio-base
       namespace: istio-system
-      enabled: true
----
+
