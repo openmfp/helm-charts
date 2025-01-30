@@ -123,6 +123,42 @@ operator match the snapshot:
                   path: /readyz
                   port: 8081
                 periodSeconds: 10
+            - args:
+                - server
+              image: ghcr.io/openmfp/extension-manager-operator:1.0.0
+              imagePullPolicy: Always
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /readyz
+                  port: 8081
+                periodSeconds: 10
+              name: server
+              ports:
+                - containerPort: 8088
+                - containerPort: 8080
+                  name: metrics
+                  protocol: TCP
+                - containerPort: 8081
+                  name: health-port
+                  protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8081
+                initialDelaySeconds: 5
+                periodSeconds: 10
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8081
+                periodSeconds: 10
           securityContext:
             runAsNonRoot: true
             seccompProfile:
