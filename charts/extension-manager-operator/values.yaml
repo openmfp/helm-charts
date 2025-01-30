@@ -15,8 +15,6 @@ crds:
 commonAnnotations: {}
 
 validationServer:
-  # -- enable the validation server
-  enabled: false
   # -- port for the validation server
   port: 8088
   # -- host for the validation VirtualService
