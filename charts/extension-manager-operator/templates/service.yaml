@@ -1,4 +1,3 @@
-{{- if .Values.validationServer.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -13,4 +12,3 @@ spec:
     - protocol: TCP
       port: {{ .Values.validationServer.port }}
       targetPort: {{ .Values.validationServer.port }}
-{{- end }}
