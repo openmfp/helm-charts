@@ -38,7 +38,6 @@ spec:
           {{- include "common.PortsMetricsHealth" . | nindent 10 -}}
           {{- include "common.operatorHealthAndReadyness" . | nindent 10 -}}
           {{- include "common.resources" . | nindent 10 }}
-        {{- if .Values.validationServer.enabled }}
         - args:
           - server
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
@@ -49,5 +48,4 @@ spec:
           - containerPort: {{ .Values.validationServer.port }}
           {{- include "common.PortsMetricsHealth" . | nindent 10 -}}
           {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}
-        {{- end }}
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
