@@ -9,7 +9,7 @@ spec:
     content: |-
       {
         "name": "overview",
-        "creationTimestamp": "2022-05-17T11:37:17Z",
+        "creationTimestamp": "2025-01-30T08:00:00Z",
         "luigiConfigFragment": {
           "data": {
             "nodes": [
@@ -50,6 +50,20 @@ spec:
                 "layoutConfig": {
                   "row": "1",
                   "column": "1 / -1"
+                }
+              },
+              {
+                "entityType": "main.overview::compound",
+                "url": "{{ .Values.exampleContentWc }}/main.js#showcase",
+                "context": {
+                  "title": "Configuration showcase"
+                },
+                "layoutConfig": {
+                  "row": "2",
+                  "column": "1 / -1"
+                },
+                "webcomponent": {
+                  "selfRegistered": true
                 }
               }
             ]
