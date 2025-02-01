@@ -5,7 +5,7 @@ metadata:
   name: {{ .Values.crossplane.realm.name}}
 spec:
   forProvider:
-    accessCodeLifespan: 1h
+    accessTokenLifespan: 1h
     attributes:
       organizationsEnabled: "true"
     displayName: {{ .Values.crossplane.realm.displayName }}
