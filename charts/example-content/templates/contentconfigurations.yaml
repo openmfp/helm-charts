@@ -9,7 +9,7 @@ spec:
     content: |-
       {
         "name": "overview",
-        "creationTimestamp": "2022-05-17T11:37:17Z",
+        "creationTimestamp": "2025-01-30T08:00:00Z",
         "luigiConfigFragment": {
           "data": {
             "nodes": [
@@ -23,7 +23,7 @@ spec:
                 "children": [
                   {
                     "pathSegment": "overview",
-                    "label": "Overview",
+                    "label": "Configuration examples overview",
                     "icon": "home",
                     "defineEntity": {
                       "id": "overview"
@@ -36,6 +36,37 @@ spec:
                         }
                       }
                     }
+                  },
+                  {
+                    "pathSegment": "firstExample",
+                    "hideFromNav": true,
+                    "defineEntity": {
+                      "id": "first"
+                    },
+                    "compound": {
+                      "renderer": {
+                        "use": "grid",
+                        "config": {
+                          "columns": "1fr 1fr 1fr 1fr"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "pathSegment": "secondExample",
+                    "hideFromNav": false, 
+                    "defineEntity": {
+                      "id": "second"
+                    }             
+                  },
+                  {
+                    "pathSegment": "fourthExample",
+                    "hideFromNav": true,
+                    "defineEntity": {
+                      "id": "fourth"
+                    },
+                    "compound": {
+                    }
                   }
                 ]
               },
@@ -45,11 +76,79 @@ spec:
                 "context": {
                   "border": "shadow",
                   "title": "Welcome to OpenMFP Portal",
-                  "description": " "
+                  "description": "Click on tab in the left side navigation to open a showcase of particular features"
                 },
                 "layoutConfig": {
                   "row": "1",
                   "column": "1 / -1"
+                }
+              },
+              {
+                "entityType": "main.overview::compound",
+                "url": "http://localhost:4200/main.js#showcase",
+                "context": {
+                },
+                "layoutConfig": {
+                  "row": "2",
+                  "column": "1 / -1"
+                },
+                "webcomponent": {
+                  "selfRegistered": true
+                }
+              },
+              {
+                "entityType": "main.first::compound",
+                "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
+                "context": {
+                  "border": "shadow",
+                  "title": "{{firstExampleTitle}}",
+                  "description": "{{firstExampleDescription}}"
+                }
+              },
+              {
+                "entityType": "main.second",
+                "pathSegment": "secondExample",
+                "url": "https://example.com/",
+                "loadingIndicator": {
+                  "enabled": false
+                },
+                "requiredIFramePermissions": {
+                  "sandbox": [
+                    "allow-forms",
+                    "allow-modals",
+                    "allow-popups",
+                    "allow-popups-to-escape-sandbox",
+                    "allow-same-origin",
+                    "allow-scripts",
+                    "allow-download"
+                  ],
+                  "allow": [
+                    "clipboard-read",
+                    "clipboard-write"
+                  ]
+                }
+              },
+              {
+                "entityType": "main.fourth::compound",
+                "url": "http://localhost:4200/main.js#account-overview",
+                "context": {
+                  "title": "Showcase"
+                },
+                "layoutConfig": {
+                  "row": "1",
+                  "column": "1 / -1"
+                },
+                "webcomponent": {
+                  "selfRegistered": true
+                }
+              }                           
+            ],
+            "texts": [
+              {
+                "locale": "",
+                "textDictionary": {
+                  "firstExampleTitle": "Definition of an Entity",
+                  "firstExampleDescription": "Entity is basic building block of configuration."
                 }
               }
             ]
