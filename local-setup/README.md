@@ -44,7 +44,7 @@ export GH_TOKEN='' # token used to pull the openmfp docker images
 ```
 - apply flux deployment configuration
 
-To start the boostrapping and local installation invoke
+To start the bootstrapping and local installation invoke
 ```sh
 ./local-setup/scripts/start.sh
 ```
