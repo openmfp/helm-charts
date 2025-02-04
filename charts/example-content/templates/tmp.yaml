@@ -54,7 +54,8 @@ spec:
                   {
                     "pathSegment": "secondExample",
                     "virtualTree": true,
-                    "url": "https://example.com/",
+                    "navigationContext": "showcase",
+                    "url": "http://localhost:4400/#/showcase",
                     "loadingIndicator": {
                       "enabled": false
                     },
@@ -100,7 +101,7 @@ spec:
               },
               {
                 "entityType": "main.overview::compound",
-                "url": "http://localhost:4400/main.js#showcase",
+                "url": "http://localhost:4200/main.js#showcase",
                 "context": {
                 },
                 "layoutConfig": {
@@ -122,7 +123,7 @@ spec:
               },              
               {
                 "entityType": "main.fourth::compound",
-                "url": "http://localhost:4400/main.js#account-overview",
+                "url": "http://localhost:4200/main.js#account-overview",
                 "context": {
                   "title": "Showcase"
                 },
