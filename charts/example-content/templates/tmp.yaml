@@ -7,7 +7,7 @@ spec:
   inlineConfiguration:
     content: |-
       {
-        "name": "overview",
+        "name": "configuration-examples-overview",
         "creationTimestamp": "2025-01-30T08:00:00Z",
         "luigiConfigFragment": {
           "data": {
@@ -53,10 +53,26 @@ spec:
                   },
                   {
                     "pathSegment": "secondExample",
-                    "hideFromNav": false, 
-                    "defineEntity": {
-                      "id": "second"
-                    }             
+                    "virtualTree": true,
+                    "url": "https://example.com/",
+                    "loadingIndicator": {
+                      "enabled": false
+                    },
+                    "requiredIFramePermissions": {
+                      "sandbox": [
+                        "allow-forms",
+                        "allow-modals",
+                        "allow-popups",
+                        "allow-popups-to-escape-sandbox",
+                        "allow-same-origin",
+                        "allow-scripts",
+                        "allow-download"
+                      ],
+                      "allow": [
+                        "clipboard-read",
+                        "clipboard-write"
+                      ]
+                    } 
                   },
                   {
                     "pathSegment": "fourthExample",
@@ -84,7 +100,7 @@ spec:
               },
               {
                 "entityType": "main.overview::compound",
-                "url": "http://localhost:4200/main.js#showcase",
+                "url": "http://localhost:4400/main.js#showcase",
                 "context": {
                 },
                 "layoutConfig": {
@@ -103,33 +119,10 @@ spec:
                   "title": "{{firstExampleTitle}}",
                   "description": "{{firstExampleDescription}}"
                 }
-              },
-              {
-                "entityType": "main.second",
-                "pathSegment": "secondExample",
-                "url": "https://example.com/",
-                "loadingIndicator": {
-                  "enabled": false
-                },
-                "requiredIFramePermissions": {
-                  "sandbox": [
-                    "allow-forms",
-                    "allow-modals",
-                    "allow-popups",
-                    "allow-popups-to-escape-sandbox",
-                    "allow-same-origin",
-                    "allow-scripts",
-                    "allow-download"
-                  ],
-                  "allow": [
-                    "clipboard-read",
-                    "clipboard-write"
-                  ]
-                }
-              },
+              },              
               {
                 "entityType": "main.fourth::compound",
-                "url": "http://localhost:4200/main.js#account-overview",
+                "url": "http://localhost:4400/main.js#account-overview",
                 "context": {
                   "title": "Showcase"
                 },
