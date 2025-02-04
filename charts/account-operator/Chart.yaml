@@ -2,8 +2,8 @@ apiVersion: v2
 name: account-operator
 description: A Helm chart to deploy OpenMFP Account-Operator
 type: application
-version: 0.5.66
-appVersion: "0.154.0"
+version: 0.5.67
+appVersion: "0.155.0"
 dependencies:
   - name: account-operator-crds
     version: 0.1.11
