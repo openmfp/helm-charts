@@ -7,56 +7,7 @@ matches the snapshot:
       namespace: NAMESPACE
     spec:
       inlineConfiguration:
-        content: |-
-          {
-            "name": "overview",
-            "creationTimestamp": "2022-05-17T11:37:17Z",
-            "luigiConfigFragment": {
-              "data": {
-                "nodes": [
-                  {
-                    "entityType": "global",
-                    "pathSegment": "home",
-                    "hideFromNav": true,
-                    "defineEntity": {
-                      "id": "main"
-                    },
-                    "children": [
-                      {
-                        "pathSegment": "overview",
-                        "label": "Overview",
-                        "icon": "home",
-                        "defineEntity": {
-                          "id": "overview"
-                        },
-                        "compound": {
-                          "renderer": {
-                            "use": "grid",
-                            "config": {
-                              "columns": "1fr 1fr 1fr 1fr"
-                            }
-                          }
-                        }
-                      }
-                    ]
-                  },
-                  {
-                    "entityType": "main.overview::compound",
-                    "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
-                    "context": {
-                      "border": "shadow",
-                      "title": "Welcome to OpenMFP Portal",
-                      "description": " "
-                    },
-                    "layoutConfig": {
-                      "row": "1",
-                      "column": "1 / -1"
-                    }
-                  }
-                ]
-              }
-            }
-          }
+        content: "{\n  \"name\": \"configuration-examples-overview\",\n  \"creationTimestamp\": \"2025-02-05T08:00:00Z\",\n  \"luigiConfigFragment\": {\n    \"data\": {\n      \"nodes\": [\n        {\n          \"entityType\": \"global\",\n          \"pathSegment\": \"home\",\n          \"hideFromNav\": true,\n          \"defineEntity\": {\n            \"id\": \"main\"\n          },\n          \"children\": [\n            {\n              \"pathSegment\": \"overview\",\n              \"label\": \"Configuration examples overview\",\n              \"icon\": \"home\",\n              \"defineEntity\": {\n                \"id\": \"overview\"\n              },\n              \"compound\": {\n                \"renderer\": {\n                  \"use\": \"grid\",\n                  \"config\": {\n                    \"columns\": \"1fr 1fr 1fr 1fr\"\n                  }\n                }\n              }\n            },\n            {\n              \"pathSegment\": \"firstExample\",\n              \"hideFromNav\": true,\n              \"defineEntity\": {\n                \"id\": \"first\"\n              },\n              \"compound\": {\n                \"renderer\": {\n                  \"use\": \"grid\",\n                  \"config\": {\n                    \"columns\": \"1fr 1fr 1fr 1fr\"\n                  }\n                }\n              }\n            },\n            {\n              \"pathSegment\": \"secondExample\",\n              \"virtualTree\": true,\n              \"navigationContext\": \"showcase\",\n              \"url\": \"https://example-content.some-domain.com/ui/example-content/index.html#/showcase\",\n              \"loadingIndicator\": {\n                \"enabled\": false\n              },\n              \"requiredIFramePermissions\": {\n                \"sandbox\": [\n                  \"allow-forms\",\n                  \"allow-modals\",\n                  \"allow-popups\",\n                  \"allow-popups-to-escape-sandbox\",\n                  \"allow-same-origin\",\n                  \"allow-scripts\",\n                  \"allow-download\"\n                ],\n                \"allow\": [\n                  \"clipboard-read\",\n                  \"clipboard-write\"\n                ]\n              } \n            },\n            {\n              \"pathSegment\": \"fourthExample\",\n              \"hideFromNav\": true,\n              \"defineEntity\": {\n                \"id\": \"fourth\"\n              },\n              \"compound\": {\n              }\n            }\n          ]\n        },\n        {\n          \"entityType\": \"main.overview::compound\",\n          \"url\": \"https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js\",\n          \"context\": {\n            \"border\": \"shadow\",\n            \"title\": \"Welcome to OpenMFP Portal\",\n            \"description\": \"Click on Show Example button to preview particular feature.\"\n          },\n          \"layoutConfig\": {\n            \"row\": \"1\",\n            \"column\": \"1 / -1\"\n          }\n        },\n        {\n          \"entityType\": \"main.overview::compound\",\n          \"url\": \"https://example-content.some-domain.com/ui/wc/main.js#showcase\",\n          \"context\": {\n          },\n          \"layoutConfig\": {\n            \"row\": \"2\",\n            \"column\": \"1 / -1\"\n          },\n          \"webcomponent\": {\n            \"selfRegistered\": true\n          }\n        },\n        {\n          \"entityType\": \"main.first::compound\",\n          \"url\": \"https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js\",\n          \"context\": {\n            \"border\": \"shadow\",\n            \"title\": \"Definition of an Entity\",\n            \"description\": \"Entity is basic building block of configuration.\"\n          }\n        },              \n        {\n          \"entityType\": \"main.fourth::compound\",\n          \"url\": \"https://example-content.some-domain.com/ui/wc/main.js#account-overview\",\n          \"context\": {\n            \"title\": \"Showcase\"\n          },\n          \"layoutConfig\": {\n            \"row\": \"1\",\n            \"column\": \"1 / -1\"\n          },\n          \"webcomponent\": {\n            \"selfRegistered\": true\n          }\n        }                           \n      ]\n    }\n  }\n}"
         contentType: json
   2: |
     apiVersion: apps/v1

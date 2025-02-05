@@ -9,7 +9,7 @@ spec:
     content: |-
       {
         "name": "configuration-examples-overview",
-        "creationTimestamp": "2025-01-30T08:00:00Z",
+        "creationTimestamp": "2025-02-05T08:00:00Z",
         "luigiConfigFragment": {
           "data": {
             "nodes": [
@@ -56,7 +56,7 @@ spec:
                     "pathSegment": "secondExample",
                     "virtualTree": true,
                     "navigationContext": "showcase",
-                    "url": "http://localhost:4400/#/showcase",
+                    "url": "{{ .Values.contentProtocolDomain }}/ui/example-content/index.html#/showcase",
                     "loadingIndicator": {
                       "enabled": false
                     },
@@ -102,7 +102,7 @@ spec:
               },
               {
                 "entityType": "main.overview::compound",
-                "url": "http://localhost:4200/main.js#showcase",
+                "url": "{{ .Values.contentProtocolDomain }}/ui/wc/main.js#showcase",
                 "context": {
                 },
                 "layoutConfig": {
@@ -118,13 +118,13 @@ spec:
                 "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
                 "context": {
                   "border": "shadow",
-                  "title": "{{firstExampleTitle}}",
-                  "description": "{{firstExampleDescription}}"
+                  "title": "Definition of an Entity",
+                  "description": "Entity is basic building block of configuration."
                 }
               },              
               {
                 "entityType": "main.fourth::compound",
-                "url": "http://localhost:4200/main.js#account-overview",
+                "url": "{{ .Values.contentProtocolDomain }}/ui/wc/main.js#account-overview",
                 "context": {
                   "title": "Showcase"
                 },
@@ -136,15 +136,6 @@ spec:
                   "selfRegistered": true
                 }
               }                           
-            ],
-            "texts": [
-              {
-                "locale": "",
-                "textDictionary": {
-                  "firstExampleTitle": "Definition of an Entity",
-                  "firstExampleDescription": "Entity is basic building block of configuration."
-                }
-              }
             ]
           }
         }

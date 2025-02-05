@@ -16,3 +16,5 @@ istio:
 contentConfigurations:
   # -- This content configuration enables a basic homepage in the portal
   home: true
+
+contentProtocolDomain: https://example-content.some-domain.com
