@@ -11,6 +11,7 @@ Helm Chart for the openmfp Portal
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | contentConfigurations.home | bool | `true` | This content configuration enables a basic homepage in the portal |
+| contentProtocolDomain | string | `"https://example-content.some-domain.com"` |  |
 | image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
 | istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
 | istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
