@@ -1,15 +1,14 @@
-{{- if .Values.contentConfigurations.home }}
 apiVersion: core.openmfp.io/v1alpha1
 kind: ContentConfiguration
 metadata:
-  name: home
-  namespace: {{ .Release.Namespace }}
+  name: configuration-examples-overview
+  namespace: openmfp-system
 spec:
   inlineConfiguration:
     content: |-
       {
         "name": "configuration-examples-overview",
-        "creationTimestamp": "",
+        "creationTimestamp": "2025-02-05T08:00:00Z",
         "luigiConfigFragment": {
           "data": {
             "nodes": [
@@ -36,6 +35,54 @@ spec:
                         }
                       }
                     }
+                  },
+                  {
+                    "pathSegment": "firstExample",
+                    "hideFromNav": true,
+                    "defineEntity": {
+                      "id": "first-example"
+                    },
+                    "compound": {
+                      "renderer": {
+                        "use": "grid",
+                        "config": {
+                          "columns": "1fr 1fr 1fr 1fr"
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "pathSegment": "secondExample",
+                    "virtualTree": true,
+                    "navigationContext": "showcase",
+                    "url": "http://localhost:4400/index.html#/showcase",
+                    "loadingIndicator": {
+                      "enabled": false
+                    },
+                    "requiredIFramePermissions": {
+                      "sandbox": [
+                        "allow-forms",
+                        "allow-modals",
+                        "allow-popups",
+                        "allow-popups-to-escape-sandbox",
+                        "allow-same-origin",
+                        "allow-scripts",
+                        "allow-download"
+                      ],
+                      "allow": [
+                        "clipboard-read",
+                        "clipboard-write"
+                      ]
+                    } 
+                  },
+                  {
+                    "pathSegment": "fourthExample",
+                    "hideFromNav": true,
+                    "defineEntity": {
+                      "id": "fourth-example"
+                    },
+                    "compound": {
+                    }
                   }
                 ]
               },
@@ -54,7 +101,7 @@ spec:
               },
               {
                 "entityType": "main.overview::compound",
-                "url": "{{ .Values.contentProtocolDomain }}/ui/wc/main.js#showcase",
+                "url": "http://localhost:4200/main.js#showcase",
                 "context": {
                 },
                 "layoutConfig": {
@@ -70,4 +117,3 @@ spec:
         }
       }
     contentType: json
-{{- end }}

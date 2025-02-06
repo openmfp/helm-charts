@@ -1,0 +1,43 @@
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: web-component-integration-example
+  namespace: openmfp-system
+spec:
+  inlineConfiguration:
+    content: |-
+      {
+        "name": "web-component-integration-example",
+        "creationTimestamp": "",
+        "luigiConfigFragment": {
+          "data": {
+            "nodes": [
+              {
+                "entityType": "main",
+                "pathSegment": "fourthExample",
+                "hideFromNav": true,
+                "defineEntity": {
+                  "id": "fourth-example"
+                },
+                "compound": {
+                }
+              }, 
+              {
+                "entityType": "main.fourth-example::compound",
+                "url": "http://localhost:4200/main.js#account-overview",
+                "context": {
+                  "title": "Showcase"
+                },
+                "layoutConfig": {
+                  "row": "1",
+                  "column": "1 / -1"
+                },
+                "webcomponent": {
+                  "selfRegistered": true
+                }
+              } 
+            ]
+          }
+        }
+      }
+    contentType: json
