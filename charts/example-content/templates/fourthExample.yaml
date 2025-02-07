@@ -1,9 +1,0 @@
-apiVersion: core.openmfp.io/v1alpha1
-kind: ContentConfiguration
-metadata:
-  name: web-component-integration-example
-  namespace: {{ .Release.Namespace }}
-spec:
-  remoteConfiguration:
-    url: http://localhost:4400/assets/showcase-examples/fourthExample.json
-    contentType: json
