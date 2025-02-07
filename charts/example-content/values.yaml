@@ -20,6 +20,6 @@ contentConfigurations:
     url: http://localhost:8000/ui/example-content/ui/assets/config.json
   wc:
     enabled: true
-    url: http://localhost:8000/ui/example-content/ui/assets/config.json
+    url: http://localhost:8000/ui/example-content/wc/assets/config.json
 
 contentProtocolDomain: https://example-content.some-domain.com

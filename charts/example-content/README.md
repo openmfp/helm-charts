@@ -10,7 +10,9 @@ Helm Chart for the openmfp Portal
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| contentConfigurations.home | bool | `true` | This content configuration enables a basic homepage in the portal |
+| contentConfigurations.ui | object | `{"enabled":true,"url":"http://localhost:8000/ui/example-content/ui/assets/config.json"}` | This content configuration enables a basic homepage in the portal |
+| contentConfigurations.wc.enabled | bool | `true` |  |
+| contentConfigurations.wc.url | string | `"http://localhost:8000/ui/example-content/wc/assets/config.json"` |  |
 | contentProtocolDomain | string | `"https://example-content.some-domain.com"` |  |
 | image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
 | istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
