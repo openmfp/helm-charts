@@ -51,7 +51,38 @@ helm upgrade -i -n flux-system --create-namespace flux oci://ghcr.io/fluxcd-comm
   --set notificationController.create=false
 
 echo -e "${COL}[$(date '+%H:%M:%S')] Starting deployments ${COL_RES}"
-kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
+
+if [ "${1}" != "oci" ]; then
+  kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
+else
+  kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/oci
+  sleep 10 # give time for the 'registry' pod to be created
+
+  kubectl wait --namespace default \
+    --for=condition=Ready pods \
+    --timeout=120s registry
+
+  kubectl port-forward svc/registry 5000:5000 --context kind-openmfp &
+  sleep 1
+
+  for dir in "oci/"; do
+    if [ -d "$dir" ]; then
+      echo -e "${COL}[$(date '+%H:%M:%S')] Listing files in directory: $dir ${COL_RES}"
+      for file in "$dir"/*; do
+        echo -e "${COL}[$(date '+%H:%M:%S')] Processing file: $file ${COL_RES}"
+        # Replace the following line with the command you want to run on each file
+        ls -l "$file"
+        helm push "$file" oci://localhost:5000/openmfp
+      done
+    else
+      echo -e "${COL}[$(date '+%H:%M:%S')] Directory not found: $dir ${COL_RES}"
+      exit 1
+    fi
+  done
+
+  # kill the port-forward process
+  pkill -f "kubectl port-forward svc/registry 5000:5000"
+fi
 
 echo -e "${COL}[$(date '+%H:%M:%S')] Creating necessary secrets ${COL_RES}"
 kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
