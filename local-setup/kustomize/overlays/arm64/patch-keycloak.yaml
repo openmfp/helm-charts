@@ -1,9 +1,10 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: OCIRepository
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
 metadata:
   name: openmfp
   namespace: openmfp-system
 spec:
-  url: oci://registry.default.svc.cluster.local:5000/openmfp/openmfp
-  ref:
-    semver: 0.0.194
+  values:
+    keycloak:
+      keycloak:
+        arch: "Arm64"
