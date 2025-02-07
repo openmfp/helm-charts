@@ -1,0 +1,9 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: openmfp
+  namespace: openmfp-system
+spec:
+  url: oci://registry.default.svc.cluster.local:5000/openmfp/openmfp
+  ref:
+    semver: 0.0.194
