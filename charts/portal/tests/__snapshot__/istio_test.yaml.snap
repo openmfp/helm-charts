@@ -36,6 +36,8 @@ matches the snapshot:
                   value: http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
                 - name: AUTH_SERVER_URL_OPENMFP
                   value: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
+                - name: CONTENT_CONFIGURATION_VALIDATOR_API_URL
+                  value: http://openmfp-extension-manager-operator-server.openmfp-system.svc.cluster.local:8088/validate
                 - name: BASE_DOMAINS_OPENMFP
                   value: localhost
                 - name: OIDC_CLIENT_ID_PORTAL
@@ -47,6 +49,8 @@ matches the snapshot:
                       name: portal-client-secret-portal
                 - name: DISCOVERY_ENDPOINT_PORTAL
                   value: https://auth.example.com/.well-known/openid-configuration
+                - name: CONTENT_CONFIGURATION_VALIDATOR_API_URL
+                  value: null
                 - name: BASE_DOMAINS_PORTAL
                   value: portal.example.com,portal2.example.com
                 - name: IDP_NAMES
@@ -208,6 +212,8 @@ matches the snapshot with istio disabled:
                   value: http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
                 - name: AUTH_SERVER_URL_OPENMFP
                   value: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
+                - name: CONTENT_CONFIGURATION_VALIDATOR_API_URL
+                  value: http://openmfp-extension-manager-operator-server.openmfp-system.svc.cluster.local:8088/validate
                 - name: BASE_DOMAINS_OPENMFP
                   value: localhost
                 - name: OIDC_CLIENT_ID_PORTAL
@@ -219,6 +225,8 @@ matches the snapshot with istio disabled:
                       name: portal-client-secret-portal
                 - name: DISCOVERY_ENDPOINT_PORTAL
                   value: https://auth.example.com/.well-known/openid-configuration
+                - name: CONTENT_CONFIGURATION_VALIDATOR_API_URL
+                  value: null
                 - name: BASE_DOMAINS_PORTAL
                   value: portal.example.com,portal2.example.com
                 - name: IDP_NAMES

@@ -52,6 +52,8 @@ trust:
     loginAudience: openmfp
     # -- secret key reference
     secretKeyRef: attribute.client_secret
+    # -- ContentConfiguration validator api url
+    contentConfigurationValidatorApiUrl: http://openmfp-extension-manager-operator-server.openmfp-system.svc.cluster.local:8088/validate
 
 health:
   # -- health port to be used by probes

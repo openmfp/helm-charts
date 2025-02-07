@@ -27,11 +27,6 @@ spec:
     components:
       example-content:
         enabled: true
-    extension-manager-operator:
-      validationServer:
-        enabled: true
-      istio:
-        enabled: true
     example-content:
       istio:
         enabled: true
@@ -63,7 +58,6 @@ spec:
           discoveryEndpoint: ""
           authDomain: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
           tokenUrl: http://openmfp-keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
-          contentConfigurationValidatorApiUrl: http://openmfp-extension-manager-operator-server.openmfp-system.svc.cluster.local:8088/validate
           oidcClientSecretName: openmfp-client
           loginAudience: openmfp
           secretKeyRef: attribute.client_secret
@@ -99,11 +93,6 @@ spec:
           name: openmfp
           displayName: OpenMFP
         identityProviders: { }
-        clients:
-          openmfp:
-            validRedirectUris:
-              - http://localhost:8000/callback*
-              - http://localhost:4300/callback*
 
       keycloak:
         httpRelativePath: "/keycloak/"
@@ -124,7 +113,7 @@ spec:
 
       keycloakConfig:
         url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
-        redirectUrls: [ "http://localhost:8000/callback*", "http://localhost:4300/callback*" ]
+        redirectUrls: [ "http://localhost:8000/callback*" ]
       domain:
         pathPrefix: "/keycloak"
       service:
