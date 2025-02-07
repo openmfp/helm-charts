@@ -22,4 +22,4 @@ validationServer:
 
 istio:
   # -- enable Istio VirtualService
-  enabled: true
+  enabled: false
