@@ -19,3 +19,7 @@ validationServer:
   port: 8088
   # -- host for the validation VirtualService
   host: "*"
+
+istio:
+  # -- enable Istio VirtualService
+  enabled: true
