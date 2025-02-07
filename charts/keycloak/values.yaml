@@ -52,7 +52,11 @@ keycloak:
           name: keycloak-admin
           key: secret
     - name: JAVA_OPTS_APPEND
-      value: "-XX:UseSVE=0 -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local"
+      value: >-
+        {% if eq .Values.arch "Arm64" -%}
+        -XX:UseSVE=0 -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local
+        {%- end %}
+        -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local
 
   # -- configuration for the postgresql sub-chart
   postgresql:
