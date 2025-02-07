@@ -49,6 +49,12 @@ To start the bootstrapping and local installation invoke
 ./local-setup/scripts/start.sh
 ```
 
+To start bootstrapping using the local charts from a local oci repository, package the charts and run the string with the `oci` parameter:
+```sh
+task helmpackage
+./local-setup/scripts/start.sh oci
+```
+
 Once the process is completed you can access the environment using http://localhost:8000
 
 # Optional Steps

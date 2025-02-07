@@ -1,0 +1,13 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: openmfp
+  namespace: openmfp-system
+spec:
+  interval: 5m
+  url: oci://registry.default.svc.cluster.local:5000/openmfp/openmfp
+  ref:
+    # renovate: datasource=docker registryUrl=https://ghcr.io depName=ghcr.io/openmfp/helm-charts/openmfp
+    semver: 0.0.194
+  secretRef:
+    name: ghcr-credentials
