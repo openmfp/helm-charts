@@ -15,6 +15,7 @@ matches the snapshot:
         standardFlowEnabled: true
         validRedirectUris:
           - http://localhost:8000/callback*
+          - http://localhost:4300/callback*
       providerConfigRef:
         name: keycloak-provider-config
       writeConnectionSecretToRef:
