@@ -14,7 +14,7 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | crossplane.clients.openmfp.name | string | `"OpenMFP"` | name of the client |
-| crossplane.clients.openmfp.validRedirectUris | list | `["http://localhost:8000/callback*"]` | valid redirect uris for the client |
+| crossplane.clients.openmfp.validRedirectUris | list | `["http://localhost:8000/callback*","http://localhost:4300/callback*"]` | valid redirect uris for the client |
 | crossplane.clients.openmfp.validRedirectUris[0] | string | `"http://localhost:8000/callback*"` | keycloak callback url |
 | crossplane.enabled | bool | `false` | toggle to enable/disable crossplane |
 | crossplane.identityProviders | object | `{}` |  |
