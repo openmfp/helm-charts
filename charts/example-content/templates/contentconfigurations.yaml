@@ -1,73 +1,24 @@
-{{- if .Values.contentConfigurations.home }}
+{{- if .Values.contentConfigurations.ui.enabled }}
 apiVersion: core.openmfp.io/v1alpha1
-kind: ContentConfiguration
+kind: ContentConfiguration-ui
 metadata:
-  name: home
+  name: {{ include "common.entity.name" . }}-ui
   namespace: {{ .Release.Namespace }}
 spec:
-  inlineConfiguration:
-    content: |-
-      {
-        "name": "configuration-examples-overview",
-        "creationTimestamp": "",
-        "luigiConfigFragment": {
-          "data": {
-            "nodes": [
-              {
-                "entityType": "global",
-                "pathSegment": "home",
-                "hideFromNav": true,
-                "defineEntity": {
-                  "id": "main"
-                },
-                "children": [
-                  {
-                    "pathSegment": "overview",
-                    "label": "Configuration examples overview",
-                    "icon": "home",
-                    "defineEntity": {
-                      "id": "overview"
-                    },
-                    "compound": {
-                      "renderer": {
-                        "use": "grid",
-                        "config": {
-                          "columns": "1fr 1fr 1fr 1fr"
-                        }
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "entityType": "main.overview::compound",
-                "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
-                "context": {
-                  "border": "shadow",
-                  "title": "Welcome to OpenMFP Portal",
-                  "description": "Click on Show Example button to preview particular feature."
-                },
-                "layoutConfig": {
-                  "row": "1",
-                  "column": "1 / -1"
-                }
-              },
-              {
-                "entityType": "main.overview::compound",
-                "url": "{{ .Values.contentProtocolDomain }}/ui/wc/main.js#showcase",
-                "context": {
-                },
-                "layoutConfig": {
-                  "row": "2",
-                  "column": "1 / -1"
-                },
-                "webcomponent": {
-                  "selfRegistered": true
-                }
-              }                                      
-            ]
-          }
-        }
-      }
+  remoteConfiguration:
+    url: {{ .Values.contentConfigurations.ui.url }}
+    contentType: json
+{{- end }}
+
+{{- if .Values.contentConfigurations.wc.enabled }}
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration-wc
+metadata:
+  name: {{ include "common.entity.name" . }}-wc
+  namespace: {{ .Release.Namespace }}
+spec:
+  remoteConfiguration:
+    url: {{ .Values.contentConfigurations.wc.url }}
     contentType: json
 {{- end }}
