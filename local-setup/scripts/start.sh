@@ -51,10 +51,9 @@ helm upgrade -i -n flux-system --create-namespace flux oci://ghcr.io/fluxcd-comm
   --set notificationController.create=false
 
 echo -e "${COL}[$(date '+%H:%M:%S')] Starting deployments ${COL_RES}"
+kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
 
-if [ "${1}" != "oci" ]; then
-  kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
-else
+if [ "${1}" == "oci" ]; then
   kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/oci
   sleep 10 # give time for the 'registry' pod to be created
 
