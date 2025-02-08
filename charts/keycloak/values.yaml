@@ -39,11 +39,14 @@ crossplane:
 
   identityProviders: {}
 
+arch: "x86_64"
+
 # -- configuration passed to the child 'keyclaok' chart
 # https://github.com/bitnami/charts/tree/main/bitnami/keycloak
 keycloak:
   # -- keycloak environment variables (raw)
-  extraEnvVars: |
+  # For Arm64 arch (especially Apple M4), add -XX:UseSVE=0 to JAVA_OPTS_APPEND
+  extraEnvVars:
     - name: KEYCLOAK_USER
       value: keycloak-admin
     - name: KEYCLOAK_PASSWORD
@@ -52,10 +55,7 @@ keycloak:
           name: keycloak-admin
           key: secret
     - name: JAVA_OPTS_APPEND
-      value: >-
-        {% if eq .Values.arch "Arm64" -%}
-        -XX:UseSVE=0 -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local
-        {%- end %}
+      value: |-
         -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local
 
   # -- configuration for the postgresql sub-chart

@@ -13,6 +13,7 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| arch | string | `"x86_64"` |  |
 | crossplane.clients.openmfp.name | string | `"OpenMFP"` | name of the client |
 | crossplane.clients.openmfp.validRedirectUris | list | `["http://localhost:8000/callback*","http://localhost:4300/callback*"]` | valid redirect uris for the client |
 | crossplane.clients.openmfp.validRedirectUris[0] | string | `"http://localhost:8000/callback*"` | keycloak callback url |
@@ -37,8 +38,8 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 | job | object | `{"annotations":{"argocd.argoproj.io/hook":"PostSync"},"serviceAccount":"keycloak-client-creation"}` | job configuration |
 | job.annotations | object | `{"argocd.argoproj.io/hook":"PostSync"}` | custom job annotations |
 | job.serviceAccount | string | `"keycloak-client-creation"` | job ServiceAccount name |
-| keycloak | object | `{"extraEnvVars":"- name: KEYCLOAK_USER\n  value: keycloak-admin\n- name: KEYCLOAK_PASSWORD\n  valueFrom:\n    secretKeyRef:\n      name: keycloak-admin\n      key: secret\n- name: JAVA_OPTS_APPEND\n  value: >-\n    {% if eq .Values.arch \"Arm64\" -%}\n    -XX:UseSVE=0 -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local\n    {%- end %}\n    -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local\n","postgresql":{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"}}}}` | configuration passed to the child 'keyclaok' chart https://github.com/bitnami/charts/tree/main/bitnami/keycloak |
-| keycloak.extraEnvVars | string | `"- name: KEYCLOAK_USER\n  value: keycloak-admin\n- name: KEYCLOAK_PASSWORD\n  valueFrom:\n    secretKeyRef:\n      name: keycloak-admin\n      key: secret\n- name: JAVA_OPTS_APPEND\n  value: >-\n    {% if eq .Values.arch \"Arm64\" -%}\n    -XX:UseSVE=0 -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local\n    {%- end %}\n    -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local\n"` | keycloak environment variables (raw) |
+| keycloak | object | `{"extraEnvVars":[{"name":"KEYCLOAK_USER","value":"keycloak-admin"},{"name":"KEYCLOAK_PASSWORD","valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},{"name":"JAVA_OPTS_APPEND","value":"-Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local"}],"postgresql":{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"}}}}` | configuration passed to the child 'keyclaok' chart https://github.com/bitnami/charts/tree/main/bitnami/keycloak |
+| keycloak.extraEnvVars | list | `[{"name":"KEYCLOAK_USER","value":"keycloak-admin"},{"name":"KEYCLOAK_PASSWORD","valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},{"name":"JAVA_OPTS_APPEND","value":"-Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local"}]` | keycloak environment variables (raw) For Arm64 arch (especially Apple M4), add -XX:UseSVE=0 to JAVA_OPTS_APPEND |
 | keycloak.postgresql | object | `{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"}}}` | configuration for the postgresql sub-chart |
 | keycloak.postgresql.auth | object | `{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"}}` | authorization configuration |
 | keycloak.postgresql.auth.existingSecret | string | `""` | existing secret name |
