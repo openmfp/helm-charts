@@ -39,8 +39,6 @@ crossplane:
 
   identityProviders: {}
 
-arch: "x86_64"
-
 # -- configuration passed to the child 'keyclaok' chart
 # https://github.com/bitnami/charts/tree/main/bitnami/keycloak
 keycloak:

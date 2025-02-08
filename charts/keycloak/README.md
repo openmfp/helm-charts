@@ -13,7 +13,6 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| arch | string | `"x86_64"` |  |
 | crossplane.clients.openmfp.name | string | `"OpenMFP"` | name of the client |
 | crossplane.clients.openmfp.validRedirectUris | list | `["http://localhost:8000/callback*","http://localhost:4300/callback*"]` | valid redirect uris for the client |
 | crossplane.clients.openmfp.validRedirectUris[0] | string | `"http://localhost:8000/callback*"` | keycloak callback url |
