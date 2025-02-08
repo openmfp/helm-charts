@@ -7,4 +7,9 @@ spec:
   values:
     keycloak:
       keycloak:
-        arch: "Arm64"
+        extraEnvVars:
+          - name: JAVA_OPTS_APPEND
+            value: |-
+             -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local
+             -XX:UseSVE=0
+
