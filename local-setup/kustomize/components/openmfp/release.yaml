@@ -110,6 +110,11 @@ spec:
             existingSecret: ""
           primary:
             resourcesPreset: none
+        extraEnvVars:
+          - name: JAVA_OPTS_APPEND
+            value: |-
+             -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local
+             -XX:UseSVE=0
 
       keycloakConfig:
         url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
