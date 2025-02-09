@@ -87,6 +87,8 @@ operator match the snapshot:
                             - yaml
                             - json
                           type: string
+                        internalUrl:
+                          type: string
                         url:
                           type: string
                       type: object

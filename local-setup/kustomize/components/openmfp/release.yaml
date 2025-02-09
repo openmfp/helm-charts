@@ -28,6 +28,13 @@ spec:
       example-content:
         enabled: true
     example-content:
+      contentConfigurations:
+        ui:
+          enabled: true
+          internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/assets/config.json
+        wc:
+          enabled: true
+          internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/wc/assets/config.json
       istio:
         enabled: true
         virtualService:
@@ -36,7 +43,9 @@ spec:
           matchers:
             - match:
               - uri:
-                  prefix: /ui/
+                  prefix: /ui/example-content
+              rewrite:
+                uri: /
     portal:
       baseDomains:
         - "localhost"
@@ -114,7 +123,6 @@ spec:
           - name: JAVA_OPTS_APPEND
             value: |-
              -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local
-             -XX:UseSVE=0
 
       keycloakConfig:
         url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
