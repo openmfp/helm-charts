@@ -28,6 +28,13 @@ spec:
       example-content:
         enabled: true
     example-content:
+      contentConfigurations:
+        ui:
+          enabled: true
+          url: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/assets/config.json
+        wc:
+          enabled: true
+          url: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/wc/assets/config.json
       istio:
         enabled: true
         virtualService:
