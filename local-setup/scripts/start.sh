@@ -62,7 +62,14 @@ if [ "${1}" == "oci" ]; then
   kubectl port-forward svc/registry 5000:5000 --context kind-openmfp &
   sleep 1
 
-  for dir in "oci/"; do
+  cleanup() {
+    echo -e "${COL}[$(date '+%H:%M:%S')] Cleaning up background processes ${COL_RES}"
+    pkill -f "kubectl port-forward svc/registry 5000:5000"
+  }
+  trap cleanup EXIT
+
+  OCIDIR=$SCRIPT_DIR/../../oci
+  for dir in $OCIDIR; do
     if [ -d "$dir" ]; then
       echo -e "${COL}[$(date '+%H:%M:%S')] Listing files in directory: $dir ${COL_RES}"
       for file in "$dir"/*; do
@@ -76,9 +83,6 @@ if [ "${1}" == "oci" ]; then
       exit 1
     fi
   done
-
-  # kill the port-forward process
-  pkill -f "kubectl port-forward svc/registry 5000:5000"
 else
   kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
 fi

@@ -7,6 +7,9 @@ metadata:
 spec:
   remoteConfiguration:
     url: {{ .Values.contentConfigurations.ui.url }}
+    {{- if .Values.contentConfigurations.ui.internalUrl }}
+    internalUrl: {{ .Values.contentConfigurations.ui.internalUrl }}
+    {{- end }}
     contentType: json
 {{- end }}
 
@@ -20,5 +23,8 @@ metadata:
 spec:
   remoteConfiguration:
     url: {{ .Values.contentConfigurations.wc.url }}
+    {{- if .Values.contentConfigurations.wc.internalUrl }}
+    internalUrl: {{ .Values.contentConfigurations.wc.internalUrl }}
+    {{- end }}
     contentType: json
 {{- end }}
