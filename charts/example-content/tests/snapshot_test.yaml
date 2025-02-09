@@ -7,3 +7,10 @@ tests:
       - ../test-values.yaml
     asserts:
       - matchSnapshot: {}
+  - it: matches the snapshot (internalUrl)
+    values:
+      - ../test-values.yaml
+    set:
+      contentConfigurations.ui.internalUrl: http://example-content:8000/ui/assets/config.json
+    asserts:
+      - matchSnapshot: {}
