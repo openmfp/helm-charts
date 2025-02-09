@@ -4,6 +4,8 @@ kind: ContentConfiguration
 metadata:
   name: {{ include "common.entity.name" . }}-ui
   namespace: {{ .Release.Namespace }}
+  labels:
+    portal.openmfp.org/entity: main
 spec:
   remoteConfiguration:
     url: {{ .Values.contentConfigurations.ui.url }}
@@ -20,6 +22,8 @@ kind: ContentConfiguration
 metadata:
   name: {{ include "common.entity.name" . }}-wc
   namespace: {{ .Release.Namespace }}
+  labels:
+    portal.openmfp.org/entity: main
 spec:
   remoteConfiguration:
     url: {{ .Values.contentConfigurations.wc.url }}
