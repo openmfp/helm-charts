@@ -11,7 +11,7 @@ defaults:
   imagePullSecret: "github"
 
   # -- imagePullPolicy is the policy to use when pulling images for all charts
-  imagePullPolicy: Always
+  imagePullPolicy: IfNotPresent
 
   deployment:
     resources:
