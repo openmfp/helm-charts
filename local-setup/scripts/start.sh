@@ -52,7 +52,12 @@ helm upgrade -i -n flux-system --create-namespace flux oci://ghcr.io/fluxcd-comm
 
 echo -e "${COL}[$(date '+%H:%M:%S')] Starting deployments ${COL_RES}"
 if [ "${1}" == "oci" ]; then
-  kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default-oci
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    echo -e "${COL}[$(date '+%H:%M:%S')] ARM64 architecture detected, applying patch ${COL_RES}"
+    kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/oci-arm64
+  else
+    kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/oci
+  fi
   sleep 10 # give time for the 'registry' pod to be created
 
   kubectl wait --namespace default \
@@ -84,13 +89,15 @@ if [ "${1}" == "oci" ]; then
     fi
   done
 else
-  kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    echo -e "${COL}[$(date '+%H:%M:%S')] ARM64 architecture detected, applying patch ${COL_RES}"
+    kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default-arm64
+  else
+    kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
+  fi
 fi
 
-if [[ "$(uname -m)" == "arm64" ]]; then
-  echo -e "${COL}[$(date '+%H:%M:%S')] ARM64 architecture detected, applying patch ${COL_RES}"
-  kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/arm64
-fi
+
 
 echo -e "${COL}[$(date '+%H:%M:%S')] Creating necessary secrets ${COL_RES}"
 kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
