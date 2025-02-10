@@ -4,4 +4,4 @@
 .secret
 bin/
 node_modules/
-oci/
+/oci/
