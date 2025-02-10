@@ -1,6 +1,7 @@
+.DS_Store
 .idea
 .vscode/settings.json
 .secret
 bin/
 node_modules/
-oci/
+/oci/
