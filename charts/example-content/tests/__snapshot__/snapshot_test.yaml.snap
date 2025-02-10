@@ -49,7 +49,7 @@ matches the snapshot:
                 - name: PORT
                   value: "8080"
               image: ghcr.io/openmfp/example-content:1.0.0
-              imagePullPolicy: Always
+              imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-example-content
               ports:
                 - containerPort: 8080
@@ -164,7 +164,7 @@ matches the snapshot (internalUrl):
                 - name: PORT
                   value: "8080"
               image: ghcr.io/openmfp/example-content:1.0.0
-              imagePullPolicy: Always
+              imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-example-content
               ports:
                 - containerPort: 8080

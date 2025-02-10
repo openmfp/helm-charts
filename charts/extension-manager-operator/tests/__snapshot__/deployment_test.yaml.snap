@@ -89,7 +89,7 @@ operator match the snapshot:
                 - --log-level=
                 - --health-probe-bind-address=:8081
               image: ghcr.io/openmfp/extension-manager-operator:1.0.0
-              imagePullPolicy: Always
+              imagePullPolicy: IfNotPresent
               livenessProbe:
                 failureThreshold: 1
                 httpGet:
@@ -126,7 +126,7 @@ operator match the snapshot:
             - args:
                 - server
               image: ghcr.io/openmfp/extension-manager-operator:1.0.0
-              imagePullPolicy: Always
+              imagePullPolicy: IfNotPresent
               livenessProbe:
                 failureThreshold: 1
                 httpGet:
