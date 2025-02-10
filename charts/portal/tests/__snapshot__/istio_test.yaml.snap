@@ -78,7 +78,7 @@ matches the snapshot:
                 - name: TEST_TEST
                   value: test test
               image: ghcr.io/openmfp/portal:1.0.0
-              imagePullPolicy: Always
+              imagePullPolicy: IfNotPresent
               livenessProbe:
                 failureThreshold: 1
                 httpGet:
@@ -254,7 +254,7 @@ matches the snapshot with istio disabled:
                 - name: TEST_TEST
                   value: test test
               image: ghcr.io/openmfp/portal:1.0.0
-              imagePullPolicy: Always
+              imagePullPolicy: IfNotPresent
               livenessProbe:
                 failureThreshold: 1
                 httpGet:
