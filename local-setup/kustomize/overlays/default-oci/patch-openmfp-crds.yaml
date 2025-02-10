@@ -1,9 +1,0 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: OCIRepository
-metadata:
-  name: openmfp-crds
-  namespace: openmfp-system
-spec:
-  url: oci://registry.default.svc.cluster.local:5000/openmfp/openmfp-crds
-  ref:
-    semver: 0.0.15

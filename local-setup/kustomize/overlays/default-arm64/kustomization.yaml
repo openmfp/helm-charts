@@ -3,8 +3,6 @@ kind: Kustomization
 
 resources:
   - ../default
-  - ../../components/registry
 
 patches:
-- path: patch-openmfp.yaml
-- path: patch-openmfp-crds.yaml
+- path: patch-keycloak.yaml
