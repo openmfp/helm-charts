@@ -4,6 +4,10 @@ on:
     paths:
       - 'charts/openmfp-crds/**'
       - '.github/workflows/openmfp-crds.yaml'
+  pull_request:
+    paths:
+      - 'charts/openmfp-crds/**'
+      - '.github/workflows/openmfp-crds.yaml'
 
 jobs:
   pipeline:

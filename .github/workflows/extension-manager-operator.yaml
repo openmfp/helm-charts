@@ -4,6 +4,10 @@ on:
     paths:
       - 'charts/extension-manager-operator/**'
       - '.github/workflows/extension-manager-operator.yaml'
+  pull_request:
+    paths:
+      - 'charts/extension-manager-operator/**'
+      - '.github/workflows/extension-manager-operator.yaml'
 
 jobs:
   pipeline:
