@@ -4,6 +4,10 @@ on:
     paths:
       - 'charts/keycloak/**'
       - '.github/workflows/keycloak.yaml'
+  pull_request:
+    paths:
+      - 'charts/keycloak/**'
+      - '.github/workflows/keycloak.yaml'
 
 jobs:
   pipeline:

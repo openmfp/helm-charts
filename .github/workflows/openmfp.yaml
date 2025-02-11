@@ -4,6 +4,10 @@ on:
     paths:
       - 'charts/openmfp/**'
       - '.github/workflows/openmfp.yaml'
+  pull_request:
+    paths:
+      - 'charts/openmfp/**'
+      - '.github/workflows/openmfp.yaml'
 
 jobs:
   pipeline:
