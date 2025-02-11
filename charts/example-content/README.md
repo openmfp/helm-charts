@@ -13,7 +13,7 @@ Helm Chart for the openmfp Portal
 | contentConfigurations.ui | object | `{"enabled":true,"url":"http://localhost:8000/ui/example-content/ui/assets/config.json"}` | This content configuration enables a basic homepage in the portal |
 | contentConfigurations.wc.enabled | bool | `true` |  |
 | contentConfigurations.wc.url | string | `"http://localhost:8000/ui/example-content/wc/assets/config.json"` |  |
-| contentProtocolDomain | string | `"https://example-content.some-domain.com"` |  |
+| contentProtocolDomain | string | `"https://example-content.somedomain.com"` |  |
 | image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
 | istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
 | istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
