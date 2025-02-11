@@ -13,8 +13,8 @@ A Helm chart containing reuse templates
 | defaults.deployment.resources.requests | object | `{"cpu":"40m","memory":"50Mi"}` | cpu and memory requests for the deployment |
 | defaults.deployment.revisionHistoryLimit | int | `3` | deployment revision history limit |
 | defaults.deployment.strategy | string | `"RollingUpdate"` | deployment strategy |
-| defaults.externalSecrets.enabled | bool | `true` | toggle to enable/disable external-secrets |
-| defaults.fga.enabled | bool | `false` | toggle to enable/disable experimental FGA features |
+| defaults.externalSecrets.enabled | bool | `false` | toggle to enable/disable external-secrets |
+| defaults.fga.enabled | bool | `true` | toggle to enable/disable experimental FGA features |
 | defaults.health.liveness | object | `{"failureThreshold":1,"path":"/healthz"}` | liveness probe parameters |
 | defaults.health.periodSeconds | int | `10` | health period |
 | defaults.health.port | int | `8081` | health port |
@@ -22,7 +22,7 @@ A Helm chart containing reuse templates
 | defaults.health.startup | object | `{"failureThreshold":30,"path":"/readyz"}` | startup probe parameters |
 | defaults.imagePullPolicy | string | `"IfNotPresent"` | imagePullPolicy is the policy to use when pulling images for all charts |
 | defaults.imagePullSecret | string | `"github"` | imagePullSecret is the name of the secret that holds the docker registry credentials |
-| defaults.istio.enabled | bool | `false` | toggle to enable/disable istio |
+| defaults.istio.enabled | bool | `true` | toggle to enable/disable istio |
 | defaults.istio.gateway.name | string | `"gateway"` | name of the gateway |
 | defaults.metrics.port | int | `8080` | metrics port |
 | defaults.port | int | `8080` | service port |

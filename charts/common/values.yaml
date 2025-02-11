@@ -57,14 +57,14 @@ defaults:
 
   istio:
     # -- toggle to enable/disable istio
-    enabled: false
+    enabled: true
     gateway:
       # -- name of the gateway
       name: gateway
 
   fga:
     # -- toggle to enable/disable experimental FGA features
-    enabled: false
+    enabled: true
 
   securityContext:
     # -- user id to run the container
@@ -76,4 +76,4 @@ defaults:
 
   externalSecrets:
     # -- toggle to enable/disable external-secrets
-    enabled: true
+    enabled: false
