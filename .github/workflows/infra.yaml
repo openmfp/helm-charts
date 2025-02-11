@@ -4,6 +4,10 @@ on:
     paths:
       - 'charts/infra/**'
       - '.github/workflows/infra.yaml'
+  pull_request:
+    paths:
+      - 'charts/infra/**'
+      - '.github/workflows/infra.yaml'
 
 jobs:
   pipeline:
