@@ -7,10 +7,6 @@ istio:
   virtualService:
     hosts:
       - "*"
-    # matchers:
-    #   - match:
-    #       - uri:
-    #           prefix: /ui/
     matchers:
       - match:
         - uri:

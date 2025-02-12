@@ -299,7 +299,7 @@ operator match the snapshot:
             - args:
                 - operator
                 - --leader-elect
-                - --log-level=info
+                - --log-level=warn
                 - --health-probe-bind-address=:8081
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
@@ -757,7 +757,7 @@ operator match the snapshot (with kubeconfigSecret):
             - args:
                 - operator
                 - --leader-elect
-                - --log-level=info
+                - --log-level=warn
                 - --health-probe-bind-address=:8081
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
@@ -1218,7 +1218,7 @@ operator match the snapshot with webhook enabled:
             - args:
                 - operator
                 - --leader-elect
-                - --log-level=info
+                - --log-level=warn
                 - --health-probe-bind-address=:8081
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
