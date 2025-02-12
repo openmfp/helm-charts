@@ -43,7 +43,7 @@ ports:
 {{- end}}
 
 {{- define "common.sentry" }}
-{{- if and (hasKey .Values "global") (hasKey .Values.global "sentry") (hasKey .Values.global.sentry "enabled") (eq .Values.global.sentry.enabled true) }}
+{{- if eq (include "common.getKeyValue" (dict "Values" .Values "key" "global.sentry.enabled")) "true" -}}
 - name: REGION
   value: {{ .Values.region }}
 - name: ENVIRONMENT
@@ -51,7 +51,7 @@ ports:
 - name: SENTRY_ENVIRONMENT
   value: {{ .Values.sentry.environment | default .Values.environment }}
 - name: IMAGE_TAG
-  value: "{{ .Values.image.tag }}"
+  value: "{{ .Chart.AppVersion }}"
 - name: IMAGE_NAME
   value: "{{ .Values.image.name }}"
 {{- end }}
@@ -60,9 +60,7 @@ ports:
 {{- define "common.basicEnvironment" }}
 - name: LOG_LEVEL
   value: {{ (.Values.log).level | default "info" }}
-{{- include "common.sentry" . }}
-- name: DIRECTIVES_AUTHORIZATION_ENABLED
-  value: "{{ ((.Values.directives).authorization).enabled | default false }}"
+{{ include "common.sentry" . }}
 {{- end }}
 {{- define "common.basicService" }}
 - name: PORT
