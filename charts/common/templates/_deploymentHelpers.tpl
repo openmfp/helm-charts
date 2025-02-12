@@ -43,7 +43,7 @@ ports:
 {{- end}}
 
 {{- define "common.sentry" }}
-{{- if eq (include "common.getKeyValue" (dict "Values" .Values "key" "global.sentry.enabled")) "true" -}}
+{{- if eq (include "common.getKeyValue" (dict "Values" .Values "key" "sentry.enabled")) "true" -}}
 - name: REGION
   value: {{ .Values.region }}
 - name: ENVIRONMENT
