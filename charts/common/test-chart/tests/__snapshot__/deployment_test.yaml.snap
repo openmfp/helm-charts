@@ -12,9 +12,13 @@ test name override:
       template:
         spec:
           containers:
-            automountServiceAccountToken: true
+            env:
+              - name: LOG_LEVEL
+                value: info
+              - name: DIRECTIVES_AUTHORIZATION_ENABLED
+                value: "false"
             image: my-image:0.1.0
-            imagePullPolicy: Always
+            imagePullPolicy: IfNotPresent
             livenessProbe:
               failureThreshold: 1
               httpGet:
@@ -42,19 +46,87 @@ test name override:
               requests:
                 cpu: 40m
                 memory: 50Mi
-            securityContext:
-              readOnlyRootFilesystem: true
-              runAsNonRoot: true
-              seccompProfile:
-                type: RuntimeDefault
-            serviceAccountName: RELEASE-NAME
             startupProbe:
               failureThreshold: 30
               httpGet:
                 path: /readyz
                 port: 8081
               periodSeconds: 10
-          serviceAccountName: RELEASE-NAME-test-chart
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          terminationGracePeriodSeconds: 10
+test sentry enabled:
+  1: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: RELEASE-NAME-test-chart
+    spec:
+      revisionHistoryLimit: 3
+      selector:
+        matchLabels:
+          service: RELEASE-NAME-test-chart
+      template:
+        spec:
+          containers:
+            env:
+              - name: LOG_LEVEL
+                value: info
+              - name: REGION
+                value: null
+              - name: ENVIRONMENT
+                value: test
+              - name: SENTRY_ENVIRONMENT
+                value: test
+              - name: IMAGE_TAG
+                value: ""
+              - name: IMAGE_NAME
+                value: my-image
+              - name: DIRECTIVES_AUTHORIZATION_ENABLED
+                value: "false"
+            image: my-image:0.1.0
+            imagePullPolicy: IfNotPresent
+            livenessProbe:
+              failureThreshold: 1
+              httpGet:
+                path: /healthz
+                port: 8081
+              periodSeconds: 10
+            name: manager
+            ports:
+              - containerPort: 8080
+                name: metrics
+                protocol: TCP
+              - containerPort: 8081
+                name: health-port
+                protocol: TCP
+            readinessProbe:
+              httpGet:
+                path: /readyz
+                port: 8081
+              initialDelaySeconds: 5
+              periodSeconds: 10
+            resources:
+              limits:
+                cpu: 100m
+                memory: 512Mi
+              requests:
+                cpu: 40m
+                memory: 50Mi
+            startupProbe:
+              failureThreshold: 30
+              httpGet:
+                path: /readyz
+                port: 8081
+              periodSeconds: 10
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           terminationGracePeriodSeconds: 10
 test tag default:
   1: |
@@ -70,9 +142,13 @@ test tag default:
       template:
         spec:
           containers:
-            automountServiceAccountToken: true
+            env:
+              - name: LOG_LEVEL
+                value: info
+              - name: DIRECTIVES_AUTHORIZATION_ENABLED
+                value: "false"
             image: test-chart:0.1.0
-            imagePullPolicy: Always
+            imagePullPolicy: IfNotPresent
             livenessProbe:
               failureThreshold: 1
               httpGet:
@@ -100,19 +176,17 @@ test tag default:
               requests:
                 cpu: 40m
                 memory: 50Mi
-            securityContext:
-              readOnlyRootFilesystem: true
-              runAsNonRoot: true
-              seccompProfile:
-                type: RuntimeDefault
-            serviceAccountName: RELEASE-NAME
             startupProbe:
               failureThreshold: 30
               httpGet:
                 path: /readyz
                 port: 8081
               periodSeconds: 10
-          serviceAccountName: RELEASE-NAME-test-chart
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           terminationGracePeriodSeconds: 10
 test tag override:
   1: |
@@ -128,9 +202,13 @@ test tag override:
       template:
         spec:
           containers:
-            automountServiceAccountToken: true
+            env:
+              - name: LOG_LEVEL
+                value: info
+              - name: DIRECTIVES_AUTHORIZATION_ENABLED
+                value: "false"
             image: test-chart:1.0.0
-            imagePullPolicy: Always
+            imagePullPolicy: IfNotPresent
             livenessProbe:
               failureThreshold: 1
               httpGet:
@@ -158,17 +236,15 @@ test tag override:
               requests:
                 cpu: 40m
                 memory: 50Mi
-            securityContext:
-              readOnlyRootFilesystem: true
-              runAsNonRoot: true
-              seccompProfile:
-                type: RuntimeDefault
-            serviceAccountName: RELEASE-NAME
             startupProbe:
               failureThreshold: 30
               httpGet:
                 path: /readyz
                 port: 8081
               periodSeconds: 10
-          serviceAccountName: RELEASE-NAME-test-chart
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           terminationGracePeriodSeconds: 10

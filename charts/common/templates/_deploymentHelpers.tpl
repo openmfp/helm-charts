@@ -42,9 +42,8 @@ ports:
 {{- join "," $technicalIssuers }}
 {{- end}}
 
-{{- define "common.basicEnvironment" }}
-- name: LOG_LEVEL
-  value: {{ (.Values.log).level | default "info" }}
+{{- define "common.sentry" }}
+{{- if and (hasKey .Values "global") (hasKey .Values.global "sentry") (hasKey .Values.global.sentry "enabled") (eq .Values.global.sentry.enabled true) }}
 - name: REGION
   value: {{ .Values.region }}
 - name: ENVIRONMENT
@@ -55,12 +54,13 @@ ports:
   value: "{{ .Values.image.tag }}"
 - name: IMAGE_NAME
   value: "{{ .Values.image.name }}"
-{{- $technicalIssuers := include "common.technicalIssuers" . }}
-{{- if $technicalIssuers }}
-- name: TECHNICAL_ISSUERS
-  value: {{ $technicalIssuers }}
 {{- end }}
-{{- include "common.sentry-env" . }}
+{{- end}}
+
+{{- define "common.basicEnvironment" }}
+- name: LOG_LEVEL
+  value: {{ (.Values.log).level | default "info" }}
+{{- include "common.sentry" . }}
 - name: DIRECTIVES_AUTHORIZATION_ENABLED
   value: "{{ ((.Values.directives).authorization).enabled | default false }}"
 {{- end }}

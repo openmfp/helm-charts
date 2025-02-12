@@ -21,4 +21,6 @@ spec:
           {{ include "common.PortsMetricsHealth" . | nindent 10 }}
           {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}
           {{ include "common.resources" . | nindent 10 }}
+          env:
+          {{- include "common.basicEnvironment" . | nindent 10 }}
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
