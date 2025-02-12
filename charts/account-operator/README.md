@@ -23,19 +23,19 @@ A Helm chart to deploy OpenMFP Account-Operator
 | kcp.enabled | bool | `false` | Enable KCP |
 | kcp.virtualWorkspaceUrl | string | `""` | The URL for the virtual workspace |
 | kubeconfigSecret | string | `""` | The secret for kubeconfig |
-| logLevel | string | `"warn"` | The log level |
+| logLevel | string | `"debug"` | The log level |
 | security.mountServiceAccountToken | bool | `true` | Mount the service account token |
 | subroutines.extension.enabled | bool | `true` | Enable extension subroutines |
 | subroutines.extensionReady.enabled | bool | `true` | Enable extension ready subroutines |
 | subroutines.fga.creatorRelation | string | `"owner"` | The creator relation for FGA |
 | subroutines.fga.enabled | bool | `true` | Enable FGA subroutines |
-| subroutines.fga.grpcAddr | string | `""` | The gRPC address for FGA |
+| subroutines.fga.grpcAddr | string | `"openmfp-openfga:8081"` | The gRPC address for FGA |
 | subroutines.fga.objectType | string | `"account"` | The object type for FGA |
 | subroutines.fga.parentRelation | string | `"parent"` | The parent relation for FGA |
 | subroutines.fga.rootNamespace | string | `"openmfp-root"` | The root namespace for FGA |
 | subroutines.namespace.enabled | bool | `true` | Enable namespace subroutines |
 | webhooks.certDir | string | `"/certs"` | The directory for webhook certificates |
-| webhooks.enabled | bool | `false` | Enable webhooks |
+| webhooks.enabled | bool | `true` | Enable webhooks |
 
 ## Overriding Values
 
