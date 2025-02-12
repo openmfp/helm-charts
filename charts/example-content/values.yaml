@@ -3,26 +3,33 @@ image:
   name: ghcr.io/openmfp/example-content
 
 istio:
+  enabled: true
   virtualService:
     hosts:
-      - your-host.com
+      - "*"
+    # matchers:
+    #   - match:
+    #       - uri:
+    #           prefix: /ui/
     matchers:
       - match:
-          - uri:
-              exact: /ui/example-content
-          - uri:
-              prefix: /ui/example-content/
+        - uri:
+            prefix: /ui/example-content
+        rewrite:
+          uri: /
 
 contentConfigurations:
   # -- This content configuration enables a basic homepage in the portal
   ui:
     enabled: true
     url: http://localhost:8000/ui/example-content/ui/assets/config.json
+    internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/assets/config.json
 # Set internal url especially for local a setup where the url is not reachable from within the cluster
 #    internalUrl: null
   wc:
     enabled: true
     url: http://localhost:8000/ui/example-content/wc/assets/config.json
+    internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/wc/assets/config.json
 # Set internal url especially for local a setup where the url is not reachable from within the cluster
 #    internalUrl: null
 

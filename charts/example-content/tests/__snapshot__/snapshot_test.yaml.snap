@@ -10,6 +10,7 @@ matches the snapshot:
     spec:
       remoteConfiguration:
         contentType: json
+        internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/assets/config.json
         url: http://localhost:8000/ui/example-content/ui/assets/config.json
   2: |
     apiVersion: core.openmfp.io/v1alpha1
@@ -22,6 +23,7 @@ matches the snapshot:
     spec:
       remoteConfiguration:
         contentType: json
+        internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/wc/assets/config.json
         url: http://localhost:8000/ui/example-content/wc/assets/config.json
   3: |
     apiVersion: apps/v1
@@ -91,6 +93,28 @@ matches the snapshot:
             - emptyDir: {}
               name: run-volume
   4: |
+    apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+      name: RELEASE-NAME-example-content
+      namespace: NAMESPACE
+    spec:
+      gateways:
+        - NAMESPACE/gateway
+      hosts:
+        - '*'
+      http:
+        - match:
+            - uri:
+                prefix: /ui/example-content
+          rewrite:
+            uri: /
+          route:
+            - destination:
+                host: RELEASE-NAME-example-content.NAMESPACE.svc.cluster.local
+                port:
+                  number: 8080
+  5: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
@@ -98,7 +122,7 @@ matches the snapshot:
     metadata:
       name: RELEASE-NAME-example-content
       namespace: NAMESPACE
-  5: |
+  6: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -137,6 +161,7 @@ matches the snapshot (internalUrl):
     spec:
       remoteConfiguration:
         contentType: json
+        internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/wc/assets/config.json
         url: http://localhost:8000/ui/example-content/wc/assets/config.json
   3: |
     apiVersion: apps/v1
@@ -206,6 +231,28 @@ matches the snapshot (internalUrl):
             - emptyDir: {}
               name: run-volume
   4: |
+    apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+      name: RELEASE-NAME-example-content
+      namespace: NAMESPACE
+    spec:
+      gateways:
+        - NAMESPACE/gateway
+      hosts:
+        - '*'
+      http:
+        - match:
+            - uri:
+                prefix: /ui/example-content
+          rewrite:
+            uri: /
+          route:
+            - destination:
+                host: RELEASE-NAME-example-content.NAMESPACE.svc.cluster.local
+                port:
+                  number: 8080
+  5: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
@@ -213,7 +260,7 @@ matches the snapshot (internalUrl):
     metadata:
       name: RELEASE-NAME-example-content
       namespace: NAMESPACE
-  5: |
+  6: |
     apiVersion: v1
     kind: Service
     metadata:
