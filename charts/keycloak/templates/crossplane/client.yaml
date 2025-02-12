@@ -39,7 +39,7 @@ spec:
     - basic
     - acr
     - groups
-    - trusted-openmfp-auds
+    - trusted-openmfp-audiences
     realmIdRef:
       name: {{ $.Values.crossplane.realm.name }}
   providerConfigRef:
