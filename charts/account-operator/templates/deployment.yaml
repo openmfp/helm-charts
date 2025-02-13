@@ -46,6 +46,7 @@ spec:
           {{- include "common.operatorHealthAndReadyness" . | nindent 10 -}}
           {{- include "common.resources" . | nindent 10 }}
           env:
+          {{- include "common.basicEnvironment" . | nindent 10 }}
           - name: SUBROUTINES_NAMESPACE_ENABLED
             value: "{{ .Values.subroutines.namespace.enabled }}"
           - name: SUBROUTINES_FGA_ENABLED

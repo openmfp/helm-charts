@@ -301,6 +301,8 @@ operator match the snapshot:
                 - --leader-elect
                 - --health-probe-bind-address=:8081
               env:
+                - name: LOG_LEVEL
+                  value: info
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
                 - name: SUBROUTINES_FGA_ENABLED
@@ -758,6 +760,8 @@ operator match the snapshot (with kubeconfigSecret):
                 - --leader-elect
                 - --health-probe-bind-address=:8081
               env:
+                - name: LOG_LEVEL
+                  value: info
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
                 - name: SUBROUTINES_FGA_ENABLED
@@ -1218,6 +1222,8 @@ operator match the snapshot with webhook enabled:
                 - --leader-elect
                 - --health-probe-bind-address=:8081
               env:
+                - name: LOG_LEVEL
+                  value: info
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
                 - name: SUBROUTINES_FGA_ENABLED
