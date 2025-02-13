@@ -1,37 +1,36 @@
-istio:
-  enabled: true
-  serviceEntries:
-    https:
-      enabled: true
-      hosts: [ "example.com" ]
-  gateway:
-    apiVersion: networking.istio.io/v1
-    name: gateway
-    selector:
-      istio: gateway
-    servers:
-      - port:
-          number: 8080
-          name: http
-          protocol: HTTP
-        hosts:
-          - "*"
+gateway:
+  apiVersion: networking.istio.io/v1
+  name: gateway
+  selector:
+    istio: gateway
+  servers:
+    - port:
+        number: 8080
+        name: http
+        protocol: HTTP
+      hosts:
+        - "*"
 
-fga:
-  enabled: true
-  stores:
-    - name: test
-      namespace: test
-      coreModuleName: |
-        module core
-  
-        type user
-  
-        type account
-          relations
-            define owner: [user]
-            define member: [user] or owner
-      tuples:
-      - object: account:a
-        relation: owner
-        user: user:a
+kcp:
+  enabled: false
+#  host: ""
+
+auth:
+#  host: ""
+
+externalSecrets:
+  accountOperatorSaKubeconfig: account-operator-sa-kubeconfig
+  enabled: false
+
+stores:
+  - name: test
+    namespace: test
+    coreModuleName: |
+      module core
+
+      type user
+
+      type account
+        relations
+          define owner: [user]
+          define member: [user] or owner

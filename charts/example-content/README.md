@@ -10,14 +10,16 @@ Helm Chart for the openmfp Portal
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| contentConfigurations.ui | object | `{"enabled":true,"url":"http://localhost:8000/ui/example-content/ui/assets/config.json"}` | This content configuration enables a basic homepage in the portal |
+| contentConfigurations.ui | object | `{"enabled":true,"internalUrl":"http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/assets/config.json","url":"http://localhost:8000/ui/example-content/ui/assets/config.json"}` | This content configuration enables a basic homepage in the portal |
 | contentConfigurations.wc.enabled | bool | `true` |  |
+| contentConfigurations.wc.internalUrl | string | `"http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/wc/assets/config.json"` |  |
 | contentConfigurations.wc.url | string | `"http://localhost:8000/ui/example-content/wc/assets/config.json"` |  |
 | contentProtocolDomain | string | `"https://example-content.some-domain.com"` |  |
 | image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
-| istio.virtualService.hosts[0] | string | `"your-host.com"` |  |
-| istio.virtualService.matchers[0].match[0].uri.exact | string | `"/ui/example-content"` |  |
-| istio.virtualService.matchers[0].match[1].uri.prefix | string | `"/ui/example-content/"` |  |
+| istio.enabled | bool | `true` |  |
+| istio.virtualService.hosts[0] | string | `"*"` |  |
+| istio.virtualService.matchers[0].match[0].uri.prefix | string | `"/ui/example-content"` |  |
+| istio.virtualService.matchers[0].rewrite.uri | string | `"/"` |  |
 
 ## Overriding Values
 
