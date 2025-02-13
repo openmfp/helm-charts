@@ -5,5 +5,5 @@ name: example-content
 version: 0.114.0
 dependencies:
   - name: common
-    version: 0.2.9
+    version: 0.2.10
     repository: oci://ghcr.io/openmfp/helm-charts
