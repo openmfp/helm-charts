@@ -11,8 +11,6 @@ istio:
       - match:
         - uri:
             prefix: /ui/example-content
-        rewrite:
-          uri: /
 
 contentConfigurations:
   # -- This content configuration enables a basic homepage in the portal

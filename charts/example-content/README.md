@@ -19,7 +19,6 @@ Helm Chart for the openmfp Portal
 | istio.enabled | bool | `true` |  |
 | istio.virtualService.hosts[0] | string | `"*"` |  |
 | istio.virtualService.matchers[0].match[0].uri.prefix | string | `"/ui/example-content"` |  |
-| istio.virtualService.matchers[0].rewrite.uri | string | `"/"` |  |
 
 ## Overriding Values
 
