@@ -108,8 +108,6 @@ matches the snapshot:
         - match:
             - uri:
                 prefix: /ui/example-content
-          rewrite:
-            uri: /
           route:
             - destination:
                 host: RELEASE-NAME-example-content.NAMESPACE.svc.cluster.local
@@ -247,8 +245,6 @@ matches the snapshot (internalUrl):
         - match:
             - uri:
                 prefix: /ui/example-content
-          rewrite:
-            uri: /
           route:
             - destination:
                 host: RELEASE-NAME-example-content.NAMESPACE.svc.cluster.local
