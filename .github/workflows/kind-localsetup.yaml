@@ -5,7 +5,7 @@ on:
       - 'local-setup/**'
 
 concurrency:
-  group: localsetup-${{ github.ref }}
+  group: localsetup-${{ github.event.pull_request.number }}
   cancel-in-progress: false
 
 jobs:
