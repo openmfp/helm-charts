@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "common.entity.name" . }}
+  namespace: {{ .Release.Namespace }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
@@ -34,6 +35,7 @@ spec:
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: manager
+          {{- include "common.container.securityContext" . | nindent 10 }}
           ports:
           {{- include "common.PortsMetricsHealth" . | nindent 10 -}}
           {{- include "common.operatorHealthAndReadyness" . | nindent 10 -}}
@@ -43,6 +45,7 @@ spec:
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: server
+          {{- include "common.resources" . | nindent 10 }}
           {{- include "common.container.securityContext" . | nindent 10 }}
           ports:
           - containerPort: {{ .Values.validationServer.port }}

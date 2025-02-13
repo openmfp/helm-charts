@@ -68,6 +68,7 @@ operator match the snapshot:
     kind: Deployment
     metadata:
       name: extension-manager-operator
+      namespace: NAMESPACE
     spec:
       revisionHistoryLimit: 3
       selector:
@@ -117,6 +118,11 @@ operator match the snapshot:
                 requests:
                   cpu: 40m
                   memory: 50Mi
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
               startupProbe:
                 failureThreshold: 30
                 httpGet:
@@ -148,6 +154,13 @@ operator match the snapshot:
                   port: 8081
                 initialDelaySeconds: 5
                 periodSeconds: 10
+              resources:
+                limits:
+                  cpu: 260m
+                  memory: 512Mi
+                requests:
+                  cpu: 40m
+                  memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
@@ -172,3 +185,4 @@ operator match the snapshot:
     kind: ServiceAccount
     metadata:
       name: extension-manager-operator
+      namespace: NAMESPACE

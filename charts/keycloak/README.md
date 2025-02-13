@@ -16,34 +16,44 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 | crossplane.clients.openmfp.name | string | `"OpenMFP"` | name of the client |
 | crossplane.clients.openmfp.validRedirectUris | list | `["http://localhost:8000/callback*","http://localhost:4300/callback*"]` | valid redirect uris for the client |
 | crossplane.clients.openmfp.validRedirectUris[0] | string | `"http://localhost:8000/callback*"` | keycloak callback url |
-| crossplane.enabled | bool | `false` | toggle to enable/disable crossplane |
+| crossplane.enabled | bool | `true` | toggle to enable/disable crossplane |
 | crossplane.identityProviders | object | `{}` |  |
 | crossplane.providerConfig | object | `{"name":"keycloak-provider-config","namespace":"openmfp-system"}` | crossplane provider config |
 | crossplane.providerConfig.name | string | `"keycloak-provider-config"` | name of the client |
 | crossplane.providerConfig.namespace | string | `"openmfp-system"` | client namespace |
-| crossplane.realm | object | `{"displayName":"OpenMFP","name":"openmfp","registrationAllowed":false}` | crossplane realm config |
+| crossplane.realm | object | `{"displayName":"OpenMFP","name":"openmfp","registrationAllowed":true}` | crossplane realm config |
 | crossplane.realm.displayName | string | `"OpenMFP"` | realm display name |
 | crossplane.realm.name | string | `"openmfp"` | realm name |
-| crossplane.realm.registrationAllowed | bool | `false` | realm registration allowed |
+| crossplane.realm.registrationAllowed | bool | `true` | realm registration allowed |
 | crossplane.trustedAudiences | list | `[]` |  |
 | debug | bool | `false` | debug mode |
-| domain | object | `{"name":"openmfp.org","pathPrefix":""}` | domain configuration |
+| domain | object | `{"name":"openmfp.org","pathPrefix":"/keycloak"}` | domain configuration |
 | domain.name | string | `"openmfp.org"` | domain name |
-| domain.pathPrefix | string | `""` | path prefix |
+| domain.pathPrefix | string | `"/keycloak"` | path prefix |
 | externalSecrets | object | `{"keycloakAdminRemoteRef":"","postgres-adminRemoteRef":""}` | external secrets configuration |
 | externalSecrets.keycloakAdminRemoteRef | string | `""` | keycloak admin secret |
 | externalSecrets.postgres-adminRemoteRef | string | `""` | postgres admin secret |
-| istio.virtualservice.hosts | list | `["auth.openmfp.org"]` | istio virtual service hosts |
+| istio.https.enabled | bool | `false` | toggle to enable/disable https |
+| istio.virtualservice.hosts | list | `["*"]` | istio virtual service hosts |
 | job | object | `{"annotations":{"argocd.argoproj.io/hook":"PostSync"},"serviceAccount":"keycloak-client-creation"}` | job configuration |
 | job.annotations | object | `{"argocd.argoproj.io/hook":"PostSync"}` | custom job annotations |
 | job.serviceAccount | string | `"keycloak-client-creation"` | job ServiceAccount name |
-| keycloak | object | `{"extraEnvVars":[{"name":"KEYCLOAK_USER","value":"keycloak-admin"},{"name":"KEYCLOAK_PASSWORD","valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},{"name":"JAVA_OPTS_APPEND","value":"-Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local"}],"postgresql":{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"}}}}` | configuration passed to the child 'keyclaok' chart https://github.com/bitnami/charts/tree/main/bitnami/keycloak |
+| keycloak | object | `{"auth":{"adminUser":"keycloak-admin","existingSecret":"keycloak-admin","passwordSecretKey":"secret"},"extraEnvVars":[{"name":"KEYCLOAK_USER","value":"keycloak-admin"},{"name":"KEYCLOAK_PASSWORD","valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},{"name":"JAVA_OPTS_APPEND","value":"-Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local"}],"httpRelativePath":"/keycloak/","logging":{"level":"DEBUG"},"postgresql":{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"},"username":"keycloak"},"nameOverride":"postgresql-keycloak","primary":{"resourcesPreset":"none"}},"resourcesPreset":"none"}` | configuration passed to the child 'keyclaok' chart https://github.com/bitnami/charts/tree/main/bitnami/keycloak |
+| keycloak.auth.adminUser | string | `"keycloak-admin"` | keycloak admin user |
+| keycloak.auth.existingSecret | string | `"keycloak-admin"` | keycloak admin secret |
+| keycloak.auth.passwordSecretKey | string | `"secret"` | keycloak admin secret key |
 | keycloak.extraEnvVars | list | `[{"name":"KEYCLOAK_USER","value":"keycloak-admin"},{"name":"KEYCLOAK_PASSWORD","valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},{"name":"JAVA_OPTS_APPEND","value":"-Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local"}]` | keycloak environment variables (raw) For Arm64 arch (especially Apple M4), add -XX:UseSVE=0 to JAVA_OPTS_APPEND |
-| keycloak.postgresql | object | `{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"}}}` | configuration for the postgresql sub-chart |
-| keycloak.postgresql.auth | object | `{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"}}` | authorization configuration |
+| keycloak.httpRelativePath | string | `"/keycloak/"` | keycloak http relative path |
+| keycloak.logging.level | string | `"DEBUG"` | keycloak logging level |
+| keycloak.postgresql | object | `{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"},"username":"keycloak"},"nameOverride":"postgresql-keycloak","primary":{"resourcesPreset":"none"}}` | configuration for the postgresql sub-chart |
+| keycloak.postgresql.auth | object | `{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"},"username":"keycloak"}` | authorization configuration |
 | keycloak.postgresql.auth.existingSecret | string | `""` | existing secret name |
 | keycloak.postgresql.auth.secretKeys.adminPasswordKey | string | `"password"` | admin password key |
 | keycloak.postgresql.auth.secretKeys.userPasswordKey | string | `"password"` | user password key |
+| keycloak.postgresql.auth.username | string | `"keycloak"` | postgresql username |
+| keycloak.postgresql.nameOverride | string | `"postgresql-keycloak"` | postgresql name override |
+| keycloak.postgresql.primary.resourcesPreset | string | `"none"` | primary postgresql resources preset |
+| keycloak.resourcesPreset | string | `"none"` | keycloak resources preset |
 | keycloakConfig.admin | object | `{"password":{"valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},"username":{"value":"keycloak-admin"}}` | admin user configuration |
 | keycloakConfig.admin.password | object | `{"valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}}` | admin password |
 | keycloakConfig.admin.password.valueFrom.secretKeyRef.key | string | `"secret"` | key of the password in the secret |
@@ -57,12 +67,12 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 | keycloakConfig.client.tokenLifespan | int | `3600` | token lifespan |
 | keycloakConfig.realm | object | `{"name":"master"}` | realm configuration |
 | keycloakConfig.realm.name | string | `"master"` | realm name |
-| keycloakConfig.redirectUrls | list | `[]` | redirect urls |
-| keycloakConfig.url | string | `"http://keycloak-http.openmfp-system.svc.cluster.local:8080"` | url of the keycloak server |
+| keycloakConfig.redirectUrls | list | `["http://localhost:8000/callback*"]` | redirect urls |
+| keycloakConfig.url | string | `"http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak"` | url of the keycloak server |
 | keycloakConfig.userRegistration.enabled | bool | `true` | toggle to enable/disable user registration |
-| service | object | `{"name":"keycloak","port":8080}` | service configuration |
-| service.name | string | `"keycloak"` | service name |
-| service.port | int | `8080` | service port |
+| service | object | `{"name":"openmfp-keycloak","port":80}` | service configuration |
+| service.name | string | `"openmfp-keycloak"` | service name |
+| service.port | int | `80` | service port |
 
 ## Overriding Values
 

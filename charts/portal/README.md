@@ -14,7 +14,7 @@ Helm Chart for the openmfp Portal
 | cookieDomain | string | `"localhost"` | cookie domain |
 | developmentLandcsape | string | `"true"` | development landscape toggle |
 | environment | string | `"local"` | environment |
-| extraEnvVars | object | `{}` | A way to provide additional experimental environment variables |
+| extraEnvVars | list | `[{"name":"CRD_GATEWAY_API_URL","value":"http://localhost:8000/example-gateway/graphql"}]` | A way to provide additional experimental environment variables |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
 | frontendPort | int | `8000` | frontend port |
 | health.liveness.path | string | `"/rest/health"` | path used for the liveness probe |
@@ -32,7 +32,7 @@ Helm Chart for the openmfp Portal
 | trust.openmfp.loginAudience | string | `"openmfp"` | login audience |
 | trust.openmfp.oidcClientSecretName | string | `"openmfp-client"` | oidc client secret name |
 | trust.openmfp.secretKeyRef | string | `"attribute.client_secret"` | secret key reference |
-| trust.openmfp.tokenUrl | string | `"http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token"` | token url (if discoveryEndpoint is not specified) |
+| trust.openmfp.tokenUrl | string | `"http://openmfp-keycloak/keycloak/realms/openmfp/protocol/openid-connect/token"` | token url (if discoveryEndpoint is not specified) |
 | validWebcomponentUrls | string | `".?"` |  |
 | virtualService.hosts | list | `["*"]` | virtual service hosts |
 

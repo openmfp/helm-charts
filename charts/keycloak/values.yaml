@@ -1,14 +1,17 @@
 istio:
   virtualservice:
     # -- istio virtual service hosts
-    hosts: [auth.openmfp.org]
+    hosts: ["*"]
+  https:
+    # -- toggle to enable/disable https
+    enabled: false
 
 # -- debug mode
 debug: false
 
 crossplane:
   # -- toggle to enable/disable crossplane
-  enabled: false
+  enabled: true
 
   # -- crossplane provider config
   providerConfig:
@@ -24,7 +27,7 @@ crossplane:
     # -- realm display name
     displayName: OpenMFP
     # -- realm registration allowed
-    registrationAllowed: false
+    registrationAllowed: true
 
   clients:
     openmfp:
@@ -42,6 +45,20 @@ crossplane:
 # -- configuration passed to the child 'keyclaok' chart
 # https://github.com/bitnami/charts/tree/main/bitnami/keycloak
 keycloak:
+  auth:
+    # -- keycloak admin user
+    adminUser: keycloak-admin
+    # -- keycloak admin secret
+    existingSecret: keycloak-admin
+    # -- keycloak admin secret key
+    passwordSecretKey: secret
+  # -- keycloak resources preset
+  resourcesPreset: none
+  # -- keycloak http relative path
+  httpRelativePath: "/keycloak/"
+  logging:
+    # -- keycloak logging level
+    level: DEBUG
   # -- keycloak environment variables (raw)
   # For Arm64 arch (especially Apple M4), add -XX:UseSVE=0 to JAVA_OPTS_APPEND
   extraEnvVars:
@@ -58,8 +75,15 @@ keycloak:
 
   # -- configuration for the postgresql sub-chart
   postgresql:
+    primary:
+      # -- primary postgresql resources preset
+      resourcesPreset: none
+    # -- postgresql name override
+    nameOverride: postgresql-keycloak
     # -- authorization configuration
     auth:
+      # -- postgresql username
+      username: keycloak
       # -- existing secret name
       existingSecret: ""
       secretKeys:
@@ -70,12 +94,12 @@ keycloak:
 
 keycloakConfig:
   # -- url of the keycloak server
-  url: http://keycloak-http.openmfp-system.svc.cluster.local:8080
+  url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
   userRegistration:
     # -- toggle to enable/disable user registration
     enabled: true
   # -- redirect urls
-  redirectUrls: []
+  redirectUrls: ["http://localhost:8000/callback*"]
   # -- realm configuration
   realm:
     # -- realm name
@@ -109,16 +133,16 @@ keycloakConfig:
 # -- service configuration
 service:
   # -- service name
-  name: keycloak
+  name: openmfp-keycloak
   # -- service port
-  port: 8080
+  port: 80
 
 # -- domain configuration
 domain:
   # -- domain name
   name: openmfp.org
   # -- path prefix
-  pathPrefix: ""
+  pathPrefix: "/keycloak"
 
 # -- job configuration
 job:

@@ -33,7 +33,7 @@ matches the snapshot:
                       key: attribute.client_secret
                       name: portal-client-secret-openmfp
                 - name: TOKEN_URL_OPENMFP
-                  value: http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
+                  value: http://openmfp-keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
                 - name: AUTH_SERVER_URL_OPENMFP
                   value: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
                 - name: CONTENT_CONFIGURATION_VALIDATOR_API_URL
@@ -209,7 +209,7 @@ matches the snapshot with istio disabled:
                       key: attribute.client_secret
                       name: portal-client-secret-openmfp
                 - name: TOKEN_URL_OPENMFP
-                  value: http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
+                  value: http://openmfp-keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
                 - name: AUTH_SERVER_URL_OPENMFP
                   value: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
                 - name: CONTENT_CONFIGURATION_VALIDATOR_API_URL
