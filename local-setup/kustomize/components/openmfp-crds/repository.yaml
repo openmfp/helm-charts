@@ -10,4 +10,4 @@ spec:
     # renovate: datasource=docker registryUrl=https://ghcr.io depName=ghcr.io/openmfp/helm-charts/openmfp-crds
     semver: 0.0.17
   secretRef:
-    name: ghcr-credentials
+    name: github

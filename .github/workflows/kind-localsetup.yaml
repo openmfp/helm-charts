@@ -56,7 +56,7 @@ jobs:
         echo "Describe all helmreleases which are not Ready yet"
         kubectl get helmreleases -A -o json | jq -r '.items[] | select(.status.conditions[]? | select(.type == "Ready" and .status != "True")) | "\(.metadata.namespace) \(.metadata.name)"' | while read namespace name; do kubectl describe helmrelease $name -n $namespace; done
         echo "Print imagePullSecret"
-        kubectl get secret ghcr-credentials -n openmfp-system -o yaml
+        kubectl get secret github -n openmfp-system -o yaml
         echo "Test docker login and pull"
         docker login ghcr.io -u ${{ github.repository_owner }} -p ${{ steps.generate-token.outputs.token }}
         docker pull ghcr.io/openmfp/portal:0.287.0
