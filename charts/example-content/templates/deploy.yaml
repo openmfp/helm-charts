@@ -4,6 +4,7 @@ metadata:
   name: {{ include "common.entity.name" . }}
   labels:
     app: {{ include "common.entity.name" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   strategy:
     rollingUpdate:

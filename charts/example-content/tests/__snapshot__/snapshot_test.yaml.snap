@@ -32,6 +32,7 @@ matches the snapshot:
       labels:
         app: RELEASE-NAME-example-content
       name: RELEASE-NAME-example-content
+      namespace: NAMESPACE
     spec:
       revisionHistoryLimit: 3
       selector:
@@ -170,6 +171,7 @@ matches the snapshot (internalUrl):
       labels:
         app: RELEASE-NAME-example-content
       name: RELEASE-NAME-example-content
+      namespace: NAMESPACE
     spec:
       revisionHistoryLimit: 3
       selector:
