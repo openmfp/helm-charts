@@ -4,6 +4,8 @@ on:
     paths:
       - 'local-setup/**'
   push:
+    branches:
+      - main
     paths:
       - 'local-setup/**'
 
