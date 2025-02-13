@@ -17,3 +17,7 @@ spec:
       namespace: istio-system
     - name: crossplane
       namespace: crossplane-system
+  values:
+    components: # TODO: remove when semver 0.0.238 is released
+      example-content:
+        enabled: true
