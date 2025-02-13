@@ -1,32 +1,65 @@
+crossplane:
+  enabled: true
 istio:
   networking:
     # -- The istio apiVersion used for networking resources in this chart eg. networking.istio.io/v1, networking.istio.io/v1beta1
     apiVersion: networking.istio.io/v1
-  gateway:
-    # -- Annotations to be applied to the istio gateway
-    annotations: {}
-    # -- The istio apiVersion of the gateway resource eg, networking.istio.io/v1, networking.istio.io/v1beta1
-    apiVersion:
-    # -- The name of the istio gateway resource
-    name: gateway
-    selector:
-      # -- The istio ingress gateway selector
-      istio: gateway
-    # -- The "servers" section of the istio gateway. By default it is configured for a local kind setup. Adjust to be a https port for productive deployments
-    servers:
-      - port:
-          number: 8080
-          name: http
-          protocol: HTTP
-        hosts:
-          - "*"
   serviceEntries:
     https:
       # -- A toggle to enable the service entries for external https communication
       enabled: false
       # -- The list of hosts to be added to the service entry
       hosts: []
+  enabled: true
+  gateway:
+    annotations: {}
+    apiVersion: networking.istio.io/v1
+    name: gateway
+    selector:
+      istio: gateway
+    servers:
+      - port:
+          number: 8000
+          name: http
+          protocol: HTTP
+        hosts:
+          - "*"
 
 fga:
-  # -- The list of FGA stores to be created
-  stores: []
+  enabled: false
+  stores:
+    - name: tenant-demo-root
+      namespace: openmfp-system
+      tuples:
+      - object: role:authenticated
+        relation: assignee
+        user: user:*
+      - object: account:demo-root
+        relation: member
+        user: role:authenticated#assignee
+      coreModuleName: |
+        module core
+
+        type user
+
+        type role
+          relations
+            define assignee: [user,user:*]
+
+        type account
+          relations
+
+            define parent: [account]
+            define owner: [role#assignee]
+            define member: [role#assignee] or owner
+
+            define get: member or get from parent
+            define update: member or update from parent
+            define delete: owner or delete from parent
+
+            # org and account specific
+            define watch: member or watch from parent
+
+            # org specific
+            define create: member or create from parent
+            define list: member or list from parent

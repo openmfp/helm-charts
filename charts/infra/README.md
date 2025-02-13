@@ -12,12 +12,26 @@ The infra openmfp chart configures a number of common infrastructure components 
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| fga.stores | list | `[]` | The list of FGA stores to be created |
-| istio.gateway.annotations | object | `{}` | Annotations to be applied to the istio gateway |
-| istio.gateway.apiVersion | string | `nil` | The istio apiVersion of the gateway resource eg, networking.istio.io/v1, networking.istio.io/v1beta1 |
-| istio.gateway.name | string | `"gateway"` | The name of the istio gateway resource |
-| istio.gateway.selector.istio | string | `"gateway"` | The istio ingress gateway selector |
-| istio.gateway.servers | list | `[{"hosts":["*"],"port":{"name":"http","number":8080,"protocol":"HTTP"}}]` | The "servers" section of the istio gateway. By default it is configured for a local kind setup. Adjust to be a https port for productive deployments |
+| crossplane.enabled | bool | `true` |  |
+| fga.enabled | bool | `false` |  |
+| fga.stores[0].coreModuleName | string | `"module core\n\ntype user\n\ntype role\n  relations\n    define assignee: [user,user:*]\n\ntype account\n  relations\n\n    define parent: [account]\n    define owner: [role#assignee]\n    define member: [role#assignee] or owner\n\n    define get: member or get from parent\n    define update: member or update from parent\n    define delete: owner or delete from parent\n\n    # org and account specific\n    define watch: member or watch from parent\n\n    # org specific\n    define create: member or create from parent\n    define list: member or list from parent\n"` |  |
+| fga.stores[0].name | string | `"tenant-demo-root"` |  |
+| fga.stores[0].namespace | string | `"openmfp-system"` |  |
+| fga.stores[0].tuples[0].object | string | `"role:authenticated"` |  |
+| fga.stores[0].tuples[0].relation | string | `"assignee"` |  |
+| fga.stores[0].tuples[0].user | string | `"user:*"` |  |
+| fga.stores[0].tuples[1].object | string | `"account:demo-root"` |  |
+| fga.stores[0].tuples[1].relation | string | `"member"` |  |
+| fga.stores[0].tuples[1].user | string | `"role:authenticated#assignee"` |  |
+| istio.enabled | bool | `true` |  |
+| istio.gateway.annotations | object | `{}` |  |
+| istio.gateway.apiVersion | string | `"networking.istio.io/v1"` |  |
+| istio.gateway.name | string | `"gateway"` |  |
+| istio.gateway.selector.istio | string | `"gateway"` |  |
+| istio.gateway.servers[0].hosts[0] | string | `"*"` |  |
+| istio.gateway.servers[0].port.name | string | `"http"` |  |
+| istio.gateway.servers[0].port.number | int | `8000` |  |
+| istio.gateway.servers[0].port.protocol | string | `"HTTP"` |  |
 | istio.networking.apiVersion | string | `"networking.istio.io/v1"` | The istio apiVersion used for networking resources in this chart eg. networking.istio.io/v1, networking.istio.io/v1beta1 |
 | istio.serviceEntries.https.enabled | bool | `false` | A toggle to enable the service entries for external https communication |
 | istio.serviceEntries.https.hosts | list | `[]` | The list of hosts to be added to the service entry |

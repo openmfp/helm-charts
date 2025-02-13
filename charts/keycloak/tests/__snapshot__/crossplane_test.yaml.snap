@@ -133,7 +133,7 @@ matches the snapshot:
           "client_id":"admin-cli",
           "username": "keycloak-admin",
           "password": "admin",
-          "url": "http://keycloak-http.openmfp-system.svc.cluster.local:8080",
+          "url": "http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak",
           "realm": "master"
         }
   10: |
@@ -151,7 +151,7 @@ matches the snapshot:
         enabled: true
         loginWithEmailAllowed: true
         realm: openmfp
-        registrationAllowed: false
+        registrationAllowed: true
         registrationEmailAsUsername: true
       providerConfigRef:
         name: keycloak-provider-config
