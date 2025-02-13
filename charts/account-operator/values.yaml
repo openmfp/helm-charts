@@ -47,8 +47,6 @@ subroutines:
 
 # -- The secret for kubeconfig
 kubeconfigSecret: ""
-# -- The log level
-logLevel: warn
 
 security:
   # -- Mount the service account token
