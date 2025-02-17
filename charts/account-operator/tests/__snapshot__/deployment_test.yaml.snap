@@ -424,7 +424,7 @@ operator match the snapshot:
       name: account-operator-webhook
     spec:
       ports:
-        - port: 443
+        - port: 9443
           protocol: TCP
           targetPort: 9443
       selector:
@@ -859,7 +859,7 @@ operator match the snapshot (with kubeconfigSecret):
       name: account-operator-webhook
     spec:
       ports:
-        - port: 443
+        - port: 9443
           protocol: TCP
           targetPort: 9443
       selector:
@@ -1287,7 +1287,7 @@ operator match the snapshot with webhook enabled:
       name: account-operator-webhook
     spec:
       ports:
-        - port: 443
+        - port: 9443
           protocol: TCP
           targetPort: 9443
       selector:
