@@ -35,6 +35,7 @@ A Helm chart to deploy OpenMFP Account-Operator
 | subroutines.namespace.enabled | bool | `true` | Enable namespace subroutines |
 | webhooks.certDir | string | `"/certs"` | The directory for webhook certificates |
 | webhooks.enabled | bool | `true` | Enable webhooks |
+| webhooks.register | bool | `false` | Register webhooks, flag to toggle if webhooks should be registered on the runtime cluster |
 
 ## Overriding Values
 
