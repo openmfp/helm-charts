@@ -51,10 +51,56 @@ helm upgrade -i -n flux-system --create-namespace flux oci://ghcr.io/fluxcd-comm
   --set notificationController.create=false
 
 echo -e "${COL}[$(date '+%H:%M:%S')] Starting deployments ${COL_RES}"
-kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
+if [ "${1}" == "oci" ]; then
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    echo -e "${COL}[$(date '+%H:%M:%S')] ARM64 architecture detected, applying patch ${COL_RES}"
+    kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/oci-arm64
+  else
+    kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/oci
+  fi
+  sleep 10 # give time for the 'registry' pod to be created
+
+  kubectl wait --namespace default \
+    --for=condition=Ready pods \
+    --timeout=120s registry
+
+  kubectl port-forward svc/registry 5000:5000 --context kind-openmfp &
+  sleep 1
+
+  cleanup() {
+    echo -e "${COL}[$(date '+%H:%M:%S')] Cleaning up background processes ${COL_RES}"
+    pkill -f "kubectl port-forward svc/registry 5000:5000"
+  }
+  trap cleanup EXIT
+
+  OCIDIR=$SCRIPT_DIR/../../oci
+  for dir in $OCIDIR; do
+    if [ -d "$dir" ]; then
+      echo -e "${COL}[$(date '+%H:%M:%S')] Listing files in directory: $dir ${COL_RES}"
+      for file in "$dir"/*; do
+        echo -e "${COL}[$(date '+%H:%M:%S')] Processing file: $file ${COL_RES}"
+        # Replace the following line with the command you want to run on each file
+        ls -l "$file"
+        helm push "$file" oci://localhost:5000/openmfp
+      done
+    else
+      echo -e "${COL}[$(date '+%H:%M:%S')] Directory not found: $dir ${COL_RES}"
+      exit 1
+    fi
+  done
+else
+  if [[ "$(uname -m)" == "arm64" ]]; then
+    echo -e "${COL}[$(date '+%H:%M:%S')] ARM64 architecture detected, applying patch ${COL_RES}"
+    kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default-arm64
+  else
+    kubectl apply -k $SCRIPT_DIR/../kustomize/overlays/default
+  fi
+fi
+
+
 
 echo -e "${COL}[$(date '+%H:%M:%S')] Creating necessary secrets ${COL_RES}"
-kubectl create secret docker-registry ghcr-credentials -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
+kubectl create secret docker-registry github -n openmfp-system --docker-server=ghcr.io --docker-username=$ghUser --docker-password=$ghToken --dry-run=client -o yaml | kubectl apply -f -
 
 kubectl create secret generic keycloak-admin -n openmfp-system --from-literal=secret=admin --dry-run=client -o yaml | kubectl apply -f -
 

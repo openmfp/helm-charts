@@ -1,6 +1,8 @@
+.DS_Store
 .idea
 .vscode/settings.json
 .secret
 bin/
 node_modules/
-oci/
+/oci/
+local-setup/e2e/test-results/.last-run.json

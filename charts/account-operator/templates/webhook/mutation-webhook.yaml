@@ -1,4 +1,4 @@
-{{- if .Values.webhooks.enabled -}}
+{{- if and .Values.webhooks.enabled .Values.webhooks.register -}}
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
 metadata:
@@ -9,10 +9,7 @@ webhooks:
 - admissionReviewVersions:
   - v1
   clientConfig:
-    service:
-      name: {{ include "common.entity.name" . }}-webhook
-      namespace: {{ .Release.Namespace }}
-      path: /mutate-core-openmfp-io-v1alpha1-account
+    url: {{ include "common.entity.name" . }}-webhook.{{ .Release.Namespace }}.svc:9443/mutate-core-openmfp-io-v1alpha1-account
   failurePolicy: Fail
   name: maccount.kb.io
   rules:

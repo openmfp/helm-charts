@@ -1,60 +1,34 @@
-{{- if .Values.contentConfigurations.home }}
+{{- if .Values.contentConfigurations.ui.enabled }}
 apiVersion: core.openmfp.io/v1alpha1
 kind: ContentConfiguration
 metadata:
-  name: home
+  name: {{ include "common.entity.name" . }}-ui
   namespace: {{ .Release.Namespace }}
+  labels:
+    portal.openmfp.org/entity: main
 spec:
-  inlineConfiguration:
-    content: |-
-      {
-        "name": "overview",
-        "creationTimestamp": "2022-05-17T11:37:17Z",
-        "luigiConfigFragment": {
-          "data": {
-            "nodes": [
-              {
-                "entityType": "global",
-                "pathSegment": "home",
-                "hideFromNav": true,
-                "defineEntity": {
-                  "id": "main"
-                },
-                "children": [
-                  {
-                    "pathSegment": "overview",
-                    "label": "Overview",
-                    "icon": "home",
-                    "defineEntity": {
-                      "id": "overview"
-                    },
-                    "compound": {
-                      "renderer": {
-                        "use": "grid",
-                        "config": {
-                          "columns": "1fr 1fr 1fr 1fr"
-                        }
-                      }
-                    }
-                  }
-                ]
-              },
-              {
-                "entityType": "main.overview::compound",
-                "url": "https://luigiwebcomponents.gitlab.io/layouts/panelHeader.js",
-                "context": {
-                  "border": "shadow",
-                  "title": "Welcome to OpenMFP Portal",
-                  "description": " "
-                },
-                "layoutConfig": {
-                  "row": "1",
-                  "column": "1 / -1"
-                }
-              }
-            ]
-          }
-        }
-      }
+  remoteConfiguration:
+    url: {{ .Values.contentConfigurations.ui.url }}
+    {{- if .Values.contentConfigurations.ui.internalUrl }}
+    internalUrl: {{ .Values.contentConfigurations.ui.internalUrl }}
+    {{- end }}
+    contentType: json
+{{- end }}
+
+{{- if .Values.contentConfigurations.wc.enabled }}
+---
+apiVersion: core.openmfp.io/v1alpha1
+kind: ContentConfiguration
+metadata:
+  name: {{ include "common.entity.name" . }}-wc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    portal.openmfp.org/entity: main
+spec:
+  remoteConfiguration:
+    url: {{ .Values.contentConfigurations.wc.url }}
+    {{- if .Values.contentConfigurations.wc.internalUrl }}
+    internalUrl: {{ .Values.contentConfigurations.wc.internalUrl }}
+    {{- end }}
     contentType: json
 {{- end }}

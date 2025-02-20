@@ -10,7 +10,10 @@ crds:
 
 webhooks:
   # -- Enable webhooks
-  enabled: false
+  enabled: true
+
+  # -- Register webhooks, flag to toggle if webhooks should be registered on the runtime cluster
+  register: false
   # -- The directory for webhook certificates
   certDir: /certs
 
@@ -29,7 +32,7 @@ subroutines:
     # -- Enable FGA subroutines
     enabled: true
     # -- The gRPC address for FGA
-    grpcAddr: ""
+    grpcAddr: openmfp-openfga:8081
     # -- The root namespace for FGA
     rootNamespace: openmfp-root
     # -- The object type for FGA
@@ -47,8 +50,6 @@ subroutines:
 
 # -- The secret for kubeconfig
 kubeconfigSecret: ""
-# -- The log level
-logLevel: warn
 
 security:
   # -- Mount the service account token

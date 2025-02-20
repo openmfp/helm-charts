@@ -20,6 +20,7 @@ metadata:
   name: {{ $val }}-trust
 spec:
   forProvider:
+    name: {{ $val }}-trust
     clientScopeIdRef:
       name: trusted-openmfp-audiences
     protocol: openid-connect

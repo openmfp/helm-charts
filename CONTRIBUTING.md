@@ -20,6 +20,32 @@ You are welcome to contribute with your pull requests. These steps explain the c
 > **NOTE:** You should always add tests if you are adding code to our repository.
 To let chart tests run locally, run `helm unittest -u <PATH TO CHART>`.
 
+To start bootstrapping using the local charts from a local oci repository, package the charts and run the string with the `oci` parameter:
+```sh
+task helmpackage
+./local-setup/scripts/start.sh oci
+```
+
+Also ensure the proper chart versions are referenced in the OCIRepository patches, before running the start script. 
+
+To reference local chart dependencies, change the Chart.yaml file to point to local chart folder like so:
+```yaml
+apiVersion: v2
+name: openmfp
+description: The OpenMFP chart for Kubernetes
+type: application
+version: 0.0.194
+appVersion: "0.0.0"
+
+dependencies:
+  - name: keycloak
+    version: 0.61.0
+    repository: file://../keycloak
+    condition: components.keycloak.enabled
+```
+
+After such change, Increment the `version` and make sure to run `helm dependency update` on to dependencies first and last on the top-level chart which links them. Update the patch versions to reflect your changes.
+
 ## Issues
 We use GitHub issues to track bugs. Please ensure your description is
 clear and includes sufficient instructions to reproduce the issue.
