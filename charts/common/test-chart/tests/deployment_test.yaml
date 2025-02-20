@@ -22,3 +22,15 @@ tests:
         name: my-image
     asserts:
       - matchSnapshot: {}
+  - it: test sentry enabled
+    set:
+      image:
+        name: my-image
+      global:
+        sentry:
+          enabled: true
+      environment: "test"
+      sentry:
+        environment: "test"
+    asserts:
+      - matchSnapshot: {}

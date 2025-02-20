@@ -34,7 +34,9 @@ baseDomains:
 cookieDomain: "localhost"
 
 # -- A way to provide additional experimental environment variables
-extraEnvVars: {}
+extraEnvVars:
+  - name: CRD_GATEWAY_API_URL
+    value: http://localhost:8000/example-gateway/graphql
 
 trust:
   openmfp:
@@ -45,13 +47,15 @@ trust:
     # -- auth domain (if discoveryEndpoint is not specified)
     authDomain: http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth
     # -- token url (if discoveryEndpoint is not specified)
-    tokenUrl: http://keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
+    tokenUrl: http://openmfp-keycloak/keycloak/realms/openmfp/protocol/openid-connect/token
     # -- oidc client secret name
     oidcClientSecretName: openmfp-client
     # -- login audience
     loginAudience: openmfp
     # -- secret key reference
     secretKeyRef: attribute.client_secret
+    # -- ContentConfiguration validator api url
+    contentConfigurationValidatorApiUrl: http://openmfp-extension-manager-operator-server.openmfp-system.svc.cluster.local:8088/validate
 
 health:
   # -- health port to be used by probes

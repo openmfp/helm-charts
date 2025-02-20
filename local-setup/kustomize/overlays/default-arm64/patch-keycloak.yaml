@@ -1,0 +1,15 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: openmfp
+  namespace: openmfp-system
+spec:
+  values:
+    keycloak:
+      keycloak:
+        extraEnvVars:
+          - name: JAVA_OPTS_APPEND
+            value: |-
+             -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local
+             -XX:UseSVE=0
+

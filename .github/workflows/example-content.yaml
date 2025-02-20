@@ -4,6 +4,10 @@ on:
     paths:
       - 'charts/example-content/**'
       - 'example-content.yaml'
+  pull_request:
+    paths:
+      - 'charts/example-content/**'
+      - 'example-content.yaml'
 
 jobs:
   pipeline:

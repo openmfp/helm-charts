@@ -1,25 +1,5 @@
-matches the snapshot:
+disables externalsecrets:
   1: |
-    apiVersion: core.openmfp.io/v1alpha1
-    kind: Store
-    metadata:
-      name: test
-      namespace: test
-    spec:
-      coreModule: |2
-        module core
-
-        type user
-
-        type account
-          relations
-            define owner: [user]
-            define member: [user] or owner
-      tuples:
-        - object: account:a
-          relation: owner
-          user: user:a
-  2: |
     apiVersion: networking.istio.io/v1
     kind: Gateway
     metadata:
@@ -33,20 +13,22 @@ matches the snapshot:
             - '*'
           port:
             name: http
-            number: 8080
+            number: 8000
             protocol: HTTP
-  3: |
+matches the snapshot:
+  1: |
     apiVersion: networking.istio.io/v1
-    kind: ServiceEntry
+    kind: Gateway
     metadata:
-      name: openmfp-https
+      name: gateway
       namespace: NAMESPACE
     spec:
-      hosts:
-        - example.com
-      location: MESH_EXTERNAL
-      ports:
-        - name: https
-          number: 443
-          protocol: TLS
-      resolution: DNS
+      selector:
+        istio: gateway
+      servers:
+        - hosts:
+            - '*'
+          port:
+            name: http
+            number: 8000
+            protocol: HTTP

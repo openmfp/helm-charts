@@ -10,11 +10,14 @@ matches the snapshot:
       hosts:
         - keycloak.openmfp.org
       http:
-        - route:
+        - match:
+            - uri:
+                prefix: /keycloak
+          route:
             - destination:
-                host: keycloak.openmfp-system.svc.cluster.local
+                host: openmfp-keycloak.openmfp-system.svc.cluster.local
                 port:
-                  number: 8080
+                  number: 80
 matches the snapshot (with path prefix):
   1: |
     apiVersion: networking.istio.io/v1beta1
@@ -32,6 +35,6 @@ matches the snapshot (with path prefix):
                 prefix: /auth
           route:
             - destination:
-                host: keycloak.openmfp-system.svc.cluster.local
+                host: openmfp-keycloak.openmfp-system.svc.cluster.local
                 port:
-                  number: 8080
+                  number: 80

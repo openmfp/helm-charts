@@ -1,14 +1,17 @@
 istio:
   virtualservice:
     # -- istio virtual service hosts
-    hosts: [auth.openmfp.org]
+    hosts: ["*"]
+  https:
+    # -- toggle to enable/disable https
+    enabled: false
 
 # -- debug mode
 debug: false
 
 crossplane:
   # -- toggle to enable/disable crossplane
-  enabled: false
+  enabled: true
 
   # -- crossplane provider config
   providerConfig:
@@ -24,7 +27,7 @@ crossplane:
     # -- realm display name
     displayName: OpenMFP
     # -- realm registration allowed
-    registrationAllowed: false
+    registrationAllowed: true
 
   clients:
     openmfp:
@@ -34,36 +37,31 @@ crossplane:
       validRedirectUris:
         # -- keycloak callback url
         - http://localhost:8000/callback*
+        - http://localhost:4300/callback*
   trustedAudiences: []
 
-  # -- crossplane identity providers config
-  identityProviders:
-    # -- sap IDP
-    sap:
-      # -- authorization URL
-      authorizationUrl: https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7/oauth2/v2.0/authorize
-      # -- token URL
-      tokenUrl: https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7/oauth2/v2.0/token
-      # -- user info URL
-      issuer: https://login.microsoftonline.com/42f7676c-f455-423c-82f6-dc2d99791af7/v2.0
-      # -- client id
-      clientId: 82b4c72c-ff99-4df6-ba4f-fb634d1fc491
-      # -- client secret
-      clientSecretRef:
-        # -- secret name
-        name: sap-client-secret
-        # -- secret namespace
-        namespace: openmfp-system
-        # -- secret key
-        key: client-secret
-      # -- user info URL
-      clientSecretRemoteRef: dxp-core-team/manual-secrets/sap-client-secret
+  identityProviders: {}
 
 # -- configuration passed to the child 'keyclaok' chart
 # https://github.com/bitnami/charts/tree/main/bitnami/keycloak
 keycloak:
+  auth:
+    # -- keycloak admin user
+    adminUser: keycloak-admin
+    # -- keycloak admin secret
+    existingSecret: keycloak-admin
+    # -- keycloak admin secret key
+    passwordSecretKey: secret
+  # -- keycloak resources preset
+  resourcesPreset: none
+  # -- keycloak http relative path
+  httpRelativePath: "/keycloak/"
+  logging:
+    # -- keycloak logging level
+    level: DEBUG
   # -- keycloak environment variables (raw)
-  extraEnvVars: |
+  # For Arm64 arch (especially Apple M4), add -XX:UseSVE=0 to JAVA_OPTS_APPEND
+  extraEnvVars:
     - name: KEYCLOAK_USER
       value: keycloak-admin
     - name: KEYCLOAK_PASSWORD
@@ -71,10 +69,21 @@ keycloak:
         secretKeyRef:
           name: keycloak-admin
           key: secret
+    - name: JAVA_OPTS_APPEND
+      value: |-
+        -Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local
+
   # -- configuration for the postgresql sub-chart
   postgresql:
+    primary:
+      # -- primary postgresql resources preset
+      resourcesPreset: none
+    # -- postgresql name override
+    nameOverride: postgresql-keycloak
     # -- authorization configuration
     auth:
+      # -- postgresql username
+      username: keycloak
       # -- existing secret name
       existingSecret: ""
       secretKeys:
@@ -85,12 +94,12 @@ keycloak:
 
 keycloakConfig:
   # -- url of the keycloak server
-  url: http://keycloak-http.openmfp-system.svc.cluster.local:8080
+  url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
   userRegistration:
     # -- toggle to enable/disable user registration
     enabled: true
   # -- redirect urls
-  redirectUrls: []
+  redirectUrls: ["http://localhost:8000/callback*"]
   # -- realm configuration
   realm:
     # -- realm name
@@ -124,16 +133,16 @@ keycloakConfig:
 # -- service configuration
 service:
   # -- service name
-  name: keycloak
+  name: openmfp-keycloak
   # -- service port
-  port: 8080
+  port: 80
 
 # -- domain configuration
 domain:
   # -- domain name
   name: openmfp.org
   # -- path prefix
-  pathPrefix: ""
+  pathPrefix: "/keycloak"
 
 # -- job configuration
 job:
@@ -146,6 +155,6 @@ job:
 # -- external secrets configuration
 externalSecrets:
   # -- keycloak admin secret
-  keycloakAdminRemoteRef: dxp-core-team/manual-secrets/keycloak-admin
+  keycloakAdminRemoteRef: ""
   # -- postgres admin secret
-  postgres-adminRemoteRef: dxp-core-team/manual-secrets/postgres-admin-password
+  postgres-adminRemoteRef: ""
