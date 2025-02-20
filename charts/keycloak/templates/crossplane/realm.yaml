@@ -1,11 +1,11 @@
-{{- if eq (include "common.getNestedValue" (dict "Values" .Values "key" "crossplane.enabled")) "true" -}}
+{{- if eq (include "common.getKeyValue" (dict "Values" .Values "key" "crossplane.enabled")) "true" -}}
 apiVersion: realm.keycloak.crossplane.io/v1alpha1
 kind: Realm
 metadata:
   name: {{ .Values.crossplane.realm.name}}
 spec:
   forProvider:
-    accessCodeLifespan: 1h
+    accessTokenLifespan: 1h
     attributes:
       organizationsEnabled: "true"
     displayName: {{ .Values.crossplane.realm.displayName }}

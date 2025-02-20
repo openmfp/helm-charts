@@ -4,6 +4,10 @@ on:
     paths:
       - 'charts/extension-manager-operator-crds/**'
       - '.github/workflows/extension-manager-operator-crds.yaml'
+  pull_request:
+    paths:
+      - 'charts/extension-manager-operator-crds/**'
+      - '.github/workflows/extension-manager-operator-crds.yaml'
 
 jobs:
   pipeline:

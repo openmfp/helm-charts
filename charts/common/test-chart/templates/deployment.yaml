@@ -14,11 +14,13 @@ spec:
     spec:
       {{ include "common.container.securityContext" . | nindent 6 }}
       containers:
-          image: {{ include "common.image" . }}
+        - image: {{ include "common.image" . }}
           imagePullPolicy: {{ include "common.imagePullPolicy" . }}
           name: manager
           ports:
           {{ include "common.PortsMetricsHealth" . | nindent 10 }}
           {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}
           {{ include "common.resources" . | nindent 10 }}
+          env:
+          {{- include "common.basicEnvironment" . | nindent 12 }}
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
