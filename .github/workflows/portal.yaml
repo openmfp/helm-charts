@@ -4,6 +4,10 @@ on:
     paths:
       - 'charts/portal/**'
       - '.github/workflows/portal.yaml'
+  pull_request:
+    paths:
+      - 'charts/portal/**'
+      - '.github/workflows/portal.yaml'
 
 jobs:
   pipeline:

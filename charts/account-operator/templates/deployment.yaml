@@ -32,7 +32,6 @@ spec:
         - args:
           - operator
           - --leader-elect
-          - --log-level={{ .Values.logLevel }}
           - '--health-probe-bind-address=:{{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}'
           image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
           name: manager
@@ -47,6 +46,7 @@ spec:
           {{- include "common.operatorHealthAndReadyness" . | nindent 10 -}}
           {{- include "common.resources" . | nindent 10 }}
           env:
+          {{- include "common.basicEnvironment" . | nindent 10 }}
           - name: SUBROUTINES_NAMESPACE_ENABLED
             value: "{{ .Values.subroutines.namespace.enabled }}"
           - name: SUBROUTINES_FGA_ENABLED

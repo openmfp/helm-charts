@@ -43,10 +43,11 @@ tasks:
       - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
   validate:
     cmds:
-      - task: lint
-      # - task: package
       - task: test
-      - task: vulnerability
+      - task: helm-docs
+      - task: update
+      - task: lint
+      - task: oci
   vulnerability:
     deps:
       - task: setup:kube-lint
@@ -65,3 +66,7 @@ tasks:
       - task: helmpackage
     cmds:
       - "for chart in $(echo {{.PACKAGED_CHARTS}} | tr ',' ' '); do helm push $chart oci://localhost:5000/openmfp; done"
+  oci:
+    cmds:
+      - "rm oci/* || true"
+      - task: helmpackage

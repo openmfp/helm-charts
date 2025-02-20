@@ -1,0 +1,9 @@
+version = 1
+SPDX-PackageName = "helm-charts"
+SPDX-PackageDownloadLocation = "https://github.com/openmfp/helm-charts"
+
+[[annotations]]
+path = "**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 SAP SE or an SAP affiliate company and openMFP contributors and helm-charts contributors."
+SPDX-License-Identifier = "Apache-2.0"

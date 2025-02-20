@@ -58,6 +58,9 @@ operator match the snapshot:
                             - yaml
                             - json
                           type: string
+                      required:
+                        - content
+                        - contentType
                       type: object
                     remoteConfiguration:
                       properties:
@@ -87,8 +90,13 @@ operator match the snapshot:
                             - yaml
                             - json
                           type: string
+                        internalUrl:
+                          type: string
                         url:
                           type: string
+                      required:
+                        - contentType
+                        - url
                       type: object
                   type: object
                 status:

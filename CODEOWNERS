@@ -3,3 +3,5 @@
 Chart.lock
 Chart.yaml
 *.tgz
+local-setup/kustomize/components/openmfp/repository.yaml
+local-setup/kustomize/components/openmfp-crds/repository.yaml
