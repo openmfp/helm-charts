@@ -21,7 +21,8 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 | crossplane.providerConfig | object | `{"name":"keycloak-provider-config","namespace":"openmfp-system"}` | crossplane provider config |
 | crossplane.providerConfig.name | string | `"keycloak-provider-config"` | name of the client |
 | crossplane.providerConfig.namespace | string | `"openmfp-system"` | client namespace |
-| crossplane.realm | object | `{"displayName":"OpenMFP","name":"openmfp","registrationAllowed":true}` | crossplane realm config |
+| crossplane.realm | object | `{"accessTokenLifespan":"8h","displayName":"OpenMFP","name":"openmfp","registrationAllowed":true}` | crossplane realm config |
+| crossplane.realm.accessTokenLifespan | string | `"8h"` | realm access token lifespan |
 | crossplane.realm.displayName | string | `"OpenMFP"` | realm display name |
 | crossplane.realm.name | string | `"openmfp"` | realm name |
 | crossplane.realm.registrationAllowed | bool | `true` | realm registration allowed |

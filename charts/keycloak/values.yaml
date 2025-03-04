@@ -28,6 +28,8 @@ crossplane:
     displayName: OpenMFP
     # -- realm registration allowed
     registrationAllowed: true
+    # -- realm access token lifespan
+    accessTokenLifespan: 8h
 
   clients:
     openmfp:

@@ -5,7 +5,8 @@ metadata:
   name: {{ .Values.crossplane.realm.name}}
 spec:
   forProvider:
-    accessTokenLifespan: 1h
+    accessTokenLifespan: {{ .Values.crossplane.realm.accessTokenLifespan }}
+    ssoSessionIdleTimeout: {{ .Values.crossplane.realm.accessTokenLifespan }}
     attributes:
       organizationsEnabled: "true"
     displayName: {{ .Values.crossplane.realm.displayName }}

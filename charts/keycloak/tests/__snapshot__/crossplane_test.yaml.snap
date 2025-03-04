@@ -143,7 +143,7 @@ matches the snapshot:
       name: openmfp
     spec:
       forProvider:
-        accessTokenLifespan: 1h
+        accessTokenLifespan: 8h
         attributes:
           organizationsEnabled: "true"
         displayName: OpenMFP
@@ -153,5 +153,6 @@ matches the snapshot:
         realm: openmfp
         registrationAllowed: true
         registrationEmailAsUsername: true
+        ssoSessionIdleTimeout: 8h
       providerConfigRef:
         name: keycloak-provider-config
