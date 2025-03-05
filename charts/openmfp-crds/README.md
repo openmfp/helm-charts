@@ -14,7 +14,6 @@ A chart containing CRD Definitions for OpenMFP
 ## Values
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| account-operator-crds.enabled | bool | `true` |  |
 | extension-manager-operator-crds.enabled | bool | `true` |  |
 
 ## Overriding Values
