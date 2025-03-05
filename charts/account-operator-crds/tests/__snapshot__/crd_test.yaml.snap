@@ -35,7 +35,7 @@ crds match the snapshot:
     kind: APIResourceSchema
     metadata:
       creationTimestamp: null
-      name: v250226-290f38d.accountinfos.core.openmfp.org
+      name: v250304-c26848b.accountinfos.core.openmfp.org
     spec:
       group: core.openmfp.org
       names:
@@ -164,7 +164,7 @@ crds match the snapshot:
     kind: APIResourceSchema
     metadata:
       creationTimestamp: null
-      name: v250226-290f38d.accounts.core.openmfp.org
+      name: v250305-70de32b.accounts.core.openmfp.org
     spec:
       group: core.openmfp.org
       names:
@@ -177,9 +177,6 @@ crds match the snapshot:
         - additionalPrinterColumns:
             - jsonPath: .spec.displayName
               name: Display Name
-              type: string
-            - jsonPath: .status.namespace
-              name: Account Workspace
               type: string
             - jsonPath: .spec.type
               name: Type
@@ -395,7 +392,7 @@ crds with kcp enabled match the snapshot:
     kind: APIResourceSchema
     metadata:
       creationTimestamp: null
-      name: v250226-290f38d.accountinfos.core.openmfp.org
+      name: v250304-c26848b.accountinfos.core.openmfp.org
     spec:
       group: core.openmfp.org
       names:
@@ -524,7 +521,7 @@ crds with kcp enabled match the snapshot:
     kind: APIResourceSchema
     metadata:
       creationTimestamp: null
-      name: v250226-290f38d.accounts.core.openmfp.org
+      name: v250305-70de32b.accounts.core.openmfp.org
     spec:
       group: core.openmfp.org
       names:
@@ -537,9 +534,6 @@ crds with kcp enabled match the snapshot:
         - additionalPrinterColumns:
             - jsonPath: .spec.displayName
               name: Display Name
-              type: string
-            - jsonPath: .status.namespace
-              name: Account Workspace
               type: string
             - jsonPath: .spec.type
               name: Type
