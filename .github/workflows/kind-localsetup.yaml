@@ -1,4 +1,4 @@
-name: Test local setup
+name: test-local-setup
 on:
   pull_request:
     branches:
