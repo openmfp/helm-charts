@@ -1,8 +1,8 @@
 apiVersion: v2
 description: Helm Chart for the openmfp Portal
 name: portal
-version: 0.73.39
-appVersion: "v0.377.14"
+version: 0.73.40
+appVersion: "v0.377.15"
 dependencies:
   - name: common
     repository: oci://ghcr.io/openmfp/helm-charts
