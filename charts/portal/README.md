@@ -14,7 +14,7 @@ Helm Chart for the openmfp Portal
 | cookieDomain | string | `"localhost"` | cookie domain |
 | developmentLandcsape | string | `"true"` | development landscape toggle |
 | environment | string | `"local"` | environment |
-| extraEnvVars | list | `[{"name":"CRD_GATEWAY_API_URL","value":"http://localhost:8000/example-gateway/graphql"}]` | A way to provide additional experimental environment variables |
+| extraEnvVars | list | `[{"name":"KUBERNETES_GRAPHQL_GATEWAY_API_URL","value":"http://localhost:8000/example-gateway/graphql"}]` | A way to provide additional experimental environment variables |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
 | frontendPort | int | `8000` | frontend port |
 | health.liveness.path | string | `"/rest/health"` | path used for the liveness probe |
