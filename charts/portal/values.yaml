@@ -35,7 +35,7 @@ cookieDomain: "localhost"
 
 # -- A way to provide additional experimental environment variables
 extraEnvVars:
-  - name: CRD_GATEWAY_API_URL
+  - name: KUBERNETES_GRAPHQL_GATEWAY_API_URL
     value: http://localhost:8000/example-gateway/graphql
 
 trust:
