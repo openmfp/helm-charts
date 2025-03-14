@@ -26,7 +26,7 @@ spec:
     protocol: openid-connect
     protocolMapper: oidc-audience-mapper
     config:
-      "included.client.audience": "{{ $val }}"
+      "included.custom.audience": "{{ $val }}"
       "id.token.claim": "true"
       "lightweight.claim": "false"
       "introspection.token.claim": "true"
