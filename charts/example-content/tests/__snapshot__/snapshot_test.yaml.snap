@@ -10,7 +10,7 @@ matches the snapshot:
     spec:
       remoteConfiguration:
         contentType: json
-        internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/assets/config.json
+        internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/example-content/ui/assets/config.json
         url: http://localhost:8000/ui/example-content/ui/assets/config.json
   2: |
     apiVersion: core.openmfp.io/v1alpha1
@@ -23,7 +23,7 @@ matches the snapshot:
     spec:
       remoteConfiguration:
         contentType: json
-        internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/wc/assets/config.json
+        internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/example-content/wc/assets/config.json
         url: http://localhost:8000/ui/example-content/wc/assets/config.json
   3: |
     apiVersion: apps/v1
@@ -160,7 +160,7 @@ matches the snapshot (internalUrl):
     spec:
       remoteConfiguration:
         contentType: json
-        internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/wc/assets/config.json
+        internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/example-content/wc/assets/config.json
         url: http://localhost:8000/ui/example-content/wc/assets/config.json
   3: |
     apiVersion: apps/v1
