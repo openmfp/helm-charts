@@ -70,3 +70,6 @@ tasks:
     cmds:
       - "rm oci/* || true"
       - task: helmpackage
+  local-setup:
+    cmds:
+      - "./local-setup/scripts/start.sh"
