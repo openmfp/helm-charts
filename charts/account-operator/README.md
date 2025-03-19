@@ -19,7 +19,8 @@ A Helm chart to deploy OpenMFP Account-Operator
 | deployment.specTemplate.labels | object | `{}` | The labels for the deployment |
 | image.name | string | `"ghcr.io/openmfp/account-operator"` | The image repository |
 | image.tag | string | `"latest"` | The image tag |
-| kcp | object | `{"enabled":false,"virtualWorkspaceUrl":""}` | The KCP configuration |
+| kcp | object | `{"apiExportEndpointSliceName":"core.openmfp.org","enabled":false,"virtualWorkspaceUrl":""}` | The KCP configuration |
+| kcp.apiExportEndpointSliceName | string | `"core.openmfp.org"` | KCP APIExportEndpointSliceName |
 | kcp.enabled | bool | `false` | Enable KCP |
 | kcp.virtualWorkspaceUrl | string | `""` | The URL for the virtual workspace |
 | kubeconfigSecret | string | `""` | The secret for kubeconfig |
