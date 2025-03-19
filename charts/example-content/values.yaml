@@ -17,13 +17,13 @@ contentConfigurations:
   ui:
     enabled: true
     url: http://localhost:8000/ui/example-content/ui/assets/config.json
-    internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/assets/config.json
+    internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/example-content/ui/assets/config.json
 # Set internal url especially for local a setup where the url is not reachable from within the cluster
 #    internalUrl: null
   wc:
     enabled: true
     url: http://localhost:8000/ui/example-content/wc/assets/config.json
-    internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/wc/assets/config.json
+    internalUrl: http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/example-content/wc/assets/config.json
 # Set internal url especially for local a setup where the url is not reachable from within the cluster
 #    internalUrl: null
 
