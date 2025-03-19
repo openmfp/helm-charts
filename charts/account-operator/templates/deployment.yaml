@@ -73,6 +73,8 @@ spec:
             value: "{{ .Values.webhooks.enabled }}"
           - name: WEBHOOKS_CERT_DIR
             value: "{{ .Values.webhooks.certDir }}"
+          - name: KCP_API_EXPORT_ENDPOINT_SLICE_NAME
+            value: "{{ .Values.kcp.apiExportEndpointSliceName }}"
           {{- if .Values.kubeconfigSecret }}
           - name: KUBECONFIG
             value: /api-kubeconfig/kubeconfig

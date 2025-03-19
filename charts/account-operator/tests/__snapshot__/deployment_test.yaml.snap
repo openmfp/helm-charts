@@ -329,6 +329,8 @@ operator match the snapshot:
                   value: "true"
                 - name: WEBHOOKS_CERT_DIR
                   value: /certs
+                - name: KCP_API_EXPORT_ENDPOINT_SLICE_NAME
+                  value: core.openmfp.org
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
                 failureThreshold: 1
@@ -761,6 +763,8 @@ operator match the snapshot (with kubeconfigSecret):
                   value: "true"
                 - name: WEBHOOKS_CERT_DIR
                   value: /certs
+                - name: KCP_API_EXPORT_ENDPOINT_SLICE_NAME
+                  value: core.openmfp.org
                 - name: KUBECONFIG
                   value: /api-kubeconfig/kubeconfig
               image: ghcr.io/openmfp/account-operator:0.0.0
@@ -1196,6 +1200,8 @@ operator match the snapshot with webhook enabled:
                   value: "true"
                 - name: WEBHOOKS_CERT_DIR
                   value: /certs
+                - name: KCP_API_EXPORT_ENDPOINT_SLICE_NAME
+                  value: core.openmfp.org
               image: ghcr.io/openmfp/account-operator:0.0.0
               livenessProbe:
                 failureThreshold: 1
