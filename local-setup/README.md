@@ -49,6 +49,7 @@ To start the bootstrapping and local installation invoke
 ./local-setup/scripts/start.sh
 ```
 
+
 Once the process is completed you can access the environment using http://localhost:8000
 
 # Optional Steps
