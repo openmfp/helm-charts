@@ -5,9 +5,6 @@ on:
       - 'charts/common/**'
       - '.github/workflows/common.yaml'
   pull_request:
-    paths:
-      - 'charts/common/**'
-      - '.github/workflows/common.yaml'
 
 jobs:
   pipeline:
