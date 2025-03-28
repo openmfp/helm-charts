@@ -1,0 +1,9 @@
+apiVersion: v2
+version: 0.19.27
+appVersion: v0.64.2
+name: kubernetes-graphql-gateway
+description: Basic helm chart that contains listener and gateway
+dependencies:
+  - name: common
+    version: 0.2.10
+    repository: oci://ghcr.io/openmfp/helm-charts
