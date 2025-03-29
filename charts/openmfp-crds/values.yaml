@@ -1,2 +1,5 @@
 extension-manager-operator-crds:
   enabled: true
+
+account-operator-crds:
+  enabled: true
