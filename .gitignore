@@ -6,3 +6,6 @@ bin/
 node_modules/
 /oci/
 local-setup/e2e/test-results/.last-run.json
+
+# for local setup
+values-local.yaml
