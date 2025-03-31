@@ -20,16 +20,27 @@ gateway:
   logLevel: trace
   shouldImpersonate: true
   usernameClaim: email
+  resources:
+    limits:
+      cpu: 200m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 320Mi
 
 listener:
-  enabled: true
   port: 8090
   healthCheck:
     enabled: true
     port: 3390
   metricsPort: 8091
-
-imagePullSecret: ghcr-credentials
+  resources:
+    limits:
+      cpu: 200m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 320Mi
 
 deployment:
   maxUnavailable: 0

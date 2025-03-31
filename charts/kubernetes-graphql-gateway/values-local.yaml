@@ -24,14 +24,11 @@ gateway:
   usernameClaim: email
 
 listener:
-  enabled: true
   port: 8090
   healthCheck:
     enabled: true
     port: 3390
   metricsPort: 8091
-
-imagePullSecret: ghcr-credentials
 
 deployment:
   maxUnavailable: 0
