@@ -45,6 +45,8 @@ listener:
 deployment:
   maxUnavailable: 0
   maxSurge: 5
+  revisionHistoryLimit: 3
+  replicas: 1
 
 
 sentry:

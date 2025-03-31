@@ -6,11 +6,12 @@ metadata:
   labels:
     app: {{ include "common.entity.name" . }}
 spec:
+  replicas: {{ .Values.deployment.replicas }}
   strategy:
     rollingUpdate:
       maxSurge: {{ .Values.deployment.maxSurge }}
       maxUnavailable: {{ .Values.deployment.maxUnavailable }}
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
   selector:
     matchLabels:
       app: {{ include "common.entity.name" . }}
@@ -58,6 +59,10 @@ spec:
         - name: GATEWAY_CORS_ALLOWED_ORIGINS
           value: "{{ .Values.cors.allowedOrigins }}"
         {{- end }}
+        {{- if .Values.gateway.resources }}
+        resources:
+          {{- toYaml .Values.gateway.resources | nindent 10 }}
+        {{- end }}
         volumeMounts:
           - name: definitions-volume
             mountPath: /app/definitions
@@ -85,6 +90,10 @@ spec:
             protocol: TCP
         env:
         {{- include "kubernetes-graphql-gateway.env" . | nindent 8 }}
+        {{- if .Values.listener.resources }}
+        resources:
+          {{- toYaml .Values.listener.resources | nindent 10 }}
+        {{- end }}
         volumeMounts:
           - name: definitions-volume
             mountPath: /app/definitions

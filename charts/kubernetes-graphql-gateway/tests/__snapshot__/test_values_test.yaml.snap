@@ -8,6 +8,7 @@ match the Snapshot:
       name: openmfp-kubernetes-graphql-gateway
       namespace: openmfp-system
     spec:
+      replicas: 1
       revisionHistoryLimit: 3
       selector:
         matchLabels:
@@ -57,6 +58,13 @@ match the Snapshot:
                 - containerPort: 8080
                   name: service-port
                   protocol: TCP
+              resources:
+                limits:
+                  cpu: 200m
+                  memory: 512Mi
+                requests:
+                  cpu: 100m
+                  memory: 320Mi
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
@@ -89,6 +97,13 @@ match the Snapshot:
                 - containerPort: 8090
                   name: service-port
                   protocol: TCP
+              resources:
+                limits:
+                  cpu: 200m
+                  memory: 512Mi
+                requests:
+                  cpu: 100m
+                  memory: 320Mi
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
@@ -98,7 +113,7 @@ match the Snapshot:
                 - mountPath: /app/definitions
                   name: definitions-volume
           imagePullSecrets:
-            - name: ghcr-credentials
+            - name: github
           serviceAccountName: openmfp-kubernetes-graphql-gateway
           volumes:
             - emptyDir:
@@ -201,7 +216,7 @@ match the Snapshot:
   7: |
     apiVersion: v1
     imagePullSecrets:
-      - name: ghcr-credentials
+      - name: github
     kind: ServiceAccount
     metadata:
       name: openmfp-kubernetes-graphql-gateway
