@@ -33,8 +33,6 @@ match the Snapshot:
                   value: "false"
                 - name: ENABLE_KCP
                   value: "true"
-                - name: KEY1
-                  value: value1
                 - name: GATEWAY_HANDLER_CFG_GRAPHI_QL
                   value: "true"
                 - name: GATEWAY_LOG_LEVEL
@@ -82,8 +80,6 @@ match the Snapshot:
                   value: "false"
                 - name: ENABLE_KCP
                   value: "true"
-                - name: KEY1
-                  value: value1
               image: ghcr.io/openmfp/kubernetes-graphql-gateway:1.0.0
               imagePullPolicy: IfNotPresent
               name: openmfp-kubernetes-graphql-gateway-listener
