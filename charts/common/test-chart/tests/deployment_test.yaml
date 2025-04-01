@@ -34,3 +34,13 @@ tests:
         environment: "test"
     asserts:
       - matchSnapshot: {}
+  - it: test extraEnvs
+    set:
+      extraEnvs:
+        - name: MY_ENV
+          value: my-value
+      extraVolumes:
+        - name: my-volume
+          emptyDir: {}
+    asserts:
+      - matchSnapshot: {}

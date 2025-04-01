@@ -23,4 +23,7 @@ spec:
           {{ include "common.resources" . | nindent 10 }}
           env:
           {{- include "common.basicEnvironment" . | nindent 12 }}
+          {{- include "common.extraEnvs" . | nindent 12 }}
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
+      volumes:
+        {{- include "common.extraVolumes" . | nindent 8 }}
