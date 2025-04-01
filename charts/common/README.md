@@ -14,6 +14,8 @@ A Helm chart containing reuse templates
 | defaults.deployment.revisionHistoryLimit | int | `3` | deployment revision history limit |
 | defaults.deployment.strategy | string | `"RollingUpdate"` | deployment strategy |
 | defaults.externalSecrets.enabled | bool | `false` | toggle to enable/disable external-secrets |
+| defaults.externalSecrets.secretStore.kind | string | `"SecretStore"` | the default kind to be used in external secrets |
+| defaults.externalSecrets.secretStore.name | string | `"environment-store"` | the default store name to be used in external secrets |
 | defaults.fga.enabled | bool | `true` | toggle to enable/disable experimental FGA features |
 | defaults.health.liveness | object | `{"failureThreshold":1,"path":"/healthz"}` | liveness probe parameters |
 | defaults.health.periodSeconds | int | `10` | health period |
@@ -29,6 +31,8 @@ A Helm chart containing reuse templates
 | defaults.securityContext.fsGroup | int | `2000` | fsGroup id to run the container |
 | defaults.securityContext.runAsGroup | int | `3000` | group id to run the container |
 | defaults.securityContext.runAsUser | int | `1000` | user id to run the container |
+| defaults.sentry.enabled | bool | `false` | toggle to enable/disable sentry integration |
+| defaults.sentry.externalSecrets.secretKey | string | `"sentry/sentry-dsn"` | the secret name that holds the sentry DSNs |
 
 ## Overriding Values
 

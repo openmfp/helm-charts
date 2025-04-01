@@ -62,6 +62,13 @@ defaults:
       # -- name of the gateway
       name: gateway
 
+  sentry:
+    # -- toggle to enable/disable sentry integration
+    enabled: false
+    externalSecrets:
+      # -- the secret name that holds the sentry DSNs
+      secretKey: sentry/sentry-dsn
+
   fga:
     # -- toggle to enable/disable experimental FGA features
     enabled: true
@@ -77,3 +84,8 @@ defaults:
   externalSecrets:
     # -- toggle to enable/disable external-secrets
     enabled: false
+    secretStore:
+      # -- the default kind to be used in external secrets
+      kind: SecretStore
+      # -- the default store name to be used in external secrets
+      name: environment-store
