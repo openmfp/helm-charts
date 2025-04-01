@@ -147,6 +147,11 @@ test sentry enabled:
                   value: 0.1.0
                 - name: IMAGE_NAME
                   value: my-image
+                - name: SENTRY_DSN
+                  valueFrom:
+                    secretKeyRef:
+                      key: dsn
+                      name: RELEASE-NAME-sentry
               image: my-image:0.1.0
               imagePullPolicy: IfNotPresent
               livenessProbe:
