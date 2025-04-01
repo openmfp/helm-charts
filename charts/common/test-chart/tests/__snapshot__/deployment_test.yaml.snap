@@ -15,9 +15,17 @@ test extraEnvs:
             - env:
                 - name: LOG_LEVEL
                   value: info
+                - name: REGION
+                  value: eu-west
+                - name: ENVIRONMENT
+                  value: dev
+                - name: IMAGE_TAG
+                  value: 0.1.0
+                - name: IMAGE_NAME
+                  value: ghcr.io/your-org/your-image
                 - name: MY_ENV
                   value: my-value
-              image: test-chart:0.1.0
+              image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 failureThreshold: 1
@@ -78,6 +86,14 @@ test name override:
             - env:
                 - name: LOG_LEVEL
                   value: info
+                - name: REGION
+                  value: eu-west
+                - name: ENVIRONMENT
+                  value: dev
+                - name: IMAGE_TAG
+                  value: 0.1.0
+                - name: IMAGE_NAME
+                  value: my-image
               image: my-image:0.1.0
               imagePullPolicy: IfNotPresent
               livenessProbe:
@@ -138,10 +154,8 @@ test sentry enabled:
                 - name: LOG_LEVEL
                   value: info
                 - name: REGION
-                  value: null
+                  value: eu-west
                 - name: ENVIRONMENT
-                  value: test
-                - name: SENTRY_ENVIRONMENT
                   value: test
                 - name: IMAGE_TAG
                   value: 0.1.0
@@ -211,7 +225,15 @@ test tag default:
             - env:
                 - name: LOG_LEVEL
                   value: info
-              image: test-chart:0.1.0
+                - name: REGION
+                  value: eu-west
+                - name: ENVIRONMENT
+                  value: dev
+                - name: IMAGE_TAG
+                  value: 0.1.0
+                - name: IMAGE_NAME
+                  value: ghcr.io/your-org/your-image
+              image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 failureThreshold: 1
@@ -270,7 +292,15 @@ test tag override:
             - env:
                 - name: LOG_LEVEL
                   value: info
-              image: test-chart:1.0.0
+                - name: REGION
+                  value: eu-west
+                - name: ENVIRONMENT
+                  value: dev
+                - name: IMAGE_TAG
+                  value: 0.1.0
+                - name: IMAGE_NAME
+                  value: ghcr.io/your-org/your-image
+              image: ghcr.io/your-org/your-image:1.0.0
               imagePullPolicy: IfNotPresent
               livenessProbe:
                 failureThreshold: 1

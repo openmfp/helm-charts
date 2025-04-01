@@ -42,25 +42,18 @@ ports:
 {{- join "," $technicalIssuers }}
 {{- end}}
 
-{{- define "common.sentry" }}
-{{- if eq (include "common.getKeyValue" (dict "Values" .Values "key" "sentry.enabled")) "true" -}}
+{{- define "common.basicEnvironment" }}
+- name: LOG_LEVEL
+  value: {{ (.Values.log).level | default "info" }}
 - name: REGION
   value: {{ .Values.region }}
 - name: ENVIRONMENT
   value: {{ .Values.environment }}
-- name: SENTRY_ENVIRONMENT
-  value: {{ .Values.sentry.environment | default .Values.environment }}
 - name: IMAGE_TAG
   value: "{{ .Chart.AppVersion }}"
 - name: IMAGE_NAME
-  value: "{{ .Values.image.name }}"
-{{- end }}
-{{- end}}
-
-{{- define "common.basicEnvironment" }}
-- name: LOG_LEVEL
-  value: {{ (.Values.log).level | default "info" }}
-{{ include "common.sentry" . }}
+  value: "{{ (.Values.image).name }}"
+{{ include "common.sentry-env" . }}
 {{- end }}
 {{- define "common.basicService" }}
 - name: PORT
