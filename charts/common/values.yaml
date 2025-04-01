@@ -85,6 +85,8 @@ defaults:
     # -- toggle to enable/disable external-secrets
     enabled: false
     secretStore:
+      # -- the default kind to be used in external secrets
       kind: SecretStore
+      # -- the default store name to be used in external secrets
       name: environment-store
 
