@@ -13,7 +13,7 @@ spec:
   data:
   - remoteRef:
       conversionStrategy: Default
-      key: {{ include "common.getKeyValue" (dict "Values" .Values "key" "sentry.externalSecrets.secretkey") }}
+      key: {{ include "common.getKeyValue" (dict "Values" .Values "key" "sentry.externalSecrets.secretKey") }}
       property: {{ default (printf "%s-sentry" .Release.Name) (.Values.sentry).secretProperty }}
     secretKey: dsn
   refreshInterval: 10m
