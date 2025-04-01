@@ -165,7 +165,7 @@ test sentry enabled:
                   valueFrom:
                     secretKeyRef:
                       key: dsn
-                      name: RELEASE-NAME-sentry
+                      name: RELEASE-NAME-test-chart-sentry
               image: my-image:0.1.0
               imagePullPolicy: IfNotPresent
               livenessProbe:
