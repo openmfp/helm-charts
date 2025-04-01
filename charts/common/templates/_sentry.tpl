@@ -14,7 +14,7 @@ spec:
   - remoteRef:
       conversionStrategy: Default
       key: {{ include "common.getKeyValue" (dict "Values" .Values "key" "sentry.externalSecrets.secretKey") }}
-      property: {{ default (printf "%s-sentry" .Release.Name) (.Values.sentry).secretProperty }}
+      property: {{ default (printf "%s-sentry" (include "common.entity.name" . )) (.Values.sentry).secretProperty }}
     secretKey: dsn
   refreshInterval: 10m
   secretStoreRef:

@@ -10,7 +10,7 @@ test sentry enabled (global):
         - remoteRef:
             conversionStrategy: Default
             key: sentry/sentry-dsn
-            property: RELEASE-NAME-sentry
+            property: RELEASE-NAME-test-chart-sentry
           secretKey: dsn
       refreshInterval: 10m
       secretStoreRef:
@@ -32,7 +32,7 @@ test sentry enabled (local):
         - remoteRef:
             conversionStrategy: Default
             key: sentry/sentry-dsn
-            property: RELEASE-NAME-sentry
+            property: RELEASE-NAME-test-chart-sentry
           secretKey: dsn
       refreshInterval: 10m
       secretStoreRef:
