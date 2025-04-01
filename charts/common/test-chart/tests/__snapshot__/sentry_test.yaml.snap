@@ -3,7 +3,7 @@ test sentry enabled (global):
     apiVersion: external-secrets.io/v1beta1
     kind: ExternalSecret
     metadata:
-      name: RELEASE-NAME-sentry
+      name: RELEASE-NAME-test-chart-sentry
       namespace: NAMESPACE
     spec:
       data:
@@ -19,13 +19,13 @@ test sentry enabled (global):
       target:
         creationPolicy: Owner
         deletionPolicy: Retain
-        name: RELEASE-NAME-sentry
+        name: RELEASE-NAME-test-chart-sentry
 test sentry enabled (local):
   1: |
     apiVersion: external-secrets.io/v1beta1
     kind: ExternalSecret
     metadata:
-      name: RELEASE-NAME-sentry
+      name: RELEASE-NAME-test-chart-sentry
       namespace: NAMESPACE
     spec:
       data:
@@ -41,4 +41,4 @@ test sentry enabled (local):
       target:
         creationPolicy: Owner
         deletionPolicy: Retain
-        name: RELEASE-NAME-sentry
+        name: RELEASE-NAME-test-chart-sentry

@@ -7,7 +7,7 @@
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: {{ .Release.Name }}-sentry
+  name: {{ include "common.entity.name" . }}-sentry
   namespace: {{ .Release.Namespace }}
 spec:
   data:
@@ -23,7 +23,7 @@ spec:
   target:
     creationPolicy: Owner
     deletionPolicy: Retain
-    name: {{ .Release.Name }}-sentry
+    name: {{ include "common.entity.name" . }}-sentry
 {{- end }}    
 {{- end }}
 
@@ -32,7 +32,7 @@ spec:
 - name: SENTRY_DSN
   valueFrom:
     secretKeyRef:
-      name: {{ .Release.Name }}-sentry
+      name: {{ include "common.entity.name" . }}-sentry
       key: dsn
 {{- end }}
 {{- end }}
