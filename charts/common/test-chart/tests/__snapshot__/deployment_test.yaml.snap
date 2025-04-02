@@ -16,11 +16,18 @@ test extras:
         spec:
           automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
-
-                - --arg1=value1 - --arg2=value2
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="ghcr.io/your-org/your-image"
+                - --arg1=value1
+                - --arg2=value2
               env:
                 - name: MY_ENV
                   value: my-value
@@ -83,9 +90,16 @@ test global region:
         spec:
           automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=us-east-1 - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=us-east-1
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="ghcr.io/your-org/your-image"
               env: null
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
@@ -138,9 +152,16 @@ test name override:
         spec:
           automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="my-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="my-image"
               env: null
               image: my-image:0.1.0
               imagePullPolicy: IfNotPresent
@@ -193,9 +214,16 @@ test sentry enabled:
         spec:
           automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=test - --image-tag=0.1.0 - --image-name="my-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=test
+                - --image-tag=0.1.0
+                - --image-name="my-image"
               env:
                 - name: SENTRY_DSN
                   valueFrom:
@@ -253,9 +281,16 @@ test tag default:
         spec:
           automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="ghcr.io/your-org/your-image"
               env: null
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
@@ -308,9 +343,16 @@ test tag override:
         spec:
           automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=1.0.0 - --image-name="ghcr.io/your-org/your-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=1.0.0
+                - --image-name="ghcr.io/your-org/your-image"
               env: null
               image: ghcr.io/your-org/your-image:1.0.0
               imagePullPolicy: IfNotPresent
