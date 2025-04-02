@@ -201,7 +201,12 @@ test sentry enabled:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-          env: null
+          env:
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  key: dsn
+                  name: RELEASE-NAME-test-chart-sentry
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true

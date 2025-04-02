@@ -19,7 +19,7 @@ spec:
         {{- include "common.commonArgs" . | indent 8 }}
         {{- include "common.extraArgs" . | nindent 10 }}
       env:
-        {{- include "common.extraEnvs" . | nindent 8 }}
+        {{- include "common.basicEnvironment" . | nindent 8 }}
       volumeMounts:
         {{- include "common.extraVolumeMounts" . | nindent 8 }}
       volumes:

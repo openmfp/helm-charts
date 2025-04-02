@@ -72,14 +72,6 @@ args:
 {{- end }}
 
 {{- define "common.basicEnvironment" }}
-- name: REGION
-  value: {{ include "common.getKeyValue" (dict "Values" .Values "key" "region") }}
-- name: ENVIRONMENT
-  value: {{ include "common.getKeyValue" (dict "Values" .Values "key" "environment") }}
-- name: IMAGE_TAG
-  value: "{{ include "common.image.tag" . }}"
-- name: IMAGE_NAME
-  value: "{{ include "common.image.name" . }}"
 {{ include "common.sentryEnv" . }}
 {{ include "common.extraEnvs" . }}
 {{- end }}
