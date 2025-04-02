@@ -16,7 +16,6 @@ A Helm chart for extension-manager-operator which manages resources like Content
 | commonAnnotations | object | `{}` |  |
 | crds.enabled | bool | `true` |  |
 | image.name | string | `"ghcr.io/openmfp/extension-manager-operator"` |  |
-| image.tag | string | `"0.22.48"` |  |
 | istio.enabled | bool | `false` | enable Istio VirtualService |
 | validationServer.host | string | `"*"` | host for the validation VirtualService |
 | validationServer.port | int | `8088` | port for the validation server |
