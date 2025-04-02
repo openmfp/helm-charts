@@ -27,12 +27,12 @@ spec:
 {{- end }}    
 {{- end }}
 
-{{- define "common.sentry-env" }}
+{{- define "common.sentryEnv" }}
 {{- if eq (include "common.sentryEnabled" .) "true" -}}
 - name: SENTRY_DSN
   valueFrom:
     secretKeyRef:
       name: {{ include "common.entity.name" . }}-sentry
       key: dsn
-{{- end }}
+{{- end -}}
 {{- end }}

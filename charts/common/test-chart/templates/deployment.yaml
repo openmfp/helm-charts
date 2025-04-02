@@ -9,21 +9,18 @@ spec:
   revisionHistoryLimit: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.revisionHistoryLimit") }}
   selector:
     matchLabels:
-      service: {{ include "common.entity.name" . }}
+      {{- include "common.labelMatcher" . | indent 6 }}
   template:
     spec:
-      {{ include "common.container.securityContext" . | nindent 6 }}
-      containers:
-        - image: {{ include "common.image" . }}
-          imagePullPolicy: {{ include "common.imagePullPolicy" . }}
-          name: manager
-          ports:
-          {{ include "common.PortsMetricsHealth" . | nindent 10 }}
-          {{ include "common.operatorHealthAndReadyness" . | nindent 10 }}
-          {{ include "common.resources" . | nindent 10 }}
-          env:
-          {{- include "common.basicEnvironment" . | nindent 12 }}
-          {{- include "common.extraEnvs" . | nindent 12 }}
+      {{- include "common.container.securityContext" . | indent 6 }}
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
+      containers:
+      - {{- include "common.podBasics" . | indent 8 }}
+        {{- include "common.commonArgs" . | indent 8 }}
+        {{- include "common.extraArgs" . | nindent 10 }}
+      env:
+        {{- include "common.extraEnvs" . | nindent 8 }}
+      volumeMounts:
+        {{- include "common.extraVolumeMounts" . | nindent 8 }}
       volumes:
         {{- include "common.extraVolumes" . | nindent 8 }}
