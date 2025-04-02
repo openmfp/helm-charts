@@ -11,7 +11,7 @@ selector:
 {{- end }}
 {{- define "common.podBasics" }}
 name: {{ .Release.Name }}
-image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+image: {{ include "common.image" . }}
 {{ include "common.resources" . }}
 {{ include "common.ports" . }}
 {{- end }}
@@ -46,13 +46,13 @@ ports:
 - name: LOG_LEVEL
   value: {{ (.Values.log).level | default "info" }}
 - name: REGION
-  value: {{ .Values.region }}
+  value: {{ include "common.getKeyValue" (dict "Values" .Values "key" "region") }}
 - name: ENVIRONMENT
-  value: {{ .Values.environment }}
+  value: {{ include "common.getKeyValue" (dict "Values" .Values "key" "environment") }}
 - name: IMAGE_TAG
-  value: "{{ .Chart.AppVersion }}"
+  value: "{{ include "common.image.tag" . }}"
 - name: IMAGE_NAME
-  value: "{{ (.Values.image).name }}"
+  value: "{{ include "common.image.name" . }}"
 {{ include "common.sentry-env" . }}
 {{- end }}
 {{- define "common.basicService" }}
