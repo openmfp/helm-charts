@@ -51,6 +51,11 @@ defaults:
       path: "/readyz"
       failureThreshold: 30
 
+  # -- default region, this value is primarily used for observability, e.g. logs
+  region: local
+  # -- default environment, this value is primarily used for observability, e.g. logs
+  environment: local
+
   metrics:
     # -- metrics port
     port: 8080

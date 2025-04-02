@@ -44,3 +44,9 @@ tests:
           emptyDir: {}
     asserts:
       - matchSnapshot: {}
+  - it: test global region
+    set:
+      global:
+        region: us-east-1
+    asserts:
+      - matchSnapshot: {}

@@ -1,5 +1,2 @@
 image:
   name: ghcr.io/your-org/your-image
-
-environment: dev
-region: eu-west
