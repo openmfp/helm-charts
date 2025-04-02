@@ -21,6 +21,7 @@ test extras:
 
                 - --arg1=value1 - --arg2=value2
               image: ghcr.io/your-org/your-image:0.1.0
+              imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -31,7 +32,7 @@ test extras:
                   protocol: TCP
                 - containerPort: 8090
                   name: health-port
-                  protocol: TCPIfNotPresent
+                  protocol: TCP
               resources:
                 limits:
                   cpu: 100m
@@ -79,6 +80,7 @@ test global region:
                 -- operator - --leader-elect
                 - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=us-east-1 - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
               image: ghcr.io/your-org/your-image:0.1.0
+              imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -89,7 +91,7 @@ test global region:
                   protocol: TCP
                 - containerPort: 8090
                   name: health-port
-                  protocol: TCPIfNotPresent
+                  protocol: TCP
               resources:
                 limits:
                   cpu: 100m
@@ -127,6 +129,7 @@ test name override:
                 -- operator - --leader-elect
                 - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="my-image"
               image: my-image:0.1.0
+              imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -137,7 +140,7 @@ test name override:
                   protocol: TCP
                 - containerPort: 8090
                   name: health-port
-                  protocol: TCPIfNotPresent
+                  protocol: TCP
               resources:
                 limits:
                   cpu: 100m
@@ -175,6 +178,7 @@ test sentry enabled:
                 -- operator - --leader-elect
                 - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=test - --image-tag=0.1.0 - --image-name="my-image"
               image: my-image:0.1.0
+              imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -185,7 +189,7 @@ test sentry enabled:
                   protocol: TCP
                 - containerPort: 8090
                   name: health-port
-                  protocol: TCPIfNotPresent
+                  protocol: TCP
               resources:
                 limits:
                   cpu: 100m
@@ -228,6 +232,7 @@ test tag default:
                 -- operator - --leader-elect
                 - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
               image: ghcr.io/your-org/your-image:0.1.0
+              imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -238,7 +243,7 @@ test tag default:
                   protocol: TCP
                 - containerPort: 8090
                   name: health-port
-                  protocol: TCPIfNotPresent
+                  protocol: TCP
               resources:
                 limits:
                   cpu: 100m
@@ -276,6 +281,7 @@ test tag override:
                 -- operator - --leader-elect
                 - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=1.0.0 - --image-name="ghcr.io/your-org/your-image"
               image: ghcr.io/your-org/your-image:1.0.0
+              imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -286,7 +292,7 @@ test tag override:
                   protocol: TCP
                 - containerPort: 8090
                   name: health-port
-                  protocol: TCPIfNotPresent
+                  protocol: TCP
               resources:
                 limits:
                   cpu: 100m
