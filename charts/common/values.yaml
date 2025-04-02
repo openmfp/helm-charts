@@ -43,6 +43,8 @@ defaults:
   operator:
     # -- By default operators participate in leader election
     leaderElect: true
+    maxConcurrentReconciles: 10
+    shutdownTimeout: 1m
 
   health:
     # -- health port

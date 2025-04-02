@@ -11,21 +11,23 @@ test extras:
           app: RELEASE-NAME-test-chart
       template:
         metadata:
-          app: RELEASE-NAME-test-chart
-          labels: null
+          labels:
+            app: RELEASE-NAME-test-chart
         spec:
           automountServiceAccountToken: true
           containers:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
+                - --metrics-bind-address=":8090"
+                - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
                 - --environment=local
                 - --image-tag=0.1.0
                 - --image-name="ghcr.io/your-org/your-image"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
                 - --arg1=value1
                 - --arg2=value2
               env:
@@ -85,21 +87,23 @@ test global region:
           app: RELEASE-NAME-test-chart
       template:
         metadata:
-          app: RELEASE-NAME-test-chart
-          labels: null
+          labels:
+            app: RELEASE-NAME-test-chart
         spec:
           automountServiceAccountToken: true
           containers:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
+                - --metrics-bind-address=":8090"
+                - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=us-east-1
                 - --environment=local
                 - --image-tag=0.1.0
                 - --image-name="ghcr.io/your-org/your-image"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
               env: null
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
@@ -147,21 +151,23 @@ test name override:
           app: RELEASE-NAME-test-chart
       template:
         metadata:
-          app: RELEASE-NAME-test-chart
-          labels: null
+          labels:
+            app: RELEASE-NAME-test-chart
         spec:
           automountServiceAccountToken: true
           containers:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
+                - --metrics-bind-address=":8090"
+                - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
                 - --environment=local
                 - --image-tag=0.1.0
                 - --image-name="my-image"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
               env: null
               image: my-image:0.1.0
               imagePullPolicy: IfNotPresent
@@ -209,21 +215,23 @@ test sentry enabled:
           app: RELEASE-NAME-test-chart
       template:
         metadata:
-          app: RELEASE-NAME-test-chart
-          labels: null
+          labels:
+            app: RELEASE-NAME-test-chart
         spec:
           automountServiceAccountToken: true
           containers:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
+                - --metrics-bind-address=":8090"
+                - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
                 - --environment=test
                 - --image-tag=0.1.0
                 - --image-name="my-image"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
               env:
                 - name: SENTRY_DSN
                   valueFrom:
@@ -276,21 +284,23 @@ test tag default:
           app: RELEASE-NAME-test-chart
       template:
         metadata:
-          app: RELEASE-NAME-test-chart
-          labels: null
+          labels:
+            app: RELEASE-NAME-test-chart
         spec:
           automountServiceAccountToken: true
           containers:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
+                - --metrics-bind-address=":8090"
+                - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
                 - --environment=local
                 - --image-tag=0.1.0
                 - --image-name="ghcr.io/your-org/your-image"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
               env: null
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
@@ -338,21 +348,23 @@ test tag override:
           app: RELEASE-NAME-test-chart
       template:
         metadata:
-          app: RELEASE-NAME-test-chart
-          labels: null
+          labels:
+            app: RELEASE-NAME-test-chart
         spec:
           automountServiceAccountToken: true
           containers:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
+                - --metrics-bind-address=":8090"
+                - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
                 - --environment=local
                 - --image-tag=1.0.0
                 - --image-name="ghcr.io/your-org/your-image"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
               env: null
               image: ghcr.io/your-org/your-image:1.0.0
               imagePullPolicy: IfNotPresent
