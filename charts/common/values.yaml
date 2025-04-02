@@ -41,9 +41,11 @@ defaults:
     port: 8080
 
   operator:
-    # -- By default operators participate in leader election
+    # -- by default operators participate in leader election
     leaderElect: true
+    # -- number of concurrent reconciles per controller
     maxConcurrentReconciles: 10
+    # -- duration on how long the operator waits before shutting down
     shutdownTimeout: 1m
 
   health:
