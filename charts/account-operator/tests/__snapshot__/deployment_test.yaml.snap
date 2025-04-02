@@ -298,13 +298,15 @@ operator match the snapshot:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
+                - --metrics-bind-address=":8090"
+                - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
                 - --environment=local
                 - --image-tag=0.0.0
                 - --image-name="ghcr.io/openmfp/account-operator"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -736,13 +738,15 @@ operator match the snapshot (with kubeconfigSecret):
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
+                - --metrics-bind-address=":8090"
+                - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
                 - --environment=local
                 - --image-tag=0.0.0
                 - --image-name="ghcr.io/openmfp/account-operator"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -1177,13 +1181,15 @@ operator match the snapshot with webhook enabled:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
+                - --metrics-bind-address=":8090"
+                - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
                 - --environment=local
                 - --image-tag=0.0.0
                 - --image-name="ghcr.io/openmfp/account-operator"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
