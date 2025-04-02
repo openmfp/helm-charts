@@ -19,6 +19,7 @@ Helm Chart for the openmfp Portal
 | istio.enabled | bool | `true` |  |
 | istio.virtualService.hosts[0] | string | `"*"` |  |
 | istio.virtualService.matchers[0].match[0].uri.prefix | string | `"/ui/example-content"` |  |
+| security.mountServiceAccountToken | bool | `false` | The service account token is not necessary for the example content |
 
 ## Overriding Values
 

@@ -12,6 +12,11 @@ istio:
         - uri:
             prefix: /ui/example-content
 
+
+security:
+    # -- The service account token is not necessary for the example content
+  mountServiceAccountToken: false
+
 contentConfigurations:
   # -- This content configuration enables a basic homepage in the portal
   ui:
