@@ -86,13 +86,15 @@ operator match the snapshot:
             - args:
                 - operator
                 - --leader-elect
-                - --metrics-bind-address=8081
-                - --health-probe-bind-address=8081
+                - --metrics-bind-address=":8081"
+                - --health-probe-bind-address=":8081"
                 - --log-level=warn
                 - --region=local
                 - --environment=local
                 - --image-tag=0.22.48
                 - --image-name="ghcr.io/openmfp/extension-manager-operator"
+                - --shutdown-time=1m
+                - --max-concurrent-reconciles=10
               env: null
               image: ghcr.io/openmfp/extension-manager-operator:0.22.48
               imagePullPolicy: IfNotPresent
