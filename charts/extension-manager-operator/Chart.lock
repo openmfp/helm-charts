@@ -4,6 +4,6 @@ dependencies:
   version: 0.2.1
 - name: common
   repository: oci://ghcr.io/openmfp/helm-charts
-  version: 0.3.5
-digest: sha256:62493afbb441a2a2bd8e76d30af3ed492f65a44e562a3347741c116d6ab798d0
-generated: "2025-04-02T08:07:53.093826+02:00"
+  version: 0.4.4
+digest: sha256:dac34e5962f66fd69e298b6a01e1d43951bc4797a9668b67c210ba1357e70f61
+generated: "2025-04-02T17:08:53.088496+02:00"
