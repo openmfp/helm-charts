@@ -152,7 +152,7 @@ securityContext:
 {{- end }}
 
 
-{{- define "common.pod.securityContext" -}}
+{{- define "common.pod.securityContext" }}
 securityContext:
   runAsNonRoot: true
   seccompProfile:
