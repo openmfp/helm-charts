@@ -17,21 +17,21 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ include "common.entity.name" . }}
+        {{- include "common.labelMatcher" . | indent 8 }}
     spec:
-      serviceAccountName: {{ include "common.entity.name" . }}
-      {{- include "common.spec.securityContext" (dict "Values" .Values) | nindent 6 }}
+      {{- include "common.pod.securityContext" . | indent 6 }}
+      terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
       containers:
-      - name: {{ include "common.entity.name" . }}
-        image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
-        imagePullPolicy: {{ include "common.getKeyValue" (dict "Values" .Values "key" "imagePullPolicy") }}
-        {{- include "common.container.securityContext" (dict "Values" .Values "Release" .Release) | nindent 8 }}
+      - {{- include "common.podBasics" . | indent 8 }}
+      {{- include "common.container.securityContext" . | indent 8 }}
+        ports:
+        {{- include "common.ports" . | nindent 10 }}
         env:
+          {{- include "common.basicEnvironment" . | nindent 10 }}
           - name: PORT
             value: "{{ include "common.getKeyValue" (dict "Values" .Values "key" "port") -}}"
-        {{- include "common.resources" . | nindent 8 -}}
-        {{- include "common.ports" (dict "Values" .Values) | nindent 8 }}
         volumeMounts:
+          {{- include "common.extraVolumeMounts" . | nindent 8 }}
           - name: tmp-volume
             mountPath: /var/cache/nginx
             readOnly: false
@@ -39,6 +39,7 @@ spec:
             mountPath: /var/run
             readOnly: false
       volumes:
+        {{- include "common.extraVolumes" . | nindent 8 }}
         - name: tmp-volume
           emptyDir: {}
         - name: run-volume

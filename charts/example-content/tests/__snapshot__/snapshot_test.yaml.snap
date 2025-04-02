@@ -47,6 +47,7 @@ matches the snapshot:
           labels:
             app: RELEASE-NAME-example-content
         spec:
+          automountServiceAccountToken: false
           containers:
             - env:
                 - name: PORT
@@ -58,10 +59,10 @@ matches the snapshot:
                 - containerPort: 8080
                   name: http
                   protocol: TCP
-                - containerPort: 8080
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8090
                   name: health-port
                   protocol: TCP
               resources:
@@ -84,10 +85,11 @@ matches the snapshot:
                   name: run-volume
                   readOnly: false
           securityContext:
-            fsGroup: 2000
-            runAsGroup: 3000
-            runAsUser: 1000
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           serviceAccountName: RELEASE-NAME-example-content
+          terminationGracePeriodSeconds: 10
           volumes:
             - emptyDir: {}
               name: tmp-volume
@@ -184,6 +186,7 @@ matches the snapshot (internalUrl):
           labels:
             app: RELEASE-NAME-example-content
         spec:
+          automountServiceAccountToken: false
           containers:
             - env:
                 - name: PORT
@@ -195,10 +198,10 @@ matches the snapshot (internalUrl):
                 - containerPort: 8080
                   name: http
                   protocol: TCP
-                - containerPort: 8080
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8090
                   name: health-port
                   protocol: TCP
               resources:
@@ -221,10 +224,11 @@ matches the snapshot (internalUrl):
                   name: run-volume
                   readOnly: false
           securityContext:
-            fsGroup: 2000
-            runAsGroup: 3000
-            runAsUser: 1000
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           serviceAccountName: RELEASE-NAME-example-content
+          terminationGracePeriodSeconds: 10
           volumes:
             - emptyDir: {}
               name: tmp-volume
