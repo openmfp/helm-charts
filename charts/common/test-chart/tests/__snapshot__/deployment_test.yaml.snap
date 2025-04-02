@@ -14,12 +14,23 @@ test extras:
           app: RELEASE-NAME-test-chart
           labels: null
         spec:
+          automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
-
-                - --arg1=value1 - --arg2=value2
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="ghcr.io/your-org/your-image"
+                - --arg1=value1
+                - --arg2=value2
+              env:
+                - name: MY_ENV
+                  value: my-value
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
@@ -40,14 +51,16 @@ test extras:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-          env:
-            - name: MY_ENV
-              value: my-value
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
+          serviceAccountName: RELEASE-NAME-test-chart
           terminationGracePeriodSeconds: 10
           volumeMounts:
             - mountPath: /mnt/my-volume
@@ -75,10 +88,19 @@ test global region:
           app: RELEASE-NAME-test-chart
           labels: null
         spec:
+          automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=us-east-1 - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=us-east-1
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="ghcr.io/your-org/your-image"
+              env: null
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
@@ -99,12 +121,16 @@ test global region:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-          env: null
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
+          serviceAccountName: RELEASE-NAME-test-chart
           terminationGracePeriodSeconds: 10
           volumeMounts: null
           volumes: null
@@ -124,10 +150,19 @@ test name override:
           app: RELEASE-NAME-test-chart
           labels: null
         spec:
+          automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="my-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="my-image"
+              env: null
               image: my-image:0.1.0
               imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
@@ -148,12 +183,16 @@ test name override:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-          env: null
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
+          serviceAccountName: RELEASE-NAME-test-chart
           terminationGracePeriodSeconds: 10
           volumeMounts: null
           volumes: null
@@ -173,10 +212,24 @@ test sentry enabled:
           app: RELEASE-NAME-test-chart
           labels: null
         spec:
+          automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=test - --image-tag=0.1.0 - --image-name="my-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=test
+                - --image-tag=0.1.0
+                - --image-name="my-image"
+              env:
+                - name: SENTRY_DSN
+                  valueFrom:
+                    secretKeyRef:
+                      key: dsn
+                      name: RELEASE-NAME-test-chart-sentry
               image: my-image:0.1.0
               imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
@@ -197,17 +250,16 @@ test sentry enabled:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-          env:
-            - name: SENTRY_DSN
-              valueFrom:
-                secretKeyRef:
-                  key: dsn
-                  name: RELEASE-NAME-test-chart-sentry
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
+          serviceAccountName: RELEASE-NAME-test-chart
           terminationGracePeriodSeconds: 10
           volumeMounts: null
           volumes: null
@@ -227,10 +279,19 @@ test tag default:
           app: RELEASE-NAME-test-chart
           labels: null
         spec:
+          automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="ghcr.io/your-org/your-image"
+              env: null
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
@@ -251,12 +312,16 @@ test tag default:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-          env: null
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
+          serviceAccountName: RELEASE-NAME-test-chart
           terminationGracePeriodSeconds: 10
           volumeMounts: null
           volumes: null
@@ -276,10 +341,19 @@ test tag override:
           app: RELEASE-NAME-test-chart
           labels: null
         spec:
+          automountServiceAccountToken: true
           containers:
-            - args: |-
-                -- operator - --leader-elect
-                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=1.0.0 - --image-name="ghcr.io/your-org/your-image"
+            - args:
+                - -- operator
+                - --leader-elect
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=1.0.0
+                - --image-name="ghcr.io/your-org/your-image"
+              env: null
               image: ghcr.io/your-org/your-image:1.0.0
               imagePullPolicy: IfNotPresent
               name: RELEASE-NAME-test-chart
@@ -300,12 +374,16 @@ test tag override:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-          env: null
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
           securityContext:
-            readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
+          serviceAccountName: RELEASE-NAME-test-chart
           terminationGracePeriodSeconds: 10
           volumeMounts: null
           volumes: null

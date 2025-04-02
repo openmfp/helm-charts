@@ -15,17 +15,18 @@ spec:
       labels:
         {{- include "common.labelMatcher" . | indent 6 }}
     spec:
-      {{- include "common.container.securityContext" . | indent 6 }}
+      {{- include "common.pod.securityContext" . | indent 6 }}
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
       containers:
       - {{- include "common.podBasics" . | indent 8 }}
+        {{- include "common.container.securityContext" . | indent 8 }}
         ports:
           {{- include "common.ports" . | nindent 10 }}
         args:
-          -- operator
+          - -- operator
           {{- include "common.commonOperatorArgs" . | indent 8 }}
-      env:
-        {{- include "common.basicEnvironment" . | nindent 8 }}
+        env:
+          {{- include "common.basicEnvironment" . | nindent 10 }}
       volumeMounts:
         {{- include "common.extraVolumeMounts" . | nindent 8 }}
       volumes:
