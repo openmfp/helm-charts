@@ -48,9 +48,20 @@ ports:
 {{- end}}
 
 {{- define "common.commonArgs" }}
-args:
-{{- include "common.observabilityArgs" . | indent 2 }}
-{{- include "common.collectorArgs" . | indent 2 }}
+{{- include "common.observabilityArgs" . | nindent 2 }}
+{{- include "common.collectorArgs" . | nindent 2 }}
+{{- include "common.extraArgs" . | nindent 2 }}
+{{- end }}
+
+{{- define "common.commonOperatorArgs" }}
+{{- include "common.leaderElectArg" . | indent 2 }}
+{{- include "common.commonArgs" . }}
+{{- end }}
+
+{{- define "common.leaderElectArg" }}
+{{- if eq (include "common.getKeyValue" (dict "Values" .Values "key" "operator.leaderElect")) "true" }}
+- --leader-elect
+{{- end -}}
 {{- end }}
 
 {{- define "common.collectorArgs" }}

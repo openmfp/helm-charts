@@ -1,7 +1,2 @@
 image:
   name: ghcr.io/your-org/your-image
-
-extraServicePorts:
-  - name: my-port
-    port: 8081
-    targetPort: 8081
