@@ -20,14 +20,17 @@ A Helm chart containing reuse templates
 | defaults.fga.enabled | bool | `true` | toggle to enable/disable experimental FGA features |
 | defaults.health.liveness | object | `{"failureThreshold":1,"path":"/healthz"}` | liveness probe parameters |
 | defaults.health.periodSeconds | int | `10` | health period |
-| defaults.health.port | int | `8081` | health port |
+| defaults.health.port | int | `8090` | health port |
 | defaults.health.readiness | object | `{"initialDelaySeconds":5,"path":"/readyz","periodSeconds":10}` | readiness probe parameters |
 | defaults.health.startup | object | `{"failureThreshold":30,"path":"/readyz"}` | startup probe parameters |
 | defaults.imagePullPolicy | string | `"IfNotPresent"` | imagePullPolicy is the policy to use when pulling images for all charts |
 | defaults.imagePullSecret | string | `"github"` | imagePullSecret is the name of the secret that holds the docker registry credentials |
 | defaults.istio.enabled | bool | `true` | toggle to enable/disable istio |
 | defaults.istio.gateway.name | string | `"gateway"` | name of the gateway |
-| defaults.metrics.port | int | `8080` | metrics port |
+| defaults.log.level | string | `"warn"` | default log level |
+| defaults.metrics.port | int | `9090` | metrics port |
+| defaults.otel.collector.endpoint | string | `"http://otel-collector:4317"` | the OpenTelemetry collector endpoint |
+| defaults.otel.enabled | bool | `false` | toggle to enable/disable OpenTelemetry |
 | defaults.port | int | `8080` | service port |
 | defaults.region | string | `"local"` | default region, this value is primarily used for observability, e.g. logs |
 | defaults.securityContext.fsGroup | int | `2000` | fsGroup id to run the container |
@@ -35,6 +38,8 @@ A Helm chart containing reuse templates
 | defaults.securityContext.runAsUser | int | `1000` | user id to run the container |
 | defaults.sentry.enabled | bool | `false` | toggle to enable/disable sentry integration |
 | defaults.sentry.externalSecrets.secretKey | string | `"sentry/sentry-dsn"` | the secret name that holds the sentry DSNs |
+| defaults.service.port | int | `8080` |  |
+| defaults.service.type | string | `"ClusterIP"` |  |
 
 ## Overriding Values
 
