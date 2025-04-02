@@ -3,7 +3,8 @@
 ## @param image.tag The image tag
 image:
   name: ghcr.io/openmfp/extension-manager-operator
-  tag: 0.22.48
+  ## Overwrite this value to use a different image tag then the .chart.appVersion
+  # tag: v0.0.0
 
 # The Custom Resource Definitions (CRDs) configuration
 ## @param crds.enabled Enable or disable the CRDs
