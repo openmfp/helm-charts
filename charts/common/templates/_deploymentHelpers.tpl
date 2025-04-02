@@ -71,13 +71,15 @@ resources:
 {{- end }}
 
 {{- define "common.observabilityArgs" }}
-- --metrics-bind-address={{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}
-- --health-probe-bind-address={{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}
+- --metrics-bind-address=":{{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}"
+- --health-probe-bind-address=":{{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}"
 - --log-level={{ include "common.getKeyValue" (dict "Values" .Values "key" "log.level") }}
 - --region={{ include "common.getKeyValue" (dict "Values" .Values "key" "region") }}
 - --environment={{ include "common.getKeyValue" (dict "Values" .Values "key" "environment") }}
 - --image-tag={{ include "common.image.tag" . }}
 - --image-name="{{ include "common.image.name" . }}"
+- --shutdown-time={{ include "common.getKeyValue" (dict "Values" .Values "key" "operator.shutdownTimeout") }}
+- --max-concurrent-reconciles={{ include "common.getKeyValue" (dict "Values" .Values "key" "operator.maxConcurrentReconciles") }}
 {{- end }}
 
 {{- define "common.basicEnvironment" }}
