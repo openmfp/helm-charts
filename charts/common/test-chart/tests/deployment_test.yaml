@@ -34,14 +34,24 @@ tests:
         environment: "test"
     asserts:
       - matchSnapshot: {}
-  - it: test extraEnvs
+  - it: test extras
     set:
       extraEnvs:
         - name: MY_ENV
           value: my-value
+      extraArgs:
+        - --arg1=value1
+        - --arg2=value2
       extraVolumes:
         - name: my-volume
           emptyDir: {}
+        - name: my-volume2
+          emptyDir: {}
+      extraVolumeMounts:
+        - name: my-volume
+          mountPath: /mnt/my-volume
+        - name: my-volume2
+          mountPath: /mnt/my-volume2
     asserts:
       - matchSnapshot: {}
   - it: test global region

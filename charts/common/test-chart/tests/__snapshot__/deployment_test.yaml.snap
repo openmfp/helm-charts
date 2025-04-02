@@ -1,4 +1,4 @@
-test extraEnvs:
+test extras:
   1: |
     apiVersion: apps/v1
     kind: Deployment
@@ -8,45 +8,32 @@ test extraEnvs:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-test-chart
+          app: RELEASE-NAME-test-chart
       template:
         spec:
           containers:
-            - env:
-                - name: LOG_LEVEL
-                  value: info
-                - name: REGION
-                  value: local
-                - name: ENVIRONMENT
-                  value: local
-                - name: IMAGE_TAG
-                  value: 0.1.0
-                - name: IMAGE_NAME
-                  value: ghcr.io/your-org/your-image
-                - name: MY_ENV
-                  value: my-value
+            - args:
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="ghcr.io/your-org/your-image"
+                - --arg1=value1
+                - --arg2=value2
               image: ghcr.io/your-org/your-image:0.1.0
-              imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /healthz
-                  port: 8081
-                periodSeconds: 10
-              name: manager
+              name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
+                  name: http
+                  protocol: TCP
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8090
                   name: health-port
-                  protocol: TCP
-              readinessProbe:
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                initialDelaySeconds: 5
-                periodSeconds: 10
+                  protocol: TCPIfNotPresent
               resources:
                 limits:
                   cpu: 100m
@@ -54,21 +41,25 @@ test extraEnvs:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              startupProbe:
-                failureThreshold: 30
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                periodSeconds: 10
+          env:
+            - name: MY_ENV
+              value: my-value
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           terminationGracePeriodSeconds: 10
+          volumeMounts:
+            - mountPath: /mnt/my-volume
+              name: my-volume
+            - mountPath: /mnt/my-volume2
+              name: my-volume2
           volumes:
             - emptyDir: {}
               name: my-volume
+            - emptyDir: {}
+              name: my-volume2
 test global region:
   1: |
     apiVersion: apps/v1
@@ -79,43 +70,30 @@ test global region:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-test-chart
+          app: RELEASE-NAME-test-chart
       template:
         spec:
           containers:
-            - env:
-                - name: LOG_LEVEL
-                  value: info
-                - name: REGION
-                  value: us-east-1
-                - name: ENVIRONMENT
-                  value: local
-                - name: IMAGE_TAG
-                  value: 0.1.0
-                - name: IMAGE_NAME
-                  value: ghcr.io/your-org/your-image
+            - args:
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=us-east-1
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="ghcr.io/your-org/your-image"
               image: ghcr.io/your-org/your-image:0.1.0
-              imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /healthz
-                  port: 8081
-                periodSeconds: 10
-              name: manager
+              name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
+                  name: http
+                  protocol: TCP
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8090
                   name: health-port
-                  protocol: TCP
-              readinessProbe:
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                initialDelaySeconds: 5
-                periodSeconds: 10
+                  protocol: TCPIfNotPresent
               resources:
                 limits:
                   cpu: 100m
@@ -123,18 +101,14 @@ test global region:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              startupProbe:
-                failureThreshold: 30
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                periodSeconds: 10
+          env: null
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           terminationGracePeriodSeconds: 10
+          volumeMounts: null
           volumes: null
 test name override:
   1: |
@@ -146,43 +120,30 @@ test name override:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-test-chart
+          app: RELEASE-NAME-test-chart
       template:
         spec:
           containers:
-            - env:
-                - name: LOG_LEVEL
-                  value: info
-                - name: REGION
-                  value: local
-                - name: ENVIRONMENT
-                  value: local
-                - name: IMAGE_TAG
-                  value: 0.1.0
-                - name: IMAGE_NAME
-                  value: my-image
+            - args:
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="my-image"
               image: my-image:0.1.0
-              imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /healthz
-                  port: 8081
-                periodSeconds: 10
-              name: manager
+              name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
+                  name: http
+                  protocol: TCP
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8090
                   name: health-port
-                  protocol: TCP
-              readinessProbe:
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                initialDelaySeconds: 5
-                periodSeconds: 10
+                  protocol: TCPIfNotPresent
               resources:
                 limits:
                   cpu: 100m
@@ -190,18 +151,14 @@ test name override:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              startupProbe:
-                failureThreshold: 30
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                periodSeconds: 10
+          env: null
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           terminationGracePeriodSeconds: 10
+          volumeMounts: null
           volumes: null
 test sentry enabled:
   1: |
@@ -213,48 +170,30 @@ test sentry enabled:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-test-chart
+          app: RELEASE-NAME-test-chart
       template:
         spec:
           containers:
-            - env:
-                - name: LOG_LEVEL
-                  value: info
-                - name: REGION
-                  value: local
-                - name: ENVIRONMENT
-                  value: test
-                - name: IMAGE_TAG
-                  value: 0.1.0
-                - name: IMAGE_NAME
-                  value: my-image
-                - name: SENTRY_DSN
-                  valueFrom:
-                    secretKeyRef:
-                      key: dsn
-                      name: RELEASE-NAME-test-chart-sentry
+            - args:
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=test
+                - --image-tag=0.1.0
+                - --image-name="my-image"
               image: my-image:0.1.0
-              imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /healthz
-                  port: 8081
-                periodSeconds: 10
-              name: manager
+              name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
+                  name: http
+                  protocol: TCP
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8090
                   name: health-port
-                  protocol: TCP
-              readinessProbe:
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                initialDelaySeconds: 5
-                periodSeconds: 10
+                  protocol: TCPIfNotPresent
               resources:
                 limits:
                   cpu: 100m
@@ -262,18 +201,19 @@ test sentry enabled:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              startupProbe:
-                failureThreshold: 30
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                periodSeconds: 10
+          env:
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  key: dsn
+                  name: RELEASE-NAME-test-chart-sentry
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           terminationGracePeriodSeconds: 10
+          volumeMounts: null
           volumes: null
 test tag default:
   1: |
@@ -285,43 +225,30 @@ test tag default:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-test-chart
+          app: RELEASE-NAME-test-chart
       template:
         spec:
           containers:
-            - env:
-                - name: LOG_LEVEL
-                  value: info
-                - name: REGION
-                  value: local
-                - name: ENVIRONMENT
-                  value: local
-                - name: IMAGE_TAG
-                  value: 0.1.0
-                - name: IMAGE_NAME
-                  value: ghcr.io/your-org/your-image
+            - args:
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.1.0
+                - --image-name="ghcr.io/your-org/your-image"
               image: ghcr.io/your-org/your-image:0.1.0
-              imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /healthz
-                  port: 8081
-                periodSeconds: 10
-              name: manager
+              name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
+                  name: http
+                  protocol: TCP
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8090
                   name: health-port
-                  protocol: TCP
-              readinessProbe:
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                initialDelaySeconds: 5
-                periodSeconds: 10
+                  protocol: TCPIfNotPresent
               resources:
                 limits:
                   cpu: 100m
@@ -329,18 +256,14 @@ test tag default:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              startupProbe:
-                failureThreshold: 30
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                periodSeconds: 10
+          env: null
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           terminationGracePeriodSeconds: 10
+          volumeMounts: null
           volumes: null
 test tag override:
   1: |
@@ -352,43 +275,30 @@ test tag override:
       revisionHistoryLimit: 3
       selector:
         matchLabels:
-          service: RELEASE-NAME-test-chart
+          app: RELEASE-NAME-test-chart
       template:
         spec:
           containers:
-            - env:
-                - name: LOG_LEVEL
-                  value: info
-                - name: REGION
-                  value: local
-                - name: ENVIRONMENT
-                  value: local
-                - name: IMAGE_TAG
-                  value: 1.0.0
-                - name: IMAGE_NAME
-                  value: ghcr.io/your-org/your-image
+            - args:
+                - --metrics-bind-address=8090
+                - --health-probe-bind-address=8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=1.0.0
+                - --image-name="ghcr.io/your-org/your-image"
               image: ghcr.io/your-org/your-image:1.0.0
-              imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /healthz
-                  port: 8081
-                periodSeconds: 10
-              name: manager
+              name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
+                  name: http
+                  protocol: TCP
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
-                - containerPort: 8081
+                - containerPort: 8090
                   name: health-port
-                  protocol: TCP
-              readinessProbe:
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                initialDelaySeconds: 5
-                periodSeconds: 10
+                  protocol: TCPIfNotPresent
               resources:
                 limits:
                   cpu: 100m
@@ -396,16 +306,12 @@ test tag override:
                 requests:
                   cpu: 40m
                   memory: 50Mi
-              startupProbe:
-                failureThreshold: 30
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                periodSeconds: 10
+          env: null
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           terminationGracePeriodSeconds: 10
+          volumeMounts: null
           volumes: null

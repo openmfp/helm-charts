@@ -7,13 +7,18 @@ strategy:
 revisionHistoryLimit: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.revisionHistoryLimit") }}
 selector:
   matchLabels:
-    app: {{ .Release.Name }}
+    {{ include "common.labelMatcher" . }}
 {{- end }}
+{{- define "common.labelMatcher" }}
+app: {{ include "common.entity.name" . }}
+{{- end }}
+
 {{- define "common.podBasics" }}
-name: {{ .Release.Name }}
+name: {{ include "common.entity.name" . }}
 image: {{ include "common.image" . }}
-{{ include "common.resources" . }}
-{{ include "common.ports" . }}
+{{- include "common.resources" . }}
+{{- include "common.ports" . }}
+{{- include "common.imagePullPolicy" . }}
 {{- end }}
 {{- define "common.resources" }}
 resources:
@@ -26,10 +31,10 @@ resources:
 {{- end }}
 {{- define "common.ports" }}
 ports:
-  - name: http
-    containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "port") }}
-    protocol: TCP
-  {{ include "common.PortsMetricsHealth" (dict "Values" .Values) | nindent 2 }}
+- name: http
+  containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "port") }}
+  protocol: TCP
+{{- include "common.PortsMetricsHealth" (dict "Values" .Values) }}
 {{- end}}
 
 {{- define "common.technicalIssuers" }}
@@ -42,18 +47,33 @@ ports:
 {{- join "," $technicalIssuers }}
 {{- end}}
 
+{{- define "common.commonArgs" }}
+args:
+{{- include "common.observabilityArgs" . | indent 2 }}
+{{- include "common.collectorArgs" . | indent 2 }}
+{{- end }}
+
+{{- define "common.collectorArgs" }}
+{{- if eq (include "common.otelEnabled" .) "true" }}
+- --collector-service-name={{ include "common.entity.name" .}}
+- --collector-service-version="{{ include "common.image.tag" . }}"
+- --collector-endpoint="{{ include "common.getKeyValue" (dict "Values" .Values "key" "otel.collector.endpoint") }}"
+{{- end }}
+{{- end }}
+
+{{- define "common.observabilityArgs" }}
+- --metrics-bind-address={{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}
+- --health-probe-bind-address={{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}
+- --log-level={{ include "common.getKeyValue" (dict "Values" .Values "key" "log.level") }}
+- --region={{ include "common.getKeyValue" (dict "Values" .Values "key" "region") }}
+- --environment={{ include "common.getKeyValue" (dict "Values" .Values "key" "environment") }}
+- --image-tag={{ include "common.image.tag" . }}
+- --image-name="{{ include "common.image.name" . }}"
+{{- end }}
+
 {{- define "common.basicEnvironment" }}
-- name: LOG_LEVEL
-  value: {{ (.Values.log).level | default "info" }}
-- name: REGION
-  value: {{ include "common.getKeyValue" (dict "Values" .Values "key" "region") }}
-- name: ENVIRONMENT
-  value: {{ include "common.getKeyValue" (dict "Values" .Values "key" "environment") }}
-- name: IMAGE_TAG
-  value: "{{ include "common.image.tag" . }}"
-- name: IMAGE_NAME
-  value: "{{ include "common.image.name" . }}"
-{{ include "common.sentry-env" . }}
+{{ include "common.sentryEnv" . }}
+{{ include "common.extraEnvs" . }}
 {{- end }}
 {{- define "common.basicService" }}
 - name: PORT
@@ -69,7 +89,7 @@ ports:
 - name: COLLECTOR_SERVICE_VERSION
   value: {{ .Release.Revision | quote }}
 - name: COLLECTOR_ENDPOINT
-  value: {{ (and .Values.otel .Values.otel.collectorEndpoint) | default "localhost:4317" }}
+  value: "{{ (and .Values.otel .Values.otel.collectorEndpoint) | default "localhost:4317" }}"
 {{- end }}
 {{- define "common.healthEnvironment" }}
 - name: HEALTH_PORT
@@ -104,7 +124,7 @@ readinessProbe:
 {{- define "common.imagePullPolicy" -}}
 {{ include "common.getKeyValue" (dict "Values" .Values "key" "imagePullPolicy") }}
 {{- end }}
-{{- define "common.PortsMetricsHealth" -}}
+{{- define "common.PortsMetricsHealth" }}
 - name: metrics
   containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "metrics.port") }}
   protocol: TCP
@@ -114,7 +134,7 @@ readinessProbe:
 {{- end -}}
 
 
-{{- define "common.container.securityContext" -}}
+{{- define "common.container.securityContext" }}
 securityContext:
   readOnlyRootFilesystem: true
   runAsNonRoot: true
