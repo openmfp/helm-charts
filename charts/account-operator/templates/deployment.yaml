@@ -10,12 +10,11 @@ spec:
   revisionHistoryLimit: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.revisionHistoryLimit") }}
   selector:
     matchLabels:
-      service: {{ include "common.entity.name" . }}
+      {{- include "common.labelMatcher" . | indent 6 }}
   template:
     metadata:
       labels:
-        service: {{ include "common.entity.name" . }}
-        control-plane: controller-manager
+        {{- include "common.labelMatcher" . | indent 8 }}
         {{- with .Values.deployment.specTemplate.labels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -27,25 +26,23 @@ spec:
         traffic.sidecar.istio.io/excludeInboundPorts: "9443"
         {{- end }}
     spec:
-      {{- include "common.pod.securityContext" . | nindent 6 }}
+      {{- include "common.pod.securityContext" . | indent 6 }}
+      terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
       containers:
-        - args:
-          - operator
-          - --leader-elect
-          - '--health-probe-bind-address=:{{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}'
-          image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
-          name: manager
-          {{- include "common.container.securityContext" . | nindent 10 }}
-          ports:
-          {{- include "common.PortsMetricsHealth" . | nindent 10 -}}
-          {{- if .Values.webhooks.enabled }}
+      - {{- include "common.podBasics" . | indent 8 }}
+        {{- include "common.container.securityContext" . | indent 8 }}
+        {{- include "common.operatorHealthAndReadyness" . | indent 8}}
+        ports:
+        {{- include "common.PortsMetricsHealth" . | nindent 10 }}
+        {{- if .Values.webhooks.enabled }}
           - name: webhook-port
             containerPort: 9443
             protocol: TCP
-          {{- end }}
-          {{- include "common.operatorHealthAndReadyness" . | nindent 10 -}}
-          {{- include "common.resources" . | nindent 10 }}
-          env:
+        {{- end }}
+        args:
+          - -- operator
+          {{- include "common.commonOperatorArgs" . | indent 8 }}
+        env:
           {{- include "common.basicEnvironment" . | nindent 10 }}
           - name: SUBROUTINES_NAMESPACE_ENABLED
             value: "{{ .Values.subroutines.namespace.enabled }}"
@@ -79,17 +76,17 @@ spec:
           - name: KUBECONFIG
             value: /api-kubeconfig/kubeconfig
           {{- end }}
-          volumeMounts:
-          {{- if .Values.kubeconfigSecret }}
-          - name: external-api-server
-            mountPath: /api-kubeconfig
-          {{- end }}
-          {{- if .Values.webhooks.enabled }}
-          - mountPath: {{ .Values.webhooks.certDir }}
-            name: cert
-            readOnly: true
-          {{- end }}
-      terminationGracePeriodSeconds: 10
+        volumeMounts:
+          {{- include "common.extraVolumeMounts" . | nindent 8 }}
+        {{- if .Values.kubeconfigSecret }}
+        - name: external-api-server
+          mountPath: /api-kubeconfig
+        {{- end }}
+        {{- if .Values.webhooks.enabled }}
+        - mountPath: {{ .Values.webhooks.certDir }}
+          name: cert
+          readOnly: true
+        {{- end }}
       {{- if .Values.deployment.hostAliases }}
       hostAliases:
       {{- range .Values.deployment.hostAliases }}
@@ -102,6 +99,7 @@ spec:
       {{- else }}
       {{- end }}
       volumes:
+        {{- include "common.extraVolumes" . | nindent 8 }}
         {{- if .Values.kubeconfigSecret }}
         - name: external-api-server
           secret:

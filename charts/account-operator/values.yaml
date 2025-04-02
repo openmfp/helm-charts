@@ -1,8 +1,8 @@
 image:
   # -- The image repository
   name: ghcr.io/openmfp/account-operator
-  # -- The image tag
-  tag: latest
+  # Overwrite image.tag to use a different image tag then .chart.appVersion
+  #  tag: latest
 
 crds:
   # -- Enable CRDs
