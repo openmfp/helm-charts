@@ -35,7 +35,7 @@ tasks:
     deps:
       - task: helm-docs
     cmds:
-      - "for chart in $(echo {{.CHANGED_CHARTS}} | tr ',' ' '); do helm dependency update $chart; done"
+      - "for chart in $(echo {{.CHANGED_CHARTS}} | tr ',' ' '); do helm dependency update $chart && helm unittest -u $chart; done"
   update:
     deps:
       - task: helm-docs
