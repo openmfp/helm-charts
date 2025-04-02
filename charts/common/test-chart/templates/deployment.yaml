@@ -19,6 +19,8 @@ spec:
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
       containers:
       - {{- include "common.podBasics" . | indent 8 }}
+        ports:
+          {{- include "common.ports" . | nindent 10 }}
         args:
           -- operator
           {{- include "common.commonOperatorArgs" . | indent 8 }}

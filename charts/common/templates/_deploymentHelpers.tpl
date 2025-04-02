@@ -16,9 +16,8 @@ app: {{ include "common.entity.name" . }}
 {{- define "common.podBasics" }}
 name: {{ include "common.entity.name" . }}
 image: {{ include "common.image" . }}
-{{- include "common.resources" . }}
-{{- include "common.ports" . }}
 {{- include "common.imagePullPolicy" . }}
+{{- include "common.resources" . }}
 {{- end }}
 {{- define "common.resources" }}
 resources:
@@ -30,7 +29,6 @@ resources:
     memory: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.requests.memory") }}
 {{- end }}
 {{- define "common.ports" }}
-ports:
 - name: http
   containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "port") }}
   protocol: TCP
@@ -132,8 +130,8 @@ readinessProbe:
 {{- define "common.terminationGracePeriodSeconds" -}}
 {{ .Values.terminationGracePeriodSeconds | default 10 }}
 {{- end }}
-{{- define "common.imagePullPolicy" -}}
-{{ include "common.getKeyValue" (dict "Values" .Values "key" "imagePullPolicy") }}
+{{- define "common.imagePullPolicy" }}
+imagePullPolicy: {{ include "common.getKeyValue" (dict "Values" .Values "key" "imagePullPolicy") }}
 {{- end }}
 {{- define "common.PortsMetricsHealth" }}
 - name: metrics
