@@ -6,7 +6,7 @@
 
 {{- define "common.extraArgs" }}
 {{- with .Values.extraArgs }}
-{{- toYaml . }}
+{{ toYaml . }}
 {{- end }}
 {{- end }}
 

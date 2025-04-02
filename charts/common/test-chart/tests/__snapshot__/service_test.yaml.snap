@@ -9,9 +9,6 @@ test default:
         - name: http
           port: 8080
           protocol: TCP
-        - name: my-port
-          port: 8081
-          targetPort: 8081
       selector:
         app: RELEASE-NAME-test-chart
       type: ClusterIP
@@ -43,9 +40,6 @@ test service type:
         - name: http
           port: 8080
           protocol: TCP
-        - name: my-port
-          port: 8081
-          targetPort: 8081
       selector:
         app: RELEASE-NAME-test-chart
       type: NodePort

@@ -40,6 +40,10 @@ defaults:
     type: ClusterIP
     port: 8080
 
+  operator:
+    # -- By default operators participate in leader election
+    leaderElect: true
+
   health:
     # -- health port
     port: 8090

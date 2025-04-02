@@ -11,13 +11,17 @@ spec:
     matchLabels:
       {{- include "common.labelMatcher" . | indent 6 }}
   template:
+    metadata:
+      labels:
+        {{- include "common.labelMatcher" . | indent 6 }}
     spec:
       {{- include "common.container.securityContext" . | indent 6 }}
       terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
       containers:
       - {{- include "common.podBasics" . | indent 8 }}
-        {{- include "common.commonArgs" . | indent 8 }}
-        {{- include "common.extraArgs" . | nindent 10 }}
+        args:
+          -- operator
+          {{- include "common.commonOperatorArgs" . | indent 8 }}
       env:
         {{- include "common.basicEnvironment" . | nindent 8 }}
       volumeMounts:

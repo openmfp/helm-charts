@@ -10,18 +10,16 @@ test extras:
         matchLabels:
           app: RELEASE-NAME-test-chart
       template:
+        metadata:
+          app: RELEASE-NAME-test-chart
+          labels: null
         spec:
           containers:
-            - args:
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
-                - --log-level=warn
-                - --region=local
-                - --environment=local
-                - --image-tag=0.1.0
-                - --image-name="ghcr.io/your-org/your-image"
-                - --arg1=value1
-                - --arg2=value2
+            - args: |-
+                -- operator - --leader-elect
+                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
+
+                - --arg1=value1 - --arg2=value2
               image: ghcr.io/your-org/your-image:0.1.0
               name: RELEASE-NAME-test-chart
               ports:
@@ -72,16 +70,14 @@ test global region:
         matchLabels:
           app: RELEASE-NAME-test-chart
       template:
+        metadata:
+          app: RELEASE-NAME-test-chart
+          labels: null
         spec:
           containers:
-            - args:
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
-                - --log-level=warn
-                - --region=us-east-1
-                - --environment=local
-                - --image-tag=0.1.0
-                - --image-name="ghcr.io/your-org/your-image"
+            - args: |-
+                -- operator - --leader-elect
+                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=us-east-1 - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
               image: ghcr.io/your-org/your-image:0.1.0
               name: RELEASE-NAME-test-chart
               ports:
@@ -122,16 +118,14 @@ test name override:
         matchLabels:
           app: RELEASE-NAME-test-chart
       template:
+        metadata:
+          app: RELEASE-NAME-test-chart
+          labels: null
         spec:
           containers:
-            - args:
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
-                - --log-level=warn
-                - --region=local
-                - --environment=local
-                - --image-tag=0.1.0
-                - --image-name="my-image"
+            - args: |-
+                -- operator - --leader-elect
+                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="my-image"
               image: my-image:0.1.0
               name: RELEASE-NAME-test-chart
               ports:
@@ -172,16 +166,14 @@ test sentry enabled:
         matchLabels:
           app: RELEASE-NAME-test-chart
       template:
+        metadata:
+          app: RELEASE-NAME-test-chart
+          labels: null
         spec:
           containers:
-            - args:
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
-                - --log-level=warn
-                - --region=local
-                - --environment=test
-                - --image-tag=0.1.0
-                - --image-name="my-image"
+            - args: |-
+                -- operator - --leader-elect
+                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=test - --image-tag=0.1.0 - --image-name="my-image"
               image: my-image:0.1.0
               name: RELEASE-NAME-test-chart
               ports:
@@ -227,16 +219,14 @@ test tag default:
         matchLabels:
           app: RELEASE-NAME-test-chart
       template:
+        metadata:
+          app: RELEASE-NAME-test-chart
+          labels: null
         spec:
           containers:
-            - args:
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
-                - --log-level=warn
-                - --region=local
-                - --environment=local
-                - --image-tag=0.1.0
-                - --image-name="ghcr.io/your-org/your-image"
+            - args: |-
+                -- operator - --leader-elect
+                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=0.1.0 - --image-name="ghcr.io/your-org/your-image"
               image: ghcr.io/your-org/your-image:0.1.0
               name: RELEASE-NAME-test-chart
               ports:
@@ -277,16 +267,14 @@ test tag override:
         matchLabels:
           app: RELEASE-NAME-test-chart
       template:
+        metadata:
+          app: RELEASE-NAME-test-chart
+          labels: null
         spec:
           containers:
-            - args:
-                - --metrics-bind-address=8090
-                - --health-probe-bind-address=8090
-                - --log-level=warn
-                - --region=local
-                - --environment=local
-                - --image-tag=1.0.0
-                - --image-name="ghcr.io/your-org/your-image"
+            - args: |-
+                -- operator - --leader-elect
+                - --metrics-bind-address=8090 - --health-probe-bind-address=8090 - --log-level=warn - --region=local - --environment=local - --image-tag=1.0.0 - --image-name="ghcr.io/your-org/your-image"
               image: ghcr.io/your-org/your-image:1.0.0
               name: RELEASE-NAME-test-chart
               ports:

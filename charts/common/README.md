@@ -29,6 +29,7 @@ A Helm chart containing reuse templates
 | defaults.istio.gateway.name | string | `"gateway"` | name of the gateway |
 | defaults.log.level | string | `"warn"` | default log level |
 | defaults.metrics.port | int | `9090` | metrics port |
+| defaults.operator.leaderElect | bool | `true` | By default operators participate in leader election |
 | defaults.otel.collector.endpoint | string | `"http://otel-collector:4317"` | the OpenTelemetry collector endpoint |
 | defaults.otel.enabled | bool | `false` | toggle to enable/disable OpenTelemetry |
 | defaults.port | int | `8080` | service port |
