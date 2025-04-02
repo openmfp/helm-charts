@@ -7,7 +7,7 @@ strategy:
 revisionHistoryLimit: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.revisionHistoryLimit") }}
 selector:
   matchLabels:
-    {{ include "common.labelMatcher" . }}
+    {{- include "common.labelMatcher" .  | indent 4 }}
 {{- end }}
 {{- define "common.labelMatcher" }}
 app: {{ include "common.entity.name" . }}

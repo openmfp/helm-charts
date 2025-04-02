@@ -6,10 +6,7 @@ metadata:
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
-  revisionHistoryLimit: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.revisionHistoryLimit") }}
-  selector:
-    matchLabels:
-      {{- include "common.labelMatcher" . | indent 6 }}
+  {{ include "common.deploymentBasics" . | indent 2 }}
   template:
     metadata:
       labels:
@@ -20,6 +17,7 @@ spec:
       containers:
       - {{- include "common.podBasics" . | indent 8 }}
         {{- include "common.container.securityContext" . | indent 8 }}
+        {{- include "common.healthAndReadiness" . | indent 8}}
         ports:
           {{- include "common.ports" . | nindent 10 }}
         args:

@@ -9,6 +9,11 @@ test extras:
       selector:
         matchLabels:
           app: RELEASE-NAME-test-chart
+      strategy:
+        rollingUpdate:
+          maxSurge: 5
+          maxUnavailable: 0
+        type: RollingUpdate
       template:
         metadata:
           labels:
@@ -35,6 +40,12 @@ test extras:
                   value: my-value
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /healthz
+                  port: 8090
+                periodSeconds: 10
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -46,6 +57,12 @@ test extras:
                 - containerPort: 8090
                   name: health-port
                   protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                initialDelaySeconds: 5
+                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -58,6 +75,12 @@ test extras:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                periodSeconds: 10
           securityContext:
             runAsNonRoot: true
             seccompProfile:
@@ -85,6 +108,11 @@ test global region:
       selector:
         matchLabels:
           app: RELEASE-NAME-test-chart
+      strategy:
+        rollingUpdate:
+          maxSurge: 5
+          maxUnavailable: 0
+        type: RollingUpdate
       template:
         metadata:
           labels:
@@ -107,6 +135,12 @@ test global region:
               env: null
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /healthz
+                  port: 8090
+                periodSeconds: 10
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -118,6 +152,12 @@ test global region:
                 - containerPort: 8090
                   name: health-port
                   protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                initialDelaySeconds: 5
+                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -130,6 +170,12 @@ test global region:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                periodSeconds: 10
           securityContext:
             runAsNonRoot: true
             seccompProfile:
@@ -149,6 +195,11 @@ test name override:
       selector:
         matchLabels:
           app: RELEASE-NAME-test-chart
+      strategy:
+        rollingUpdate:
+          maxSurge: 5
+          maxUnavailable: 0
+        type: RollingUpdate
       template:
         metadata:
           labels:
@@ -171,6 +222,12 @@ test name override:
               env: null
               image: my-image:0.1.0
               imagePullPolicy: IfNotPresent
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /healthz
+                  port: 8090
+                periodSeconds: 10
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -182,6 +239,12 @@ test name override:
                 - containerPort: 8090
                   name: health-port
                   protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                initialDelaySeconds: 5
+                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -194,6 +257,12 @@ test name override:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                periodSeconds: 10
           securityContext:
             runAsNonRoot: true
             seccompProfile:
@@ -213,6 +282,11 @@ test sentry enabled:
       selector:
         matchLabels:
           app: RELEASE-NAME-test-chart
+      strategy:
+        rollingUpdate:
+          maxSurge: 5
+          maxUnavailable: 0
+        type: RollingUpdate
       template:
         metadata:
           labels:
@@ -240,6 +314,12 @@ test sentry enabled:
                       name: RELEASE-NAME-test-chart-sentry
               image: my-image:0.1.0
               imagePullPolicy: IfNotPresent
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /healthz
+                  port: 8090
+                periodSeconds: 10
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -251,6 +331,12 @@ test sentry enabled:
                 - containerPort: 8090
                   name: health-port
                   protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                initialDelaySeconds: 5
+                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -263,6 +349,12 @@ test sentry enabled:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                periodSeconds: 10
           securityContext:
             runAsNonRoot: true
             seccompProfile:
@@ -282,6 +374,11 @@ test tag default:
       selector:
         matchLabels:
           app: RELEASE-NAME-test-chart
+      strategy:
+        rollingUpdate:
+          maxSurge: 5
+          maxUnavailable: 0
+        type: RollingUpdate
       template:
         metadata:
           labels:
@@ -304,6 +401,12 @@ test tag default:
               env: null
               image: ghcr.io/your-org/your-image:0.1.0
               imagePullPolicy: IfNotPresent
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /healthz
+                  port: 8090
+                periodSeconds: 10
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -315,6 +418,12 @@ test tag default:
                 - containerPort: 8090
                   name: health-port
                   protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                initialDelaySeconds: 5
+                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -327,6 +436,12 @@ test tag default:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                periodSeconds: 10
           securityContext:
             runAsNonRoot: true
             seccompProfile:
@@ -346,6 +461,11 @@ test tag override:
       selector:
         matchLabels:
           app: RELEASE-NAME-test-chart
+      strategy:
+        rollingUpdate:
+          maxSurge: 5
+          maxUnavailable: 0
+        type: RollingUpdate
       template:
         metadata:
           labels:
@@ -368,6 +488,12 @@ test tag override:
               env: null
               image: ghcr.io/your-org/your-image:1.0.0
               imagePullPolicy: IfNotPresent
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /healthz
+                  port: 8090
+                periodSeconds: 10
               name: RELEASE-NAME-test-chart
               ports:
                 - containerPort: 8080
@@ -379,6 +505,12 @@ test tag override:
                 - containerPort: 8090
                   name: health-port
                   protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                initialDelaySeconds: 5
+                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -391,6 +523,12 @@ test tag override:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                periodSeconds: 10
           securityContext:
             runAsNonRoot: true
             seccompProfile:
