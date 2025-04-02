@@ -5,25 +5,17 @@ metadata:
   labels:
     app: {{ include "common.entity.name" . }}
 spec:
-  strategy:
-    rollingUpdate:
-      maxSurge: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxSurge") }}
-      maxUnavailable: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.maxUnavailable") }}
-  revisionHistoryLimit: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.revisionHistoryLimit") }}
-  selector:
-    matchLabels:
-      app: {{ include "common.entity.name" . }}
+  {{ include "common.deploymentBasics" . | indent 2 }}
   template:
     metadata:
       labels:
-        app: {{ include "common.entity.name" . }}
+        {{- include "common.labelMatcher" . | indent 8 }}
     spec:
-      {{- include "common.imagePullSecret" . | indent 6}}
-      {{ include "common.pod.securityContext" . | nindent 6 }}
+      {{- include "common.pod.securityContext" . | indent 6 }}
+      terminationGracePeriodSeconds: {{ include "common.terminationGracePeriodSeconds" .}}
       containers:
-      - name: {{ include "common.entity.name" . }}
-        image: {{ .Values.image.name }}:{{ .Chart.AppVersion }}
-        imagePullPolicy: {{ include "common.imagePullPolicy" . }}
+      - {{- include "common.podBasics" . | indent 8 }}
+        {{- include "common.container.securityContext" . | indent 8 }}
         env:
         - name: HTTP_PROTOCOL
           value: {{ .Values.http.protocol }}
@@ -92,8 +84,5 @@ spec:
         - name: {{ .name }}
           value: {{ .value }}
         {{ end }}
-        {{ include "common.resources" . | nindent 8 }}
-        {{- include "common.ports" (dict "Values" .Values) | nindent 8 -}}
-        {{ include "common.container.securityContext" . | nindent 8 }}
-        {{ include "common.healthAndReadiness" . | nindent 8 }}
-
+        ports:
+          {{- include "common.ports" . | nindent 10 }}

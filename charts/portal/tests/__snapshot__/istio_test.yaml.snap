@@ -15,6 +15,7 @@ matches the snapshot:
         rollingUpdate:
           maxSurge: 5
           maxUnavailable: 0
+        type: RollingUpdate
       template:
         metadata:
           labels:
@@ -77,31 +78,19 @@ matches the snapshot:
                   value: .?
                 - name: TEST_TEST
                   value: test test
-              image: ghcr.io/openmfp/portal:1.0.0
+              image: ghcr.io/openmfp/portal:12345
               imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /rest/health
-                  port: 8080
-                periodSeconds: 10
               name: portal
               ports:
                 - containerPort: 8080
                   name: http
                   protocol: TCP
-                - containerPort: 8080
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
                 - containerPort: 8080
                   name: health-port
                   protocol: TCP
-              readinessProbe:
-                httpGet:
-                  path: /rest/health
-                  port: 8080
-                initialDelaySeconds: 5
-                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -114,19 +103,12 @@ matches the snapshot:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
-              startupProbe:
-                failureThreshold: 30
-                httpGet:
-                  path: /rest/health
-                  port: 8080
-                periodSeconds: 10
-          imagePullSecrets:
-            - name: github
           securityContext:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           serviceAccountName: portal
+          terminationGracePeriodSeconds: 10
   2: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
@@ -191,6 +173,7 @@ matches the snapshot with istio disabled:
         rollingUpdate:
           maxSurge: 5
           maxUnavailable: 0
+        type: RollingUpdate
       template:
         metadata:
           labels:
@@ -253,31 +236,19 @@ matches the snapshot with istio disabled:
                   value: .?
                 - name: TEST_TEST
                   value: test test
-              image: ghcr.io/openmfp/portal:1.0.0
+              image: ghcr.io/openmfp/portal:12345
               imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /rest/health
-                  port: 8080
-                periodSeconds: 10
               name: portal
               ports:
                 - containerPort: 8080
                   name: http
                   protocol: TCP
-                - containerPort: 8080
+                - containerPort: 9090
                   name: metrics
                   protocol: TCP
                 - containerPort: 8080
                   name: health-port
                   protocol: TCP
-              readinessProbe:
-                httpGet:
-                  path: /rest/health
-                  port: 8080
-                initialDelaySeconds: 5
-                periodSeconds: 10
               resources:
                 limits:
                   cpu: 100m
@@ -290,19 +261,12 @@ matches the snapshot with istio disabled:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
-              startupProbe:
-                failureThreshold: 30
-                httpGet:
-                  path: /rest/health
-                  port: 8080
-                periodSeconds: 10
-          imagePullSecrets:
-            - name: github
           securityContext:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           serviceAccountName: portal
+          terminationGracePeriodSeconds: 10
   2: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
