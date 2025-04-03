@@ -86,7 +86,7 @@ operator match the snapshot:
             - args:
                 - operator
                 - --leader-elect
-                - --metrics-bind-address=":8081"
+                - --metrics-bind-address=":8080"
                 - --health-probe-bind-address=":8081"
                 - --log-level=warn
                 - --region=local
