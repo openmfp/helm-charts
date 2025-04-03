@@ -31,7 +31,7 @@ test extras:
                 - --environment=local
                 - --image-tag=0.1.0
                 - --image-name="ghcr.io/your-org/your-image"
-                - --shutdown-time=1m
+                - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
                 - --arg1=value1
                 - --arg2=value2
@@ -130,7 +130,7 @@ test global region:
                 - --environment=local
                 - --image-tag=0.1.0
                 - --image-name="ghcr.io/your-org/your-image"
-                - --shutdown-time=1m
+                - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
               env: null
               image: ghcr.io/your-org/your-image:0.1.0
@@ -217,7 +217,7 @@ test name override:
                 - --environment=local
                 - --image-tag=0.1.0
                 - --image-name="my-image"
-                - --shutdown-time=1m
+                - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
               env: null
               image: my-image:0.1.0
@@ -304,7 +304,7 @@ test sentry enabled:
                 - --environment=test
                 - --image-tag=0.1.0
                 - --image-name="my-image"
-                - --shutdown-time=1m
+                - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
               env:
                 - name: SENTRY_DSN
@@ -396,7 +396,7 @@ test tag default:
                 - --environment=local
                 - --image-tag=0.1.0
                 - --image-name="ghcr.io/your-org/your-image"
-                - --shutdown-time=1m
+                - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
               env: null
               image: ghcr.io/your-org/your-image:0.1.0
@@ -483,7 +483,7 @@ test tag override:
                 - --environment=local
                 - --image-tag=1.0.0
                 - --image-name="ghcr.io/your-org/your-image"
-                - --shutdown-time=1m
+                - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
               env: null
               image: ghcr.io/your-org/your-image:1.0.0
