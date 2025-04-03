@@ -78,7 +78,7 @@ resources:
 - --environment={{ include "common.getKeyValue" (dict "Values" .Values "key" "environment") }}
 - --image-tag={{ include "common.image.tag" . }}
 - --image-name="{{ include "common.image.name" . }}"
-- --shutdown-time={{ include "common.getKeyValue" (dict "Values" .Values "key" "operator.shutdownTimeout") }}
+- --shutdown-timeout={{ include "common.getKeyValue" (dict "Values" .Values "key" "operator.shutdownTimeout") }}
 - --max-concurrent-reconciles={{ include "common.getKeyValue" (dict "Values" .Values "key" "operator.maxConcurrentReconciles") }}
 {{- end }}
 
