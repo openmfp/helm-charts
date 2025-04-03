@@ -6,4 +6,4 @@ metadata:
 spec:
   url: oci://registry.default.svc.cluster.local:5000/openmfp/openmfp
   ref:
-    semver: 0.0.238
+    semver: 0.0.385
