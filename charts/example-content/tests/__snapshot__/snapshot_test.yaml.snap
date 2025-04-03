@@ -79,6 +79,9 @@ matches the snapshot:
                   type: RuntimeDefault
               volumeMounts:
                 - mountPath: /var/cache/nginx
+                  name: cache-volume
+                  readOnly: false
+                - mountPath: /tmp
                   name: tmp-volume
                   readOnly: false
                 - mountPath: /var/run
@@ -93,6 +96,8 @@ matches the snapshot:
           volumes:
             - emptyDir: {}
               name: tmp-volume
+            - emptyDir: {}
+              name: cache-volume
             - emptyDir: {}
               name: run-volume
   4: |
@@ -218,6 +223,9 @@ matches the snapshot (internalUrl):
                   type: RuntimeDefault
               volumeMounts:
                 - mountPath: /var/cache/nginx
+                  name: cache-volume
+                  readOnly: false
+                - mountPath: /tmp
                   name: tmp-volume
                   readOnly: false
                 - mountPath: /var/run
@@ -232,6 +240,8 @@ matches the snapshot (internalUrl):
           volumes:
             - emptyDir: {}
               name: tmp-volume
+            - emptyDir: {}
+              name: cache-volume
             - emptyDir: {}
               name: run-volume
   4: |
