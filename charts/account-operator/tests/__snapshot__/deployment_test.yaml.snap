@@ -298,7 +298,7 @@ operator match the snapshot:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=":8090"
+                - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
@@ -738,7 +738,7 @@ operator match the snapshot (with kubeconfigSecret):
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=":8090"
+                - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
@@ -1181,7 +1181,7 @@ operator match the snapshot with webhook enabled:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=":8090"
+                - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
