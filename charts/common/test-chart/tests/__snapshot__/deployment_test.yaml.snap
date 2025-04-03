@@ -24,7 +24,7 @@ test extras:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=":8090"
+                - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
@@ -123,7 +123,7 @@ test global region:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=":8090"
+                - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=us-east-1
@@ -210,7 +210,7 @@ test name override:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=":8090"
+                - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
@@ -297,7 +297,7 @@ test sentry enabled:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=":8090"
+                - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
@@ -389,7 +389,7 @@ test tag default:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=":8090"
+                - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
@@ -476,7 +476,7 @@ test tag override:
             - args:
                 - -- operator
                 - --leader-elect
-                - --metrics-bind-address=":8090"
+                - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
                 - --log-level=warn
                 - --region=local
