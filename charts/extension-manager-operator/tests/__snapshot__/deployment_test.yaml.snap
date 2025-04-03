@@ -93,7 +93,7 @@ operator match the snapshot:
                 - --environment=local
                 - --image-tag=1.0.0
                 - --image-name="ghcr.io/openmfp/extension-manager-operator"
-                - --shutdown-time=1m
+                - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
               env: null
               image: ghcr.io/openmfp/extension-manager-operator:1.0.0
