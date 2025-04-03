@@ -32,8 +32,11 @@ spec:
             value: "{{ include "common.getKeyValue" (dict "Values" .Values "key" "port") -}}"
         volumeMounts:
           {{- include "common.extraVolumeMounts" . | nindent 8 }}
-          - name: tmp-volume
+          - name: cache-volume
             mountPath: /var/cache/nginx
+            readOnly: false
+          - name: tmp-volume
+            mountPath: /tmp
             readOnly: false
           - name: run-volume
             mountPath: /var/run
@@ -41,6 +44,8 @@ spec:
       volumes:
         {{- include "common.extraVolumes" . | nindent 8 }}
         - name: tmp-volume
+          emptyDir: {}
+        - name: cache-volume
           emptyDir: {}
         - name: run-volume
           emptyDir: {}
