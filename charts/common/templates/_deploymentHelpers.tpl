@@ -71,7 +71,7 @@ resources:
 {{- end }}
 
 {{- define "common.observabilityArgs" }}
-- --metrics-bind-address=":{{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}"
+- --metrics-bind-address=":{{ include "common.getKeyValue" (dict "Values" .Values "key" "metrics.port") }}"
 - --health-probe-bind-address=":{{ include "common.getKeyValue" (dict "Values" .Values "key" "health.port") }}"
 - --log-level={{ include "common.getKeyValue" (dict "Values" .Values "key" "log.level") }}
 - --region={{ include "common.getKeyValue" (dict "Values" .Values "key" "region") }}
