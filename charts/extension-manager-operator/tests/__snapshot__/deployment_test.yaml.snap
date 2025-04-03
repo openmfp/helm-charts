@@ -85,6 +85,7 @@ operator match the snapshot:
           containers:
             - args:
                 - operator
+                - --subroutines-contentconfiguration-enabled
                 - --leader-elect
                 - --metrics-bind-address=":8080"
                 - --health-probe-bind-address=":8081"
