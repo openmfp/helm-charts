@@ -296,7 +296,7 @@ operator match the snapshot:
           automountServiceAccountToken: true
           containers:
             - args:
-                - -- operator
+                - operator
                 - --leader-elect
                 - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
@@ -736,7 +736,7 @@ operator match the snapshot (with kubeconfigSecret):
           automountServiceAccountToken: true
           containers:
             - args:
-                - -- operator
+                - operator
                 - --leader-elect
                 - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"
@@ -1179,7 +1179,7 @@ operator match the snapshot with webhook enabled:
           automountServiceAccountToken: true
           containers:
             - args:
-                - -- operator
+                - operator
                 - --leader-elect
                 - --metrics-bind-address=":9090"
                 - --health-probe-bind-address=":8090"

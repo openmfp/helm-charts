@@ -40,7 +40,7 @@ spec:
             protocol: TCP
         {{- end }}
         args:
-          - -- operator
+          - operator
           {{- include "common.commonOperatorArgs" . | indent 8 }}
         env:
           {{- include "common.basicEnvironment" . | nindent 10 }}
