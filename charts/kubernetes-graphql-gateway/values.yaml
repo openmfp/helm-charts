@@ -22,7 +22,6 @@ gateway:
   usernameClaim: email
   resources:
     limits:
-      cpu: 1000m
       memory: 840Mi
     requests:
       cpu: 250m
@@ -37,7 +36,6 @@ listener:
   metricsPort: 8091
   resources:
     limits:
-      cpu: 1000m
       memory: 840Mi
     requests:
       cpu: 250m
@@ -75,7 +73,6 @@ virtualService:
 
 resources:
   limits:
-    cpu: 2000m # We have spikes up to 2 cores
     memory: 1680Mi # let's make it 20% more than requests
   requests:
     cpu: 500m
