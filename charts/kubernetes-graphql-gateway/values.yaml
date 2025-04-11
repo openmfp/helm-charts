@@ -73,7 +73,7 @@ virtualService:
 
 resources:
   limits:
-    memory: 1400Mi # let's make it 20% more than requests
+    memory: 1400Mi
   requests:
     cpu: 500m
     memory: 1400Mi
