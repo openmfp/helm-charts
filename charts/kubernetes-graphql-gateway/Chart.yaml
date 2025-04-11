@@ -5,5 +5,5 @@ name: kubernetes-graphql-gateway
 description: Basic helm chart that contains listener and gateway
 dependencies:
   - name: common
-    version: 0.4.8
+    version: 0.4.9
     repository: oci://ghcr.io/openmfp/helm-charts
