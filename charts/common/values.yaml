@@ -21,7 +21,7 @@ defaults:
     resources:
       # -- cpu and memory limits for the deployment
       limits:
-        cpu: "100m"
+        cpu: ""
         memory: "512Mi"
       # -- cpu and memory requests for the deployment
       requests:
