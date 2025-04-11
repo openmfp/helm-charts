@@ -51,8 +51,6 @@ spec:
           value: "{{ .Values.gateway.usernameClaim }}"
         - name: GATEWAY_SHOULDIMPERSONATE
           value: "{{ .Values.gateway.shouldImpersonate }}"
-        - name: LISTENER_API_EXPORT_NAME
-          value: "{{ .Values.listener.apiExportName }}"
         {{- if (.Values.cors).enabled }}
         - name: GATEWAY_CORS_ENABLED
           value: "{{ .Values.cors.enabled }}"
@@ -92,6 +90,8 @@ spec:
             protocol: TCP
         env:
         {{- include "kubernetes-graphql-gateway.env" . | nindent 8 }}
+        - name: LISTENER_API_EXPORT_NAME
+          value: "{{ .Values.listener.apiExportName }}"
         {{- if .Values.listener.resources }}
         resources:
           {{- toYaml .Values.listener.resources | nindent 10 }}
