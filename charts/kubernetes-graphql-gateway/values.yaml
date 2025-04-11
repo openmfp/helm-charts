@@ -22,11 +22,11 @@ gateway:
   usernameClaim: email
   resources:
     limits:
-      cpu: 200m
-      memory: 512Mi
+      cpu: 1000m
+      memory: 840Mi
     requests:
-      cpu: 100m
-      memory: 320Mi
+      cpu: 250m
+      memory: 700Mi
 
 listener:
   apiExportName: kcp.io
@@ -37,11 +37,11 @@ listener:
   metricsPort: 8091
   resources:
     limits:
-      cpu: 200m
-      memory: 512Mi
+      cpu: 1000m
+      memory: 840Mi
     requests:
-      cpu: 100m
-      memory: 320Mi
+      cpu: 250m
+      memory: 700Mi
 
 deployment:
   maxUnavailable: 0
@@ -75,11 +75,11 @@ virtualService:
 
 resources:
   limits:
-    cpu: 200m
-    memory: 512Mi
+    cpu: 2000m # We have spikes up to 2 cores
+    memory: 1680Mi # let's make it 20% more than requests
   requests:
-    cpu: 100m
-    memory: 320Mi
+    cpu: 500m
+    memory: 1400Mi
 
 kubeConfig:
   createSecret: false
