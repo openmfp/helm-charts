@@ -45,6 +45,8 @@ match the Snapshot:
                   value: email
                 - name: GATEWAY_SHOULDIMPERSONATE
                   value: "true"
+                - name: LISTENER_API_EXPORT_NAME
+                  value: kcp.io
               image: ghcr.io/openmfp/kubernetes-graphql-gateway:1.0.0
               imagePullPolicy: IfNotPresent
               name: openmfp-kubernetes-graphql-gateway-gateway

@@ -29,6 +29,7 @@ gateway:
       memory: 320Mi
 
 listener:
+  apiExportName: kcp.io
   port: 8090
   healthCheck:
     enabled: true
