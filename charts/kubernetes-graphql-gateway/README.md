@@ -31,7 +31,6 @@ kubeConfig:
 | gateway.logLevel | string | `"trace"` |  |
 | gateway.metricsPort | int | `8081` |  |
 | gateway.port | int | `8080` |  |
-| gateway.resources.limits.cpu | string | `"1000m"` |  |
 | gateway.resources.limits.memory | string | `"840Mi"` |  |
 | gateway.resources.requests.cpu | string | `"250m"` |  |
 | gateway.resources.requests.memory | string | `"700Mi"` |  |
@@ -50,11 +49,9 @@ kubeConfig:
 | listener.healthCheck.port | int | `3390` |  |
 | listener.metricsPort | int | `8091` |  |
 | listener.port | int | `8090` |  |
-| listener.resources.limits.cpu | string | `"1000m"` |  |
 | listener.resources.limits.memory | string | `"840Mi"` |  |
 | listener.resources.requests.cpu | string | `"250m"` |  |
 | listener.resources.requests.memory | string | `"700Mi"` |  |
-| resources.limits.cpu | string | `"2000m"` |  |
 | resources.limits.memory | string | `"1680Mi"` |  |
 | resources.requests.cpu | string | `"500m"` |  |
 | resources.requests.memory | string | `"1400Mi"` |  |
