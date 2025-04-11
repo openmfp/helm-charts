@@ -45,6 +45,7 @@ kubeConfig:
 | kubeConfig.createSecret | bool | `false` |  |
 | kubeConfig.enabled | bool | `false` |  |
 | kubeConfig.secretName | string | `"kcp-root-kubeconfig"` |  |
+| listener.apiExportName | string | `"kcp.io"` |  |
 | listener.healthCheck.enabled | bool | `true` |  |
 | listener.healthCheck.port | int | `3390` |  |
 | listener.metricsPort | int | `8091` |  |
