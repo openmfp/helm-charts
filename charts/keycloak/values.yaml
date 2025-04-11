@@ -160,3 +160,4 @@ externalSecrets:
   keycloakAdminRemoteRef: ""
   # -- postgres admin secret
   postgres-adminRemoteRef: ""
+
