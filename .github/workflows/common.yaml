@@ -9,11 +9,12 @@ on:
       - 'charts/common/**'
       - '.github/workflows/common.yaml'
 
+concurrency:
+  group: common-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   pipeline:
-    concurrency:
-      group: common-${{ github.ref }}
-      cancel-in-progress: true
     uses: openmfp/gha/.github/workflows/pipeline-chart.yml@main
     with:
       chartFolder: charts
