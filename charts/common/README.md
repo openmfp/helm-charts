@@ -9,7 +9,7 @@ A Helm chart containing reuse templates
 | defaults.certManager.enabled | bool | `false` | toggle to enable/disable cert-manager |
 | defaults.deployment.maxSurge | int | `5` | maxSurge |
 | defaults.deployment.maxUnavailable | int | `0` | maxUnavailable |
-| defaults.deployment.resources.limits | object | `{"cpu":"100m","memory":"512Mi"}` | cpu and memory limits for the deployment |
+| defaults.deployment.resources.limits | object | `{"cpu":"","memory":"512Mi"}` | cpu and memory limits for the deployment |
 | defaults.deployment.resources.requests | object | `{"cpu":"40m","memory":"50Mi"}` | cpu and memory requests for the deployment |
 | defaults.deployment.revisionHistoryLimit | int | `3` | deployment revision history limit |
 | defaults.deployment.strategy | string | `"RollingUpdate"` | deployment strategy |

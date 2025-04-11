@@ -22,7 +22,9 @@ image: {{ include "common.image" . }}
 {{- define "common.resources" }}
 resources:
   limits:
+    {{ if not (eq (include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.limits.cpu")) "") }}
     cpu: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.limits.cpu") }}
+    {{- end }}
     memory: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.limits.memory") }}
   requests:
     cpu: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.requests.cpu") }}

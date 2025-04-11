@@ -60,3 +60,11 @@ tests:
         region: us-east-1
     asserts:
       - matchSnapshot: {}
+  - it: set cpu limits
+    set:
+      deployment:
+        resources:
+          limits:
+            cpu: 1000m
+    asserts:
+      - matchSnapshot: {}
