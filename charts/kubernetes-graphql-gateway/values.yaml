@@ -22,7 +22,7 @@ gateway:
   usernameClaim: email
   resources:
     limits:
-      memory: 840Mi
+      memory: 700Mi
     requests:
       cpu: 250m
       memory: 700Mi
@@ -36,7 +36,7 @@ listener:
   metricsPort: 8091
   resources:
     limits:
-      memory: 840Mi
+      memory: 700Mi
     requests:
       cpu: 250m
       memory: 700Mi
@@ -73,7 +73,7 @@ virtualService:
 
 resources:
   limits:
-    memory: 1680Mi # let's make it 20% more than requests
+    memory: 1400Mi # let's make it 20% more than requests
   requests:
     cpu: 500m
     memory: 1400Mi

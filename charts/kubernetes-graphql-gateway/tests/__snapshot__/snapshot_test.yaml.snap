@@ -58,7 +58,7 @@ match the Snapshot:
                   protocol: TCP
               resources:
                 limits:
-                  memory: 840Mi
+                  memory: 700Mi
                 requests:
                   cpu: 250m
                   memory: 700Mi
@@ -96,7 +96,7 @@ match the Snapshot:
                   protocol: TCP
               resources:
                 limits:
-                  memory: 840Mi
+                  memory: 700Mi
                 requests:
                   cpu: 250m
                   memory: 700Mi

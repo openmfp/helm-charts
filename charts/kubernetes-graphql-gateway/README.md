@@ -31,7 +31,7 @@ kubeConfig:
 | gateway.logLevel | string | `"trace"` |  |
 | gateway.metricsPort | int | `8081` |  |
 | gateway.port | int | `8080` |  |
-| gateway.resources.limits.memory | string | `"840Mi"` |  |
+| gateway.resources.limits.memory | string | `"700Mi"` |  |
 | gateway.resources.requests.cpu | string | `"250m"` |  |
 | gateway.resources.requests.memory | string | `"700Mi"` |  |
 | gateway.shouldImpersonate | bool | `true` |  |
@@ -49,10 +49,10 @@ kubeConfig:
 | listener.healthCheck.port | int | `3390` |  |
 | listener.metricsPort | int | `8091` |  |
 | listener.port | int | `8090` |  |
-| listener.resources.limits.memory | string | `"840Mi"` |  |
+| listener.resources.limits.memory | string | `"700Mi"` |  |
 | listener.resources.requests.cpu | string | `"250m"` |  |
 | listener.resources.requests.memory | string | `"700Mi"` |  |
-| resources.limits.memory | string | `"1680Mi"` |  |
+| resources.limits.memory | string | `"1400Mi"` |  |
 | resources.requests.cpu | string | `"500m"` |  |
 | resources.requests.memory | string | `"1400Mi"` |  |
 | sentry.environment | string | `"dev"` |  |
