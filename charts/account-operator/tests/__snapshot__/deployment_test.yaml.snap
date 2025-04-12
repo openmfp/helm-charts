@@ -805,7 +805,6 @@ operator match the snapshot (with kubeconfigSecret):
                 periodSeconds: 10
               resources:
                 limits:
-                  cpu: 100m
                   memory: 512Mi
                 requests:
                   cpu: 40m

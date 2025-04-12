@@ -93,7 +93,6 @@ matches the snapshot:
                   protocol: TCP
               resources:
                 limits:
-                  cpu: 100m
                   memory: 512Mi
                 requests:
                   cpu: 40m
@@ -251,7 +250,6 @@ matches the snapshot with istio disabled:
                   protocol: TCP
               resources:
                 limits:
-                  cpu: 100m
                   memory: 512Mi
                 requests:
                   cpu: 40m
