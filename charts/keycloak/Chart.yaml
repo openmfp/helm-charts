@@ -3,7 +3,7 @@ name: keycloak
 description: A Helm chart to deploy keycloak as OIDC provider in openmfp
 
 type: application
-version: 0.62.13
+version: 0.62.14
 appVersion: "1.16.0"
 
 dependencies:
@@ -12,5 +12,5 @@ dependencies:
     version: 24.4.14
     repository: oci://registry-1.docker.io/bitnamicharts
   - name: common
-    version: 0.4.8
+    version: 0.4.9
     repository: oci://ghcr.io/openmfp/helm-charts
