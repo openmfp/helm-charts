@@ -15,7 +15,7 @@ jobs:
 
     steps:
       # Step 0: Generate a GitHub token
-      - uses: actions/create-github-app-token@v1
+      - uses: actions/create-github-app-token@d72941d797fd3113feb6b93fd0dec494b13a2547 # v1
         id: app-token
         with:
           app-id: "838464"
@@ -23,11 +23,11 @@ jobs:
           owner: ${{ github.repository_owner }}
 
       # Step 1: Checkout the code
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Get changed files for local setup relevant files
         id: changed-files
-        uses: step-security/changed-files@v45
+        uses: step-security/changed-files@3dbe17c78367e7d60f00d78ae6781a35be47b4a1 # v45
         with:
           files_yaml: |
             localsetup:
@@ -38,7 +38,7 @@ jobs:
       # Step 2: Install github cli
       - name: Install the gh cli
         if: steps.changed-files.outputs.localsetup_any_changed == 'true'
-        uses: ksivamuthu/actions-setup-gh-cli@v3
+        uses: ksivamuthu/actions-setup-gh-cli@c78dbed4be2f8d6133a14a9a597ee12fd4ed5c93 # v3
         with:
           version: 2.24.3
 
@@ -82,7 +82,7 @@ jobs:
       # Step 4: Prepare the NodeJS/playwright environment
       - if: steps.changed-files.outputs.localsetup_any_changed == 'true'
         name: Cache node modules
-        uses: actions/cache@v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4
         with:
           path: ~/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -92,7 +92,7 @@ jobs:
       # Step 5: Install NodeJS and dependencies
       - if: steps.changed-files.outputs.localsetup_any_changed == 'true'
         name: Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
