@@ -152,6 +152,7 @@ test extras:
                 periodSeconds: 10
               resources:
                 limits:
+                  cpu: null
                   memory: 512Mi
                 requests:
                   cpu: 40m
@@ -246,6 +247,7 @@ test global region:
                 periodSeconds: 10
               resources:
                 limits:
+                  cpu: null
                   memory: 512Mi
                 requests:
                   cpu: 40m
@@ -332,6 +334,7 @@ test name override:
                 periodSeconds: 10
               resources:
                 limits:
+                  cpu: null
                   memory: 512Mi
                 requests:
                   cpu: 40m
@@ -423,6 +426,7 @@ test sentry enabled:
                 periodSeconds: 10
               resources:
                 limits:
+                  cpu: null
                   memory: 512Mi
                 requests:
                   cpu: 40m
@@ -509,6 +513,7 @@ test tag default:
                 periodSeconds: 10
               resources:
                 limits:
+                  cpu: null
                   memory: 512Mi
                 requests:
                   cpu: 40m
@@ -595,6 +600,7 @@ test tag override:
                 periodSeconds: 10
               resources:
                 limits:
+                  cpu: null
                   memory: 512Mi
                 requests:
                   cpu: 40m
