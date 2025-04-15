@@ -22,10 +22,10 @@ gateway:
   usernameClaim: email
   resources:
     limits:
-      memory: 700Mi
+      memory: 1600Mi
     requests:
       cpu: 250m
-      memory: 700Mi
+      memory: 1600Mi
 
 listener:
   apiExportName: kcp.io
@@ -36,10 +36,10 @@ listener:
   metricsPort: 8091
   resources:
     limits:
-      memory: 700Mi
+      memory: 800Mi
     requests:
       cpu: 250m
-      memory: 700Mi
+      memory: 800Mi
 
 deployment:
   maxUnavailable: 0
@@ -73,10 +73,10 @@ virtualService:
 
 resources:
   limits:
-    memory: 1400Mi
+    memory: 2400Mi
   requests:
     cpu: 500m
-    memory: 1400Mi
+    memory: 2400Mi
 
 kubeConfig:
   createSecret: false

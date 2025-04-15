@@ -60,10 +60,10 @@ match the Snapshot:
                   protocol: TCP
               resources:
                 limits:
-                  memory: 700Mi
+                  memory: 1600Mi
                 requests:
                   cpu: 250m
-                  memory: 700Mi
+                  memory: 1600Mi
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
@@ -100,10 +100,10 @@ match the Snapshot:
                   protocol: TCP
               resources:
                 limits:
-                  memory: 700Mi
+                  memory: 800Mi
                 requests:
                   cpu: 250m
-                  memory: 700Mi
+                  memory: 800Mi
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
