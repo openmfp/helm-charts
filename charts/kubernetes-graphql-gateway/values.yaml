@@ -25,7 +25,7 @@ gateway:
       memory: 1600Mi
     requests:
       cpu: 250m
-      memory: 1600Mi
+      memory: 800Mi
 
 listener:
   apiExportName: kcp.io
@@ -39,7 +39,7 @@ listener:
       memory: 800Mi
     requests:
       cpu: 250m
-      memory: 800Mi
+      memory: 400Mi
 
 deployment:
   maxUnavailable: 0
@@ -76,7 +76,7 @@ resources:
     memory: 2400Mi
   requests:
     cpu: 500m
-    memory: 2400Mi
+    memory: 1200Mi
 
 kubeConfig:
   createSecret: false
