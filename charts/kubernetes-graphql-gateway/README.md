@@ -33,7 +33,7 @@ kubeConfig:
 | gateway.port | int | `8080` |  |
 | gateway.resources.limits.memory | string | `"1600Mi"` |  |
 | gateway.resources.requests.cpu | string | `"250m"` |  |
-| gateway.resources.requests.memory | string | `"1600Mi"` |  |
+| gateway.resources.requests.memory | string | `"800Mi"` |  |
 | gateway.shouldImpersonate | bool | `true` |  |
 | gateway.usernameClaim | string | `"email"` |  |
 | image.name | string | `"ghcr.io/openmfp/kubernetes-graphql-gateway"` |  |
@@ -51,10 +51,10 @@ kubeConfig:
 | listener.port | int | `8090` |  |
 | listener.resources.limits.memory | string | `"800Mi"` |  |
 | listener.resources.requests.cpu | string | `"250m"` |  |
-| listener.resources.requests.memory | string | `"800Mi"` |  |
+| listener.resources.requests.memory | string | `"400Mi"` |  |
 | resources.limits.memory | string | `"2400Mi"` |  |
 | resources.requests.cpu | string | `"500m"` |  |
-| resources.requests.memory | string | `"2400Mi"` |  |
+| resources.requests.memory | string | `"1200Mi"` |  |
 | sentry.environment | string | `"dev"` |  |
 | virtualService.hosts[0] | string | `"*"` |  |
 | virtualService.httpRules[0].cors.allowHeaders[0] | string | `"*"` |  |
