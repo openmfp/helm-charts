@@ -24,8 +24,6 @@ resources:
   limits:
     {{ if not (eq (include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.limits.cpu")) "") }}
     cpu: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.limits.cpu") }}
-    {{- else }}
-    cpu: null
     {{- end }}
     memory: {{ include "common.getKeyValue" (dict "Values" .Values "key" "deployment.resources.limits.memory") }}
   requests:
