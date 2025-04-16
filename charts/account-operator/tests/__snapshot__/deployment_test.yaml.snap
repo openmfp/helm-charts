@@ -436,8 +436,7 @@ operator match the snapshot:
           protocol: TCP
           targetPort: 9443
       selector:
-        control-plane: controller-manager
-        service: account-operator
+        app: account-operator
 operator match the snapshot (with kubeconfigSecret):
   1: |
     apiVersion: apiextensions.k8s.io/v1
@@ -878,8 +877,7 @@ operator match the snapshot (with kubeconfigSecret):
           protocol: TCP
           targetPort: 9443
       selector:
-        control-plane: controller-manager
-        service: account-operator
+        app: account-operator
 operator match the snapshot with webhook enabled:
   1: |
     apiVersion: apiextensions.k8s.io/v1
@@ -1314,5 +1312,4 @@ operator match the snapshot with webhook enabled:
           protocol: TCP
           targetPort: 9443
       selector:
-        control-plane: controller-manager
-        service: account-operator
+        app: account-operator
