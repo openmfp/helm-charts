@@ -307,6 +307,8 @@ operator match the snapshot:
                 - --image-name="ghcr.io/openmfp/account-operator"
                 - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
+                - --webhooks-enabled
+                - --webhooks-cert-dir=/certs
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -330,10 +332,6 @@ operator match the snapshot:
                   value: "false"
                 - name: KCP_VIRTUAL_WORKSPACE_URL
                   value: ""
-                - name: WEBHOOKS_ENABLED
-                  value: "true"
-                - name: WEBHOOKS_CERT_DIR
-                  value: /certs
                 - name: KCP_API_EXPORT_ENDPOINT_SLICE_NAME
                   value: core.openmfp.org
               image: ghcr.io/openmfp/account-operator:0.0.0
@@ -746,6 +744,8 @@ operator match the snapshot (with kubeconfigSecret):
                 - --image-name="ghcr.io/openmfp/account-operator"
                 - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
+                - --webhooks-enabled
+                - --webhooks-cert-dir=/certs
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -769,10 +769,6 @@ operator match the snapshot (with kubeconfigSecret):
                   value: "false"
                 - name: KCP_VIRTUAL_WORKSPACE_URL
                   value: ""
-                - name: WEBHOOKS_ENABLED
-                  value: "true"
-                - name: WEBHOOKS_CERT_DIR
-                  value: /certs
                 - name: KCP_API_EXPORT_ENDPOINT_SLICE_NAME
                   value: core.openmfp.org
                 - name: KUBECONFIG
@@ -1187,6 +1183,8 @@ operator match the snapshot with webhook enabled:
                 - --image-name="ghcr.io/openmfp/account-operator"
                 - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
+                - --webhooks-enabled
+                - --webhooks-cert-dir=/certs
               env:
                 - name: SUBROUTINES_NAMESPACE_ENABLED
                   value: "true"
@@ -1210,10 +1208,6 @@ operator match the snapshot with webhook enabled:
                   value: "false"
                 - name: KCP_VIRTUAL_WORKSPACE_URL
                   value: ""
-                - name: WEBHOOKS_ENABLED
-                  value: "true"
-                - name: WEBHOOKS_CERT_DIR
-                  value: /certs
                 - name: KCP_API_EXPORT_ENDPOINT_SLICE_NAME
                   value: core.openmfp.org
               image: ghcr.io/openmfp/account-operator:0.0.0
