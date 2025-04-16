@@ -42,6 +42,10 @@ spec:
         args:
           - operator
           {{- include "common.commonOperatorArgs" . | indent 8 }}
+          {{- if .Values.webhooks.enabled }}
+          - --webhooks-enabled
+          - --webhooks-cert-dir={{ .Values.webhooks.certDir }}
+          {{- end }}
         env:
           {{- include "common.basicEnvironment" . | nindent 10 }}
           - name: SUBROUTINES_NAMESPACE_ENABLED
@@ -66,10 +70,6 @@ spec:
             value: "{{ .Values.kcp.enabled }}"
           - name: KCP_VIRTUAL_WORKSPACE_URL
             value: "{{ .Values.kcp.virtualWorkspaceUrl }}"
-          - name: WEBHOOKS_ENABLED
-            value: "{{ .Values.webhooks.enabled }}"
-          - name: WEBHOOKS_CERT_DIR
-            value: "{{ .Values.webhooks.certDir }}"
           - name: KCP_API_EXPORT_ENDPOINT_SLICE_NAME
             value: "{{ .Values.kcp.apiExportEndpointSliceName }}"
           {{- if .Values.kubeconfigSecret }}
