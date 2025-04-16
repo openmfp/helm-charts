@@ -9,6 +9,5 @@ spec:
       protocol: TCP
       targetPort: 9443
   selector:
-    service: {{ include "common.entity.name" . }}
-    control-plane: controller-manager
+    {{- include "common.labelMatcher" . | indent 6 }}
 {{- end -}}
