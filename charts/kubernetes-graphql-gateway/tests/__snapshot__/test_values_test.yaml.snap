@@ -27,7 +27,9 @@ match the Snapshot:
             - args:
                 - gateway
               env:
-                - name: OPEN_API_DEFINITIONS_PATH
+                - name: KEY1
+                  value: value1
+                - name: OPENAPI_DEFINITIONS_PATH
                   value: /app/definitions
                 - name: LOCAL_DEVELOPMENT
                   value: "false"
@@ -41,9 +43,9 @@ match the Snapshot:
                   value: trace
                 - name: GATEWAY_PORT
                   value: "8080"
-                - name: GATEWAY_USERNAMECLAIM
+                - name: GATEWAY_USERNAME_CLAIM
                   value: email
-                - name: GATEWAY_SHOULDIMPERSONATE
+                - name: GATEWAY_SHOULD_IMPERSONATE
                   value: "true"
               image: ghcr.io/openmfp/kubernetes-graphql-gateway:1.0.0
               imagePullPolicy: IfNotPresent
@@ -60,10 +62,10 @@ match the Snapshot:
                   protocol: TCP
               resources:
                 limits:
-                  memory: 1200Mi
+                  memory: 512Mi
                 requests:
-                  cpu: 250m
-                  memory: 1000Mi
+                  cpu: 40m
+                  memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
@@ -75,7 +77,9 @@ match the Snapshot:
             - args:
                 - listener
               env:
-                - name: OPEN_API_DEFINITIONS_PATH
+                - name: KEY1
+                  value: value1
+                - name: OPENAPI_DEFINITIONS_PATH
                   value: /app/definitions
                 - name: LOCAL_DEVELOPMENT
                   value: "false"
@@ -83,7 +87,7 @@ match the Snapshot:
                   value: "true"
                 - name: KEY1
                   value: value1
-                - name: LISTENER_API_EXPORT_NAME
+                - name: LISTENER_APIEXPORT_NAME
                   value: kcp.io
               image: ghcr.io/openmfp/kubernetes-graphql-gateway:1.0.0
               imagePullPolicy: IfNotPresent
@@ -100,10 +104,10 @@ match the Snapshot:
                   protocol: TCP
               resources:
                 limits:
-                  memory: 600Mi
+                  memory: 512Mi
                 requests:
-                  cpu: 250m
-                  memory: 500Mi
+                  cpu: 40m
+                  memory: 50Mi
               securityContext:
                 readOnlyRootFilesystem: true
                 runAsNonRoot: true
