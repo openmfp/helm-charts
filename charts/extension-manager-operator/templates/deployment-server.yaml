@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "common.entity.name" . }}-operator
+  name: {{ include "common.entity.name" . }}-server
   namespace: {{ .Release.Namespace }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
@@ -30,7 +30,11 @@ spec:
         ports:
         {{- include "common.PortsMetricsHealth" . | nindent 10 }}
         args:
-          - operator
+          - server
         {{- include "common.commonOperatorArgs" . | indent 8 }}
         env:
         {{- include "common.basicEnvironment" . | nindent 10 }}
+      volumeMounts:
+        {{- include "common.extraVolumeMounts" . | nindent 8 }}
+      volumes:
+        {{- include "common.extraVolumes" . | nindent 8 }}

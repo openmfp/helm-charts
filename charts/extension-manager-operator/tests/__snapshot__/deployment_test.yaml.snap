@@ -67,7 +67,7 @@ operator match the snapshot:
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: extension-manager-operator
+      name: extension-manager-operator-operator
       namespace: NAMESPACE
     spec:
       revisionHistoryLimit: 3
@@ -136,67 +136,12 @@ operator match the snapshot:
                   path: /readyz
                   port: 8081
                 periodSeconds: 10
-            - args:
-                - server
-                - --leader-elect
-                - --metrics-bind-address=:8080
-                - --health-probe-bind-address=:8081
-                - --log-level=warn
-                - --region=local
-                - --environment=local
-                - --image-tag=1.0.0
-                - --image-name="ghcr.io/openmfp/extension-manager-operator"
-                - --shutdown-timeout=1m
-                - --max-concurrent-reconciles=10
-              env: null
-              image: ghcr.io/openmfp/extension-manager-operator:1.0.0
-              imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                periodSeconds: 10
-              name: extension-manager-operator
-              ports:
-                - containerPort: 8080
-                  name: metrics
-                  protocol: TCP
-                - containerPort: 8081
-                  name: health-port
-                  protocol: TCP
-              readinessProbe:
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                initialDelaySeconds: 5
-                periodSeconds: 10
-              resources:
-                limits:
-                  cpu: 260m
-                  memory: 512Mi
-                requests:
-                  cpu: 40m
-                  memory: 50Mi
-              securityContext:
-                readOnlyRootFilesystem: true
-                runAsNonRoot: true
-                seccompProfile:
-                  type: RuntimeDefault
-              startupProbe:
-                failureThreshold: 30
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                periodSeconds: 10
           securityContext:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           serviceAccountName: extension-manager-operator
           terminationGracePeriodSeconds: 10
-          volumeMounts: null
-          volumes: null
   4: |
     apiVersion: v1
     imagePullSecrets:
