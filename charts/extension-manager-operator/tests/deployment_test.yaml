@@ -1,6 +1,7 @@
 suite: operator
 templates:
   - deployment.yaml
+  - deployment-server.yaml
   - service-account.yaml
   - cluster-role.yaml
   - cluster-rolebinding.yaml
