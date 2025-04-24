@@ -26,9 +26,28 @@ spec:
       containers:
       - {{- include "common.podBasics" . | indent 8 }}
         {{- include "common.container.securityContext" . | indent 8 }}
-        {{- include "common.healthAndReadiness" . | indent 8 }}
         ports:
         {{- include "common.PortsMetricsHealth" . | nindent 10 }}
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: 8088
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        startupProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: 8088
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
         args:
           - server
         {{- include "common.commonOperatorArgs" . | indent 8 }}
