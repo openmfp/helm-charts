@@ -98,12 +98,6 @@ operator match the snapshot:
               env: null
               image: ghcr.io/openmfp/extension-manager-operator:1.0.0
               imagePullPolicy: IfNotPresent
-              livenessProbe:
-                failureThreshold: 1
-                httpGet:
-                  path: /readyz
-                  port: 8081
-                periodSeconds: 10
               name: extension-manager-operator
               ports:
                 - containerPort: 8080
@@ -113,11 +107,15 @@ operator match the snapshot:
                   name: health-port
                   protocol: TCP
               readinessProbe:
+                failureThreshold: 3
                 httpGet:
                   path: /readyz
-                  port: 8081
+                  port: 8088
+                  scheme: HTTP
                 initialDelaySeconds: 5
                 periodSeconds: 10
+                successThreshold: 1
+                timeoutSeconds: 1
               resources:
                 limits:
                   cpu: 260m
@@ -131,11 +129,15 @@ operator match the snapshot:
                 seccompProfile:
                   type: RuntimeDefault
               startupProbe:
-                failureThreshold: 30
+                failureThreshold: 3
                 httpGet:
                   path: /readyz
-                  port: 8081
+                  port: 8088
+                  scheme: HTTP
+                initialDelaySeconds: 5
                 periodSeconds: 10
+                successThreshold: 1
+                timeoutSeconds: 1
           securityContext:
             runAsNonRoot: true
             seccompProfile:
