@@ -25,6 +25,10 @@ istio:
         hosts:
           - "*"
 
+kcp:
+  enabled: false
+  clientCertIssuer: kcp-client-issuer
+
 fga:
   enabled: false
   stores:

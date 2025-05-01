@@ -11,4 +11,10 @@ tests:
         accountOperatorSaKubeconfig: null
     asserts:
       - matchSnapshot: {}
+  - it: with kcp
+    set:
+      kcp:
+        enabled: true
+    asserts:
+      - matchSnapshot: {}
 

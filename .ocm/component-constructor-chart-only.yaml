@@ -1,0 +1,19 @@
+components:
+  - name: {{ .COMPONENT_NAME }}
+    version: {{ .VERSION }}
+    provider:
+      name: The Open Micro Frontend Platform Team
+    resources:
+      - name: chart
+        type: helmChart
+        input:
+          type: helm
+          path: ../{{ .LOCAL_CHART_PATH }}
+    sources:
+      - name: chart
+        type: git
+        version: {{ .VERSION }}
+        access:
+          commit: {{ .COMMIT }}
+          repoUrl: {{ .CHART_REPO }}
+          type: gitHub
