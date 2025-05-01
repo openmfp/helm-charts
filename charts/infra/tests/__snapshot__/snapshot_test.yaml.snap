@@ -32,3 +32,58 @@ matches the snapshot:
             name: http
             number: 8000
             protocol: HTTP
+with kcp:
+  1: |
+    apiVersion: networking.istio.io/v1
+    kind: Gateway
+    metadata:
+      name: gateway
+      namespace: NAMESPACE
+    spec:
+      selector:
+        istio: gateway
+      servers:
+        - hosts:
+            - '*'
+          port:
+            name: http
+            number: 8000
+            protocol: HTTP
+  2: |
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    metadata:
+      name: kcp-system-masters-client-cert-authz-webhook
+      namespace: NAMESPACE
+    spec:
+      commonName: authz-webhook
+      issuerRef:
+        name: openmfp-kcp-client-issuer
+      privateKey:
+        algorithm: RSA
+        size: 2048
+      secretName: kcp-system-masters-client-cert-secret
+      subject:
+        organizations:
+          - system:masters
+      usages:
+        - client auth
+  3: |
+    apiVersion: cert-manager.io/v1
+    kind: Certificate
+    metadata:
+      name: kcp-system-masters-client-cert-openmfp-operator
+      namespace: NAMESPACE
+    spec:
+      commonName: openmfp-operator
+      issuerRef:
+        name: kcp-client-issuer
+      privateKey:
+        algorithm: RSA
+        size: 2048
+      secretName: kcp-system-masters-client-cert-secret
+      subject:
+        organizations:
+          - system:masters
+      usages:
+        - client auth
