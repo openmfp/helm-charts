@@ -62,7 +62,7 @@ with kcp:
       privateKey:
         algorithm: RSA
         size: 2048
-      secretName: kcp-system-masters-client-cert-secret
+      secretName: kcp-system-masters-client-cert-authz-webhook
       subject:
         organizations:
           - system:masters
@@ -81,7 +81,7 @@ with kcp:
       privateKey:
         algorithm: RSA
         size: 2048
-      secretName: kcp-system-masters-client-cert-secret
+      secretName: kcp-system-masters-client-cert-openmfp-operator
       subject:
         organizations:
           - system:masters
