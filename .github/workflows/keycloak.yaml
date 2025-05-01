@@ -30,3 +30,4 @@ jobs:
     with:
       chartPath: charts/keycloak
       componentName: github.com/openmfp/keycloak
+      componentConstructorFile: .ocm/component-constructor-chart-only.yaml
