@@ -4,6 +4,7 @@ on:
     paths:
       - 'charts/keycloak/**'
       - '.github/workflows/keycloak.yaml'
+      - '.ocm/component-constructor-chart-only.yaml'
   pull_request:
     paths:
       - 'charts/keycloak/**'

@@ -4,6 +4,7 @@ on:
     paths:
       - 'charts/infra/**'
       - '.github/workflows/infra.yaml'
+      - '.ocm/component-constructor-chart-only.yaml'
   pull_request:
     paths:
       - 'charts/infra/**'

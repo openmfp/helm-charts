@@ -6,9 +6,11 @@ components:
     resources:
       - name: chart
         type: helmChart
-        input:
-          type: helm
-          path: ../{{ .LOCAL_CHART_PATH }}
+        relation: external
+        version: {{ .VERSION }}
+        access:
+          type: ociArtifact
+          imageReference: "{{ .CHART_OCI_PATH }}:{{ .VERSION }}"
     sources:
       - name: chart
         type: git

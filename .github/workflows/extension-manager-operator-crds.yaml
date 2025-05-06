@@ -4,6 +4,7 @@ on:
     paths:
       - 'charts/extension-manager-operator-crds/**'
       - '.github/workflows/extension-manager-operator-crds.yaml'
+      - '.ocm/component-constructor-chart-only.yaml'
   pull_request:
     paths:
       - 'charts/extension-manager-operator-crds/**'

@@ -4,6 +4,7 @@ on:
     paths:
       - 'charts/example-content/**'
       - 'example-content.yaml'
+      - '.ocm/component-constructor.yaml'
   pull_request:
     paths:
       - 'charts/example-content/**'

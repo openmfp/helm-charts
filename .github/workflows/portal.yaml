@@ -4,6 +4,7 @@ on:
     paths:
       - 'charts/portal/**'
       - '.github/workflows/portal.yaml'
+      - '.ocm/component-constructor.yaml'
   pull_request:
     paths:
       - 'charts/portal/**'

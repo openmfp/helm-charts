@@ -4,6 +4,7 @@ on:
     paths:
       - 'charts/account-operator/**'
       - '.github/workflows/account-operator.yaml'
+      - '.ocm/component-constructor.yaml'
   pull_request:
     paths:
       - 'charts/account-operator/**'
