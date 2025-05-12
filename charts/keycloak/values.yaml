@@ -54,13 +54,8 @@ keycloak:
     existingSecret: keycloak-admin
     # -- keycloak admin secret key
     passwordSecretKey: secret
-  # -- keycloak resources preset
-  resourcesPreset: none
   # -- keycloak http relative path
   httpRelativePath: "/keycloak/"
-  logging:
-    # -- keycloak logging level
-    level: DEBUG
   # -- keycloak environment variables (raw)
   # For Arm64 arch (especially Apple M4), add -XX:UseSVE=0 to JAVA_OPTS_APPEND
   extraEnvVars:

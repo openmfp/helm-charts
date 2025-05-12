@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "common.entity.name" . }}-operator
+  name: {{ include "common.entity.name" . }}-server
   namespace: {{ .Release.Namespace }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
@@ -26,11 +26,30 @@ spec:
       containers:
       - {{- include "common.podBasics" . | indent 8 }}
         {{- include "common.container.securityContext" . | indent 8 }}
-        {{- include "common.healthAndReadiness" . | indent 8 }}
         ports:
         {{- include "common.PortsMetricsHealth" . | nindent 10 }}
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: 8088
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        startupProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /readyz
+            port: 8088
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
         args:
-          - operator
+          - server
         {{- include "common.commonOperatorArgs" . | indent 8 }}
         env:
         {{- include "common.basicEnvironment" . | nindent 10 }}

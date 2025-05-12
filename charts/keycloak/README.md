@@ -39,13 +39,12 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 | job | object | `{"annotations":{"argocd.argoproj.io/hook":"PostSync"},"serviceAccount":"keycloak-client-creation"}` | job configuration |
 | job.annotations | object | `{"argocd.argoproj.io/hook":"PostSync"}` | custom job annotations |
 | job.serviceAccount | string | `"keycloak-client-creation"` | job ServiceAccount name |
-| keycloak | object | `{"auth":{"adminUser":"keycloak-admin","existingSecret":"keycloak-admin","passwordSecretKey":"secret"},"extraEnvVars":[{"name":"KEYCLOAK_USER","value":"keycloak-admin"},{"name":"KEYCLOAK_PASSWORD","valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},{"name":"JAVA_OPTS_APPEND","value":"-Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local"}],"httpRelativePath":"/keycloak/","logging":{"level":"DEBUG"},"postgresql":{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"},"username":"keycloak"},"nameOverride":"postgresql-keycloak","primary":{"resourcesPreset":"none"}},"resourcesPreset":"none"}` | configuration passed to the child 'keyclaok' chart https://github.com/bitnami/charts/tree/main/bitnami/keycloak |
+| keycloak | object | `{"auth":{"adminUser":"keycloak-admin","existingSecret":"keycloak-admin","passwordSecretKey":"secret"},"extraEnvVars":[{"name":"KEYCLOAK_USER","value":"keycloak-admin"},{"name":"KEYCLOAK_PASSWORD","valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},{"name":"JAVA_OPTS_APPEND","value":"-Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local"}],"httpRelativePath":"/keycloak/","postgresql":{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"},"username":"keycloak"},"nameOverride":"postgresql-keycloak","primary":{"resourcesPreset":"none"}}}` | configuration passed to the child 'keyclaok' chart https://github.com/bitnami/charts/tree/main/bitnami/keycloak |
 | keycloak.auth.adminUser | string | `"keycloak-admin"` | keycloak admin user |
 | keycloak.auth.existingSecret | string | `"keycloak-admin"` | keycloak admin secret |
 | keycloak.auth.passwordSecretKey | string | `"secret"` | keycloak admin secret key |
 | keycloak.extraEnvVars | list | `[{"name":"KEYCLOAK_USER","value":"keycloak-admin"},{"name":"KEYCLOAK_PASSWORD","valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},{"name":"JAVA_OPTS_APPEND","value":"-Djgroups.dns.query=openmfp-keycloak-headless.openmfp-system.svc.cluster.local"}]` | keycloak environment variables (raw) For Arm64 arch (especially Apple M4), add -XX:UseSVE=0 to JAVA_OPTS_APPEND |
 | keycloak.httpRelativePath | string | `"/keycloak/"` | keycloak http relative path |
-| keycloak.logging.level | string | `"DEBUG"` | keycloak logging level |
 | keycloak.postgresql | object | `{"auth":{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"},"username":"keycloak"},"nameOverride":"postgresql-keycloak","primary":{"resourcesPreset":"none"}}` | configuration for the postgresql sub-chart |
 | keycloak.postgresql.auth | object | `{"existingSecret":"","secretKeys":{"adminPasswordKey":"password","userPasswordKey":"password"},"username":"keycloak"}` | authorization configuration |
 | keycloak.postgresql.auth.existingSecret | string | `""` | existing secret name |
@@ -54,7 +53,6 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 | keycloak.postgresql.auth.username | string | `"keycloak"` | postgresql username |
 | keycloak.postgresql.nameOverride | string | `"postgresql-keycloak"` | postgresql name override |
 | keycloak.postgresql.primary.resourcesPreset | string | `"none"` | primary postgresql resources preset |
-| keycloak.resourcesPreset | string | `"none"` | keycloak resources preset |
 | keycloakConfig.admin | object | `{"password":{"valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}},"username":{"value":"keycloak-admin"}}` | admin user configuration |
 | keycloakConfig.admin.password | object | `{"valueFrom":{"secretKeyRef":{"key":"secret","name":"keycloak-admin"}}}` | admin password |
 | keycloakConfig.admin.password.valueFrom.secretKeyRef.key | string | `"secret"` | key of the password in the secret |
