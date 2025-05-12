@@ -17,10 +17,6 @@ Helm Chart for the openmfp Portal
 | extraEnvVars | list | `[{"name":"KUBERNETES_GRAPHQL_GATEWAY_API_URL","value":"http://localhost:8000/example-gateway/graphql"}]` | A way to provide additional experimental environment variables |
 | featureToggles | string | `"enableSessionAutoRefresh=true"` |  |
 | frontendPort | int | `8000` | frontend port |
-| health.liveness.path | string | `"/rest/health"` | path used for the liveness probe |
-| health.port | int | `8080` | health port to be used by probes |
-| health.readiness.path | string | `"/rest/health"` | path used for the readiness probe |
-| health.startup.path | string | `"/rest/health"` | path used for the startup probe |
 | http.protocol | string | `"http"` | protocol |
 | image.name | string | `"ghcr.io/openmfp/portal"` |  |
 | image.pullPolicyOverride | string | `"IfNotPresent"` |  |

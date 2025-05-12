@@ -85,4 +85,9 @@ spec:
           value: {{ .value }}
         {{ end }}
         ports:
-          {{- include "common.ports" . | nindent 10 }}
+          - name: http
+            containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "port") }}
+            protocol: TCP
+          - name: metrics
+            containerPort: {{ include "common.getKeyValue" (dict "Values" .Values "key" "metrics.port") }}
+            protocol: TCP

@@ -88,9 +88,6 @@ matches the snapshot:
                 - containerPort: 9090
                   name: metrics
                   protocol: TCP
-                - containerPort: 8080
-                  name: health-port
-                  protocol: TCP
               resources:
                 limits:
                   memory: 512Mi

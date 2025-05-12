@@ -56,16 +56,3 @@ trust:
     secretKeyRef: attribute.client_secret
     # -- ContentConfiguration validator api url
     contentConfigurationValidatorApiUrl: http://openmfp-extension-manager-operator-server.openmfp-system.svc.cluster.local:8088/validate
-
-health:
-  # -- health port to be used by probes
-  port: 8080
-  readiness:
-    # -- path used for the readiness probe
-    path: /rest/health
-  liveness:
-    # -- path used for the liveness probe
-    path: /rest/health
-  startup:
-    # -- path used for the startup probe
-    path: /rest/health
