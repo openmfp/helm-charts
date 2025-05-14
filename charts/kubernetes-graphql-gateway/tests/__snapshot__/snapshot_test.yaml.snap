@@ -27,7 +27,7 @@ match the Snapshot:
             - args:
                 - gateway
               env:
-                - name: OPENAPI_DEFINITIONS_PATH
+                - name: OPEN_API_DEFINITIONS_PATH
                   value: /app/definitions
                 - name: LOCAL_DEVELOPMENT
                   value: "false"
@@ -73,7 +73,7 @@ match the Snapshot:
             - args:
                 - listener
               env:
-                - name: OPENAPI_DEFINITIONS_PATH
+                - name: OPEN_API_DEFINITIONS_PATH
                   value: /app/definitions
                 - name: LOCAL_DEVELOPMENT
                   value: "false"
