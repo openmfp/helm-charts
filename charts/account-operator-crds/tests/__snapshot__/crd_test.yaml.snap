@@ -7,7 +7,7 @@ crds match the snapshot:
       name: core.openmfp.org
     spec:
       latestResourceSchemas:
-        - v250304-c26848b.accountinfos.core.openmfp.org
+        - v250516-0b27c30.accountinfos.core.openmfp.org
         - v250305-70de32b.accounts.core.openmfp.org
       permissionClaims:
         - all: true
@@ -35,7 +35,7 @@ crds match the snapshot:
     kind: APIResourceSchema
     metadata:
       creationTimestamp: null
-      name: v250304-c26848b.accountinfos.core.openmfp.org
+      name: v250516-0b27c30.accountinfos.core.openmfp.org
     spec:
       group: core.openmfp.org
       names:
@@ -71,9 +71,11 @@ crds match the snapshot:
                 properties:
                   account:
                     properties:
-                      clusterId:
+                      generatedClusterId:
                         type: string
                       name:
+                        type: string
+                      originClusterId:
                         type: string
                       path:
                         type: string
@@ -82,8 +84,9 @@ crds match the snapshot:
                       url:
                         type: string
                     required:
-                      - clusterId
+                      - generatedClusterId
                       - name
+                      - originClusterId
                       - path
                       - type
                       - url
@@ -109,9 +112,11 @@ crds match the snapshot:
                     type: object
                   organization:
                     properties:
-                      clusterId:
+                      generatedClusterId:
                         type: string
                       name:
+                        type: string
+                      originClusterId:
                         type: string
                       path:
                         type: string
@@ -120,17 +125,20 @@ crds match the snapshot:
                       url:
                         type: string
                     required:
-                      - clusterId
+                      - generatedClusterId
                       - name
+                      - originClusterId
                       - path
                       - type
                       - url
                     type: object
                   parentAccount:
                     properties:
-                      clusterId:
+                      generatedClusterId:
                         type: string
                       name:
+                        type: string
+                      originClusterId:
                         type: string
                       path:
                         type: string
@@ -139,8 +147,9 @@ crds match the snapshot:
                       url:
                         type: string
                     required:
-                      - clusterId
+                      - generatedClusterId
                       - name
+                      - originClusterId
                       - path
                       - type
                       - url
@@ -364,7 +373,7 @@ crds with kcp enabled match the snapshot:
       name: core.openmfp.org
     spec:
       latestResourceSchemas:
-        - v250304-c26848b.accountinfos.core.openmfp.org
+        - v250516-0b27c30.accountinfos.core.openmfp.org
         - v250305-70de32b.accounts.core.openmfp.org
       permissionClaims:
         - all: true
@@ -392,7 +401,7 @@ crds with kcp enabled match the snapshot:
     kind: APIResourceSchema
     metadata:
       creationTimestamp: null
-      name: v250304-c26848b.accountinfos.core.openmfp.org
+      name: v250516-0b27c30.accountinfos.core.openmfp.org
     spec:
       group: core.openmfp.org
       names:
@@ -428,9 +437,11 @@ crds with kcp enabled match the snapshot:
                 properties:
                   account:
                     properties:
-                      clusterId:
+                      generatedClusterId:
                         type: string
                       name:
+                        type: string
+                      originClusterId:
                         type: string
                       path:
                         type: string
@@ -439,8 +450,9 @@ crds with kcp enabled match the snapshot:
                       url:
                         type: string
                     required:
-                      - clusterId
+                      - generatedClusterId
                       - name
+                      - originClusterId
                       - path
                       - type
                       - url
@@ -466,9 +478,11 @@ crds with kcp enabled match the snapshot:
                     type: object
                   organization:
                     properties:
-                      clusterId:
+                      generatedClusterId:
                         type: string
                       name:
+                        type: string
+                      originClusterId:
                         type: string
                       path:
                         type: string
@@ -477,17 +491,20 @@ crds with kcp enabled match the snapshot:
                       url:
                         type: string
                     required:
-                      - clusterId
+                      - generatedClusterId
                       - name
+                      - originClusterId
                       - path
                       - type
                       - url
                     type: object
                   parentAccount:
                     properties:
-                      clusterId:
+                      generatedClusterId:
                         type: string
                       name:
+                        type: string
+                      originClusterId:
                         type: string
                       path:
                         type: string
@@ -496,8 +513,9 @@ crds with kcp enabled match the snapshot:
                       url:
                         type: string
                     required:
-                      - clusterId
+                      - generatedClusterId
                       - name
+                      - originClusterId
                       - path
                       - type
                       - url
