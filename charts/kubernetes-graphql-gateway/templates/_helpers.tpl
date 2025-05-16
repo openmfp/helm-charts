@@ -1,6 +1,6 @@
 {{- define "kubernetes-graphql-gateway.env" -}}
 {{- include "common.basicEnvironment" . }}
-- name: OPEN_API_DEFINITIONS_PATH
+- name: OPENAPI_DEFINITIONS_PATH
   value: /app/definitions
 - name: LOCAL_DEVELOPMENT
   value: "{{ .Values.localDevelopment | default false }}"
