@@ -26,6 +26,8 @@ match the Snapshot:
           containers:
             - args:
                 - gateway
+                - --metrics-bind-address=:8081
+                - --health-bind-address=:3389
               env:
                 - name: KEY1
                   value: value1
@@ -76,6 +78,8 @@ match the Snapshot:
                   name: definitions-volume
             - args:
                 - listener
+                - --metrics-bind-address=:8091
+                - --health-bind-address=:3390
               env:
                 - name: KEY1
                   value: value1
