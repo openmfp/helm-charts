@@ -23,7 +23,8 @@ spec:
       headers:
         request:
           set:
-            X-Forwarded-Proto: "https"
+            x-forwarded-proto: "https"
+            x-forwarded-port: {{ .Values.istio.https.port }}
       {{ end }}
 
 {{- end }}

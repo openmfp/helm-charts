@@ -3,8 +3,7 @@ istio:
     # -- istio virtual service hosts
     hosts: ["*"]
   https:
-    # -- toggle to enable/disable https
-    enabled: false
+    port: 8443
 
 # -- debug mode
 debug: false
