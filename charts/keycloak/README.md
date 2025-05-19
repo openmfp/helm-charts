@@ -34,7 +34,7 @@ A Helm chart to deploy keycloak as OIDC provider in openmfp
 | externalSecrets | object | `{"keycloakAdminRemoteRef":"","postgres-adminRemoteRef":""}` | external secrets configuration |
 | externalSecrets.keycloakAdminRemoteRef | string | `""` | keycloak admin secret |
 | externalSecrets.postgres-adminRemoteRef | string | `""` | postgres admin secret |
-| istio.https.enabled | bool | `false` | toggle to enable/disable https |
+| istio.https.port | int | `8443` |  |
 | istio.virtualservice.hosts | list | `["*"]` | istio virtual service hosts |
 | job | object | `{"annotations":{"argocd.argoproj.io/hook":"PostSync"},"serviceAccount":"keycloak-client-creation"}` | job configuration |
 | job.annotations | object | `{"argocd.argoproj.io/hook":"PostSync"}` | custom job annotations |
