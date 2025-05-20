@@ -24,7 +24,7 @@ spec:
         request:
           set:
             x-forwarded-proto: "https"
-            x-forwarded-port: {{ .Values.istio.https.port }}
+            x-forwarded-port: "{{ .Values.istio.https.port }}"
       {{ end }}
 
 {{- end }}
