@@ -13,7 +13,7 @@ spec:
 {{ .Values.istio.gateway.selector | toYaml | indent 4 }}
   servers:
     - hosts:
-    {{ .Values.istio.main.gateway.hosts | toYaml | indent 6 }}
+{{ .Values.istio.main.gateway.hosts | toYaml | indent 6 }}
       port:
         number: {{.Values.istio.main.gateway.port}}
         name: {{.Values.istio.main.gateway.name}}
@@ -26,7 +26,7 @@ spec:
       {{- end }}
     {{- if .Values.istio.passThrough.gateway.enabled }}
     - hosts:
-        {{ .Values.istio.passThrough.gateway.hosts | toYaml | indent 6 }}
+{{ .Values.istio.passThrough.gateway.hosts | toYaml | indent 6 }}
       port:
         name: {{ .Values.istio.passThrough.gateway.name }}
         number: {{ .Values.istio.passThrough.gateway.port }}
