@@ -2,7 +2,7 @@ apiVersion: v2
 name: infra
 description: The infra openmfp chart configures a number of common infrastructure components for the OpenMFP platform.
 type: application
-version: 0.62.1
+version: 0.63.0
 appVersion: "0.0.0"
 
 dependencies:

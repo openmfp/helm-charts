@@ -28,11 +28,12 @@ The infra openmfp chart configures a number of common infrastructure components 
 | istio.gateway.apiVersion | string | `"networking.istio.io/v1"` |  |
 | istio.gateway.name | string | `"gateway"` |  |
 | istio.gateway.selector.istio | string | `"gateway"` |  |
-| istio.gateway.servers[0].hosts[0] | string | `"*"` |  |
-| istio.gateway.servers[0].port.name | string | `"http"` |  |
-| istio.gateway.servers[0].port.number | int | `8000` |  |
-| istio.gateway.servers[0].port.protocol | string | `"HTTP"` |  |
+| istio.main.gateway.hosts[0] | string | `"*"` |  |
+| istio.main.gateway.name | string | `"http"` |  |
+| istio.main.gateway.port | int | `8000` |  |
+| istio.main.gateway.protocol | string | `"HTTP"` |  |
 | istio.networking.apiVersion | string | `"networking.istio.io/v1"` | The istio apiVersion used for networking resources in this chart eg. networking.istio.io/v1, networking.istio.io/v1beta1 |
+| istio.passThrough.gateway.enabled | bool | `false` |  |
 | istio.serviceEntries.https.enabled | bool | `false` | A toggle to enable the service entries for external https communication |
 | istio.serviceEntries.https.hosts | list | `[]` | The list of hosts to be added to the service entry |
 | kcp.clientCertIssuer | string | `"kcp-client-issuer"` |  |
