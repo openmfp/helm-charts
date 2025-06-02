@@ -45,6 +45,7 @@ with https:
       servers:
         - hosts:
             - my-domain.com
+            - my-domain2.com
           port:
             name: pass-https
             number: 8000
@@ -110,6 +111,7 @@ with kcp:
             protocol: HTTP
         - hosts:
             - passthrough.my-domain.com
+            - passthrough2.my-domain.com
           port:
             name: pass-https
             number: 8000

@@ -20,6 +20,7 @@ tests:
           gateway:
             hosts:
               - "my-domain.com"
+              - "my-domain2.com"
             port: 8000
             name: pass-https
             protocol: HTTPS
@@ -39,6 +40,7 @@ tests:
             enabled: true
             hosts:
               - "passthrough.my-domain.com"
+              - "passthrough2.my-domain.com"
             port: 8000
             name: pass-https
             protocol: HTTPS
