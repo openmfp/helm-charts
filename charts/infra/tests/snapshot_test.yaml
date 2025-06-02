@@ -15,6 +15,16 @@ tests:
     set:
       kcp:
         enabled: true
+      istio:
+        passThrough:
+          gateway:
+            enabled: true
+            hosts:
+              - "passthrough.my-domain.com"
+            port: 8000
+            name: pass-https
+            protocol: HTTPS
+
     asserts:
       - matchSnapshot: {}
 

@@ -49,6 +49,14 @@ with kcp:
             name: http
             number: 8000
             protocol: HTTP
+        - hosts:
+            - passthrough.my-domain.com
+          port:
+            name: pass-https
+            number: 8000
+            protocol: HTTPS
+          tls:
+            mode: PASSTHROUGH
   2: |
     apiVersion: cert-manager.io/v1
     kind: Certificate
