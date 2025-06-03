@@ -17,6 +17,10 @@ spec:
     defaultScopes: openid email profile
     trustEmail: true
     hideOnLoginPage: true
+    {{ with $val.extraConfig }}
+    extraConfig:
+{{ toYaml . | nindent 6 }}
+    {{- end }}
   providerConfigRef:
     name: {{ $.Values.crossplane.providerConfig.name }}
 ---
