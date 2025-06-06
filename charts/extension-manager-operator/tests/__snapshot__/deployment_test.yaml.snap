@@ -80,6 +80,7 @@ operator match the snapshot:
             sidecar.istio.io/inject: "true"
           labels:
             app: extension-manager-operator
+            module: server
         spec:
           automountServiceAccountToken: true
           containers:

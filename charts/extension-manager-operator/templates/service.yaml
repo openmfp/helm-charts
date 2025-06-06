@@ -7,7 +7,7 @@ metadata:
     app: {{ include "common.entity.name" . }}
 spec:
   selector:
-    app: {{ include "common.entity.name" . }}
+    module: server
   ports:
     - protocol: TCP
       port: {{ .Values.validationServer.port }}
