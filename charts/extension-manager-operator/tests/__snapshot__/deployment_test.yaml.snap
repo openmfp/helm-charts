@@ -164,6 +164,7 @@ operator match the snapshot:
             sidecar.istio.io/inject: "true"
           labels:
             app: extension-manager-operator
+            control-plane: controller-manager
         spec:
           automountServiceAccountToken: true
           containers:
