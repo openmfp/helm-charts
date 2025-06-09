@@ -292,6 +292,7 @@ operator match the snapshot:
             traffic.sidecar.istio.io/excludeInboundPorts: "9443"
           labels:
             app: account-operator
+            control-plane: controller-manager
         spec:
           automountServiceAccountToken: true
           containers:
@@ -729,6 +730,7 @@ operator match the snapshot (with kubeconfigSecret):
             traffic.sidecar.istio.io/excludeInboundPorts: "9443"
           labels:
             app: account-operator
+            control-plane: controller-manager
         spec:
           automountServiceAccountToken: true
           containers:
@@ -1168,6 +1170,7 @@ operator match the snapshot with webhook enabled:
             traffic.sidecar.istio.io/excludeInboundPorts: "9443"
           labels:
             app: account-operator
+            control-plane: controller-manager
         spec:
           automountServiceAccountToken: true
           containers:
