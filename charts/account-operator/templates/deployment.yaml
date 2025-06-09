@@ -18,6 +18,7 @@ spec:
         {{- with .Values.deployment.specTemplate.labels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        control-plane: controller-manager
       annotations:
         {{- with .Values.deployment.specTemplate.annotations }}
         {{- toYaml . | nindent 8 }}
