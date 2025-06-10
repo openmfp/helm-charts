@@ -34,9 +34,9 @@ deployment with tracing:
                 - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
                 - --tracing-enabled=true
-                - --tracing-config-service-name=account-operator
-                - --tracing-config-service-version="0.0.0"
-                - --tracing-config-collector-endpoint="test:4317"
+                - --tracing-config-service-name=account-operator.NAMESPACE
+                - --tracing-config-service-version=0.0.0
+                - --tracing-config-collector-endpoint=test:4317
                 - --webhooks-enabled
                 - --webhooks-cert-dir=/certs
               env:
