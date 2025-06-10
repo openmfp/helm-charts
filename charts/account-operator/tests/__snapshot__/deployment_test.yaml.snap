@@ -1,3 +1,126 @@
+deployment with tracing:
+  1: |
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      annotations:
+        cert-manager.io/inject-ca-from: NAMESPACE/account-operator-serving-cert
+      name: account-operator
+    spec:
+      revisionHistoryLimit: 3
+      selector:
+        matchLabels:
+          app: account-operator
+      template:
+        metadata:
+          annotations:
+            traffic.sidecar.istio.io/excludeInboundPorts: "9443"
+          labels:
+            app: account-operator
+            control-plane: controller-manager
+        spec:
+          automountServiceAccountToken: true
+          containers:
+            - args:
+                - operator
+                - --leader-elect
+                - --metrics-bind-address=:9090
+                - --health-probe-bind-address=:8090
+                - --log-level=warn
+                - --region=local
+                - --environment=local
+                - --image-tag=0.0.0
+                - --image-name="ghcr.io/openmfp/account-operator"
+                - --shutdown-timeout=1m
+                - --max-concurrent-reconciles=10
+                - --tracing-enabled=true
+                - --tracing-config-service-name=account-operator
+                - --tracing-config-service-version="0.0.0"
+                - --tracing-config-collector-endpoint="test:4317"
+                - --webhooks-enabled
+                - --webhooks-cert-dir=/certs
+              env:
+                - name: SUBROUTINES_NAMESPACE_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_FGA_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_FGA_GRPC_ADDR
+                  value: openmfp-openfga:8081
+                - name: SUBROUTINES_FGA_ROOT_NAMESPACE
+                  value: openmfp-root
+                - name: SUBROUTINES_FGA_OBJECT_TYPE
+                  value: account
+                - name: SUBROUTINES_FGA_PARENT_RELATION
+                  value: parent
+                - name: SUBROUTINES_FGA_CREATOR_RELATION
+                  value: owner
+                - name: SUBROUTINES_EXTENSION_ENABLED
+                  value: "true"
+                - name: SUBROUTINES_EXTENSION_READY_ENABLED
+                  value: "true"
+                - name: KCP_ENABLED
+                  value: "false"
+                - name: KCP_VIRTUAL_WORKSPACE_URL
+                  value: ""
+                - name: KCP_API_EXPORT_ENDPOINT_SLICE_NAME
+                  value: core.openmfp.org
+              image: ghcr.io/openmfp/account-operator:0.0.0
+              imagePullPolicy: IfNotPresent
+              livenessProbe:
+                failureThreshold: 1
+                httpGet:
+                  path: /healthz
+                  port: 8090
+                periodSeconds: 10
+              name: account-operator
+              ports:
+                - containerPort: 9090
+                  name: metrics
+                  protocol: TCP
+                - containerPort: 8090
+                  name: health-port
+                  protocol: TCP
+                - containerPort: 9443
+                  name: webhook-port
+                  protocol: TCP
+              readinessProbe:
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                initialDelaySeconds: 5
+                periodSeconds: 10
+              resources:
+                limits:
+                  memory: 512Mi
+                requests:
+                  cpu: 40m
+                  memory: 50Mi
+              securityContext:
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                seccompProfile:
+                  type: RuntimeDefault
+              startupProbe:
+                failureThreshold: 30
+                httpGet:
+                  path: /readyz
+                  port: 8090
+                periodSeconds: 10
+              volumeMounts:
+                - mountPath: /certs
+                  name: cert
+                  readOnly: true
+          securityContext:
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          serviceAccountName: account-operator
+          terminationGracePeriodSeconds: 10
+          volumes:
+            - name: cert
+              secret:
+                defaultMode: 420
+                secretName: account-operator-webhook-server-cert
 operator match the snapshot:
   1: |
     apiVersion: apiextensions.k8s.io/v1
