@@ -76,12 +76,12 @@ defaults:
     # -- metrics port
     port: 9090
 
-  otel:
+  tracing:
     # -- toggle to enable/disable OpenTelemetry
     enabled: false
     collector:
       # -- the OpenTelemetry collector endpoint
-      endpoint: "http://otel-collector:4317"
+      endpoint: observability-opentelemetry-collector.openmfp-observability.svc.cluster.local:4317
 
   istio:
     # -- toggle to enable/disable istio
