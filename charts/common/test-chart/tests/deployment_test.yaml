@@ -68,3 +68,11 @@ tests:
             cpu: 1000m
     asserts:
       - matchSnapshot: {}
+  - it: test tracing
+    set:
+      tracing:
+        enabled: true
+        collector:
+            endpoint: collector:4317
+    asserts:
+      - matchSnapshot: {}

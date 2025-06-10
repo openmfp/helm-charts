@@ -65,10 +65,11 @@ resources:
 {{- end }}
 
 {{- define "common.collectorArgs" }}
-{{- if eq (include "common.otelEnabled" .) "true" }}
-- --collector-service-name={{ include "common.entity.name" .}}
-- --collector-service-version="{{ include "common.image.tag" . }}"
-- --collector-endpoint="{{ include "common.getKeyValue" (dict "Values" .Values "key" "otel.collector.endpoint") }}"
+{{- if eq (include "common.tracingEnabled" .) "true" }}
+- --tracing-enabled={{ include "common.tracingEnabled" .}}
+- --tracing-config-service-name={{ include "common.entity.name" .}}
+- --tracing-config-service-version="{{ include "common.image.tag" . }}"
+- --tracing-config-collector-endpoint="{{ include "common.getKeyValue" (dict "Values" .Values "key" "tracing.collector.endpoint") }}"
 {{- end }}
 {{- end }}
 

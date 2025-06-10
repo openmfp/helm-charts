@@ -32,8 +32,6 @@ A Helm chart containing reuse templates
 | defaults.operator.leaderElect | bool | `true` | by default operators participate in leader election |
 | defaults.operator.maxConcurrentReconciles | int | `10` | number of concurrent reconciles per controller |
 | defaults.operator.shutdownTimeout | string | `"1m"` | duration on how long the operator waits before shutting down |
-| defaults.otel.collector.endpoint | string | `"http://otel-collector:4317"` | the OpenTelemetry collector endpoint |
-| defaults.otel.enabled | bool | `false` | toggle to enable/disable OpenTelemetry |
 | defaults.port | int | `8080` | service port |
 | defaults.region | string | `"local"` | default region, this value is primarily used for observability, e.g. logs |
 | defaults.securityContext.fsGroup | int | `2000` | fsGroup id to run the container |
@@ -43,6 +41,8 @@ A Helm chart containing reuse templates
 | defaults.sentry.externalSecrets.secretKey | string | `"sentry/sentry-dsn"` | the secret name that holds the sentry DSNs |
 | defaults.service.port | int | `8080` |  |
 | defaults.service.type | string | `"ClusterIP"` |  |
+| defaults.tracing.collector.endpoint | string | `"observability-opentelemetry-collector.openmfp-observability.svc.cluster.local:4317"` | the OpenTelemetry collector endpoint |
+| defaults.tracing.enabled | bool | `false` | toggle to enable/disable OpenTelemetry |
 
 ## Overriding Values
 
