@@ -654,7 +654,7 @@ test tracing:
                 - --shutdown-timeout=1m
                 - --max-concurrent-reconciles=10
                 - --tracing-enabled=true
-                - --tracing-config-service-name=RELEASE-NAME-test-chart
+                - --tracing-config-service-name=RELEASE-NAME-test-chart.NAMESPACE
                 - --tracing-config-service-version="0.1.0"
                 - --tracing-config-collector-endpoint="collector:4317"
               env: null
