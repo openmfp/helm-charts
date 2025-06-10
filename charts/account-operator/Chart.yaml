@@ -2,7 +2,7 @@ apiVersion: v2
 name: account-operator
 description: A Helm chart to deploy OpenMFP Account-Operator
 type: application
-version: 0.8.0
+version: 0.8.1
 appVersion: "v0.170.0"
 dependencies:
   - name: account-operator-crds
@@ -10,5 +10,5 @@ dependencies:
     condition: crds.enabled
     repository: oci://ghcr.io/openmfp/helm-charts
   - name: common
-    version: 0.5.0
+    version: 0.5.2
     repository: oci://ghcr.io/openmfp/helm-charts
