@@ -69,3 +69,12 @@ tests:
       - equal:
           path: spec.template.spec.automountServiceAccountToken
           value: true
+  - it: deployment with tracing
+    template: deployment.yaml
+    set:
+      tracing:
+        enabled: true
+        collector:
+          endpoint: test:4317
+    asserts:
+      - matchSnapshot: {}
