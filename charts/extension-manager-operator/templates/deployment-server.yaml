@@ -51,7 +51,15 @@ spec:
           timeoutSeconds: 1
         args:
           - server
-        {{- include "common.commonOperatorArgs" . | indent 8 }}
+        {{- include "common.leaderElectArg" . | indent 10 }}
+        {{- include "common.observabilityArgs" . | nindent 10 }}
+        {{- include "common.extraArgs" . | nindent 10 }}
+        {{- if eq (include "common.tracingEnabled" .) "true" }}
+          - --tracing-enabled={{ include "common.tracingEnabled" .}}
+          - --tracing-config-service-name={{ include "common.entity.name" . }}-server.{{ .Release.Namespace}}
+          - --tracing-config-service-version={{ include "common.image.tag" . }}
+          - --tracing-config-collector-endpoint={{ include "common.getKeyValue" (dict "Values" .Values "key" "tracing.collector.endpoint") }}
+        {{- end }}
         env:
         {{- include "common.basicEnvironment" . | nindent 10 }}
       volumeMounts:
