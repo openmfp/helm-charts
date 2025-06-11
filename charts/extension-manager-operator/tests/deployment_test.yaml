@@ -33,3 +33,16 @@ tests:
           requests:
             cpuOverride: 40m
             memoryOverride: 50Mi
+  - it: operator match the snapshot with tracing
+    templates:
+      - deployment.yaml
+      - deployment-server.yaml
+    set:
+      tracing:
+        enabled: true
+        collector:
+          endpoint: test:1234
+      metrics:
+        port: 8080
+    asserts:
+      - matchSnapshot: {}

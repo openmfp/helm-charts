@@ -10,5 +10,5 @@ dependencies:
     condition: crds.enabled
     repository: oci://ghcr.io/openmfp/helm-charts
   - name: common
-    version: 0.5.0
+    version: 0.5.2
     repository: oci://ghcr.io/openmfp/helm-charts
