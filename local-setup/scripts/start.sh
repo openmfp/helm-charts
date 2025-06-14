@@ -11,6 +11,7 @@ set -e
 COL='\033[92m'
 RED='\033[91m'
 COL_RES='\033[0m'
+KINDEST_VERSION="kindest/node:v1.33.1"
 
 SCRIPT_DIR=$(dirname "$0")
 
@@ -40,7 +41,7 @@ if [ $(kind get clusters | grep -c openmfp) -gt 0 ]; then
     kind export kubeconfig --name openmfp
 else
   echo -e "${COL}[$(date '+%H:%M:%S')] Creating kind cluster ${COL_RES}"
-  kind create cluster --config $SCRIPT_DIR/../kind/kind-config.yaml --name openmfp --image=kindest/node:v1.30.2
+  kind create cluster --config $SCRIPT_DIR/../kind/kind-config.yaml --name openmfp --image=$KINDEST_VERSION
 fi
 
 echo -e "${COL}[$(date '+%H:%M:%S')] Installing flux ${COL_RES}"
