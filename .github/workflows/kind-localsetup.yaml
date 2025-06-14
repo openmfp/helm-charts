@@ -103,7 +103,6 @@ jobs:
         name: Clean install of npm dependencies
         run: |
           cd local-setup/e2e
-          npm install
           npm ci
           npx playwright install 
 
