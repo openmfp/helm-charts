@@ -103,7 +103,6 @@ jobs:
         name: Clean install of npm dependencies
         run: |
           cd local-setup/e2e
-          npm install
           npm ci
           npx playwright install 
 
@@ -111,6 +110,7 @@ jobs:
       - if: steps.changed-files.outputs.localsetup_any_changed == 'true'
         name: End2End tests
         run: |
+          sleep 30
           cd local-setup/e2e/
           npx playwright test
       - if: steps.changed-files.outputs.localsetup_any_changed == 'false'
