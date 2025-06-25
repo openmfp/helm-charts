@@ -33,6 +33,7 @@ spec:
         - gateway
         - --metrics-bind-address=:{{ .Values.gateway.metricsPort }}
         - --health-probe-bind-address=:{{ .Values.gateway.healthCheck.port }}
+        {{- include "common.collectorArgs" . | nindent 8 }}
         ports:
         - name: metrics
           containerPort: {{ .Values.gateway.metricsPort }}

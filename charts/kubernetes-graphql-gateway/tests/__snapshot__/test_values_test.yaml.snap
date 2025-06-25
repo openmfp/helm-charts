@@ -28,6 +28,10 @@ match the Snapshot:
                 - gateway
                 - --metrics-bind-address=:8081
                 - --health-probe-bind-address=:3389
+                - --tracing-enabled=true
+                - --tracing-config-service-name=openmfp-kubernetes-graphql-gateway.openmfp-system
+                - --tracing-config-service-version=1.0.0
+                - --tracing-config-collector-endpoint=observability-opentelemetry-collector.openmfp-observability.svc.cluster.local:4317
               env:
                 - name: KEY1
                   value: value1
