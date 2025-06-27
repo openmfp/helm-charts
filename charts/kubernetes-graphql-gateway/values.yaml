@@ -86,3 +86,6 @@ kubeConfig:
 extraEnvs: []
 extraVolumes: []
 extraVolumeMounts: []
+
+tracing:
+  enabled: true

@@ -56,6 +56,7 @@ kubeConfig:
 | resources.requests.cpu | string | `"500m"` |  |
 | resources.requests.memory | string | `"1500Mi"` |  |
 | sentry.environment | string | `"dev"` |  |
+| tracing.enabled | bool | `true` |  |
 | virtualService.hosts[0] | string | `"*"` |  |
 | virtualService.httpRules[0].cors.allowHeaders[0] | string | `"*"` |  |
 | virtualService.httpRules[0].cors.allowMethods[0] | string | `"GET"` |  |
