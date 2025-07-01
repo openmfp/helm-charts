@@ -2,7 +2,7 @@ apiVersion: v2
 name: openmfp
 description: The OpenMFP chart for Kubernetes
 type: application
-version: 0.0.539
+version: 0.0.540
 appVersion: "0.0.0"
 
 dependencies:
@@ -11,7 +11,7 @@ dependencies:
     repository: oci://ghcr.io/openmfp/helm-charts
     condition: components.example-content.enabled
   - name: portal
-    version: 0.73.202
+    version: 0.73.203
     repository: oci://ghcr.io/openmfp/helm-charts
     condition: components.portal.enabled
   - name: infra
