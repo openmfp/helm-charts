@@ -82,7 +82,7 @@ spec:
         {{- end }}
         {{ range .Values.extraEnvVars }}
         - name: {{ .name }}
-          value: {{ .value | toJson | quote }}
+          value: {{ .value | toJson }}
         {{ end }}
         ports:
           {{- include "common.ports" . | nindent 10 }}
