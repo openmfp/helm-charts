@@ -40,7 +40,8 @@ extraEnvVars:
   - name: OPENMFP_PORTAL_CONTEXT_IAM_SERVICE_API_URL
     value: https://portal.dev.local:8443/iam/query
   - name: OPENMFP_PORTAL_CONTEXT_IAM_ENTITY_CONFIG
-    value: {"account":{"contextProperty":"entityId"}}
+    value: >-
+      {"account":{"contextProperty":"entityId"}}
 
 trust:
   openmfp:
