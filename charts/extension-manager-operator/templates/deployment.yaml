@@ -32,10 +32,26 @@ spec:
         {{- include "common.PortsMetricsHealth" . | nindent 10 }}
         args:
           - operator
+          {{- if .Values.kcp.enabled }}
+          - --kcp-enabled
+          {{- end }}
         {{- include "common.commonOperatorArgs" . | indent 8 }}
         env:
         {{- include "common.basicEnvironment" . | nindent 10 }}
-      volumeMounts:
-        {{- include "common.extraVolumeMounts" . | nindent 8 }}
+        {{- if .Values.kcp.kubeconfigSecret }}
+          - name: KCP_KUBECONFIG
+            value: /api-kubeconfig/kubeconfig
+        {{- end }}
+        volumeMounts:
+          {{- include "common.extraVolumeMounts" . | nindent 8 }}
+          {{- if .Values.kcp.kubeconfigSecret }}
+          - name: kcp-api-server
+            mountPath: /api-kubeconfig
+          {{- end }}
       volumes:
         {{- include "common.extraVolumes" . | nindent 8 }}
+        {{- if .Values.kcp.kubeconfigSecret }}
+        - name: kcp-api-server
+          secret:
+            secretName: {{ .Values.kcp.kubeconfigSecret }}
+        {{- end }}

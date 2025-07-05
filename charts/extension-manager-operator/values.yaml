@@ -24,3 +24,12 @@ validationServer:
 istio:
   # -- enable Istio VirtualService
   enabled: false
+
+## @param kubeconfigSecret The secret containing the kubeconfig for the operator
+kubeconfigSecret: ""
+
+kcp:
+  # -- enable the kcp mode of the operator
+  enabled: false
+  # -- name the secret that holds the kubeconfig for the kcp mode
+  kubeconfigSecret: ""

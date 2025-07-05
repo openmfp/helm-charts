@@ -25,6 +25,7 @@ Helm Chart for the openmfp Portal
 | image.name | string | `"ghcr.io/openmfp/portal"` |  |
 | image.pullPolicyOverride | string | `"IfNotPresent"` |  |
 | importContent | bool | `false` | import content toggle |
+| kubeconfigSecret | string | `""` | allows the configuration of a kubeconfig secret for external api servers |
 | trust.openmfp.authDomain | string | `"http://localhost:8000/keycloak/realms/openmfp/protocol/openid-connect/auth"` | auth domain (if discoveryEndpoint is not specified) |
 | trust.openmfp.baseDomains | string | `"localhost"` | base domains |
 | trust.openmfp.contentConfigurationValidatorApiUrl | string | `"http://openmfp-extension-manager-operator-server.openmfp-system.svc.cluster.local:8088/validate"` | ContentConfiguration validator api url |
