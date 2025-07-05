@@ -108,9 +108,11 @@ matches the snapshot:
                 runAsNonRoot: true
                 seccompProfile:
                   type: RuntimeDefault
+              volumeMounts: null
           securityContext:
             runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
           serviceAccountName: portal
           terminationGracePeriodSeconds: 10
+          volumes: null
