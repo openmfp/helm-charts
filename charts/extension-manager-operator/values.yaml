@@ -29,5 +29,7 @@ istio:
 kubeconfigSecret: ""
 
 kcp:
+  # -- enable the kcp mode of the operator
   enabled: false
+  # -- name the secret that holds the kubeconfig for the kcp mode
   kubeconfigSecret: ""

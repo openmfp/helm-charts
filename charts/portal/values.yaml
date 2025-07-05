@@ -33,6 +33,7 @@ baseDomains:
 # -- cookie domain
 cookieDomain: "localhost"
 
+# -- allows the configuration of a kubeconfig secret for external api servers
 kubeconfigSecret: ""
 
 # -- A way to provide additional experimental environment variables
