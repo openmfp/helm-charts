@@ -84,5 +84,22 @@ spec:
         - name: {{ .name }}
           value: {{ .value | toJson }}
         {{ end }}
+        {{- if .Values.kubeconfigSecret }}
+        - name: KUBECONFIG
+          value: /api-kubeconfig/kubeconfig
+        {{- end }}
         ports:
           {{- include "common.ports" . | nindent 10 }}
+        volumeMounts:
+          {{- include "common.extraVolumeMounts" . | nindent 8 }}
+          {{- if .Values.kubeconfigSecret }}
+          - name: kcp-api-server
+            mountPath: /api-kubeconfig
+          {{- end }}
+      volumes:
+        {{- include "common.extraVolumes" . | nindent 8 }}
+        {{- if .Values.kubeconfigSecret }}
+        - name: kcp-api-server
+          secret:
+            secretName: {{ .Values.kubeconfigSecret }}
+        {{- end }}

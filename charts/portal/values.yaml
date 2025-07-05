@@ -33,6 +33,8 @@ baseDomains:
 # -- cookie domain
 cookieDomain: "localhost"
 
+kubeconfigSecret: ""
+
 # -- A way to provide additional experimental environment variables
 extraEnvVars:
   - name: OPENMFP_PORTAL_CONTEXT_CRD_GATEWAY_API_URL
