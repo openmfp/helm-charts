@@ -132,6 +132,26 @@ match the Snapshot:
                 sizeLimit: 500Mi
               name: definitions-volume
   2: |
+    apiVersion: autoscaling/v2
+    kind: HorizontalPodAutoscaler
+    metadata:
+      name: openmfp-kubernetes-graphql-gateway
+      namespace: openmfp-system
+    spec:
+      maxReplicas: 5
+      metrics:
+        - resource:
+            name: cpu
+            target:
+              averageUtilization: 50
+              type: Utilization
+          type: Resource
+      minReplicas: 1
+      scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: openmfp-kubernetes-graphql-gateway
+  3: |
     apiVersion: security.istio.io/v1
     kind: AuthorizationPolicy
     metadata:
@@ -159,7 +179,7 @@ match the Snapshot:
       selector:
         matchLabels:
           app: openmfp-kubernetes-graphql-gateway
-  3: |
+  4: |
     apiVersion: networking.istio.io/v1alpha3
     kind: DestinationRule
     metadata:
@@ -170,7 +190,7 @@ match the Snapshot:
       trafficPolicy:
         tls:
           mode: ISTIO_MUTUAL
-  4: |
+  5: |
     apiVersion: security.istio.io/v1beta1
     kind: PeerAuthentication
     metadata:
@@ -182,7 +202,7 @@ match the Snapshot:
       selector:
         matchLabels:
           app: openmfp-kubernetes-graphql-gateway
-  5: |
+  6: |
     apiVersion: security.istio.io/v1beta1
     kind: RequestAuthentication
     metadata:
@@ -193,7 +213,7 @@ match the Snapshot:
       selector:
         matchLabels:
           app: openmfp-kubernetes-graphql-gateway
-  6: |
+  7: |
     apiVersion: networking.istio.io/v1alpha3
     kind: VirtualService
     metadata:
@@ -225,7 +245,7 @@ match the Snapshot:
                 host: openmfp-kubernetes-graphql-gateway.openmfp-system.svc.cluster.local
                 port:
                   number: 8080
-  7: |
+  8: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
@@ -233,7 +253,7 @@ match the Snapshot:
     metadata:
       name: openmfp-kubernetes-graphql-gateway
       namespace: openmfp-system
-  8: |
+  9: |
     apiVersion: v1
     kind: Service
     metadata:
