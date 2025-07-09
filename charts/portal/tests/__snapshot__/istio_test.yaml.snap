@@ -135,6 +135,26 @@ matches the snapshot:
           terminationGracePeriodSeconds: 10
           volumes: null
   2: |
+    apiVersion: autoscaling/v2
+    kind: HorizontalPodAutoscaler
+    metadata:
+      name: portal
+      namespace: NAMESPACE
+    spec:
+      maxReplicas: 5
+      metrics:
+        - resource:
+            name: cpu
+            target:
+              averageUtilization: 50
+              type: Utilization
+          type: Resource
+      minReplicas: 1
+      scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: portal
+  3: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -148,7 +168,7 @@ matches the snapshot:
           - get
           - watch
           - list
-  3: |
+  4: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -161,14 +181,14 @@ matches the snapshot:
       - kind: ServiceAccount
         name: portal
         namespace: NAMESPACE
-  4: |
+  5: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
     kind: ServiceAccount
     metadata:
       name: portal
-  5: |
+  6: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -318,6 +338,26 @@ matches the snapshot with istio disabled:
           terminationGracePeriodSeconds: 10
           volumes: null
   2: |
+    apiVersion: autoscaling/v2
+    kind: HorizontalPodAutoscaler
+    metadata:
+      name: portal
+      namespace: NAMESPACE
+    spec:
+      maxReplicas: 5
+      metrics:
+        - resource:
+            name: cpu
+            target:
+              averageUtilization: 50
+              type: Utilization
+          type: Resource
+      minReplicas: 1
+      scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: portal
+  3: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRole
     metadata:
@@ -331,7 +371,7 @@ matches the snapshot with istio disabled:
           - get
           - watch
           - list
-  3: |
+  4: |
     apiVersion: rbac.authorization.k8s.io/v1
     kind: ClusterRoleBinding
     metadata:
@@ -344,14 +384,14 @@ matches the snapshot with istio disabled:
       - kind: ServiceAccount
         name: portal
         namespace: NAMESPACE
-  4: |
+  5: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
     kind: ServiceAccount
     metadata:
       name: portal
-  5: |
+  6: |
     apiVersion: v1
     kind: Service
     metadata:
