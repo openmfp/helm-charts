@@ -46,3 +46,18 @@ tests:
         port: 8080
     asserts:
       - matchSnapshot: {}
+  - it: deployment with external kubeconfig
+    template: deployment.yaml
+    set:
+      kcp:
+        enabled: true
+      kubeconfigSecret: "test-kubeconfig"
+      extraVolumeMounts:
+        - name: test
+          mountPath: /test
+      extraVolumes:
+        - name: test
+          secret:
+            secretName: test
+    asserts:
+      - matchSnapshot: {}

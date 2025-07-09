@@ -17,6 +17,9 @@ A Helm chart for extension-manager-operator which manages resources like Content
 | crds.enabled | bool | `true` |  |
 | image.name | string | `"ghcr.io/openmfp/extension-manager-operator"` |  |
 | istio.enabled | bool | `false` | enable Istio VirtualService |
+| kcp.enabled | bool | `false` | enable the kcp mode of the operator |
+| kcp.kubeconfigSecret | string | `""` | name the secret that holds the kubeconfig for the kcp mode |
+| kubeconfigSecret | string | `""` |  |
 | validationServer.host | string | `"*"` | host for the validation VirtualService |
 | validationServer.port | int | `8088` | port for the validation server |
 
