@@ -15,11 +15,13 @@ A Helm chart for extension-manager-operator which manages resources like Content
 |-----|------|---------|-------------|
 | commonAnnotations | object | `{}` |  |
 | crds.enabled | bool | `true` |  |
+| deployment.replicas | int | `2` | replicas for the operator deployment |
 | image.name | string | `"ghcr.io/openmfp/extension-manager-operator"` |  |
 | istio.enabled | bool | `false` | enable Istio VirtualService |
 | kcp.enabled | bool | `false` | enable the kcp mode of the operator |
 | kcp.kubeconfigSecret | string | `""` | name the secret that holds the kubeconfig for the kcp mode |
 | kubeconfigSecret | string | `""` |  |
+| operator.leaderElect | bool | `true` |  |
 | validationServer.host | string | `"*"` | host for the validation VirtualService |
 | validationServer.port | int | `8088` | port for the validation server |
 
