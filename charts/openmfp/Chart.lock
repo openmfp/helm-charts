@@ -13,6 +13,6 @@ dependencies:
   version: 0.30.4
 - name: keycloak
   repository: oci://ghcr.io/openmfp/helm-charts
-  version: 0.64.7
-digest: sha256:c4afcbcffc92002cc8ec9f700a468237fb5dda410d5ec8df8c9d5744008f22d4
-generated: "2025-07-11T03:53:53.23378372Z"
+  version: 0.64.8
+digest: sha256:12e7dc98beba68f1e7cf0b357d231a80d932d6c1a45d6f6af93b4937636f5d83
+generated: "2025-07-11T13:53:08.894290828Z"
