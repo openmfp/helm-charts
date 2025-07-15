@@ -18,10 +18,10 @@ tests:
     asserts:
       - equal:
           path: spec.template.spec.containers[0].livenessProbe.httpGet.path
-          value: /healthz
+          value: /rest/health
       - equal:
           path: spec.template.spec.containers[0].readinessProbe.httpGet.path
-          value: /readyz
+          value: /rest/health
       - equal:
           path: spec.template.spec.containers[0].startupProbe.httpGet.path
-          value: /readyz
+          value: /rest/health
