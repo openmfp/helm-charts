@@ -29,6 +29,7 @@ spec:
         {{- include "common.imagePullPolicy" . | nindent 8 }}
         {{- include "common.resources" . | nindent 8 }}
         {{- include "common.container.securityContext" . | nindent 8 }}
+        {{- include "common.operatorHealthAndReadyness" . | nindent 8 }}
         args:
         - gateway
         - --metrics-bind-address=:{{ .Values.gateway.metricsPort }}
@@ -79,6 +80,7 @@ spec:
         {{- include "common.imagePullPolicy" . | nindent 8 }}
         {{- include "common.resources" . | nindent 8 }}
         {{- include "common.container.securityContext" . | nindent 8 }}
+        {{- include "common.operatorHealthAndReadyness" . | nindent 8 }}
         args:
         - listener
         - --metrics-bind-address=:{{ .Values.listener.metricsPort }}
