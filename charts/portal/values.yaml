@@ -67,7 +67,7 @@ trust:
 
 health:
   # -- health port to be used by probes
-  port: 8080
+  port: 9000
   readiness:
     # -- path used for the readiness probe
     path: /rest/health
