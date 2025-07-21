@@ -90,7 +90,7 @@ matches the snapshot:
                 failureThreshold: 1
                 httpGet:
                   path: /rest/health
-                  port: 8080
+                  port: 9000
                 periodSeconds: 10
               name: portal
               ports:
@@ -106,7 +106,7 @@ matches the snapshot:
               readinessProbe:
                 httpGet:
                   path: /rest/health
-                  port: 8080
+                  port: 9000
                 initialDelaySeconds: 5
                 periodSeconds: 10
               resources:
@@ -124,7 +124,7 @@ matches the snapshot:
                 failureThreshold: 30
                 httpGet:
                   path: /rest/health
-                  port: 8080
+                  port: 9000
                 periodSeconds: 10
               volumeMounts: null
           securityContext:
