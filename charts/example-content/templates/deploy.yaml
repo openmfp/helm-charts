@@ -24,6 +24,7 @@ spec:
       containers:
       - {{- include "common.podBasics" . | indent 8 }}
       {{- include "common.container.securityContext" . | indent 8 }}
+      {{- include "common.operatorHealthAndReadyness" . | indent 8 }}
         ports:
         {{- include "common.ports" . | nindent 10 }}
         env:

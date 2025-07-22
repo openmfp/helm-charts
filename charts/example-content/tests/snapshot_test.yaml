@@ -14,3 +14,15 @@ tests:
       contentConfigurations.ui.internalUrl: http://example-content:8000/ui/assets/config.json
     asserts:
       - matchSnapshot: {}
+  - it: has all health checks
+    template: deploy.yaml
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].livenessProbe.httpGet.path
+          value: /healthz
+      - equal:
+          path: spec.template.spec.containers[0].readinessProbe.httpGet.path
+          value: /readyz
+      - equal:
+          path: spec.template.spec.containers[0].startupProbe.httpGet.path
+          value: /readyz
