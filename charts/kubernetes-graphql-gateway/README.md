@@ -52,6 +52,10 @@ kubeConfig:
 | listener.resources.limits.memory | string | `"600Mi"` |  |
 | listener.resources.requests.cpu | string | `"250m"` |  |
 | listener.resources.requests.memory | string | `"500Mi"` |  |
+| listener.virtualWorkspacesConfig.configMapName | string | `"virtual-workspaces-config"` |  |
+| listener.virtualWorkspacesConfig.content.virtualWorkspaces | list | `[]` |  |
+| listener.virtualWorkspacesConfig.enabled | bool | `false` |  |
+| listener.virtualWorkspacesConfig.path | string | `"/app/config/virtual-workspaces.yaml"` |  |
 | resources.limits.memory | string | `"1800Mi"` |  |
 | resources.requests.cpu | string | `"500m"` |  |
 | resources.requests.memory | string | `"1500Mi"` |  |

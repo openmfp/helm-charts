@@ -99,12 +99,20 @@ spec:
         {{- include "kubernetes-graphql-gateway.env" . | nindent 8 }}
         - name: LISTENER_APIEXPORT_NAME
           value: "{{ .Values.listener.apiExportName }}"
+        {{- if .Values.listener.virtualWorkspacesConfig.enabled }}
+        - name: VIRTUAL_WORKSPACES_CONFIG_PATH
+          value: {{ .Values.listener.virtualWorkspacesConfig.path | default "/app/config/virtual-workspaces.yaml" }}
+        {{- end }}
         volumeMounts:
           - name: definitions-volume
             mountPath: /app/definitions
         {{- if .Values.kubeConfig.enabled }}
           - name: kubeconfig-volume
             mountPath: /app/kubeconfig
+        {{- end }}
+        {{- if .Values.listener.virtualWorkspacesConfig.enabled }}
+          - name: virtual-workspaces-config-volume
+            mountPath: /app/config
         {{- end }}
         {{- with .Values.extraVolumeMounts }}
           {{- toYaml . | nindent 10 }}
@@ -117,6 +125,11 @@ spec:
         - name: kubeconfig-volume
           secret:
             secretName: {{ .Values.kubeConfig.secretName }}
+        {{- end }}
+        {{- if .Values.listener.virtualWorkspacesConfig.enabled }}
+        - name: virtual-workspaces-config-volume
+          configMap:
+            name: {{ .Values.listener.virtualWorkspacesConfig.configMapName }}
         {{- end }}
         {{- with .Values.extraVolumes }}
         {{- toYaml . | nindent 8 }}

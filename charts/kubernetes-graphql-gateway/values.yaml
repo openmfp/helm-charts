@@ -34,6 +34,12 @@ listener:
     enabled: true
     port: 3390
   metricsPort: 8091
+  virtualWorkspacesConfig:
+    enabled: false
+    configMapName: "virtual-workspaces-config"
+    path: "/app/config/virtual-workspaces.yaml"
+    content:
+      virtualWorkspaces: []
   resources:
     limits:
       memory: 600Mi

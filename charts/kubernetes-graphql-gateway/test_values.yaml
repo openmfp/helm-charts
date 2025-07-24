@@ -27,7 +27,15 @@ listener:
     enabled: true
     port: 3390
   metricsPort: 8091
-
+  virtualWorkspacesConfig:
+    enabled: true
+    configMapName: "virtual-workspaces-config"
+    path: "/app/config/virtual-workspaces.yaml"
+    content:
+      virtualWorkspaces:
+        - name: custom-ws
+          url: https://example.com
+          kubeconfig: /etc/kubeconfig/kubeconfig
 deployment:
   maxUnavailable: 0
   maxSurge: 5
