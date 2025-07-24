@@ -6,9 +6,6 @@ release:
   namespace: openmfp-system
 chart:
   appVersion: 1.0.0
-templates:
-  - deploy.yaml
-  - virtual-workspaces-configmap.yaml
 tests:
 - it: match the Snapshot
   asserts:
