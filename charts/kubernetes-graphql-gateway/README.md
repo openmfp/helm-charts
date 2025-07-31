@@ -36,6 +36,16 @@ kubeConfig:
 | gateway.resources.requests.memory | string | `"1000Mi"` |  |
 | gateway.shouldImpersonate | bool | `true` |  |
 | gateway.usernameClaim | string | `"email"` |  |
+| health.liveness.failureThreshold | int | `1` |  |
+| health.liveness.path | string | `"/healthz"` |  |
+| health.liveness.periodSeconds | int | `10` |  |
+| health.periodSeconds | int | `10` |  |
+| health.readiness.initialDelaySeconds | int | `5` |  |
+| health.readiness.path | string | `"/readyz"` |  |
+| health.readiness.periodSeconds | int | `10` |  |
+| health.startup.failureThreshold | int | `30` |  |
+| health.startup.path | string | `"/readyz"` |  |
+| health.startup.periodSeconds | int | `10` |  |
 | image.name | string | `"ghcr.io/openmfp/kubernetes-graphql-gateway"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | istio.enabled | bool | `true` |  |

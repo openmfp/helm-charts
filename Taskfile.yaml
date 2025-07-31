@@ -20,11 +20,21 @@ tasks:
     internal: true
     cmds:
       - test -s {{.LOCAL_BIN}}/helm-docs || GOBIN=$(pwd)/{{.LOCAL_BIN}} go install github.com/norwoodj/helm-docs/cmd/helm-docs@latest
+  setup:ct:
+    internal: true
+    cmds:
+      - mkdir -p $(pwd)/{{.LOCAL_BIN}}
+      - test -s {{.LOCAL_BIN}}/ct || GOBIN=$(pwd)/{{.LOCAL_BIN}} go install github.com/helm/chart-testing/v3/ct@latest
   ## Development
   lint:
     deps: []
     cmds:
       - "ct lint --target-branch main --chart-dirs=charts --validate-maintainers=false --chart-repos=bitnami=https://charts.bitnami.com/bitnami,openfga=https://openfga.github.io/helm-charts"
+  lint-local:
+    deps:
+      - task: setup:ct
+    cmds:
+      - "{{.LOCAL_BIN}}/ct lint --validate-maintainers=false --validate-chart-schema=false --validate-yaml=false"
   helmtest:
     cmds:
       - "for chart in $(echo {{.CHARTS}} | tr ',' ' '); do helm unittest $chart; done"

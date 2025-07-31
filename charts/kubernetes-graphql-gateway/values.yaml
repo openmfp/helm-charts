@@ -95,3 +95,19 @@ extraVolumeMounts: []
 
 tracing:
   enabled: true
+
+# Health check configuration shared by both containers
+health:
+  periodSeconds: 10
+  readiness:
+    path: "/readyz"
+    initialDelaySeconds: 5
+    periodSeconds: 10
+  liveness:
+    path: "/healthz"
+    failureThreshold: 1
+    periodSeconds: 10
+  startup:
+    path: "/readyz"
+    failureThreshold: 30
+    periodSeconds: 10
