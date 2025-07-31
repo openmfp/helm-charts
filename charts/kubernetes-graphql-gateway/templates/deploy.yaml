@@ -31,22 +31,22 @@ spec:
         {{- include "common.container.securityContext" . | nindent 8 }}
         livenessProbe:
           httpGet:
-            path: {{ .Values.gateway.health.liveness.path }}
+            path: {{ .Values.health.liveness.path }}
             port: {{ .Values.gateway.healthCheck.port }}
-          failureThreshold: {{ .Values.gateway.health.liveness.failureThreshold }}
-          periodSeconds: {{ .Values.gateway.health.periodSeconds }}
+          failureThreshold: {{ .Values.health.liveness.failureThreshold }}
+          periodSeconds: {{ .Values.health.periodSeconds }}
         readinessProbe:
           httpGet:
-            path: {{ .Values.gateway.health.readiness.path }}
+            path: {{ .Values.health.readiness.path }}
             port: {{ .Values.gateway.healthCheck.port }}
-          initialDelaySeconds: {{ .Values.gateway.health.readiness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.gateway.health.readiness.periodSeconds }}
+          initialDelaySeconds: {{ .Values.health.readiness.initialDelaySeconds }}
+          periodSeconds: {{ .Values.health.readiness.periodSeconds }}
         startupProbe:
           httpGet:
-            path: {{ .Values.gateway.health.startup.path }}
+            path: {{ .Values.health.startup.path }}
             port: {{ .Values.gateway.healthCheck.port }}
-          failureThreshold: {{ .Values.gateway.health.startup.failureThreshold }}
-          periodSeconds: {{ .Values.gateway.health.periodSeconds }}
+          failureThreshold: {{ .Values.health.startup.failureThreshold }}
+          periodSeconds: {{ .Values.health.periodSeconds }}
         args:
         - gateway
         - --metrics-bind-address=:{{ .Values.gateway.metricsPort }}
@@ -99,22 +99,22 @@ spec:
         {{- include "common.container.securityContext" . | nindent 8 }}
         livenessProbe:
           httpGet:
-            path: {{ .Values.gateway.health.liveness.path }}
+            path: {{ .Values.health.liveness.path }}
             port: {{ .Values.listener.healthCheck.port }}
-          failureThreshold: {{ .Values.gateway.health.liveness.failureThreshold }}
-          periodSeconds: {{ .Values.gateway.health.periodSeconds }}
+          failureThreshold: {{ .Values.health.liveness.failureThreshold }}
+          periodSeconds: {{ .Values.health.periodSeconds }}
         readinessProbe:
           httpGet:
-            path: {{ .Values.gateway.health.readiness.path }}
+            path: {{ .Values.health.readiness.path }}
             port: {{ .Values.listener.healthCheck.port }}
-          initialDelaySeconds: {{ .Values.gateway.health.readiness.initialDelaySeconds }}
-          periodSeconds: {{ .Values.gateway.health.readiness.periodSeconds }}
+          initialDelaySeconds: {{ .Values.health.readiness.initialDelaySeconds }}
+          periodSeconds: {{ .Values.health.readiness.periodSeconds }}
         startupProbe:
           httpGet:
-            path: {{ .Values.gateway.health.startup.path }}
+            path: {{ .Values.health.startup.path }}
             port: {{ .Values.listener.healthCheck.port }}
-          failureThreshold: {{ .Values.gateway.health.startup.failureThreshold }}
-          periodSeconds: {{ .Values.gateway.health.periodSeconds }}
+          failureThreshold: {{ .Values.health.startup.failureThreshold }}
+          periodSeconds: {{ .Values.health.periodSeconds }}
         args:
         - listener
         - --metrics-bind-address=:{{ .Values.listener.metricsPort }}
