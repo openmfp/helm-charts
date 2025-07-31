@@ -26,6 +26,16 @@ kubeConfig:
 | extraVolumeMounts | list | `[]` |  |
 | extraVolumes | list | `[]` |  |
 | gateway.graphiql | bool | `true` |  |
+| gateway.health.liveness.failureThreshold | int | `1` |  |
+| gateway.health.liveness.path | string | `"/healthz"` |  |
+| gateway.health.liveness.periodSeconds | int | `10` |  |
+| gateway.health.periodSeconds | int | `10` |  |
+| gateway.health.readiness.initialDelaySeconds | int | `5` |  |
+| gateway.health.readiness.path | string | `"/readyz"` |  |
+| gateway.health.readiness.periodSeconds | int | `10` |  |
+| gateway.health.startup.failureThreshold | int | `30` |  |
+| gateway.health.startup.path | string | `"/readyz"` |  |
+| gateway.health.startup.periodSeconds | int | `10` |  |
 | gateway.healthCheck.enabled | bool | `true` |  |
 | gateway.healthCheck.port | int | `3389` |  |
 | gateway.logLevel | string | `"trace"` |  |

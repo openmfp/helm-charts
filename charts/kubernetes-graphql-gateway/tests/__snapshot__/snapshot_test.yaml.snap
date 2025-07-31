@@ -55,7 +55,7 @@ match the Snapshot:
                 failureThreshold: 1
                 httpGet:
                   path: /healthz
-                  port: 8090
+                  port: 3389
                 periodSeconds: 10
               name: openmfp-kubernetes-graphql-gateway-gateway
               ports:
@@ -71,7 +71,7 @@ match the Snapshot:
               readinessProbe:
                 httpGet:
                   path: /readyz
-                  port: 8090
+                  port: 3389
                 initialDelaySeconds: 5
                 periodSeconds: 10
               resources:
@@ -89,7 +89,7 @@ match the Snapshot:
                 failureThreshold: 30
                 httpGet:
                   path: /readyz
-                  port: 8090
+                  port: 3389
                 periodSeconds: 10
               volumeMounts:
                 - mountPath: /app/definitions
@@ -113,7 +113,7 @@ match the Snapshot:
                 failureThreshold: 1
                 httpGet:
                   path: /healthz
-                  port: 8090
+                  port: 3390
                 periodSeconds: 10
               name: openmfp-kubernetes-graphql-gateway-listener
               ports:
@@ -129,7 +129,7 @@ match the Snapshot:
               readinessProbe:
                 httpGet:
                   path: /readyz
-                  port: 8090
+                  port: 3390
                 initialDelaySeconds: 5
                 periodSeconds: 10
               resources:
@@ -147,7 +147,7 @@ match the Snapshot:
                 failureThreshold: 30
                 httpGet:
                   path: /readyz
-                  port: 8090
+                  port: 3390
                 periodSeconds: 10
               volumeMounts:
                 - mountPath: /app/definitions
