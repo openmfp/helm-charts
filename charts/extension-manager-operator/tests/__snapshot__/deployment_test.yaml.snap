@@ -6,7 +6,7 @@ deployment with external kubeconfig:
       name: extension-manager-operator-operator
       namespace: NAMESPACE
     spec:
-      replicas: 2
+      replicas: 1
       revisionHistoryLimit: 3
       selector:
         matchLabels:
@@ -243,7 +243,7 @@ operator match the snapshot:
       name: extension-manager-operator-operator
       namespace: NAMESPACE
     spec:
-      replicas: 2
+      replicas: 1
       revisionHistoryLimit: 3
       selector:
         matchLabels:
@@ -422,7 +422,7 @@ operator match the snapshot with tracing:
       name: extension-manager-operator-operator
       namespace: NAMESPACE
     spec:
-      replicas: 2
+      replicas: 1
       revisionHistoryLimit: 3
       selector:
         matchLabels:

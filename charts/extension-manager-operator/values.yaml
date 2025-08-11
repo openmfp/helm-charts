@@ -36,7 +36,7 @@ kcp:
 
 deployment:
   # -- replicas for the operator deployment
-  replicas: 2
+  replicas: 1
 
 operator:
   leaderElect: true
