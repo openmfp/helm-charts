@@ -313,7 +313,7 @@ match the Snapshot:
       selector:
         app: openmfp-kubernetes-graphql-gateway
       type: ClusterIP
-  9: |
+  10: |
     apiVersion: v1
     data:
       virtual-workspaces.yaml: "virtualWorkspaces:\n  - name: custom-ws\n    url: https://example.com\n    kubeconfig: /etc/kubeconfig/kubeconfig "
