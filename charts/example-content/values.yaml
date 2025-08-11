@@ -33,3 +33,16 @@ contentConfigurations:
 #    internalUrl: null
 
 contentProtocolDomain: https://example-content.some-domain.com
+
+hpa:
+  # Horizontal Pod Autoscaler configuration
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80

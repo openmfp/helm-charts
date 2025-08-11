@@ -141,12 +141,12 @@ matches the snapshot:
       name: portal
       namespace: NAMESPACE
     spec:
-      maxReplicas: 5
+      maxReplicas: 10
       metrics:
         - resource:
             name: cpu
             target:
-              averageUtilization: 50
+              averageUtilization: 80
               type: Utilization
           type: Resource
       minReplicas: 1
@@ -344,12 +344,12 @@ matches the snapshot with istio disabled:
       name: portal
       namespace: NAMESPACE
     spec:
-      maxReplicas: 5
+      maxReplicas: 10
       metrics:
         - resource:
             name: cpu
             target:
-              averageUtilization: 50
+              averageUtilization: 80
               type: Utilization
           type: Resource
       minReplicas: 1

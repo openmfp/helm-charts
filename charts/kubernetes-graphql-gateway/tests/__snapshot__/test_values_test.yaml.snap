@@ -181,12 +181,12 @@ match the Snapshot:
       name: openmfp-kubernetes-graphql-gateway
       namespace: openmfp-system
     spec:
-      maxReplicas: 5
+      maxReplicas: 10
       metrics:
         - resource:
             name: cpu
             target:
-              averageUtilization: 50
+              averageUtilization: 80
               type: Utilization
           type: Resource
       minReplicas: 1
