@@ -118,26 +118,6 @@ matches the snapshot:
             - emptyDir: {}
               name: run-volume
   4: |
-    apiVersion: autoscaling/v2
-    kind: HorizontalPodAutoscaler
-    metadata:
-      name: RELEASE-NAME-example-content
-      namespace: NAMESPACE
-    spec:
-      maxReplicas: 10
-      metrics:
-        - resource:
-            name: cpu
-            target:
-              averageUtilization: 80
-              type: Utilization
-          type: Resource
-      minReplicas: 1
-      scaleTargetRef:
-        apiVersion: apps/v1
-        kind: Deployment
-        name: RELEASE-NAME-example-content
-  5: |
     apiVersion: networking.istio.io/v1alpha3
     kind: VirtualService
     metadata:
@@ -157,7 +137,7 @@ matches the snapshot:
                 host: RELEASE-NAME-example-content.NAMESPACE.svc.cluster.local
                 port:
                   number: 8080
-  6: |
+  5: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
@@ -165,7 +145,7 @@ matches the snapshot:
     metadata:
       name: RELEASE-NAME-example-content
       namespace: NAMESPACE
-  7: |
+  6: |
     apiVersion: v1
     kind: Service
     metadata:
@@ -299,26 +279,6 @@ matches the snapshot (internalUrl):
             - emptyDir: {}
               name: run-volume
   4: |
-    apiVersion: autoscaling/v2
-    kind: HorizontalPodAutoscaler
-    metadata:
-      name: RELEASE-NAME-example-content
-      namespace: NAMESPACE
-    spec:
-      maxReplicas: 10
-      metrics:
-        - resource:
-            name: cpu
-            target:
-              averageUtilization: 80
-              type: Utilization
-          type: Resource
-      minReplicas: 1
-      scaleTargetRef:
-        apiVersion: apps/v1
-        kind: Deployment
-        name: RELEASE-NAME-example-content
-  5: |
     apiVersion: networking.istio.io/v1alpha3
     kind: VirtualService
     metadata:
@@ -338,7 +298,7 @@ matches the snapshot (internalUrl):
                 host: RELEASE-NAME-example-content.NAMESPACE.svc.cluster.local
                 port:
                   number: 8080
-  6: |
+  5: |
     apiVersion: v1
     imagePullSecrets:
       - name: github
@@ -346,7 +306,7 @@ matches the snapshot (internalUrl):
     metadata:
       name: RELEASE-NAME-example-content
       namespace: NAMESPACE
-  7: |
+  6: |
     apiVersion: v1
     kind: Service
     metadata:
