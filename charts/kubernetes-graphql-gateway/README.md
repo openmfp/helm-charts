@@ -46,13 +46,6 @@ kubeConfig:
 | health.startup.failureThreshold | int | `30` |  |
 | health.startup.path | string | `"/readyz"` |  |
 | health.startup.periodSeconds | int | `10` |  |
-| hpa.enabled | bool | `true` |  |
-| hpa.maxReplicas | int | `10` |  |
-| hpa.metrics[0].resource.name | string | `"cpu"` |  |
-| hpa.metrics[0].resource.target.averageUtilization | int | `80` |  |
-| hpa.metrics[0].resource.target.type | string | `"Utilization"` |  |
-| hpa.metrics[0].type | string | `"Resource"` |  |
-| hpa.minReplicas | int | `1` |  |
 | image.name | string | `"ghcr.io/openmfp/kubernetes-graphql-gateway"` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | istio.enabled | bool | `true` |  |

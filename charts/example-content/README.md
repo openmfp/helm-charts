@@ -15,13 +15,6 @@ Helm Chart for the openmfp Portal
 | contentConfigurations.wc.internalUrl | string | `"http://openmfp-example-content.openmfp-system.svc.cluster.local:8080/ui/example-content/wc/assets/config.json"` |  |
 | contentConfigurations.wc.url | string | `"http://localhost:8000/ui/example-content/wc/assets/config.json"` |  |
 | contentProtocolDomain | string | `"https://example-content.some-domain.com"` |  |
-| hpa.enabled | bool | `true` |  |
-| hpa.maxReplicas | int | `10` |  |
-| hpa.metrics[0].resource.name | string | `"cpu"` |  |
-| hpa.metrics[0].resource.target.averageUtilization | int | `80` |  |
-| hpa.metrics[0].resource.target.type | string | `"Utilization"` |  |
-| hpa.metrics[0].type | string | `"Resource"` |  |
-| hpa.minReplicas | int | `1` |  |
 | image.name | string | `"ghcr.io/openmfp/example-content"` | The image name |
 | istio.enabled | bool | `true` |  |
 | istio.virtualService.hosts[0] | string | `"*"` |  |

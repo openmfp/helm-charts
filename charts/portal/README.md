@@ -21,13 +21,6 @@ Helm Chart for the openmfp Portal
 | health.port | int | `9000` | health port to be used by probes |
 | health.readiness.path | string | `"/rest/health"` | path used for the readiness probe |
 | health.startup.path | string | `"/rest/health"` | path used for the startup probe |
-| hpa.enabled | bool | `true` |  |
-| hpa.maxReplicas | int | `10` |  |
-| hpa.metrics[0].resource.name | string | `"cpu"` |  |
-| hpa.metrics[0].resource.target.averageUtilization | int | `80` |  |
-| hpa.metrics[0].resource.target.type | string | `"Utilization"` |  |
-| hpa.metrics[0].type | string | `"Resource"` |  |
-| hpa.minReplicas | int | `1` |  |
 | http.protocol | string | `"http"` | protocol |
 | image.name | string | `"ghcr.io/openmfp/portal"` |  |
 | image.pullPolicyOverride | string | `"IfNotPresent"` |  |
