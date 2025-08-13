@@ -33,3 +33,10 @@ kcp:
   enabled: false
   # -- name the secret that holds the kubeconfig for the kcp mode
   kubeconfigSecret: ""
+
+deployment:
+  # -- replicas for the operator deployment
+  replicas: 1
+
+operator:
+  leaderElect: true
