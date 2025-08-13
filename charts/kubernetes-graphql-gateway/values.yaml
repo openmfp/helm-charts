@@ -111,3 +111,16 @@ health:
     path: "/readyz"
     failureThreshold: 30
     periodSeconds: 10
+
+# Horizontal Pod Autoscaler configuration
+# hpa:
+#   enabled: true
+#   minReplicas: 1
+#   maxReplicas: 10
+#   metrics:
+#     - type: Resource
+#       resource:
+#         name: cpu
+#         target:
+#           type: Utilization
+#           averageUtilization: 80
