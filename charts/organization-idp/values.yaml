@@ -38,15 +38,6 @@ keycloakConfig:
   # -- url of the keycloak server
   url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
 
-  userRegistration:
-    # -- toggle to enable/disable user registration
-    enabled: true
-  # -- redirect urls
-  redirectUrls: ["http://localhost:8000/callback*"]
-  # -- realm configuration
-  realm:
-    # -- realm name
-    name: master
   # -- client configuration
   client:
     # -- client name
@@ -64,25 +55,6 @@ keycloakConfig:
     username:
       # -- username
       value: keycloak-admin
-    # -- admin password
-    password:
-      valueFrom:
-        secretKeyRef:
-          # -- name of the secret containing the password
-          name: keycloak-admin
-          # -- key of the password in the secret
-          key: secret
-
-keycloak:
-  resources:
-    limits:
-      cpu: "2"
-      ephemeral-storage: 2Gi
-      memory: 2Gi
-    requests:
-      cpu: 750m
-      ephemeral-storage: 50Mi
-      memory: 1Gi
 
 externalSecrets:
   # -- keycloak admin secret
