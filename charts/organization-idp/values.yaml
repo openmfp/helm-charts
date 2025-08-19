@@ -12,34 +12,80 @@ crossplane:
   # -- crossplane realm config
   realm:
     # -- realm name
-    name: organizationName
+    name: test
     # -- realm display name
-    displayName: organizationName
+    displayName: test
     # -- realm registration allowed
     registrationAllowed: true
     # -- realm access token lifespan
     accessTokenLifespan: 8h
 
-  organization:
-    # -- organization name
-    name: defaultOrgName
-    # -- organization display name
-    displayName: defaultOrgName
-     # -- realm registration allowed
-    registrationAllowed: true
-    # -- realm access token lifespan
-    accessTokenLifespan: 8h
-
-  clients:
-    organization:
-      # -- name of the client
-      name: defaultOrgName
-      # -- valid redirect uris for the client
-      validRedirectUris:
-        # -- keycloak callback url
-        - http://localhost:8000/callback*
-        - http://localhost:4300/callback*
-
+  client:
+    # -- name of the client
+    name: clientname
+    # -- valid redirect uris for the client
+    displayName: ClientName
+    validRedirectUris:
+      # -- keycloak callback url
+      - http://localhost:8000/callback*
+      - http://localhost:4300/callback*
+      
   trustedAudiences: []
 
   identityProviders: {}
+    
+keycloakConfig:
+  # -- url of the keycloak server
+  url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
+
+  userRegistration:
+    # -- toggle to enable/disable user registration
+    enabled: true
+  # -- redirect urls
+  redirectUrls: ["http://localhost:8000/callback*"]
+  # -- realm configuration
+  realm:
+    # -- realm name
+    name: master
+  # -- client configuration
+  client:
+    # -- client name
+    name: organizationIDP
+    # -- target secret options
+    targetSecret:
+      # -- secret name
+      name: portal-client-secret-organization-idp
+      # -- secret namespace
+      namespace: openmfp-system
+    # -- token lifespan
+    tokenLifespan: 3600
+  # -- admin user configuration
+  admin:
+    username:
+      # -- username
+      value: keycloak-admin
+    # -- admin password
+    password:
+      valueFrom:
+        secretKeyRef:
+          # -- name of the secret containing the password
+          name: keycloak-admin
+          # -- key of the password in the secret
+          key: secret
+
+keycloak:
+  resources:
+    limits:
+      cpu: "2"
+      ephemeral-storage: 2Gi
+      memory: 2Gi
+    requests:
+      cpu: 750m
+      ephemeral-storage: 50Mi
+      memory: 1Gi
+
+externalSecrets:
+  # -- keycloak admin secret
+  keycloakAdminRemoteRef: ""
+  # -- postgres admin secret
+  postgres-adminRemoteRef: ""    

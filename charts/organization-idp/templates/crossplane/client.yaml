@@ -1,38 +1,36 @@
 {{- if eq (include "common.getNestedValue" (dict "Values" .Values "key" "crossplane.enabled")) "true" -}}
-{{- range $key, $val := .Values.crossplane.clients }}
----  
 apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
 kind: Client
 metadata:
-  name: {{ $key }}
+  name: {{ .Values.crossplane.client.name }}
 spec:
   forProvider:
     enabled: true
-    accessType: {{ default "CONFIDENTIAL" $val.accessType }}
-    clientId: {{ $key }}
+    accessType: {{ default "CONFIDENTIAL" .Values.crossplane.client.accessType }}
+    clientId: {{ .Values.crossplane.client.name }}
     standardFlowEnabled: true
-    name: {{ $val.name }}
+    name: {{ .Values.crossplane.client.displayName }}
     realmIdRef:
-      name: {{ $.Values.crossplane.realm.name }}
-    validRedirectUris: {{ toYaml $val.validRedirectUris | nindent 6 }}
+      name: {{ .Values.crossplane.realm.name }}
+    validRedirectUris: {{ toYaml .Values.crossplane.client.validRedirectUris | nindent 6 }}
   providerConfigRef:
-    name: {{ $.Values.crossplane.providerConfig.name }}
-{{- if ne $val.accessType "PUBLIC" }}
+    name: {{ .Values.crossplane.providerConfig.name }}
+  {{- if ne .Values.keycloakConfig.client.accessType "PUBLIC" }}
   writeConnectionSecretToRef:
-    name: {{ $.Values.keycloakConfig.client.targetSecret.name }}
-    namespace: {{ $.Values.keycloakConfig.client.targetSecret.namespace }}
-{{- end }}
+    name: {{ .Values.keycloakConfig.client.targetSecret.name }}
+    namespace: {{ .Values.keycloakConfig.client.targetSecret.namespace }}
+  {{- end }}
 
 ---
 
 apiVersion: openidclient.keycloak.crossplane.io/v1alpha1
 kind: ClientDefaultScopes
 metadata:
-  name: {{ $key }}-default-scopes
+  name: {{ .Values.crossplane.client.name}}-default-scopes
 spec:
   forProvider:
     clientIdRef:
-      name: {{ $key }}
+      name: {{ .Values.crossplane.client.name}}
     defaultScopes:
     - profile
     - email
@@ -44,5 +42,4 @@ spec:
       name: {{ $.Values.crossplane.realm.name }}
   providerConfigRef:
     name: {{ $.Values.crossplane.providerConfig.name }}
-{{ end -}}
 {{- end -}}
