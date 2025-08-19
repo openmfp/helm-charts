@@ -12,9 +12,9 @@ crossplane:
   # -- crossplane realm config
   realm:
     # -- realm name
-    name: test
+    name: default
     # -- realm display name
-    displayName: test
+    displayName: default
     # -- realm registration allowed
     registrationAllowed: true
     # -- realm access token lifespan
