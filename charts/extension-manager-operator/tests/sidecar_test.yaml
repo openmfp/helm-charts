@@ -1,0 +1,10 @@
+suite: platform-mesh istio sidecar
+templates:
+  - sidecar.yaml
+tests:
+- it: match the snapshot
+  values:
+    - ../values.yaml
+    - ../test-values.yaml
+  asserts:
+    - matchSnapshot: { }
