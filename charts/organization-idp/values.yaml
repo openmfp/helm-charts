@@ -29,11 +29,11 @@ crossplane:
       # -- keycloak callback url
       - http://localhost:8000/callback*
       - http://localhost:4300/callback*
-      
+
   trustedAudiences: []
 
   identityProviders: {}
-    
+
 keycloakConfig:
   # -- url of the keycloak server
   url: http://openmfp-keycloak.openmfp-system.svc.cluster.local/keycloak
@@ -60,4 +60,5 @@ externalSecrets:
   # -- keycloak admin secret
   keycloakAdminRemoteRef: ""
   # -- postgres admin secret
-  postgres-adminRemoteRef: ""    
+  postgres-adminRemoteRef: ""
+  
