@@ -1,0 +1,13 @@
+sidecar match the snapshot:
+  1: |
+    apiVersion: networking.istio.io/v1beta1
+    kind: Sidecar
+    metadata:
+      name: extension-content-operator
+      namespace: NAMESPACE
+    spec:
+      outboundTrafficPolicy:
+        mode: ALLOW_ANY
+      workloadSelector:
+        labels:
+          app: RELEASE-NAME-extension-manager-operator
