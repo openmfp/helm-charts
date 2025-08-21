@@ -14,7 +14,7 @@ deployment with external kubeconfig:
       template:
         metadata:
           annotations:
-            sidecar.istio.io/inject: "false"
+            sidecar.istio.io/inject: "true"
           labels:
             app: extension-manager-operator
             control-plane: controller-manager
@@ -342,7 +342,7 @@ operator match the snapshot with tracing:
       template:
         metadata:
           annotations:
-            sidecar.istio.io/inject: "false"
+            sidecar.istio.io/inject: "true"
           labels:
             app: extension-manager-operator
             module: server
@@ -430,7 +430,7 @@ operator match the snapshot with tracing:
       template:
         metadata:
           annotations:
-            sidecar.istio.io/inject: "false"
+            sidecar.istio.io/inject: "true"
           labels:
             app: extension-manager-operator
             control-plane: controller-manager

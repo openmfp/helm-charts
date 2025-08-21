@@ -1,2 +1,3 @@
 # Test Override Values for helm unit tests
-a: b
+istio:
+  enabled: true

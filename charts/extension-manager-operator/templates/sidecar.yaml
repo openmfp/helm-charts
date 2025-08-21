@@ -1,3 +1,4 @@
+{{- if eq (include "common.getKeyValue" (dict "Values" .Values "key" "istio.enabled")) "true" -}}
 apiVersion: networking.istio.io/v1beta1
 kind: Sidecar
 metadata:
@@ -9,3 +10,4 @@ spec:
   workloadSelector:
     labels:
       {{- include "common.labelMatcher" . | indent 6 }}
+{{- end }}
