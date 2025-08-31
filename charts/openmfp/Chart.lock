@@ -10,9 +10,9 @@ dependencies:
   version: 0.63.3
 - name: extension-manager-operator
   repository: oci://ghcr.io/openmfp/helm-charts
-  version: 0.30.163
+  version: 0.30.164
 - name: keycloak
   repository: oci://ghcr.io/openmfp/helm-charts
   version: 0.64.18
-digest: sha256:cddb9a6c1613833764bb2e0bd7ff2a4b6e2a5b03bd101728570d77765a27175d
-generated: "2025-08-28T05:08:50.42704798Z"
+digest: sha256:6cc5532e596a0a179a6a634b9965d0f19b22cba022151edf4ba31d53038337d2
+generated: "2025-08-31T09:03:01.139890731Z"
