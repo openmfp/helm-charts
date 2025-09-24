@@ -1,3 +1,6 @@
+> [!WARNING]
+> This Repository was moved to https://github.com/platform-mesh/helm-charts
+
 # OpenMFP - helm-charts
 
 [![REUSE status](
