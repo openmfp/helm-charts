@@ -22,9 +22,9 @@ crossplane:
   # -- crossplane realm config
   realm:
     # -- realm name
-    name: openmfp
+    name: default
     # -- realm display name
-    displayName: OpenMFP
+    displayName: default
     # -- realm registration allowed
     registrationAllowed: true
     # -- realm access token lifespan

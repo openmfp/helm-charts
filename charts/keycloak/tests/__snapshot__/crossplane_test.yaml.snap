@@ -11,7 +11,7 @@ matches the snapshot:
         enabled: true
         name: OpenMFP
         realmIdRef:
-          name: openmfp
+          name: default
         standardFlowEnabled: true
         validRedirectUris:
           - http://localhost:8000/callback*
@@ -38,7 +38,7 @@ matches the snapshot:
           - groups
           - trusted-openmfp-audiences
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   3: |
@@ -51,7 +51,7 @@ matches the snapshot:
         groupIdsRefs:
           - name: portal
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   4: |
@@ -63,7 +63,7 @@ matches the snapshot:
       forProvider:
         name: portal
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   5: |
@@ -77,7 +77,7 @@ matches the snapshot:
         includeInTokenScope: true
         name: groups
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   6: |
@@ -92,7 +92,7 @@ matches the snapshot:
           name: groups-client-scope
         name: group-membership-mapper
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   7: |
@@ -105,7 +105,7 @@ matches the snapshot:
         includeInTokenScope: true
         name: trusted-openmfp-audiences
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   8: |
@@ -140,17 +140,17 @@ matches the snapshot:
     apiVersion: realm.keycloak.crossplane.io/v1alpha1
     kind: Realm
     metadata:
-      name: openmfp
+      name: default
     spec:
       forProvider:
         accessTokenLifespan: 8h
         attributes:
           organizationsEnabled: "true"
-        displayName: OpenMFP
-        displayNameHtml: <b>OpenMFP</b>
+        displayName: default
+        displayNameHtml: <b>default</b>
         enabled: true
         loginWithEmailAllowed: true
-        realm: openmfp
+        realm: default
         registrationAllowed: true
         registrationEmailAsUsername: true
         ssoSessionIdleTimeout: 8h
@@ -169,7 +169,7 @@ matches the snapshot with custom config:
         enabled: true
         name: OpenMFP
         realmIdRef:
-          name: openmfp
+          name: default
         standardFlowEnabled: true
         validRedirectUris:
           - http://localhost:8000/callback*
@@ -196,7 +196,7 @@ matches the snapshot with custom config:
           - groups
           - trusted-openmfp-audiences
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   3: |
@@ -209,7 +209,7 @@ matches the snapshot with custom config:
         groupIdsRefs:
           - name: portal
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   4: |
@@ -221,7 +221,7 @@ matches the snapshot with custom config:
       forProvider:
         name: portal
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   5: |
@@ -235,7 +235,7 @@ matches the snapshot with custom config:
         includeInTokenScope: true
         name: groups
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   6: |
@@ -250,7 +250,7 @@ matches the snapshot with custom config:
           name: groups-client-scope
         name: group-membership-mapper
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   7: |
@@ -272,7 +272,7 @@ matches the snapshot with custom config:
         hideOnLoginPage: true
         issuer: https://custom-provider.com
         realmRef:
-          name: openmfp
+          name: default
         tokenUrl: https://custom-provider.com/oauth/token
         trustEmail: true
       providerConfigRef:
@@ -292,7 +292,7 @@ matches the snapshot with custom config:
         identityProviderMapper: oidc-user-attribute-idp-mapper
         name: last_name
         realmRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   9: |
@@ -310,7 +310,7 @@ matches the snapshot with custom config:
         identityProviderMapper: oidc-user-attribute-idp-mapper
         name: first_name
         realmRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   10: |
@@ -323,7 +323,7 @@ matches the snapshot with custom config:
         includeInTokenScope: true
         name: trusted-openmfp-audiences
         realmIdRef:
-          name: openmfp
+          name: default
       providerConfigRef:
         name: keycloak-provider-config
   11: |
@@ -358,17 +358,17 @@ matches the snapshot with custom config:
     apiVersion: realm.keycloak.crossplane.io/v1alpha1
     kind: Realm
     metadata:
-      name: openmfp
+      name: default
     spec:
       forProvider:
         accessTokenLifespan: 8h
         attributes:
           organizationsEnabled: "true"
-        displayName: OpenMFP
-        displayNameHtml: <b>OpenMFP</b>
+        displayName: default
+        displayNameHtml: <b>default</b>
         enabled: true
         loginWithEmailAllowed: true
-        realm: openmfp
+        realm: default
         registrationAllowed: true
         registrationEmailAsUsername: true
         ssoSessionIdleTimeout: 8h
