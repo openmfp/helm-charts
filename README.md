@@ -24,6 +24,27 @@ In order to contribute to this repository, you need to have the following tools:
 - Helm unittests is used for running helm tests. To install the helm-unittest helm plugin follow instructions [here](https://github.com/helm-unittest/helm-unittest?tab=readme-ov-file#install)
 - This repository uses a taskfile, in order to run tasks install the binary, follow instructions [here](https://taskfile.dev/installation/). 
 
+
+## Helm
+The roles chart uses unit tests. To be able to execute them locally and update the snapshots you need to install a plugin.
+
+```shell
+helm plugin install https://github.com/helm-unittest/helm-unittest.git --version v0.5.1
+```
+
+Then you can run
+
+```shell
+helm unittest ./charts/<chart-name>
+```
+
+```shell
+# To also update helm snapshot after changes, do:
+helm unittest -u ./charts/<chart-name>
+```
+
+To test your  changes in the respective chart
+
 ## Security / Disclosure
 If you find any bug that may be a security problem, please follow our instructions at [in our security policy](https://github.com/openmfp/helm-charts/security/policy) on how to report it. Please do not create GitHub issues for security-related doubts or problems.
 
